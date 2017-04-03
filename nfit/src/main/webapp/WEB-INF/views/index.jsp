@@ -4,22 +4,24 @@
 <html>
 	<head>
 		<title>Runkeeper Website Template | Home :: w3layouts</title>
-		<link href="css/style.css" rel='stylesheet' type='text/css' />
+		<link href="resources/css/style.css" rel='stylesheet' type='text/css' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="shortcut icon" type="image/x-icon" href="images/fav-icon.png" />
+		<link rel="shortcut icon" type="image/x-icon" href="resources/images/fav-icon.png" />
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 		</script>
 	    <!---strat-slider---->
-	    <script type="text/javascript" src="js/jquery.min.js"></script>
+	    <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 	    <link rel="stylesheet" type="text/css" href="css/slider-style.css" />
-		<script type="text/javascript" src="js/modernizr.custom.28468.js"></script>
+		<script type="text/javascript" src="resources/js/modernizr.custom.28468.js"></script>
 		<!---//strat-slider---->
 		<!---start-login-script--->
-		<script src="js/login.js"></script>
+		<script src="resources/js/login.js"></script>
 		<!---//End-login-script--->
 		<!-----768px-menu----->
-		<link type="text/css" rel="stylesheet" href="css/jquery.mmenu.all.css" />
-		<script type="text/javascript" src="js/jquery.mmenu.js"></script>
+		<link type="text/css" rel="stylesheet" href="resources/css/jquery.mmenu.all.css" />
+		<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="resources/js/jquery.mmenu.js"></script>
 			<script type="text/javascript">
 				//	The menu on the left
 				$(function() {
@@ -37,9 +39,9 @@
 					</div>
 					<nav id="menu-left">
 						<ul>
-							<li><a href="index.html">Home</a></li>
-							<li><a href="about.html">About</a></li>
-							<li><a href="features.html">Features</a></li>
+							<li><a href="resources/index.html">Home</a></li>
+							<li><a href="resources/about.html">About</a></li>
+							<li><a href="resources/features.html">Features</a></li>
 							<div class="clear"> </div>
 						</ul>
 					</nav>
@@ -50,15 +52,15 @@
 				<div class="wrap">
 				<div class="header-left">
 					<div class="logo">
-						<a href="index.html">Runkeeper</a>
+						<a href="resources/index.html">Runkeeper</a>
 					</div>
 				</div>
 				<div class="header-right">
 					<div class="top-nav">
 					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="about.html">About</a></li>
-						<li><a href="features.html">Features</a></li>
+						<li><a href="resources/index.html">Home</a></li>
+						<li><a href="resources/about.html">About</a></li>
+						<li><a href="resources/features.html">Features</a></li>
 					</ul>
 				</div>
 				<div class="sign-ligin-btns">
@@ -151,7 +153,7 @@
 						<span class="da-arrows-next"> </span>
 					</nav>
 			</div>
-				<script type="text/javascript" src="js/jquery.cslider.js"></script>
+				<script type="text/javascript" src="resources/js/jquery.cslider.js"></script>
 				<script type="text/javascript">
 					$(function() {
 						$('#da-slider').cslider({
@@ -172,7 +174,7 @@
 					<div class="top-grids">
 						<div class="top-grid">
 							<div class="product-pic frist-product-pic">
-								<img src="images/watch-img.png" title="watch" />
+								<img src="resources/images/watch-img.png" title="watch" />
 							</div>
 							<span><label>1</label></span>
 							<div class="border"> </div>
@@ -180,7 +182,7 @@
 						</div>
 						<div class="top-grid">
 							<div class="product-pic">
-								<img src="images/shoe-img.png" title="shoe" />
+								<img src="resources/images/shoe-img.png" title="shoe" />
 							</div>
 							<span><label>2</label></span>
 							<div class="border hide"> </div>
@@ -188,7 +190,7 @@
 						</div>
 						<div class="top-grid hide">
 							<div class="product-pic">
-								<img src="images/lap-img.png" title="laptop" />
+								<img src="resources/images/lap-img.png" title="laptop" />
 							</div>
 							<span><label>3</label></span>
 							<a href="#">View your results</a>
@@ -201,7 +203,7 @@
 					<div class="mid-grids">
 						<div class="wrap">
 						<div class="mid-grids-left">
-							<img src="images/app-divices.jpg" title="divices" />
+							<img src="resources/images/app-divices.jpg" title="divices" />
 							<span> </span>
 						</div>
 						<div class="mid-grids-right">
