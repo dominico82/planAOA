@@ -1,4 +1,4 @@
-package controller;
+package nfit.controller;
 
 public class MemberController {
 

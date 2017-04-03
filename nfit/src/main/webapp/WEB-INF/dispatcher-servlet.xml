@@ -1,19 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
+ 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xsi:schemaLocation="http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
-	
-	<!-- configs -->
-
-
-	<!-- view -->
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/views/"/>
-		<property name="suffix" value=".jsp"/>
-		<property name="order" value="1"/>
-	</bean>
+    xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd">    
+ 
+    <!-- 컴포넌트 어노테이션 스캔 -->
+   <context:component-scan base-package="nfit.*"/>
+   
+    <!-- messageSource 지정 -->
+    <bean id="messageSource"
+        class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+                <value>messages.label</value>
+                <value>messages.validation</value>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- Exception 설정 -->
+    <bean
+        class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">pageError</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <!-- viewResolver -->
+    <bean 
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp" />
+        <property name="order" value="1"/>
+    </bean>
+    
+    <!-- 파일 다운로드 -->
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
+        p:order="0"/>
+    
+    <!-- 파일 업로드 -->
+    <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="52428800"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
 </beans>
