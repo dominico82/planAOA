@@ -11,7 +11,7 @@
 		</script>
 	    <!---strat-slider---->
 	    <script type="text/javascript" src="resources/js/jquery.min.js"></script>
-	    <link rel="stylesheet" type="text/css" href="css/slider-style.css" />
+	    <link rel="stylesheet" type="text/css" href="resources/css/slider-style.css" />
 		<script type="text/javascript" src="resources/js/modernizr.custom.28468.js"></script>
 		<!---//strat-slider---->
 		<!---start-login-script--->
