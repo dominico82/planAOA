@@ -42,6 +42,7 @@
 							<li><a href="resources/index.html">Home</a></li>
 							<li><a href="resources/about.html">About</a></li>
 							<li><a href="resources/features.html">Features</a></li>
+							<li><a href="coin.do">코인결제</a></li>
 							<div class="clear"> </div>
 						</ul>
 					</nav>
@@ -61,6 +62,7 @@
 						<li><a href="resources/index.html">Home</a></li>
 						<li><a href="resources/about.html">About</a></li>
 						<li><a href="resources/features.html">Features</a></li>
+						<li><a href="coin.do">코인결제</a></li>
 					</ul>
 				</div>
 				<div class="sign-ligin-btns">
