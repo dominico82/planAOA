@@ -19,6 +19,17 @@ public class memberDTO {
 	private int member_coin;
 	
 	public memberDTO(String member_id, int member_idx, String member_pwd, String member_name, String member_addr,
+			String member_sex) {
+		super();
+		this.member_id = member_id;
+		this.member_idx = member_idx;
+		this.member_pwd = member_pwd;
+		this.member_name = member_name;
+		this.member_addr = member_addr;
+		this.member_sex = member_sex;
+	}
+
+	public memberDTO(String member_id, int member_idx, String member_pwd, String member_name, String member_addr,
 			String member_sex, String member_birth, String member_email, String member_tel, String member_tall,
 			String member_weight, int member_type, int member_coin) {
 		super();

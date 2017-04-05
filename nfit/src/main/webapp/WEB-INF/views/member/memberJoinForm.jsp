@@ -8,7 +8,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>사거리</title>
 <!-- Bootstrap -->
-<link href="../resources/js/bootstrap.js" rel="stylesheet" type="text/css" />
+<link href="../resources/js/bootstrap.js" rel="stylesheet"
+	type="text/css" />
 <link href="/resources/image/icon/HalfLife.ico" rel="shortcuticon">
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요한) -->
 <script src="//code.jquery.com/jquery.js"></script>
@@ -87,29 +88,29 @@
 				<div class="col-md-4">
 					<select name="year">
 						<%
-										for (int i = 2017; i >= 1910; i--) {
-									%>
+							for (int i = 2017; i >= 1910; i--) {
+						%>
 						<option value="<%=i%>"><%=i%></option>
 						<%
-										}
-									%>
-				</select>년 <select name="month">
+							}
+						%>
+					</select>년 <select name="month">
 						<%
-										for (int i = 1; i <= 12; i++) {
-									%>
+							for (int i = 1; i <= 12; i++) {
+						%>
 						<option value="<%=i%>"><%=i%></option>
 						<%
-										}
-									%>
-				</select>월 <select name="day">
+							}
+						%>
+					</select>월 <select name="day">
 						<%
-										for (int i = 1; i <= 31; i++) {
-									%>
+							for (int i = 1; i <= 31; i++) {
+						%>
 						<option value="<%=i%>"><%=i%></option>
 						<%
-										}
-									%>
-				</select>일
+							}
+						%>
+					</select>일
 
 				</div>
 			</div>
@@ -128,8 +129,14 @@
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="member_tel">연락처</label>
 				<div class="col-md-4">
-					<input id="member_tel" name="member_tel" type="text"
-						placeholder="항목 3개 생성" class="form-control input-md">
+					<select name="tel1">
+						<option>010</option>
+						<option>011</option>
+						<option>012</option>
+						<option>018</option>
+						<option>019</option>
+					</select>- <input type="text" name="tel2" size="5">- <input
+						type="text" name="tel3" size="5">
 
 				</div>
 			</div>
@@ -156,13 +163,11 @@
 				</div>
 			</div>
 
-			<!-- Button (Double) -->
-			<div class="form-group">
 				<div class="col-md-8">
-					<input type="submit" value="회원가입">
-					<button id="button2id" name="button2id" class="btn btn-danger">리셋</button>
+					<input type="submit" value="가입">
+					<input type="reset" value="다시작성">
 				</div>
-			</div>
+		
 
 		</fieldset>
 	</form>
