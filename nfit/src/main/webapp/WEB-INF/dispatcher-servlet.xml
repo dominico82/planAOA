@@ -9,8 +9,11 @@
        http://www.springframework.org/schema/context/spring-context-3.0.xsd">    
  
     <!-- 컴포넌트 어노테이션 스캔 -->
-   <context:component-scan base-package="nfit.*"/>
-   
+   <context:component-scan base-package="nfit.*" use-default-filters="false">
+   	<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+   </context:component-scan>
+   <bean
+		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
     <!-- messageSource 지정 -->
     <bean id="messageSource"
         class="org.springframework.context.support.ResourceBundleMessageSource">
@@ -21,7 +24,27 @@
             </list>
         </property>
     </bean>
-    
+    <!-- 1.dataSource -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@yongstudy.iptime.org:9000:orcl" />
+		<property name="username" value="PROJECT01_01" />
+		<property name="password" value="project01_01" />
+	</bean>
+	<!-- 2.트랜잭션 관리자 등록 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 3. 마이바티스 설정 -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:/mybatis-config.xml" />
+	</bean>
+
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean" />
+	</bean>
     <!-- Exception 설정 -->
     <bean
         class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
@@ -31,7 +54,12 @@
             </props>
         </property>
     </bean>
-    
+    <!-- service -->
+	<bean id="memberDao" class="nfit.member.model.MemberDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
     <!-- viewResolver -->
     <bean 
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">

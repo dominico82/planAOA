@@ -22,7 +22,7 @@
 	<header>
 		<%@include file="../header.jsp"%>
 	</header>
-	<form class="join" action="" method="post">
+	<form name="memberJoin" action="memberJoin.do" method="post">
 		<fieldset>
 
 			<!-- Form Name -->
