@@ -17,6 +17,7 @@
 <script src="/resources/bootstrap/js/bootstrap.min.js"></script>
 <!-- Respond.js 으로 IE8 에서 반응형 기능을 활성화하세요 (https://github.com/scottjehl/Respond) -->
 <script src="/resources/bootstrap/js/respond.js"></script>
+
 </head>
 <body>
 	<header>
@@ -86,32 +87,7 @@
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="member_birth">생년월일</label>
 				<div class="col-md-4">
-					<select name="year">
-						<%
-							for (int i = 2017; i >= 1910; i--) {
-						%>
-						<option value="<%=i%>"><%=i%></option>
-						<%
-							}
-						%>
-					</select>년 <select name="month">
-						<%
-							for (int i = 1; i <= 12; i++) {
-						%>
-						<option value="<%=i%>"><%=i%></option>
-						<%
-							}
-						%>
-					</select>월 <select name="day">
-						<%
-							for (int i = 1; i <= 31; i++) {
-						%>
-						<option value="<%=i%>"><%=i%></option>
-						<%
-							}
-						%>
-					</select>일
-
+					<input type="text" name="member_birth">
 				</div>
 			</div>
 
@@ -128,17 +104,8 @@
 			<!-- Text input-->
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="member_tel">연락처</label>
-				<div class="col-md-4">
-					<select name="tel1">
-						<option>010</option>
-						<option>011</option>
-						<option>012</option>
-						<option>018</option>
-						<option>019</option>
-					</select>- <input type="text" name="tel2" size="5">- <input
-						type="text" name="tel3" size="5">
-
-				</div>
+			<input type="text" name="member_tel">
+			
 			</div>
 
 			<!-- Text input-->

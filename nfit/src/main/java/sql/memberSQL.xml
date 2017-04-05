@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="nfit.member">
 	<insert id="memberJoin" parameterType="nfit.member.model.MemberDTO">
 		insert into member_table values(
-				#{member_id},
 				member_table_idx.nextval,
+				#{member_id},
 				#{member_pwd},
 				#{member_name},
 				#{member_addr},
