@@ -6,7 +6,26 @@
   <packaging>war</packaging>
   <name>nfit</name>
   
-   <dependencies>
+  <repositories>
+        <!-- ojdbc14 설정시 --> 
+ <repository>
+  <id>mesir-repo</id>
+  <url>http://mesir.googlecode.com/svn/trunk/mavenrepo</url>
+ </repository>
+</repositories>
+
+  
+  <dependencies>
+
+
+<dependency>
+    <groupId>oracle.jdbc</groupId>
+    <artifactId>OracleDriver</artifactId>
+    <version>12.1.0.2.0</version>
+    <scope>system</scope>
+    <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc7.jar</systemPath>
+</dependency>
+
   	<!-- https://mvnrepository.com/artifact/javax.servlet.jsp/jsp-api -->
 	<dependency>
 	    <groupId>javax.servlet.jsp</groupId>
@@ -91,7 +110,6 @@
 	    <artifactId>spring-tx</artifactId>
 	    <version>3.2.4.RELEASE</version>
 	</dependency>	
-	
 	<!-- dbcp -->
 	<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
 	<dependency>
@@ -134,6 +152,6 @@
 	    <groupId>org.mybatis</groupId>
 	    <artifactId>mybatis-spring</artifactId>
 	    <version>1.2.2</version>
-	</dependency>
-   </dependencies>
+	</dependency>	
+	</dependencies>
 </project>

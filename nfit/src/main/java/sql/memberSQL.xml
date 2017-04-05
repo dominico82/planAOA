@@ -3,9 +3,18 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="nfit.member">
-	<insert id="memberJoin" parameterType="nfit.member.model.memberDTO">
-		inset into member_table
-		values(#{member_id},member_table_idx.nextval,#{member_pwd},#{member_name},#{member_addr},
-		#{member_sex},#{member_birth},#{member_email},#{member_tel},#{member_tall},#{member_weight},#{member_number},#{member_coin})
+	<insert id="memberJoin" parameterType="nfit.member.model.MemberDTO">
+		insert into member_table values(
+				member_table_idx.nextval,
+				#{member_id},
+				#{member_pwd},
+				#{member_name},
+				#{member_addr},
+				#{member_sex},
+				#{member_birth},
+				#{member_email},
+				#{member_tel},
+				#{member_tall},
+				#{member_weight},0,0)
 	</insert>
 </mapper>
