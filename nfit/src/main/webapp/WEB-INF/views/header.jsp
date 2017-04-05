@@ -39,7 +39,7 @@
 					</div>
 					<nav id="menu-left">
 						<ul>
-							<li><a href="index.jsp">Home</a></li>
+							<li><a href="index.do">Home</a></li>
 							<li><a href="resources/about.html">About</a></li>
 							<li><a href="resources/features.html">Features</a></li>
 							<li><a href="coin.do">코인결제</a></li>
@@ -53,13 +53,13 @@
 				<div class="wrap">
 				<div class="header-left">
 					<div class="logo">
-						<a href="index.jsp">Runkeeper</a>
+						<a href="index.do">Runkeeper</a>
 					</div>
 				</div>
 				<div class="header-right">
 					<div class="top-nav">
 					<ul>
-						<li><a href="index.jsp">Home</a></li>
+						<li><a href="index.do">Home</a></li>
 						<li><a href="resources/about.html">About</a></li>
 						<li><a href="resources/features.html">Features</a></li>
 						<li><a href="coin.do">코인결제</a></li>

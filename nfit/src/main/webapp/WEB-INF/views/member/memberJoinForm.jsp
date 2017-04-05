@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>사거리</title>
 <!-- Bootstrap -->
-<link href="/resources/js/bootstrap.js" rel="stylesheet" type="text/css" />
+<link href="../resources/js/bootstrap.js" rel="stylesheet" type="text/css" />
 <link href="/resources/image/icon/HalfLife.ico" rel="shortcuticon">
 <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요한) -->
 <script src="//code.jquery.com/jquery.js"></script>
@@ -21,11 +21,11 @@
 	<header>
 		<%@include file="../header.jsp"%>
 	</header>
-	<form class="form-horizontal">
+	<form class="join" action="" method="post">
 		<fieldset>
 
 			<!-- Form Name -->
-			<legend>Form Name</legend>
+			<legend>회원가입</legend>
 
 			<!-- Text input-->
 			<div class="form-group">
@@ -85,8 +85,31 @@
 			<div class="form-group">
 				<label class="col-md-4 control-label" for="member_birth">생년월일</label>
 				<div class="col-md-4">
-					<input id="member_birth" name="member_birth" type="text"
-						placeholder="년 월 일 생성필요" class="form-control input-md">
+					<select name="year">
+						<%
+										for (int i = 2017; i >= 1910; i--) {
+									%>
+						<option value="<%=i%>"><%=i%></option>
+						<%
+										}
+									%>
+				</select>년 <select name="month">
+						<%
+										for (int i = 1; i <= 12; i++) {
+									%>
+						<option value="<%=i%>"><%=i%></option>
+						<%
+										}
+									%>
+				</select>월 <select name="day">
+						<%
+										for (int i = 1; i <= 31; i++) {
+									%>
+						<option value="<%=i%>"><%=i%></option>
+						<%
+										}
+									%>
+				</select>일
 
 				</div>
 			</div>
@@ -135,9 +158,8 @@
 
 			<!-- Button (Double) -->
 			<div class="form-group">
-				<label class="col-md-4 control-label" for="button">버튼</label>
 				<div class="col-md-8">
-					<button id="button" name="button" class="btn btn-success">가입</button>
+					<input type="submit" value="회원가입">
 					<button id="button2id" name="button2id" class="btn btn-danger">리셋</button>
 				</div>
 			</div>
