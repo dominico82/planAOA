@@ -2,5 +2,5 @@ package nfit.member.model;
 
 public interface MemberDAO {
 
-	public int memberJoin(memberDTO dto);
+	public int memberJoin(MemberDTO dto);
 }

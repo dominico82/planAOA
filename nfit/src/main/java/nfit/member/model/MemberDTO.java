@@ -2,7 +2,7 @@ package nfit.member.model;
 
 import java.sql.*;
 
-public class memberDTO {
+public class MemberDTO {
 
 	private String member_id;
 	private int member_idx;
@@ -18,7 +18,7 @@ public class memberDTO {
 	private int member_type;
 	private int member_coin;
 	
-	public memberDTO(String member_id, int member_idx, String member_pwd, String member_name, String member_addr,
+	public MemberDTO(String member_id, int member_idx, String member_pwd, String member_name, String member_addr,
 			String member_sex) {
 		super();
 		this.member_id = member_id;
@@ -29,7 +29,7 @@ public class memberDTO {
 		this.member_sex = member_sex;
 	}
 
-	public memberDTO(String member_id, int member_idx, String member_pwd, String member_name, String member_addr,
+	public MemberDTO(String member_id, int member_idx, String member_pwd, String member_name, String member_addr,
 			String member_sex, String member_birth, String member_email, String member_tel, String member_tall,
 			String member_weight, int member_type, int member_coin) {
 		super();
@@ -48,7 +48,7 @@ public class memberDTO {
 		this.member_coin = member_coin;
 	}
 
-	public memberDTO() {
+	public MemberDTO() {
 		super();
 	}
 

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import nfit.member.model.MemberDAO;
-import nfit.member.model.memberDTO;
-import nfit.member.model.memberDAOImple;
+import nfit.member.model.MemberDTO;
+import nfit.member.model.MemberDAOImple;
 
 @Controller
 public class MemberController {
@@ -22,5 +22,8 @@ public class MemberController {
 		return mav;
 	}
 	
+	public ModelAndView memberSubmit(MemberDTO dto){
+		
+	}
 		
 }
