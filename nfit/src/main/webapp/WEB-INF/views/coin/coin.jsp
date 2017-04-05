@@ -19,6 +19,7 @@
 		<!---//End-login-script--->
 		<!-----768px-menu----->
 		<link type="text/css" rel="stylesheet" href="resources/css/jquery.mmenu.all.css" />
+		<link type="text/css" rel="stylesheet" href="resources/css/coin.css" />
 		<!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 		<script type="text/javascript" src="resources/js/jquery.mmenu.js"></script>
@@ -29,6 +30,178 @@
 				});
 		</script>
 		<!-----//768px-menu----->
+<!-- 코인결제 jquery -->
+<script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
+<script type="text/javascript" src="resources/js/pwstabs.js"></script>
+<script>
+$(function(){
+	$("a[data-tab-id='tab2']").click(
+			function(){
+						$("a[data-tab-id='tab2']").addClass('pws_tab_active');
+						$("a[data-tab-id='tab1']").removeClass('pws_tab_active');
+						$("div[data-pws-tab='tab2']").addClass('pws_show');
+						$("div[data-pws-tab='tab1']").removeClass('pws_show');
+						$("#agreeTitle").css("display", "block");
+						$("#regul_agree_check").css("display", "block");
+						$("#regularAgreement").css("display", "inline-block");
+						$("#regul_agree_txt").text("※ 할인 정액권 3개월간 취소불가 동의 해 주세요");
+						$("#VBANK_cont").css("display", "none");
+			});
+	$("a[data-tab-id='tab1']").click(
+			function(){
+						$("a[data-tab-id='tab1']").addClass('pws_tab_active');
+						$("a[data-tab-id='tab2']").removeClass('pws_tab_active');
+						$("div[data-pws-tab='tab1']").addClass('pws_show');
+						$("div[data-pws-tab='tab2']").removeClass('pws_show');
+						$("#agreeTitle").css("display", "none");
+						$("#regul_agree_check").css("display", "none");
+						$("#regularAgreement").css("display", "none");
+						$("#regul_agree_txt").text("");
+						$("#VBANK_cont").css("display", "inline-block");
+			});
+});
+$(function(){
+	$("#CARD").click(
+			function(){
+						$("#CARD").prop("checked", true);		
+						$("#CARD").attr("value", "card");		
+						$("#VBANK").prop("checked", false);
+						$("#VBANK").removeAttr("value");
+	});
+	$("#VBANK").click(
+			function(){
+						$("#CARD").prop("checked", false);		
+						$("#CARD").removeAttr("value");		
+						$("#VBANK").prop("checked", true);
+						$("#VBANK").attr("value", "vbank");
+	});
+});
+$(function(){
+	$("#pay_num1").click(
+			function(){
+						$("#pay_num1").addClass("on");
+						$("#pay_num2").removeClass("on");
+						$("#pay_num3").removeClass("on");
+						$("#pay_num4").removeClass("on");
+						$("#pay_num5").removeClass("on");
+						$("#pay_num6").removeClass("on");
+						price="99000";
+		
+	});
+	$("#pay_num2").click(
+			function(){
+						$("#pay_num1").removeClass("on");
+						$("#pay_num2").addClass("on");
+						$("#pay_num3").removeClass("on");
+						$("#pay_num4").removeClass("on");
+						$("#pay_num5").removeClass("on");
+						$("#pay_num6").removeClass("on");
+						price="199000";
+	});
+	$("#pay_num3").click(
+			function(){
+						$("#pay_num1").removeClass("on");
+						$("#pay_num2").removeClass("on");
+						$("#pay_num3").addClass("on");
+						$("#pay_num4").removeClass("on");
+						$("#pay_num5").removeClass("on");
+						$("#pay_num6").removeClass("on");
+						price="299000";
+	});
+	$("#pay_num4").click(
+			function(){
+						$("#pay_num1").removeClass("on");
+						$("#pay_num2").removeClass("on");
+						$("#pay_num3").removeClass("on");
+						$("#pay_num4").addClass("on");
+						$("#pay_num5").removeClass("on");
+						$("#pay_num6").removeClass("on");
+						price="30000";
+	});
+	$("#pay_num5").click(
+			function(){
+						$("#pay_num1").removeClass("on");
+						$("#pay_num2").removeClass("on");
+						$("#pay_num3").removeClass("on");
+						$("#pay_num4").removeClass("on");
+						$("#pay_num5").addClass("on");
+						$("#pay_num6").removeClass("on");
+						price="99000";
+	});
+	$("#pay_num6").click(
+			function(){
+						$("#pay_num1").removeClass("on");
+						$("#pay_num2").removeClass("on");
+						$("#pay_num3").removeClass("on");
+						$("#pay_num4").removeClass("on");
+						$("#pay_num5").removeClass("on");
+						$("#pay_num6").addClass("on");
+						price="299000";
+	});
+});
+</script>
+<script>
+var IMP = window.IMP; // 생략가능
+IMP.init('iamport'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+var pay="";
+var price="";
+
+$(function(){
+	$(".buy_pass_btn").click(
+			function(){
+				if(document.getElementById('CARD').value=="card"){
+					pay="card";	
+				}else if(document.getElementById('VBANK').value=="vbank"){
+					pay="vbank";
+				}
+				IMP.request_pay({
+				    pg : 'html5_inicis', //ActiveX 결제창은 inicis를 사용
+				    pay_method : pay, //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
+				    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+				    name : '주문명:결제테스트',
+				    amount : price,
+				    buyer_email : 'iamport@siot.do',
+				    buyer_name : '강수석',
+				    buyer_tel : '010-1234-5678', //누락되면 이니시스 결제창에서 오류
+				    buyer_addr : '서울특별시 강남구 삼성동',
+				    buyer_postcode : '123-456'
+				}, function(rsp) {
+				    if ( rsp.success ) {
+				    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+				    	jQuery.ajax({
+				    		url: '/payments/complete', //cross-domain error가 발생하지 않도록 주의해주세요
+				    		type: 'POST',
+				    		dataType: 'json',
+				    		data: {
+					    		imp_uid : rsp.imp_uid
+					    		//기타 필요한 데이터가 있으면 추가 전달
+				    		}
+				    	}).done(function(data) {
+				    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+				    		if ( everythings_fine ) {
+				    			var msg = '결제가 완료되었습니다.';
+				    			msg += '\n고유ID : ' + rsp.imp_uid;
+				    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+				    			msg += '\n결제 금액 : ' + rsp.paid_amount;
+				    			msg += '카드 승인번호 : ' + rsp.apply_num;
+				    			
+				    			alert(msg);
+				    		} else {
+				    			//[3] 아직 제대로 결제가 되지 않았습니다.
+				    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+				    		}
+				    	});
+				    } else {
+				        var msg = '결제에 실패하였습니다.';
+				        msg += '에러내용 : ' + rsp.error_msg;
+				        
+				        alert(msg);
+				    }
+				});
+				
+			});
+});
+</script>
 	</head>
 	<body>
 		<!---start-wrap---->
@@ -120,12 +293,12 @@
 			</div>
 			<!---//End-header---->
 <div>
-			<section id="sub_section"  class="payPC_wrap">
+	<section id="sub_section"  class="payPC_wrap">
 
     <section class="content_inner pb0">
     <div class="myheadPC_wrap">
         <div class="myheadPC_back">
-            <img src="">
+            <img src="https://az792517.vo.msecnd.net/img/myHeadPc_pt.jpg">
         </div>        
         <div class="myheadPC_content">
             <div class="mP_nm">
@@ -151,15 +324,19 @@
 
     
         <div class="pws_tabs_container">
-            <div class="tabset0">
-                <div data-pws-tab="tab2" data-pws-tab-name="할인 정액권">
+        <div class="pws_tabs_container pws_tabs_horizontal pws_tabs_horizontal_top pws_tabs_noeffect pws_none">
+        	<ul class="pws_tabs_controll">
+        	<li><a data-tab-id="tab2" class="">할인 정액권</a></li>
+        	<li><a data-tab-id="tab1" class="pws_tab_active">일반권</a></li></ul>
+            <div class="tabset0 pws_tabs_list">
+                <div data-pws-tab="tab2" data-pws-tab-name="할인 정액권" class="pws_hide" data-pws-tab-id="1" style="overflow: hidden;">
                     <article class="buy_pass_pc">
                         <div class="pay_exp"><span>정기 결제 이용권</span></div>
                         <div class="passList_pc pc_voucher">                            
                             <ul>
                                 
                                     <li>
-                                        <a href="#" data-goods='{"goodsIndex":"1000032","goodsPrice":"99,000"}'>
+                                        <a data-goods='{"goodsIndex":"1000032","goodsPrice":"99,000"}' id="pay_num1" class>
                                             <dl class="p5Box p-renew">
                                                 <dt class="paypc-dt">다양한 운동을 실용적으로</dt>
                                                 <dd class="paypc-d1"><span>30일</span></dd>
@@ -171,7 +348,7 @@
                                         </a>
                                     </li>
                                                                     <li>
-                                        <a href="#" data-goods='{"goodsIndex":"1000033","goodsPrice":"199,000"}'>
+                                        <a data-goods='{"goodsIndex":"1000033","goodsPrice":"199,000"}' id="pay_num2" class>
                                             <dl class="p5Box p-renew">
                                                 <dt class="paypc-dt">운동이 취미인 분들은</dt>
                                                 <dd class="paypc-d1"><span>30일</span></dd>
@@ -183,7 +360,7 @@
                                         </a>
                                     </li>
                                                                     <li>
-                                        <a href="#" data-goods='{"goodsIndex":"1000034","goodsPrice":"299,000"}'>
+                                        <a data-goods='{"goodsIndex":"1000034","goodsPrice":"299,000"}' id="pay_num3" class>
                                             <dl class="p5Box p-renew">
                                                 <dt class="paypc-dt">운동 매니아들을 위한</dt>
                                                 <dd class="paypc-d1"><span>30일</span></dd>
@@ -199,14 +376,14 @@
                         
                     </article> 
                 </div>               
-                <div data-pws-tab="tab1" id="tab2" data-pws-tab-name="일반권">
+                <div data-pws-tab="tab1" id="tab2" data-pws-tab-name="일반권" class="pws_hide pws_show" data-pws-tab-id="2" style="overflow: hidden;">
                     <article class="buy_pass_pc">
                         <div class="pay_exp"><span>일반 이용권 / 유효기간 30일</span></div>
                         <div class="passList_pc">                            
                             <ul>
                                 
                                     <li>
-                                        <a href="#" data-goods='{"goodsIndex":"1000029","goodsPrice":"30,000"}'>
+                                        <a data-goods='{"goodsIndex":"1000029","goodsPrice":"30,000"}' id="pay_num4" class>
                                             <dl class="p5Box p-renew">
                                                 <dt class="paypc-dt">운동 체험을 위한 이용권</dt>
                                                 <dd class="paypc-d1"><span>30일</span></dd>
@@ -218,7 +395,7 @@
                                         </a>
                                     </li>
                                                                     <li>
-                                        <a href="#" data-goods='{"goodsIndex":"1000030","goodsPrice":"99,000"}'>
+                                        <a data-goods='{"goodsIndex":"1000030","goodsPrice":"99,000"}' id="pay_num5" class>
                                             <dl class="p5Box p-renew">
                                                 <dt class="paypc-dt">다양한 운동을 실용적으로</dt>
                                                 <dd class="paypc-d1"><span>30일</span><span class="pay-hot">HOT</span></dd>
@@ -230,7 +407,7 @@
                                         </a>
                                     </li>
                                                                     <li>
-                                        <a href="#" data-goods='{"goodsIndex":"1000031","goodsPrice":"299,000"}'>
+                                        <a data-goods='{"goodsIndex":"1000031","goodsPrice":"299,000"}' id="pay_num6" class>
                                             <dl class="p5Box p-renew">
                                                 <dt class="paypc-dt">운동 매니아들을 위한</dt>
                                                 <dd class="paypc-d1"><span>30일</span></dd>
@@ -241,59 +418,46 @@
                                             </dl>
                                         </a>
                                     </li>
-                                                            </ul>
+                           </ul>
                         </div>                         
-                    </article>                    
+                    </article>      
+                    </div>              
                 </div>                               
             </div><!-- tabset0 -->
         </div> 
-        <ul class="regul_agree_con" id="regul_agree_con">
+        <ul class="regul_agree_con" id="regul_agree_con" style="height: 230px;">
             <li>
                 <div class="pc_g_join" id="pc_g_join">
-                    <p id="agreeTitle">이용 동의</p>
+                    <p id="agreeTitle" style="display: none;">이용 동의</p>
                     
-                    <div id="regul_agree_check">
+                    <div id="regul_agree_check" style="display: none;">
                         <label class="join_info">
-                            <input type="checkbox" id="regularAgreement" />
+                            <input type="checkbox" id="regularAgreement" style="display: none;">
                         </label>
                         <strong>할인 정액권 3개월간 자동 결제 취소 불가 동의</strong>
                     </div>
-                    <p class="regul_agree_txt" id="regul_agree_txt">※ 할인 정액권 3개월간 취소불가 동의 해 주세요</p>
+                    <p class="regul_agree_txt" id="regul_agree_txt"></p>
                 </div>
             </li>
             <li>
                 <div class="pay_card_pc">
                     <div class="p_cart_pc" id="payinfo">
-                        <p>구매정보</p>
-                        <ul>
-                            <li>
-                                <div style="width:31%;">주문금액</div>
-                                <div style="width:31%;">할인금액</div>
-                                <div style="width:38%;">결제금액<p>(VAT포함)</p></div>
-                            </li>
-                            <li>
-                                <div style="width:31%; padding-left:20px; color:#bcbec0;"><span id="payAmount" class="payAmt">0</span>원<strong id="p_minus">-</strong></div>
-                                <div style="width:31%; padding-left:20px; color:#bcbec0;"><span id="discountAmount">0</span>원<strong id="p_total">=</strong></div>
-                                <div style="width:38%;">총<span id="totalAmount" class="payAmt">0</span>원</div>
-                            </li>
-                        </ul>
                     </div>
                     <div class="pay_pass_pc">
                         <div class="pass_card">
-                            <input type="radio" title="신용카드" id="CARD" name="payment" value="CARD" checked="checked" /><label for="CARD">신용카드</label>
-                            <div id="VBANK_cont"><input type="radio" title="가상계좌" id="VBANK" name="payment" value="VBANK" /><label for="VBANK">가상계좌</label></div>
+                            <input type="radio" title="신용카드" id="CARD" name="payment" value="card" checked="checked"><label for="CARD">신용카드</label>
+                            <div id="VBANK_cont" style="display: inline-block;"><input type="radio" title="가상계좌" id="VBANK" name="payment" value="vbank"><label for="VBANK">가상계좌</label></div>
                         </div>
                         <div class="buy_pass_btn" id="buy_pass_btn">
-                            <a href="#" class="f_navFocus_pc" id="navFocus">
-                                <span id="navFocus_text">구매하기</span>
+                            <a class="f_navFocus_pc" id="navFocus" style="width: 130px;">
+                                <span id="navFocus_text">결제하기</span>
                             </a>
                         </div>    
                     </div>
                 </div>
             </li>
-        </ul> 
+        </ul>
 </section>
-</div>
 			<!---start-bottom-footer-grids---->
 				<div class="footer-grids">
 					<div class="wrap">
