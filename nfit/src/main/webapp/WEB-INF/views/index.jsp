@@ -108,26 +108,26 @@
 					<div class="top-grids">
 						<div class="top-grid">
 							<div class="product-pic frist-product-pic">
-								<img src="resources/images/watch-img.png" title="watch" />
+								<img src="resources/images/img_step_1.png" title="join" />
 							</div>
 							<span><label>1</label></span>
 							<div class="border"> </div>
-							<a href="#">Get a GPS Device</a>
+							<a href="#">회원가입을 통해 정보를 입력한다.</a>
 						</div>
 						<div class="top-grid">
 							<div class="product-pic">
-								<img src="resources/images/shoe-img.png" title="shoe" />
+								<img src="resources/images/img_step_2.png" title="book" />
 							</div>
 							<span><label>2</label></span>
 							<div class="border hide"> </div>
-							<a href="#">Go for a run</a>
+							<a href="#">코인을 충전하고 원하는 센터를 찾아 예약!!</a>
 						</div>
 						<div class="top-grid hide">
 							<div class="product-pic">
-								<img src="resources/images/lap-img.png" title="laptop" />
+								<img src="resources/images/img_step_3.png" title="play" />
 							</div>
 							<span><label>3</label></span>
-							<a href="#">View your results</a>
+							<a href="#">센터를 방문해 즐겁게 운동을 ^^</a>
 						</div>
 						<div class="clear"> </div>
 					</div>

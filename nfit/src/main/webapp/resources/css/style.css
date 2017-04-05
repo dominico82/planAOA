@@ -120,9 +120,9 @@ body{
 	margin-left: 1em;
 }
 .sign-ligin-btns ul li a.signup span,.sign-ligin-btns ul li a.login span{
-	padding: 0.5em 1.8em 0.55em 1.8em;
+	padding: 0.5em 1em 0.55em 1em;
 	display: block;
-	font-size: 1em;
+	font-size: 0.5em;
 	transition: 0.5s all;
 	-webkit-transition: 0.5s all;
 	-moz-transition: 0.5s all;
@@ -149,7 +149,7 @@ body{
 /*---End-header----*/
 /*--slider--*/
 .text-slider{
-	background:url(../images/slider.jpg) no-repeat 0px 0px;
+	background:url(../images/slider.png) no-repeat 0px 0px;
 	background-size: 100% 120%;
 }
 /*--//End-slider--*/
@@ -1244,10 +1244,10 @@ input:focus {
 		height: 35px;
 	}
 	.top-grid span label {
-		font-size: 1.2em;
+		font-size: 1.0em;
 	}
 	.about h1 {
-		font-size: 1.8em;
+		font-size: 1.5em;
 		margin: 0.5em 0 0 0;
 	}
 	.content-feature-grids {
@@ -1739,7 +1739,7 @@ input:focus {
 	}
 	#signupButton,#loginButton{
 		top:8px;
-		padding: 5px 5px 1px 5px;
+		padding: 5px 3px 1px 3px;
 	}
 	#signupForm,#loginForm{
 		width: 242px;

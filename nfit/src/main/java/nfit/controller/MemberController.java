@@ -22,8 +22,6 @@ public class MemberController {
 		return mav;
 	}
 	
-	public ModelAndView memberSubmit(MemberDTO dto){
-		
-	}
+
 		
 }

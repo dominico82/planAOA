@@ -34,7 +34,7 @@
 								<li><a class="twitter" href="#"> </a></li>
 								<li><a class="youtube" href="#"> </a></li>
 							</ul>
-							<p class="copy-right">Template by <a href="#">W3layouts</a></p>
+							<p class="copy-right">We are <a href="#">Team A.O.A</a></p>
 						</div>
 						<div class="footer-grid">
 							<h3>Newsletter</h3>

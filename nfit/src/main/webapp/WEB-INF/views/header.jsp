@@ -2,26 +2,30 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Runkeeper Website Template | Home :: w3layouts</title>
-		<link href="resources/css/style.css" rel='stylesheet' type='text/css' />
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="css/style.css" rel='stylesheet' type='text/css' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="shortcut icon" type="image/x-icon" href="resources/images/fav-icon.png" />
+		
+		<!---shortcut icon--->
+		<link rel="shortcut icon" type="image/x-icon" href="images/fav-icon.png" />
+		
 		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-		</script>
+
 	    <!---strat-slider---->
-	    <script type="text/javascript" src="resources/js/jquery.min.js"></script>
-	    <link rel="stylesheet" type="text/css" href="resources/css/slider-style.css" />
-		<script type="text/javascript" src="resources/js/modernizr.custom.28468.js"></script>
+	    <script type="text/javascript" src="js/jquery.min.js"></script>
+	    <link rel="stylesheet" type="text/css" href="css/slider-style.css" />
+		<script type="text/javascript" src="js/modernizr.custom.28468.js"></script>
 		<!---//strat-slider---->
+		
 		<!---start-login-script--->
-		<script src="resources/js/login.js"></script>
+		<script src="js/login.js"></script>
 		<!---//End-login-script--->
+		
 		<!-----768px-menu----->
-		<link type="text/css" rel="stylesheet" href="resources/css/jquery.mmenu.all.css" />
-		<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="resources/js/jquery.mmenu.js"></script>
+		<link type="text/css" rel="stylesheet" href="css/jquery.mmenu.all.css" />
+		<script type="text/javascript" src="js/jquery.mmenu.js"></script>
 			<script type="text/javascript">
 				//	The menu on the left
 				$(function() {
@@ -29,9 +33,10 @@
 				});
 		</script>
 		<!-----//768px-menu----->
-	</head>
-	<body>
-		<!---start-wrap---->
+	
+</head>
+<body>
+<!---start-wrap---->
 		<!------start-768px-menu---->
 			<div id="page">
 					<div id="header">
@@ -39,11 +44,11 @@
 					</div>
 					<nav id="menu-left">
 						<ul>
-							<li><a href="index.do">Home</a></li>
-							<li><a href="resources/about.html">About</a></li>
-							<li><a href="resources/features.html">Features</a></li>
+							<li><a href="#">이용안내</a></li>
+							<li><a href="#">주변센터찾기</a></li>
+							<li><a href="#">고객센터</a></li>
+							<li><a href="#">공지사항</a></li>
 							<li><a href="coin.do">코인결제</a></li>
-							<div class="clear"> </div>
 						</ul>
 					</nav>
 			</div>
@@ -53,22 +58,25 @@
 				<div class="wrap">
 				<div class="header-left">
 					<div class="logo">
-						<a href="index.do">Runkeeper</a>
-					</div>
+						<a href="index.do">N fit</a>
+					</div> made by team A.O.A
 				</div>
 				<div class="header-right">
 					<div class="top-nav">
 					<ul>
-						<li><a href="index.do">Home</a></li>
-						<li><a href="resources/about.html">About</a></li>
-						<li><a href="resources/features.html">Features</a></li>
+						<li><a href="#">이용안내</a></li>
+						<li><a href="#">주변센터찾기</a></li>
+						<li><a href="#">고객센터</a></li>
+						<li><a href="#">공지사항</a></li>
 						<li><a href="coin.do">코인결제</a></li>
 					</ul>
 				</div>
 				<div class="sign-ligin-btns">
 					<ul>
-						<li id="memberJoinContainer"><a class="memberJoin" id="memberJoinButton" href="memberJoin.do"><span><i>회원가입</i></span></a></li>
-						<li id="loginContainer"><a class="login" id="loginButton" href="#"><span><i>Login</i></span></i></a>
+						<li id="signupContainer"><a class="signup" id="signupButton" href="memberJoin.do"><span><i>회원가입</i></span></a>
+							 				            <!-- Login Ends Here -->
+						</li>
+						<li id="loginContainer"><a class="login" id="loginButton" href="#"><span><i>로그인</i></span></a>
 							 <div class="clear"> </div>
 				                <div id="loginBox">                
 				                    <form id="loginForm">
@@ -89,7 +97,7 @@
 				                </div>
 				            <!-- Login Ends Here -->
 						</li>
-						<div class="clear"> </div>
+					
 					</ul>
 				</div>
 				<div class="clear"> </div>
@@ -97,5 +105,8 @@
 				<div class="clear"> </div>
 			</div>
 			</div>
+			<!---//End-header---->
+
+
 </body>
 </html>
