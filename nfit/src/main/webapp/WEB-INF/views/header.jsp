@@ -3,6 +3,17 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%
+	String saveid="";
+	Cookie cks[]=request.getCookies();
+	if(cks!=null){
+		for(int i=0;i<cks.length;i++){
+			if(cks[i].getName().equals("saveid")){
+				saveid=cks[i].getValue();
+			}
+		}
+	}
+%>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="css/style.css" rel='stylesheet' type='text/css' />
@@ -76,26 +87,7 @@
 						<li id="signupContainer"><a class="signup" id="signupButton" href="memberJoin.do"><span onclick="location.href='memberJoin.do'"><i>회원가입</i></span></a>
 							 				            <!-- Login Ends Here -->
 						</li>
-						<li id="loginContainer"><a class="login" id="loginButton" href="#"><span><i>로그인</i></span></a>
-							 <div class="clear"> </div>
-				                <div id="loginBox">                
-				                    <form id="loginForm">
-				                        <fieldset id="body">
-				                            <fieldset>
-				                                <label for="email">Email Address</label>
-				                                <input type="text" name="email" id="email" />
-				                            </fieldset>
-				                            <fieldset>
-				                                <label for="password">Password</label>
-				                                <input type="password" name="password" id="password" />
-				                            </fieldset>
-				                            <label class="remeber" for="checkbox"><input type="checkbox" id="checkbox" />Remember me</label>
-				                            <input type="submit" id="login" value="login" />
-				                        </fieldset>
-				                        <span><a href="#">Forgot your password?</a></span>
-				                    </form>
-				                </div>
-				            <!-- Login Ends Here -->
+						<li id="loginContainer"><a class="login" id="loginButton" href="#"><span onclick="location.href='memberLogin.do'"><i>로그인</i></span></a>
 						</li>
 					
 					</ul>

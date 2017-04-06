@@ -18,5 +18,9 @@ public class MemberDAOImple implements MemberDAO {
 		int count=sqlMap.insert("memberJoin",dto);
 		return count;
 	}
-
+	/*public int loginCheck(String member_id,String member_pwd){
+		int count=sqlMap.select("memberLogin", member_id, member_pwd);
+	}
+*/
+	
 }
