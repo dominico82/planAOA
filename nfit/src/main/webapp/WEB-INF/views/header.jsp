@@ -15,7 +15,7 @@
 	}
 %>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>만족스러운 피트니스 Nfit</title>
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		
@@ -30,10 +30,7 @@
 		<script type="text/javascript" src="js/modernizr.custom.28468.js"></script>
 		<!---//strat-slider---->
 		
-		<!---start-login-script--->
-		<script src="js/login.js"></script>
-		<!---//End-login-script--->
-		
+				
 		<!-----768px-menu----->
 		<link type="text/css" rel="stylesheet" href="css/jquery.mmenu.all.css" />
 		<script type="text/javascript" src="js/jquery.mmenu.js"></script>
