@@ -73,7 +73,7 @@
 				</div>
 				<div class="sign-ligin-btns">
 					<ul>
-						<li id="signupContainer"><a class="signup" id="signupButton" href="memberJoin.do"><span><i>회원가입</i></span></a>
+						<li id="signupContainer"><a class="signup" id="signupButton" href="memberJoin.do"><span onclick="location.href='memberJoin.do'"><i>회원가입</i></span></a>
 							 				            <!-- Login Ends Here -->
 						</li>
 						<li id="loginContainer"><a class="login" id="loginButton" href="#"><span><i>로그인</i></span></a>

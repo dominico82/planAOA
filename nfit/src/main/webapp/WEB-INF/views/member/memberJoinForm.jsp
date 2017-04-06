@@ -3,21 +3,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<!-- meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"/ -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>사거리</title>
-<!-- Bootstrap -->
-<link href="../resources/js/bootstrap.js" rel="stylesheet"
-	type="text/css" />
-<link href="/resources/image/icon/HalfLife.ico" rel="shortcuticon">
-<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요한) -->
-<script src="//code.jquery.com/jquery.js"></script>
-<!-- 모든 합쳐진 플러그인을 포함하거나 (아래) 필요한 각각의 파일들을 포함하세요 -->
-<script src="/resources/bootstrap/js/bootstrap.min.js"></script>
-<!-- Respond.js 으로 IE8 에서 반응형 기능을 활성화하세요 (https://github.com/scottjehl/Respond) -->
-<script src="/resources/bootstrap/js/respond.js"></script>
-
+<title>Runkeeper Website Template | Home :: w3layouts</title>
+		<link href="resources/css/style.css" rel='stylesheet' type='text/css' />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="resources/images/fav-icon.png" />
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		</script>
+	    <!---strat-slider---->
+	    <script type="text/javascript" src="resources/js/jquery.min.js"></script>
+	    <link rel="stylesheet" type="text/css" href="resources/css/slider-style.css" />
+		<script type="text/javascript" src="resources/js/modernizr.custom.28468.js"></script>
+		<!---//strat-slider---->
+		<!---start-login-script--->
+		<script src="resources/js/login.js"></script>
+		<!---//End-login-script--->
+		<!-----768px-menu----->
+		<link type="text/css" rel="stylesheet" href="resources/css/jquery.mmenu.all.css" />
+		<link type="text/css" rel="stylesheet" href="resources/css/coin.css" />
+		<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="resources/js/jquery.mmenu.js"></script>
+			<script type="text/javascript">
+				//	The menu on the left
+				$(function() {
+					$('nav#menu-left').mmenu();
+				});
+		</script>
 </head>
 <body>
 	<header>
