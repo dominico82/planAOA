@@ -7,13 +7,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+<div>
 <h2>My page</h2>
-<section>
-<form name="form" action="memberModifyForm.do">
+<form name="form" action="modifyForm.do">
 <div>
 <input type="submit" value="회원정보수정">
 </div>
 </form>
-</section>
+</div>
 </body>
 </html>
