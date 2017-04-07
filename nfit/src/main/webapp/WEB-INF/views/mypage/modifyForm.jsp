@@ -68,9 +68,11 @@ function checkPwd(){
 								<div class="col-md-6">
 									<div class="form-group userPicUploadBox">
 										<label>프로필 사진</label>
-											
 											<div>
-												<input type="file" class="btn btn-default" value="파일 선택">
+												<form name="upload" action="fileUpload.do" method="post" enctype="multipart/form-data">
+													<input type="file" name="imgFile"><br> <!-- input type="file" 업로드할 파일을 선택하는 속성 -->
+													<input type="submit" value="파일올리기">
+												</form>
 											</div>
 												<small class="help-block">
 													<span class="text-danger">미리보기로 업로드된 사진을 확인하신 후, 하단의 저장하기 버튼을 꼭 눌러주세요.</span>
@@ -78,7 +80,7 @@ function checkPwd(){
 													<span>프로필 사진은 센터 이용시 본인 확인 용도로 사용됩니다.</span>
 													<span>사진으로 본인 확인이 어려울 경우, 센터 입장이 제한될 수 있습니다.</span>
 												</small>
-									</div>
+										</div>
 									<div class="form-group">
 										<label>생년월일</label>
 										<div class="form-inline birthday">
