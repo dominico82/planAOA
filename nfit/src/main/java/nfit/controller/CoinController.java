@@ -27,10 +27,10 @@ public class CoinController {
 	}
 	
 	@RequestMapping(value="getCoin.do")
-	public ModelAndView getCoin(@RequestParam(value="coin")int coin){
-		System.out.println("결제한코인: "+coin);
+	public ModelAndView getCoin(@RequestParam(value="userId")String userid, @RequestParam(value="coin")int coin, @RequestParam(value="userCoin", defaultValue="0")int userCoin){
+		int totalCoin=coin+userCoin;
 		ModelAndView mav=new ModelAndView();
-		
+		int count=coinDAO.setPayInfo(userid, totalCoin);
 		mav.setViewName("coin/getCoin");
 		return mav;
 	}

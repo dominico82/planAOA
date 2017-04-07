@@ -4,5 +4,5 @@ import nfit.member.model.MemberDTO;
 
 public interface CoinDAO {
 	public MemberDTO getPayInfo(String userid);
-	public String setPayInfo();
+	public int setPayInfo(String userid, int coin);
 }

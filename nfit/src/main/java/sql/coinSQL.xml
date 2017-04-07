@@ -9,4 +9,10 @@
 		where
 			member_id = #{member_id}
 	</select>
+	<update id="setCoinInfo" parameterType="hashmap">
+		update member_table set 
+			member_coin = #{member_coin}	
+		where 
+			member_id = #{member_id}	
+	</update>
 </mapper>
