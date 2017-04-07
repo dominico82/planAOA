@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -46,6 +47,8 @@ $(function(){
 						$("#regularAgreement").css("display", "inline-block");
 						$("#regul_agree_txt").text("※ 할인 정액권 3개월간 취소불가 동의 해 주세요");
 						$("#VBANK_cont").css("display", "none");
+						$("#buy_pass_btn").hide();
+						$("#buy_monthly_pass_btn").show();
 			});
 	$("a[data-tab-id='tab1']").click(
 			function(){
@@ -58,6 +61,8 @@ $(function(){
 						$("#regularAgreement").css("display", "none");
 						$("#regul_agree_txt").text("");
 						$("#VBANK_cont").css("display", "inline-block");
+						$("#buy_pass_btn").show();
+						$("#buy_monthly_pass_btn").hide();
 			});
 });
 $(function(){
@@ -86,6 +91,7 @@ $(function(){
 						$("#pay_num5").removeClass("on");
 						$("#pay_num6").removeClass("on");
 						price="99000";
+						buy_coin="100";
 		
 	});
 	$("#pay_num2").click(
@@ -97,6 +103,7 @@ $(function(){
 						$("#pay_num5").removeClass("on");
 						$("#pay_num6").removeClass("on");
 						price="199000";
+						buy_coin="200";
 	});
 	$("#pay_num3").click(
 			function(){
@@ -107,6 +114,7 @@ $(function(){
 						$("#pay_num5").removeClass("on");
 						$("#pay_num6").removeClass("on");
 						price="299000";
+						buy_coin="300";
 	});
 	$("#pay_num4").click(
 			function(){
@@ -117,6 +125,7 @@ $(function(){
 						$("#pay_num5").removeClass("on");
 						$("#pay_num6").removeClass("on");
 						price="30000";
+						buy_coin="30";
 	});
 	$("#pay_num5").click(
 			function(){
@@ -127,6 +136,7 @@ $(function(){
 						$("#pay_num5").addClass("on");
 						$("#pay_num6").removeClass("on");
 						price="99000";
+						buy_coin="100";
 	});
 	$("#pay_num6").click(
 			function(){
@@ -137,6 +147,7 @@ $(function(){
 						$("#pay_num5").removeClass("on");
 						$("#pay_num6").addClass("on");
 						price="299000";
+						buy_coin="300";
 	});
 });
 </script>
@@ -144,8 +155,13 @@ $(function(){
 var IMP = window.IMP; // 생략가능
 IMP.init('iamport'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 var pay="";
-var price="";
-
+var price="0";
+var buy_coin="";
+var userName="${dto.member_name}";
+var userEmail="${dto.member_email}";
+var userTel="${dto.member_tel}";
+var userAddr="${dto.member_addr}";
+//일반결제 모듈
 $(function(){
 	$(".buy_pass_btn").click(
 			function(){
@@ -154,52 +170,100 @@ $(function(){
 				}else if(document.getElementById('VBANK').value=="vbank"){
 					pay="vbank";
 				}
-				IMP.request_pay({
-				    pg : 'html5_inicis', //ActiveX 결제창은 inicis를 사용
-				    pay_method : pay, //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
-				    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
-				    name : '주문명:결제테스트',
-				    amount : price,
-				    buyer_email : 'iamport@siot.do',
-				    buyer_name : '강수석',
-				    buyer_tel : '010-1234-5678', //누락되면 이니시스 결제창에서 오류
-				    buyer_addr : '서울특별시 강남구 삼성동',
-				    buyer_postcode : '123-456'
-				}, function(rsp) {
-				    if ( rsp.success ) {
-				    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-				    	jQuery.ajax({
-				    		url: '/payments/complete', //cross-domain error가 발생하지 않도록 주의해주세요
-				    		type: 'POST',
-				    		dataType: 'json',
-				    		data: {
-					    		imp_uid : rsp.imp_uid
-					    		//기타 필요한 데이터가 있으면 추가 전달
-				    		}
-				    	}).done(function(data) {
-				    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
-				    		if ( everythings_fine ) {
-				    			var msg = '결제가 완료되었습니다.';
-				    			msg += '\n고유ID : ' + rsp.imp_uid;
-				    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
-				    			msg += '\n결제 금액 : ' + rsp.paid_amount;
-				    			msg += '카드 승인번호 : ' + rsp.apply_num;
-				    			
-				    			alert(msg);
-				    		} else {
-				    			//[3] 아직 제대로 결제가 되지 않았습니다.
-				    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
-				    		}
-				    	});
-				    } else {
-				        var msg = '결제에 실패하였습니다.';
-				        msg += '에러내용 : ' + rsp.error_msg;
-				        
-				        alert(msg);
-				    }
-				});
-				
+
+				if(price!="0"){
+					IMP.request_pay({
+					    pg : 'html5_inicis', //ActiveX 결제창은 inicis를 사용
+					    pay_method : pay, //card(신용카드), trans(실시간계좌이체), vbank(가상계좌), phone(휴대폰소액결제)
+					    merchant_uid : 'merchant_' + new Date().getTime(), //상점에서 관리하시는 고유 주문번호를 전달
+					    name : '주문명:결제테스트',
+					    amount : price,
+					    buyer_email : userEmail,
+					    buyer_name : userName,
+					    buyer_tel : userTel, //누락되면 이니시스 결제창에서 오류
+					    buyer_addr : userAddr,
+					    buyer_postcode : '123-456'
+					}, function(rsp) {
+					    if ( rsp.success ) {
+					    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+					    	jQuery.ajax({
+					    		url: '/payments/complete', //cross-domain error가 발생하지 않도록 주의해주세요
+					    		type: 'POST',
+					    		dataType: 'json',
+					    		data: {
+						    		imp_uid : rsp.imp_uid
+						    		//기타 필요한 데이터가 있으면 추가 전달
+					    		}
+					    	}).done(function(data) {
+					    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+					    		if ( everythings_fine ) {
+					    			var msg = '결제가 완료되었습니다.';
+					    			msg += '\n고유ID : ' + rsp.imp_uid;
+					    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+					    			msg += '\n결제 금액 : ' + rsp.paid_amount;
+					    			msg += '카드 승인번호 : ' + rsp.apply_num;
+					    			
+					    			alert(msg);
+					    			
+					    		} else {
+					    			//[3] 아직 제대로 결제가 되지 않았습니다.
+					    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+					    		}
+					    	});
+
+					        $('#getCoin').submit();
+					    } else {
+					        var msg = '결제에 실패하였습니다.';
+					        msg += '에러내용 : ' + rsp.error_msg;
+					        
+					        alert(msg);
+					        $('#getCoin').submit();
+					    }
+					});
+				}else if(price=="0"){
+					window.alert('상품을 선택해 주세요!');
+				}
 			});
+});
+//정기 결제 모듈
+var monthly_checked="";
+
+$(function(){
+		$(".buy_monthly_pass_btn").click(
+				function(){
+					if($('input:checkbox[id="regularAgreement"]').is(":checked")==true){
+						if(price!="0"){
+							IMP.request_pay({
+							    pg : 'inicis', // version 1.1.0부터 지원.
+							    pay_method : 'card',
+							    merchant_uid : 'merchant_' + new Date().getTime(),
+							    customer_uid : 'your_customer_1234',
+							    amount : price,
+							    name : '주문명:빌링키 발급을 위한 결제',
+							    buyer_email : userEmail,
+							    buyer_name : userName,
+							    buyer_tel : userTel
+							}, function(rsp) {
+							    if ( rsp.success ) {
+							        var msg = '빌링키 발급이 완료되었습니다.';
+							        msg += '고유ID : ' + rsp.imp_uid;
+							        msg += '상점 거래ID : ' + rsp.merchant_uid;
+							    } else {
+							        var msg = '빌링키 발급에 실패하였습니다.';
+							        msg += '에러내용 : ' + rsp.error_msg;
+							    }
+			
+							    alert(msg);
+						        $('#getCoin').submit();
+							});
+						}else if(price=="0"){
+							window.alert('상품을 선택해 주세요!');
+						}
+					}else if($('input:checkbox[id="regularAgreement"]').is(":checked")==false){
+						window.alert('할인 정액권 3개월간 자동 결제 취소 불가 동의를 해주세요!');
+					}
+		});
+	
 });
 </script>
 	</head>
@@ -302,8 +366,8 @@ $(function(){
         </div>        
         <div class="myheadPC_content">
             <div class="mP_nm">
-                <span class="mP_name">강수석</span>
-                <span class="mP_mail">kss8869@naver.com</span>
+                <span class="mP_name">${dto.member_name}</span>
+                <span class="mP_mail">${dto.member_email}</span>
             </div>
             <div class="mP_btn">
                 <span class="mP_btn_gray"><a href="/process/pay">이용권구매</a></span>
@@ -314,9 +378,8 @@ $(function(){
         <div class="myheadPC_myCoin">
             <img src="https://az792517.vo.msecnd.net/img/myheadPC_coinBack.png">
             <ul>
-                <li class="mP_coin">0</li>
+                <li class="mP_coin">${dto.member_coin}</li>
                 <li class="mP_ctxt">COIN</li>
-                <li class="mP_date">~ </li>
             </ul>
         </div>
     </div>
@@ -424,12 +487,13 @@ $(function(){
                     </div>              
                 </div>                               
             </div><!-- tabset0 -->
-        </div> 
+        </div>
+        <form name="getCoin" action="getCoin.do" method="post">
         <ul class="regul_agree_con" id="regul_agree_con" style="height: 230px;">
             <li>
                 <div class="pc_g_join" id="pc_g_join">
                     <p id="agreeTitle" style="display: none;">이용 동의</p>
-                    
+                    <input type="hidden" name="coin" value="${buy_coin}">
                     <div id="regul_agree_check" style="display: none;">
                         <label class="join_info">
                             <input type="checkbox" id="regularAgreement" style="display: none;">
@@ -448,15 +512,21 @@ $(function(){
                             <input type="radio" title="신용카드" id="CARD" name="payment" value="card" checked="checked"><label for="CARD">신용카드</label>
                             <div id="VBANK_cont" style="display: inline-block;"><input type="radio" title="가상계좌" id="VBANK" name="payment" value="vbank"><label for="VBANK">가상계좌</label></div>
                         </div>
-                        <div class="buy_pass_btn" id="buy_pass_btn">
+                        <div class="buy_pass_btn" id="buy_pass_btn" style="position: relative;z-index: 1;display: block;">
                             <a class="f_navFocus_pc" id="navFocus" style="width: 130px;">
                                 <span id="navFocus_text">결제하기</span>
                             </a>
-                        </div>    
+                        </div>
+                        <div class="buy_monthly_pass_btn" id="buy_monthly_pass_btn" style="position: relative;z-index: 2;left: 183px;display: none;">
+                            <a class="f_navFocus_pc" id="navFocus" style="width: 130px;">
+                                <span id="navFocus_text">결제하기</span>
+                            </a>
+                        </div>      
                     </div>
-                </div>
+                </div><input type="submit" value="결제">
             </li>
         </ul>
+        </form>
 </section>
 			<!---start-bottom-footer-grids---->
 				<div class="footer-grids">

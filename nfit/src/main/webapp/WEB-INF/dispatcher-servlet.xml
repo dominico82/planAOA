@@ -43,6 +43,11 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+	<bean id="coinDao" class="nfit.coin.model.CoinDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
     <!-- viewResolver -->
     <bean 
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
