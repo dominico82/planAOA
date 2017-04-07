@@ -1,13 +1,12 @@
 package nfit.controller;
 
-import javax.jws.WebParam.Mode;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,9 +34,51 @@ public class MemberController {
 		mav.setViewName("member/memberMsg");
 		return mav;
 	}
-	@RequestMapping("memberLogin.do")
+	@RequestMapping(value="memberLogin.do",method=RequestMethod.GET)
 	public String loginForm(){
 		return "member/memberLoginForm";
+	}
+	@RequestMapping(value="memberLogin.do",method=RequestMethod.POST)
+	public ModelAndView login(MemberDTO dto, HttpSession session,HttpServletRequest req,HttpServletResponse resp,
+			@RequestParam(value="saveid",required=false)String save,
+			@RequestParam(value="member_id",required=false)String id,
+			@RequestParam(value="member_pwd",required=false)String pwd){
+		String member_id=id;
+		String member_pwd=pwd;
+		String saveid=save;
+		session=req.getSession();
+		ModelAndView mav=new ModelAndView();
+		int result=memberDao.loginCheck(member_id,member_pwd);
+		String msg="";
+		String goPage="";
+		if(result==MemberDAOImple.LOGIN_OK){
+			String username=memberDao.getUserInfo(member_id);
+			session.setAttribute("saveid", member_id);
+			session.setAttribute("savename", username);
+			msg=username+"님 환영합니다.";
+			goPage="member/memberMsg";
+			if(saveid==null||saveid.equals("")){
+				Cookie ck=new Cookie("saveid",member_id);
+				ck.setMaxAge(0);
+				resp.addCookie(ck);
+			}else{
+				Cookie ck=new Cookie("saveid",member_id);
+				ck.setMaxAge(60*60*24*30);
+				resp.addCookie(ck);
+			}
+		}else if(result==MemberDAOImple.NOT_ID){
+			msg="등록되지 않은 아이디입니다.";
+			goPage="/member/memberMsg";
+		}else if(result==MemberDAOImple.NOT_PWD){
+			msg="잘못된 비밀번호 입니다.";
+			goPage="/member/memberMsg";
+		}else if(result==MemberDAOImple.ERROR){
+			msg="고객센터에 연락바람";
+			goPage="/member/memberMsg";
+		}
+		mav.addObject("msg",msg);
+		mav.setViewName(goPage);
+		return mav;
 	}
 
 		
