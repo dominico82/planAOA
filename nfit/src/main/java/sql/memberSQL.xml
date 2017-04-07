@@ -17,10 +17,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				#{member_tall},
 				#{member_weight},0,0)
 	</insert>
-	<select id="memberLogin" resultType="nfit.member.model.MemberDTO">
-		select pwd from member_table where id=#{member_id}
+	
+	<select id="memberLogin" parameterType="String" resultType="nfit.member.model.MemberDTO">
+		select member_pwd from member_table where member_id=#{member_id}
 	</select>
+	
 	<select id="getUserInfo" parameterType="String" resultType="nfit.member.model.MemberDTO">
-		select member_name from member_table where id=#{member_id}
+		select member_name from member_table where member_id=#{member_id}
 	</select>
+	
 </mapper>

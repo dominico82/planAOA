@@ -33,10 +33,11 @@ public class MemberDAOImple implements MemberDAO {
 		}else{
 			return ERROR;
 		}
+		
 	}
 	
 	public String getUserInfo(String member_id){
-		String userInfo=sqlMap.selectOne("getuserInfo",member_id);
+		String userInfo=sqlMap.selectOne("getUserInfo",member_id);
 		return userInfo;
 	}
 

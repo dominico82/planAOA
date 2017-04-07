@@ -53,12 +53,12 @@
 
         <div class="form__field">
           <label class="fontawesome-user" for="login__username"><span class="hidden">ID</span></label>
-          <input id="login__username" type="text" class="form__input" placeholder="ID" required value="${cookie.saveid.value }">
+          <input id="login__username" name="member_id" type="text" class="form__input" placeholder="ID" required value="${cookie.saveid.value }">
         </div>
 
         <div class="form__field">
           <label class="fontawesome-lock" for="login__password"><span class="hidden">Password</span></label>
-          <input id="login__password" type="password" class="form__input" placeholder="Password" required>
+          <input id="login__password" name="member_pwd" type="password" class="form__input" placeholder="Password" required>
         </div>
 
         <div class="form__field">

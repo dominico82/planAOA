@@ -50,7 +50,7 @@
 </head>
 <body>
 	<c:choose>
-		<c:when test="${empty sessionScope.username }">
+		<c:when test="${empty sessionScope.saveid }">
 			<!---start-wrap---->
 			<!------start-768px-menu---->
 			<div id="page">
@@ -107,7 +107,7 @@
 			</div>
 			<!---//End-header---->
 		</c:when>
-		<c:when test="${sessionScope.username=='admin' }">
+		<c:when test="${sessionScope.saveid=='admin' }">
 			<div id="page">
 				<div id="header">
 					<a class="navicon" href="#menu-left"> </a>
@@ -162,7 +162,7 @@
 				</div>
 			</div>
 		</c:when>
-		<c:otherwise>
+		<c:when test="${!empty sessionScope.saveid }">
 			<div id="page">
 				<div id="header">
 					<a class="navicon" href="#menu-left"> </a>
@@ -202,7 +202,7 @@
 							<ul>
 
 								<li id="signupContainer"><a class="signup"
-									id="signupButton" href="memberJoin.do"><span onclick="#"><i>마이페이지</i></span></a></li>
+									id="signupButton" href="memberJoin.do"><span onclick=""><i>마이페이지</i></span></a></li>
 								<li id="loginContainer"><a class="login" id="loginButton"
 									href="#"><span onclick="location.href='logout.do'"><i>로그아웃</i></span></a></li>
 
@@ -214,7 +214,7 @@
 					<div class="clear"></div>
 				</div>
 			</div>
-		</c:otherwise>
+		</c:when>
 	</c:choose>
 
 </body>

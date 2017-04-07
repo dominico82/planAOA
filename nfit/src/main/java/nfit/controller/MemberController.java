@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,12 +53,12 @@ public class MemberController {
 		String msg="";
 		String goPage="";
 		if(result==MemberDAOImple.LOGIN_OK){
-			String username=memberDao.getUserInfo(member_id);
+			//String username=memberDao.getUserInfo(member_id);
 			session.setAttribute("saveid", member_id);
-			session.setAttribute("savename", username);
-			msg=username+"";
+			//session.setAttribute("member_name", username);
+			msg=member_id+"님 환영합니다";
 			goPage="member/memberMsg";
-			if(saveid==null||saveid.equals("")){
+			/*if(saveid==null||saveid.equals("")){
 				Cookie ck=new Cookie("saveid",member_id);
 				ck.setMaxAge(0);
 				resp.addCookie(ck);
@@ -65,21 +66,31 @@ public class MemberController {
 				Cookie ck=new Cookie("saveid",member_id);
 				ck.setMaxAge(60*60*24*30);
 				resp.addCookie(ck);
-			}
+			}*/
 		}else if(result==MemberDAOImple.NOT_ID){
-			msg="";
-			goPage="/member/memberMsg";
+			msg="아이디가 잘못되었습니다.";
+			goPage="/member/memberLogin.do";
 		}else if(result==MemberDAOImple.NOT_PWD){
-			msg=".";
-			goPage="/member/memberMsg";
+			msg="비밀번호를 잘못입력하셨습니다.";
+			goPage="/member/memberLogin.do";
 		}else if(result==MemberDAOImple.ERROR){
-			msg="";
-			goPage="/member/memberMsg";
+			msg="고객센터 연락바람";
+			goPage="/member/memberLogin.do";
 		}
 		mav.addObject("msg",msg);
 		mav.setViewName(goPage);
 		return mav;
 	}
 
+	public ModelAndView logoutForm(HttpServletRequest req){
+		HttpSession session=req.getSession();
+		ModelAndView mav=new ModelAndView();
+		session.invalidate();
+		String msg="";
+		msg="로그아웃이 완료되었습니다.";
+		mav.addObject("msg",msg);
+		mav.setViewName("/member/memberMsg");
+		return mav;
+	}
 		
 }

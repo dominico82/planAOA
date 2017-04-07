@@ -17,6 +17,28 @@ public class MemberDTO {
 	private int member_weight;
 	private int member_type;
 	private int member_coin;
+	
+	public MemberDTO() {
+		super();
+	}
+	public MemberDTO(String member_id, int member_idx, String member_pwd, String member_name, String member_addr,
+			String member_sex, String member_birth, String member_email, String member_tel, int member_tall,
+			int member_weight, int member_type, int member_coin) {
+		super();
+		this.member_id = member_id;
+		this.member_idx = member_idx;
+		this.member_pwd = member_pwd;
+		this.member_name = member_name;
+		this.member_addr = member_addr;
+		this.member_sex = member_sex;
+		this.member_birth = member_birth;
+		this.member_email = member_email;
+		this.member_tel = member_tel;
+		this.member_tall = member_tall;
+		this.member_weight = member_weight;
+		this.member_type = member_type;
+		this.member_coin = member_coin;
+	}
 	public String getMember_id() {
 		return member_id;
 	}
@@ -95,27 +117,7 @@ public class MemberDTO {
 	public void setMember_coin(int member_coin) {
 		this.member_coin = member_coin;
 	}
-	public MemberDTO() {
-		super();
-	}
-	public MemberDTO(String member_id, int member_idx, String member_pwd, String member_name, String member_addr,
-			String member_sex, String member_birth, String member_email, String member_tel, int member_tall,
-			int member_weight, int member_type, int member_coin) {
-		super();
-		this.member_id = member_id;
-		this.member_idx = member_idx;
-		this.member_pwd = member_pwd;
-		this.member_name = member_name;
-		this.member_addr = member_addr;
-		this.member_sex = member_sex;
-		this.member_birth = member_birth;
-		this.member_email = member_email;
-		this.member_tel = member_tel;
-		this.member_tall = member_tall;
-		this.member_weight = member_weight;
-		this.member_type = member_type;
-		this.member_coin = member_coin;
-	}
+	
 
 	
 }
