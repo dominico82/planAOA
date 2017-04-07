@@ -28,7 +28,7 @@ public class MemberController {
 	@RequestMapping(value="/memberJoin.do",method=RequestMethod.POST)
 	public ModelAndView bbsWrite(MemberDTO dto){
 		int result=memberDao.memberJoin(dto);
-		String msg=result>0?"È¸¿ø°¡ÀÔ¿Ï·á":"È¸¿ø°¡ÀÔ ½ÇÆĞ";
+		String msg=result>0?"íšŒì›ê°€ì…ì™„ë£Œ":"íšŒì›ê°€ì… ì‹¤íŒ¨";
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg",msg);
 		mav.setViewName("member/memberMsg");
@@ -55,7 +55,7 @@ public class MemberController {
 			String username=memberDao.getUserInfo(member_id);
 			session.setAttribute("saveid", member_id);
 			session.setAttribute("savename", username);
-			msg=username+"´Ô È¯¿µÇÕ´Ï´Ù.";
+			msg=username+"";
 			goPage="member/memberMsg";
 			if(saveid==null||saveid.equals("")){
 				Cookie ck=new Cookie("saveid",member_id);
@@ -67,13 +67,13 @@ public class MemberController {
 				resp.addCookie(ck);
 			}
 		}else if(result==MemberDAOImple.NOT_ID){
-			msg="µî·ÏµÇÁö ¾ÊÀº ¾ÆÀÌµğÀÔ´Ï´Ù.";
+			msg="";
 			goPage="/member/memberMsg";
 		}else if(result==MemberDAOImple.NOT_PWD){
-			msg="Àß¸øµÈ ºñ¹Ğ¹øÈ£ ÀÔ´Ï´Ù.";
+			msg=".";
 			goPage="/member/memberMsg";
 		}else if(result==MemberDAOImple.ERROR){
-			msg="°í°´¼¾ÅÍ¿¡ ¿¬¶ô¹Ù¶÷";
+			msg="";
 			goPage="/member/memberMsg";
 		}
 		mav.addObject("msg",msg);

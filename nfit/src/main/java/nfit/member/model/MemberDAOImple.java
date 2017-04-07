@@ -21,16 +21,20 @@ public class MemberDAOImple implements MemberDAO {
 		int count=sqlMap.insert("memberJoin",dto);
 		return count;
 	}
+	
 	public int loginCheck(String member_id,String member_pwd){
 		MemberDTO dto = sqlMap.selectOne("memberLogin", member_id);
 		if(member_pwd.equals(dto.getMember_pwd())) {
 			return LOGIN_OK;
 		}else if(!member_pwd.equals(dto.getMember_pwd())){
 			return NOT_PWD;
-		}else{
+		}else if(!member_id.equals(dto.getMember_id())){
 			return NOT_ID;
+		}else{
+			return ERROR;
 		}
 	}
+	
 	public String getUserInfo(String member_id){
 		String userInfo=sqlMap.selectOne("getuserInfo",member_id);
 		return userInfo;
