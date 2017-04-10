@@ -11,11 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				#{member_name},
 				#{member_addr},
 				#{member_sex},
-				#{member_birth},
-				#{member_email},
-				#{member_tel},
-				#{member_tall},
-				#{member_weight},0,0)
+				#{member_birth, jdbcType=VARCHAR},
+				#{member_email, jdbcType=VARCHAR},
+				#{member_tel, jdbcType=VARCHAR},
+				#{member_tall,jdbcType=INTEGER},
+				#{member_weight,jdbcType=INTEGER},0,0)
 	</insert>
 	
 	<select id="memberLogin" parameterType="String" resultType="nfit.member.model.MemberDTO">

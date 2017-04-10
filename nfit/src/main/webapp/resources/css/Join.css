@@ -12,7 +12,7 @@ body {
 }
 
 #formmain {
-    background: #9cbc2c;
+    background: #05a7c9;
  -moz-border-radius: 5px;      
  -webkit-border-radius: 5px; 
  -khtml-border-radius: 5px;   
@@ -38,7 +38,7 @@ form legend {
  font-size: 16px;
  font-weight: bold;
  padding-bottom: 10px;
- text-shadow: 0 1px 1px #c0d576;
+ text-shadow: 0 1px 1px #9bdfe1;
 }
     
 form > fieldset > legend:before {
@@ -54,9 +54,9 @@ form fieldset fieldset legend {
 }
    
 form ol li {
- background: #b9cf6a;
+ background: #2492ff;
  background: rgba(255,255,255,.3);
- border-color: #e3ebc3;
+ border-color: #00bff0;
  border-color: rgba(255,255,255,.6);
  border-style: solid;
  border-width: 2px;
@@ -66,7 +66,7 @@ form ol li {
  border-radius: 5px;
  line-height: 30px;
  list-style: none;
- padding: 5px 10px;
+ padding: 5px 5px;
  margin-bottom: 2px;
 }
        
@@ -93,40 +93,28 @@ form fieldset fieldset label {
 form fieldset fieldset label:hover {
  cursor: pointer;
 }
-    
-form input:not([type=radio]) { 
- background: #ffffff;
- border: none;
- -moz-border-radius: 3px;
- -webkit-border-radius: 3px;
- -khtml-border-radius: 3px;
- border-radius: 3px;
- font: italic 13px 맑은고딕,굴림,돋움;
- outline: none;
- padding: 5px;
- width: 200px;
-}
      
 form input:not([type=submit]):focus, {
  background: #eaeaea;
 }
      
     
-form button {
- background: #384313;
+#button {
+ background: #00bff0;
  border: none;
- -moz-border-radius: 20px;
+ -moz-border-radius: 10px;
  -webkit-border-radius: 20px;
  -khtml-border-radius: 20px;
- border-radius: 20px;
+ border-radius: 10px;
  color: #ffffff;
  display: block;
  font: 16px 맑은고딕,굴림,돋움;
  letter-spacing: 1px;
  margin: auto;
- padding: 7px 25px;
+ padding: 7px 5px;
  text-shadow: 0 1px 1px #000000;
  text-transform: uppercase;
+ width:100px;
 }
      
 form button:hover {
