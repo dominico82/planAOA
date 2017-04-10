@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="resources/css/mypage.css"/>
+<link rel="stylesheet" type="text/css" href="css/mypage.css"/>
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
 <script>
 function checkPwd(){
@@ -25,7 +25,7 @@ function checkPwd(){
 	<div class="container">
 		<div class="mypageWrap">
 			<div class="row">
-				<div class="col-lg-10 col-md-9 col-sm-8 mypagePanel" id="inner_top" style="display: block;">
+				<div class="col-lg-10 col-md-9 col-sm-8" id="inner_top">
 					<div class="editMyInfo">
 						<h3>회원정보 수정</h3>
 						<form class="memberForm" name="modify_form">
@@ -33,7 +33,7 @@ function checkPwd(){
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="password">비밀번호</label>
-										<input type="password" class="form-control" id="password" placeholder="비밀번호" name="password">
+										<input type="password" class="form-control" id="password" placeholder="비밀번호" name="password1">
 									</div>
 									<div class="form-group">
 										<label for="password2">비밀번호 다시 입력</label>
@@ -61,26 +61,27 @@ function checkPwd(){
 									<div class="form-group">
 										<label>휴대폰 번호</label>
 										<div class="input-group">
-											<input type="tel" class="form-control" placeholder="휴대폰 번호를 입력하세요" value="" name="user_phone">
+											<input type="tel" class="form-control" placeholder="휴대폰 번호를 입력하세요" value="" name="user_phone" style="width: 400px;">
+										</div>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h3 class="panel-title">마케팅 정보 수신동의</h3>
+										</div>
+										<div class="panel-body">
+											<label>중요한 알림 및 각종 혜택 알림을 수신합니다.</label>
+											<div>
+												<label class="checkbox-inline">
+													<input type="checkbox" name="chk_sms" value="y">SMS
+												</label>
+												<label class="checkbox-inline">
+													<input type="checkbox" name="chk_sms" value="y">이메일
+												</label>
+											</div>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="form-group userPicUploadBox">
-										<label>프로필 사진</label>
-											<div>
-												<form name="upload" action="fileUpload.do" method="post" enctype="multipart/form-data">
-													<input type="file" name="imgFile"><br> <!-- input type="file" 업로드할 파일을 선택하는 속성 -->
-													<input type="submit" value="파일올리기">
-												</form>
-											</div>
-												<small class="help-block">
-													<span class="text-danger">미리보기로 업로드된 사진을 확인하신 후, 하단의 저장하기 버튼을 꼭 눌러주세요.</span>
-													<span>정면,상반신 사진 / 가로 400px*세로400px 이상의 사진을 등록해주세요</span>
-													<span>프로필 사진은 센터 이용시 본인 확인 용도로 사용됩니다.</span>
-													<span>사진으로 본인 확인이 어려울 경우, 센터 입장이 제한될 수 있습니다.</span>
-												</small>
-										</div>
 									<div class="form-group">
 										<label>생년월일</label>
 										<div class="form-inline birthday">
@@ -116,14 +117,13 @@ function checkPwd(){
 									<div class="form-group">
 										<label>주소</label>
 										<div class="input-group postNumber">
-											<input type="text" class="form-control" placeholder="우편번호" readonly name="user_post" id="user_post" style="float: left;width: 370px;">
+											<input type="text" class="form-control" placeholder="우편번호" readonly name="user_post" id="user_post" style="width: 620px;">
 											<span class="input-group-btn">
-												<input type="button" class="btn btn-default" onclick="get_post();" value="우편번호 검색">
+												<button type="button" class="btn btn-default" onclick="get_post();">
+												우편번호 검색</button>
 											</span>
+											<input type="text" class="form-control" placeholder="주소" readonly name="user_addr1" id="user_addr1">
 										</div>
-										<div class="postDiv" id="post_div">
-										</div>
-										<input type="text" class="form-control" placeholder="주소" readonly name="user_addr1" id="user_addr1">
 									</div>
 									<div>
 										<input type="text" class="form-control" placeholder="상세주소를 입력하세요" name="user_addr2" id="user_addr2">
@@ -138,6 +138,7 @@ function checkPwd(){
 								<button type="submit" class="btn btn-lg btn-primary btn_mobileAppFloat">
 									<i class="fa fa-check"></i>저장하기
 								</button>
+								<span class="withdraw"><button type="button" class="btn btn-sm btn-link">탈퇴신청</button></span>
 							</div>
 						</form>
 					</div>
