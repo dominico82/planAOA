@@ -92,5 +92,10 @@ public class MemberController {
 		mav.setViewName("/member/memberMsg");
 		return mav;
 	}
+	@RequestMapping("/myPage.do")
+	public String memberForm(){
+		
+		return "mypage/myPage";
+	}
 		
 }

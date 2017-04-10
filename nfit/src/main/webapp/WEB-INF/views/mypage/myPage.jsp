@@ -7,13 +7,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div>
-<h2>My page</h2>
-<form name="form" action="modifyForm.do">
-<div>
-<input type="submit" value="회원정보수정">
-</div>
-</form>
+<div class="wrap">
+	<div class="container">
+		<div class="mypageWrap">
+			<div class="row">
+				<aside class="col-lg-2 col-md-3 col-sm-4 mypageMenuAside">
+					<div class="userInfo">
+						<span class="userCircleImgWrap">
+							<span class="userCircleImg"></span>
+						</span>
+					</div>
+				</aside>
+			</div>
+		</div>
+	</div>
 </div>
 </body>
 </html>
