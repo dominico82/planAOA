@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="nfit.center">
+  <select id="centerListSQL" resultType="nfit.center.model.CenterDTO">
+  select * from company_list order by co_idx asc
+  </select>
+  <select id="centerOneSQL" parameterType="int" resultType="nfit.center.model.CenterDTO">
+  select * from company_list where co_idx = #{co_idx}
+  </select>
+  <select id="usetimeSQL" parameterType="int" resultType="nfit.center.model.UsetimeDTO">
+  select * from usetime_table where co_idx = #{co_idx}
+  </select>
+  <select id="contentListSQL" parameterType="int" resultType="nfit.center.model.ContentDTO">
+  select * from content_list where co_idx = #{co_idx}
+  </select>
+  </mapper>

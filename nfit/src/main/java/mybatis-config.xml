@@ -6,5 +6,6 @@
 	<mappers>
 		<mapper resource="sql/memberSQL.xml"/>
 		<mapper resource="sql/coinSQL.xml"/>
+		<mapper resource="sql/centerSQL.xml"/>
 	</mappers>
 </configuration>

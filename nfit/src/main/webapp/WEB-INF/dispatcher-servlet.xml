@@ -48,6 +48,21 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+	<bean id="centerDAO" class="nfit.center.model.CenterDAOImple">
+<constructor-arg>
+<ref bean="sqlSessionTemplate"/>
+</constructor-arg>
+</bean>
+<bean id="usetimeDAO" class="nfit.center.model.UsetimeDAOImple">
+<constructor-arg>
+<ref bean="sqlSessionTemplate"/>
+</constructor-arg>
+</bean>
+<bean id="contentDAO" class="nfit.center.model.ContentDAOImple">
+<constructor-arg>	
+<ref bean="sqlSessionTemplate"/>
+</constructor-arg>
+</bean>
     <!-- viewResolver -->
     <bean 
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">

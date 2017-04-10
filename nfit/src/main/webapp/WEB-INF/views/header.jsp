@@ -60,7 +60,7 @@
 				<nav id="menu-left">
 					<ul>
 						<li><a href="#">이용안내</a></li>
-						<li><a href="#">주변센터찾기</a></li>
+						<li><a href="centerPage.do">주변센터찾기</a></li>
 						<li><a href="#">고객센터</a></li>
 						<li><a href="#">공지사항</a></li>
 						<li><a href="coin.do">코인결제</a></li>
@@ -81,7 +81,7 @@
 						<div class="top-nav">
 							<ul>
 								<li><a href="#">이용안내</a></li>
-								<li><a href="#">주변센터찾기</a></li>
+								<li><a href="centerPage.do">주변센터찾기</a></li>
 								<li><a href="#">고객센터</a></li>
 								<li><a href="#">공지사항</a></li>
 								<li><a href="coin.do">코인결제</a></li>
