@@ -6,6 +6,7 @@ IMP.init('iamport'); // 'iamport' 대신 부여받은 "가맹점 식별코드"�
 var pay="";
 var price="0";
 var buy_coin="";
+var pay_class="";
 
 $(function(){
 	$("a[data-tab-id='tab2']").click(
@@ -76,6 +77,7 @@ $(function(){
 						$("#pay_num6").removeClass("on");
 						price="99000";
 						buy_coin="100";
+						pay_class="정기/100코인";
 		
 	});
 	$("#pay_num2").click(
@@ -88,6 +90,8 @@ $(function(){
 						$("#pay_num6").removeClass("on");
 						price="199000";
 						buy_coin="200";
+						pay_class="정기/200코인";
+						
 	});
 	$("#pay_num3").click(
 			function(){
@@ -99,6 +103,7 @@ $(function(){
 						$("#pay_num6").removeClass("on");
 						price="299000";
 						buy_coin="300";
+						pay_class="정기/300코인";
 	});
 	$("#pay_num4").click(
 			function(){
@@ -110,6 +115,7 @@ $(function(){
 						$("#pay_num6").removeClass("on");
 						price="30000";
 						buy_coin="30";
+						pay_class="일반/30코인";
 	});
 	$("#pay_num5").click(
 			function(){
@@ -121,6 +127,7 @@ $(function(){
 						$("#pay_num6").removeClass("on");
 						price="99000";
 						buy_coin="100";
+						pay_class="일반/100코인";
 	});
 	$("#pay_num6").click(
 			function(){
@@ -132,6 +139,7 @@ $(function(){
 						$("#pay_num6").addClass("on");
 						price="299000";
 						buy_coin="300";
+						pay_class="일반/300코인";
 	});
 });
 
@@ -147,6 +155,10 @@ $(function(){
 				}
 				document.getElementById("userId").value=userId;
 				document.getElementById("coin").value=buy_coin;
+				document.getElementById("pay_method").value=pay;
+				document.getElementById("pay_coin").value=buy_coin;
+				document.getElementById("pay_price").value=price;
+				document.getElementById("pay_class").value=pay_class;
 				if(price!="0"){
 					IMP.request_pay({
 					    pg : 'html5_inicis', //ActiveX 결제창은 inicis를 사용
@@ -192,7 +204,6 @@ $(function(){
 					        var msg = '결제에 실패하였습니다.';
 					        msg += '에러내용 : ' + rsp.error_msg;
 					        
-					        alert(msg);
 					        $('#getCoin').submit();
 					    }
 					});
@@ -208,6 +219,10 @@ $(function(){
 				function(){
 					document.getElementById("userId").value=userId;
 					document.getElementById("coin").value=buy_coin;
+					document.getElementById("pay_method").value='card';
+					document.getElementById("pay_coin").value=buy_coin;
+					document.getElementById("pay_price").value=price;
+					document.getElementById("pay_class").value=pay_class;
 					if($('input:checkbox[id="regularAgreement"]').is(":checked")==true){
 						if(price!="0"){
 							IMP.request_pay({
@@ -230,7 +245,6 @@ $(function(){
 							        msg += '에러내용 : ' + rsp.error_msg;
 							    }
 			
-							    alert(msg);
 						        $('#getCoin').submit();
 							});
 						}else if(price=="0"){

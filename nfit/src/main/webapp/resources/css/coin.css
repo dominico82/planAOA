@@ -1,23 +1,23 @@
 a:link, a:visited, a:active { text-decoration:none; color:#78787a;} 
 a:hover { text-decoration:none; } 
 
-article.buy_pass_pc > div > ul > li > a > dl {background-color: white !important;border-color: #e6196c !important;height:auto !important;}
-.paypc-dt {letter-spacing:-1px !important;font-size: 18px !important;color: #66717a;font-weight: bold !important;border-bottom:1px solid #e6196c;margin:0 !important;padding:10px 0;}
-a.on .paypc-dt {color: white !important;background-color: #e6196c;}
+article.buy_pass_pc > div > ul > li > a > dl {background-color: white !important;border-color: #00bff0 !important;height:auto !important;}
+.paypc-dt {letter-spacing:-1px !important;font-size: 18px !important;color: #66717a;font-weight: bold !important;border-bottom:1px solid #00bff0;margin:0 !important;padding:10px 0;}
+a.on .paypc-dt {color: white !important;background-color: #00bff0;}
 /*.paypc-d1 {float: left;background-color:#6d6e71;color:white;}*/
 .paypc-d1 {margin:0 !important;height:40px;}
 .paypc-d1 span {background-color:#566871;color:white;margin:10px 10px 0 10px;font-size:16px;width:70px;border-radius:5px;height:25px;line-height:25px;letter-spacing:0 !important;font-weight:normal;float:left;}
 .paypc-d1 span.pay-hot {background-color:#F2001D !important;float:right;color:yellow;}
 .paypc-d2 {margin:8px auto !important;}
 .paypc-d2 img {height: 63px;}
-.paypc-d3 {margin:0px ! important; color: #e6196c !important;letter-spacing: .2px;font-size: 30px !important; 
+.paypc-d3 {margin:0px ! important; color: #00bff0 !important;letter-spacing: .2px;font-size: 30px !important; 
            font-family: 'NotoSansKR-Medium-Alphabetic' !important;font-weight: bold;background-color:white !important;
 }
 .paypc-d4 {font-size:18px! important;padding:15px 0 !important;font-weight: normal !important;margin-top: 0 !important;}
-.paypc-d4 span {background-color:#e6196c;color:yellow !important;border-radius:4px;padding: 0 5px;letter-spacing:0 !important;}
-.paypc-d5 {padding:20px 0;border-top:1px solid #e6196c;}
-a.on .paypc-d5 {background-color: #e6196c;}
-.paypc-d5 span {background-color:#e6196c;color:white;border-radius:5px;padding: 0 10px;font-size:26px;}
+.paypc-d4 span {background-color:#00bff0;color:yellow !important;border-radius:4px;padding: 0 5px;letter-spacing:0 !important;}
+.paypc-d5 {padding:20px 0;border-top:1px solid #00bff0;}
+a.on .paypc-d5 {background-color: #00bff0;}
+.paypc-d5 span {background-color:#00bff0;color:white;border-radius:5px;padding: 0 10px;font-size:26px;}
 a.on .paypc-d5 span {background-color:white;color:#5B6771;}
 .myheadPC_wrap{background:#fff;border:1px solid #e1e1e1;border-bottom:none;position:relative;}
 .myheadPC_back{margin:5px 5px 0 5px;}
@@ -33,7 +33,7 @@ a.on .paypc-d5 span {background-color:white;color:#5B6771;}
 .mP_date{font-size:16px;margin-top:10px;}
 .myheadPC_myCoin{position:absolute;top:50px;left:38px;color:#fff;}
 .myheadPC_myCoin ul{position:absolute;top:47px;text-align:center;width:209px;}
-.f_navFocus_pc{text-align:center;width:130px;height:30px;background:#e6196c;display:block;margin:0 auto;padding:5px 10px;}
+.f_navFocus_pc{text-align:center;width:130px;height:30px;background:#00bff0;display:block;margin:0 auto;padding:5px 10px;}
 a.f_navFocus_pc span{color:#fff;display:inline-block;height:30px;line-height:30px;}
 .payPC_wrap{width:930px;margin:0 auto;}
 .payPC_wrap .buy_pass_pc{background:#fff;border-radius:5px;padding:5px 0;}
@@ -51,9 +51,9 @@ a.f_navFocus_pc span{color:#fff;display:inline-block;height:30px;line-height:30p
 .payPC_wrap .passList_pc ul li a dl dt #p5Box_month{left:94px;width:120px;}
 .payPC_wrap .buy_pass_pc ul li a dl dd:nth-child(2){margin-top:60px;font-size:20px;color:#5b6770;font-weight:bold;list-style-type:circle;}
 .payPC_wrap .buy_pass_pc ul li a dl dd:nth-child(3){margin-top:27px;letter-spacing:.5px;font-size:35px;font-weight:bold;}
-.payPC_wrap .p5Box dd:nth-child(3){color:#e6196c;}
-.payPC_wrap .p21Box dd:nth-child(3){color:#e6196c;}
-.payPC_wrap .p100Box dd:nth-child(3){color:#e6196c;}
+.payPC_wrap .p5Box dd:nth-child(3){color:#00bff0;}
+.payPC_wrap .p21Box dd:nth-child(3){color:#00bff0;}
+.payPC_wrap .p100Box dd:nth-child(3){color:#00bff0;}
 .payPC_wrap .passList_pc>ul li a dl dd:nth-child(4){margin-top:50px;color:#9fa0a0;font-size:20px;}
 .payPC_wrap .passList_pc>ul li a dl dd:nth-child(4) s em{padding-left:51px;}
 .payPC_wrap .passList_pc>ul li a dl dd:nth-child(5){margin-top:5px;color:#000;font-size:30px;padding-bottom:10px;font-weight:bold;}
@@ -62,12 +62,12 @@ a.f_navFocus_pc span{color:#fff;display:inline-block;height:30px;line-height:30p
 .payPC_wrap .passList_pc>ul li a dl dd:nth-child(4) em{font-weight:bold;font-size:20px;}
 .payPC_wrap .passList_pc>ul li a.on{text-align:center;}
 .payPC_wrap .passList_pc>ul li a.on dl{text-align:center;}
-.payPC_wrap .passList_pc>ul li a.on .p5Box{background:#e6196c;}
-.payPC_wrap .passList_pc>ul li a.on .p21Box{background:#e6196c;}
-.payPC_wrap .passList_pc>ul li a.on .p100Box{background:#e6196c;}
+.payPC_wrap .passList_pc>ul li a.on .p5Box{background:#00bff0;}
+.payPC_wrap .passList_pc>ul li a.on .p21Box{background:#00bff0;}
+.payPC_wrap .passList_pc>ul li a.on .p100Box{background:#00bff0;}
 .payPC_wrap .passList_pc>ul li a.on dl dt{color:#c9caca;letter-spacing:1px;font-size:15px;}
 .payPC_wrap .passList_pc ul li a.on dl dt span:last-child{color:#f00;background:#fff;}
-.payPC_wrap .passList_pc ul li a.on dl dt span:first-child{width:75px;display:inline-block;text-align:center;color:#e6196c;background:#fff;border-radius:5px;font-size:18px;margin-right:2px;line-height:30px;height:30px;letter-spacing:1px;position:absolute;left:5px;}
+.payPC_wrap .passList_pc ul li a.on dl dt span:first-child{width:75px;display:inline-block;text-align:center;color:#00bff0;background:#fff;border-radius:5px;font-size:18px;margin-right:2px;line-height:30px;height:30px;letter-spacing:1px;position:absolute;left:5px;}
 .payPC_wrap .passList_pc ul li a.on dl dt #p5Box_month{left:94px;width:120px;}
 .payPC_wrap .passList_pc>ul li a.on dl dd:nth-child(2){margin-top:60px;font-size:20px;color:#fff;font-weight:bold;}
 .payPC_wrap .passList_pc>ul li a.on dl dd:nth-child(3){margin-top:27px;color:#fff;letter-spacing:.5px;font-size:35px;}
@@ -85,7 +85,7 @@ a.f_navFocus_pc span{color:#fff;display:inline-block;height:30px;line-height:30p
 .payPC_wrap .pc_g_join .join_info{vertical-align:middle;font-size:12px;height:28px;line-height:28px;color:#9fa0a0;width:20px;border:none;float:left;}
 .payPC_wrap .pc_g_join .join_info input{height:32px;line-height:32px;}
 .payPC_wrap .pc_g_join strong{height:32px;display:inline-block;line-height:32px;color:#58595b;font-size:14px;}
-.payPC_wrap .pc_g_join strong.on{color:#e6196c;}
+.payPC_wrap .pc_g_join strong.on{color:#00bff0;}
 .payPC_wrap .pc_g_join a{line-height:29px;}
 .payPC_wrap .pc_g_join ul li a{line-height:14px;display:inline-block;position:relative;top:5px;}
 .payPC_wrap .pc_g_join a span{margin-left:10px;border:1px solid #bcbec0;font-size:10px;padding:2px 5px;border-radius:3px;background:#58595b;color:#fff;}
@@ -98,10 +98,10 @@ a.f_navFocus_pc span{color:#fff;display:inline-block;height:30px;line-height:30p
 .pass_dis{float:left;}.pass_dis p{padding-bottom:5px;font-weight:bold;}
 .pay_pass_pc div.pass_card{margin-bottom:20px;float:left;margin-left:35px;line-height:40px;}
 .pay_pass_pc #CARD{margin-right:5px;}
-.pay_pass_pc label{color:#e6196c;line-height:37px;font-weight:bold;}
+.pay_pass_pc label{color:#00bff0;line-height:37px;font-weight:bold;}
 .pay_pass_pc label a{padding-bottom:5px;}
 .buy_pass_btn{display:inline-block;float:right;}
-.pay_pass_pc button{width:90px;height:30px;display:block;line-height:16px;font-size:16px;border:none;background:#e6196c;}
+.pay_pass_pc button{width:90px;height:30px;display:block;line-height:16px;font-size:16px;border:none;background:#00bff0;}
 .pay_pass_pc button>span{color:#fff;cursor:pointer;padding:5px;font-weight:bold;}
 .pay_exp{padding:2px 0 5px 15px;color:#000;}
 .pay_exp span{border:2px solid #000;border-radius:5px;padding:0 5px;}
@@ -177,7 +177,7 @@ a.f_navFocus_pc span{color:#fff;display:inline-block;height:30px;line-height:30p
 }
 
 .pws_tabs_container ul.pws_tabs_controll li a:hover {
-  background-color: #e5387e;
+  background-color: #00bff0;
   color:#fff;
 }
 
@@ -191,7 +191,7 @@ a.f_navFocus_pc span{color:#fff;display:inline-block;height:30px;line-height:30p
 }
 
 .pws_tabs_container ul.pws_tabs_controll li a.pws_tab_active {
-  background-color: #e6196c;
+  background-color: #00bff0;
   color: #fff
 }
 
@@ -364,7 +364,7 @@ a.f_navFocus_pc span{color:#fff;display:inline-block;height:30px;line-height:30p
      font-size:16px;color:#000;
     } 
     .regul_essential span:last-child{
-     color:#e6196c;margin-left:20px;
+     color:#00bff0;margin-left:20px;
     }     
     .regul_essential th{
         text-align: left; width:35%;color: #6d6e71;font-size: 13px;
@@ -376,7 +376,7 @@ a.f_navFocus_pc span{color:#fff;display:inline-block;height:30px;line-height:30p
         padding:10px; font-weight:bold;
     }
     .regul_agree_con .pc_g_join .regul_agree_txt {
-        font-size:14px;color:#e6196c;clear: both;line-height: 32px;
+        font-size:14px;color:#00bff0;clear: both;line-height: 32px;
     }
     .regul_agree_con li {
      float:left; width:50%;
@@ -388,23 +388,23 @@ a.f_navFocus_pc span{color:#fff;display:inline-block;height:30px;line-height:30p
         height: 200px; background: #fff;border:1px solid #d1d3d4; border-top:none
     }
     
-    article.buy_pass_pc > div > ul > li > a > dl {background-color: white !important;border-color: #e6196c !important;height:auto !important;}
-    .paypc-dt {letter-spacing:-1px !important;font-size: 18px !important;color: #66717a;font-weight: bold !important;border-bottom:1px solid #e6196c;margin:0 !important;padding:10px 0;}
-    a.on .paypc-dt {color: white !important;background-color: #e6196c;}
+    article.buy_pass_pc > div > ul > li > a > dl {background-color: white !important;border-color: #00bff0 !important;height:auto !important;}
+    .paypc-dt {letter-spacing:-1px !important;font-size: 18px !important;color: #66717a;font-weight: bold !important;border-bottom:1px solid #00bff0;margin:0 !important;padding:10px 0;}
+    a.on .paypc-dt {color: white !important;background-color: #00bff0;}
     /*.paypc-d1 {float: left;background-color:#6d6e71;color:white;}*/
     .paypc-d1 {margin:0 !important;height:40px;}
     .paypc-d1 span {background-color:#566871;color:white;margin:10px 10px 0 10px;font-size:16px;width:70px;border-radius:5px;height:25px;line-height:25px;letter-spacing:0 !important;font-weight:normal;float:left;}
     .paypc-d1 span.pay-hot {background-color:#F2001D !important;float:right;color:yellow;}
     .paypc-d2 {margin:8px auto !important;}
     .paypc-d2 img {height: 63px;}
-    .paypc-d3 {margin:0px ! important; color: #e6196c !important;letter-spacing: .2px;font-size: 30px !important; 
+    .paypc-d3 {margin:0px ! important; color: #00bff0 !important;letter-spacing: .2px;font-size: 30px !important; 
                font-family: 'NotoSansKR-Medium-Alphabetic' !important;font-weight: bold;background-color:white !important;
     }
     .paypc-d4 {font-size:18px! important;padding:15px 0 !important;font-weight: normal !important;margin-top: 0 !important;}
-    .paypc-d4 span {background-color:#e6196c;color:yellow !important;border-radius:4px;padding: 0 5px;letter-spacing:0 !important;}
-    .paypc-d5 {padding:20px 0;border-top:1px solid #e6196c;}
-    a.on .paypc-d5 {background-color: #e6196c;}
-    .paypc-d5 span {background-color:#e6196c;color:white;border-radius:5px;padding: 0 10px;font-size:26px;}
+    .paypc-d4 span {background-color:#00bff0;color:yellow !important;border-radius:4px;padding: 0 5px;letter-spacing:0 !important;}
+    .paypc-d5 {padding:20px 0;border-top:1px solid #00bff0;}
+    a.on .paypc-d5 {background-color: #00bff0;}
+    .paypc-d5 span {background-color:#00bff0;color:white;border-radius:5px;padding: 0 10px;font-size:26px;}
     a.on .paypc-d5 span {background-color:white;color:#5B6771;}
 
 .white-popup {
@@ -440,7 +440,7 @@ a.f_navFocus_pc span{color:#fff;display:inline-block;height:30px;line-height:30p
      font-size:16px;color:#000;
     } 
     .regul_essential span:last-child{
-     color:#e6196c;margin-left:20px;
+     color:#00bff0;margin-left:20px;
     }     
     .regul_essential th{
         text-align: left; width:35%;color: #6d6e71;font-size: 13px;
@@ -452,7 +452,7 @@ a.f_navFocus_pc span{color:#fff;display:inline-block;height:30px;line-height:30p
         padding:10px; font-weight:bold;
     }
     .regul_agree_con .pc_g_join .regul_agree_txt {
-        font-size:14px;color:#e6196c;clear: both;line-height: 32px;
+        font-size:14px;color:#00bff0;clear: both;line-height: 32px;
     }
     .regul_agree_con li {
      float:left; width:50%;
@@ -464,21 +464,21 @@ a.f_navFocus_pc span{color:#fff;display:inline-block;height:30px;line-height:30p
         height: 200px; background: #fff;border:1px solid #d1d3d4; border-top:none
     }
     
-    article.buy_pass_pc > div > ul > li > a > dl {background-color: white !important;border-color: #e6196c !important;height:auto !important;}
-    .paypc-dt {letter-spacing:-1px !important;font-size: 18px !important;color: #66717a;font-weight: bold !important;border-bottom:1px solid #e6196c;margin:0 !important;padding:10px 0;}
-    a.on .paypc-dt {color: white !important;background-color: #e6196c;}
+    article.buy_pass_pc > div > ul > li > a > dl {background-color: white !important;border-color: #00bff0 !important;height:auto !important;}
+    .paypc-dt {letter-spacing:-1px !important;font-size: 18px !important;color: #66717a;font-weight: bold !important;border-bottom:1px solid #00bff0;margin:0 !important;padding:10px 0;}
+    a.on .paypc-dt {color: white !important;background-color: #00bff0;}
     /*.paypc-d1 {float: left;background-color:#6d6e71;color:white;}*/
     .paypc-d1 {margin:0 !important;height:40px;}
     .paypc-d1 span {background-color:#566871;color:white;margin:10px 10px 0 10px;font-size:16px;width:70px;border-radius:5px;height:25px;line-height:25px;letter-spacing:0 !important;font-weight:normal;float:left;}
     .paypc-d1 span.pay-hot {background-color:#F2001D !important;float:right;color:yellow;}
     .paypc-d2 {margin:8px auto !important;}
     .paypc-d2 img {height: 63px;}
-    .paypc-d3 {margin:0px ! important; color: #e6196c !important;letter-spacing: .2px;font-size: 30px !important; 
+    .paypc-d3 {margin:0px ! important; color: #00bff0 !important;letter-spacing: .2px;font-size: 30px !important; 
                font-family: 'NotoSansKR-Medium-Alphabetic' !important;font-weight: bold;background-color:white !important;
     }
     .paypc-d4 {font-size:18px! important;padding:15px 0 !important;font-weight: normal !important;margin-top: 0 !important;}
-    .paypc-d4 span {background-color:#e6196c;color:yellow !important;border-radius:4px;padding: 0 5px;letter-spacing:0 !important;}
-    .paypc-d5 {padding:20px 0;border-top:1px solid #e6196c;}
-    a.on .paypc-d5 {background-color: #e6196c;}
-    .paypc-d5 span {background-color:#e6196c;color:white;border-radius:5px;padding: 0 10px;font-size:26px;}
+    .paypc-d4 span {background-color:#00bff0;color:yellow !important;border-radius:4px;padding: 0 5px;letter-spacing:0 !important;}
+    .paypc-d5 {padding:20px 0;border-top:1px solid #00bff0;}
+    a.on .paypc-d5 {background-color: #00bff0;}
+    .paypc-d5 span {background-color:#00bff0;color:white;border-radius:5px;padding: 0 10px;font-size:26px;}
     a.on .paypc-d5 span {background-color:white;color:#5B6771;}

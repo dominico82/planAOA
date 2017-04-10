@@ -15,4 +15,17 @@
 		where 
 			member_id = #{member_id}	
 	</update>
+	<insert id="setPayInfo" parameterType="nfit.coin.model.CoinDTO">
+		insert into 
+			pay_table
+		values(
+			pay_table_idx.nextval,
+			#{member_idx},
+			#{pay_method},
+			#{pay_coin},
+			#{pay_price},
+			sysdate,
+			#{pay_class}
+		)
+	</insert>
 </mapper>
