@@ -29,7 +29,11 @@ public class CenterController {
 	
 	@RequestMapping("/centerPage.do")
 	public String centerPage(ModelMap model){
+		System.out.println("i reached here~1");
 		List<CenterDTO> list=centerDao.centerListDB();
+		for(int i=0; i<list.size(); i++){
+			System.out.println(list.get(i).getCo_idx());
+		}
 		model.addAttribute("list", list);
 		return "/center/centerMap";
 	}

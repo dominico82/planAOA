@@ -14,7 +14,13 @@ public class CenterDAOImple implements CenterDAO {
 	}
 	
 	public List<CenterDTO> centerListDB() {
+		System.out.println("i reached here~2");
 		List<CenterDTO> list = sqlMap.selectList("centerListSQL");
+		if(list.size()>0){
+			System.out.println("data load success");
+		}else{
+			System.out.println("data load fail");
+		}
 		return list;
 	}
 	
