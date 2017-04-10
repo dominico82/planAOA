@@ -53,12 +53,12 @@ public class MemberController {
 		String msg="";
 		String goPage="";
 		if(result==MemberDAOImple.LOGIN_OK){
-			//String username=memberDao.getUserInfo(member_id);
+			String username=memberDao.getUserInfo(member_id);
 			session.setAttribute("saveid", member_id);
-			//session.setAttribute("member_name", username);
-			msg=member_id+"님 환영합니다";
+			session.setAttribute("member_name", username);
+			msg=username+"님 환영합니다";
 			goPage="member/memberMsg";
-			/*if(saveid==null||saveid.equals("")){
+			if(saveid==null||saveid.equals("")){
 				Cookie ck=new Cookie("saveid",member_id);
 				ck.setMaxAge(0);
 				resp.addCookie(ck);
@@ -66,22 +66,22 @@ public class MemberController {
 				Cookie ck=new Cookie("saveid",member_id);
 				ck.setMaxAge(60*60*24*30);
 				resp.addCookie(ck);
-			}*/
+			}
 		}else if(result==MemberDAOImple.NOT_ID){
 			msg="아이디가 잘못되었습니다.";
-			goPage="/member/memberLogin.do";
+			goPage="member/login_ok";
 		}else if(result==MemberDAOImple.NOT_PWD){
 			msg="비밀번호를 잘못입력하셨습니다.";
-			goPage="/member/memberLogin.do";
+			goPage="member/login_ok";
 		}else if(result==MemberDAOImple.ERROR){
 			msg="고객센터 연락바람";
-			goPage="/member/memberLogin.do";
+			goPage="member/login_ok";
 		}
 		mav.addObject("msg",msg);
 		mav.setViewName(goPage);
 		return mav;
 	}
-
+	@RequestMapping("/logout.do")
 	public ModelAndView logoutForm(HttpServletRequest req){
 		HttpSession session=req.getSession();
 		ModelAndView mav=new ModelAndView();
