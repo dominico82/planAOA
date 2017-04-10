@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="css/mypage.css"/>
+<link rel="stylesheet" type="text/css" href="resources/css/modifyForm.css"/>
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
 <script>
 function checkPwd(){

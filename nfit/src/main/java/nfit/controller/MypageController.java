@@ -24,7 +24,7 @@ public class MypageController {
 	
 	@RequestMapping("memberInfo.do")
 	public String memberInfo(){
-		return "mypage/memberInfo";
+		return "mypage/modifyForm";
 	}
 	
 	@RequestMapping("modifyForm.do")
