@@ -2,18 +2,29 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>M fit  | Home</title>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<title>M fit  | Home</title>
 		<link href="resources/css/style.css" rel='stylesheet' type='text/css' />
-		<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-zF4BRsG/fLiTGfR9QL82DrilZxrwgY/+du4p/c7J72zZj+FLYq4zY00RylP9ZjiT" crossorigin="anonymous">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="shortcut icon" type="image/x-icon" href="resources/images/fav-icon.png" />
 		
-		<!---shortcut icon--->
-		<link rel="shortcut icon" type="image/x-icon" href="images/fav-icon.png" />
+	    <!---strat-slider---->
+	    <script type="text/javascript" src="resources/js/jquery.min.js"></script>
+	    <link rel="stylesheet" type="text/css" href="resources/css/slider-style.css" />
+		<script type="text/javascript" src="resources/js/modernizr.custom.28468.js"></script>
+		<!---//strat-slider---->
+		
+		<!---start-login-script--->
+		<script src="resources/js/login.js"></script>
+		<!---//End-login-script--->
 		
 		<!-----768px-menu----->
 		<link type="text/css" rel="stylesheet" href="resources/css/jquery.mmenu.all.css" />
 		<!-- Latest compiled and minified JavaScript -->
+
 		<script type="text/javascript" src="resources/js/jquery.mmenu.js"></script>
 			<script type="text/javascript">
 				//	The menu on the left
@@ -23,11 +34,10 @@
 		</script>
 		<!-----//768px-menu----->
 	</head>
-	
 	<body>
-		<header>
-			<%@include file="header.jsp" %>
-		</header>
+	<header>
+		<%@include file="header.jsp" %>
+	</header>
 		<!---start-wrap---->
 		<!------start-768px-menu---->
 			<div id="page">
@@ -44,7 +54,56 @@
 						</ul>
 					</nav>
 			</div>
-		
+		<!------start-768px-menu---->
+			
+			<!----start-banner---->
+			<div class="text-slider">
+				<div class="wrap"> 
+			<!---start-da-slider----->
+			<div id="da-slider" class="da-slider">
+					<div class="da-slide">
+						<h2>Log Your Runs</h2>
+						<p> Track your Progress Compete with your Friends</p>
+						<a href="about.html" class="da-link">Find out More</a>
+					</div>
+					<div class="da-slide">
+						<h2>Log Your Runs</h2>
+						<p> Track your Progress Compete with your Friends</p>
+						<a href="about.html" class="da-link">Find out More</a>
+					</div>
+					<div class="da-slide">
+						<h2>Log Your Runs</h2>
+						<p> Track your Progress Compete with your Friends</p>
+						<a href="about.html" class="da-link">Find out More</a>
+					</div>
+					<div class="da-slide">
+						<h2>Log Your Runs</h2>
+						<p> Track your Progress Compete with your Friends</p>
+						<a href="about.html" class="da-link">Find out More</a>
+					</div>
+					<div class="da-slide">
+						<h2>Log Your Runs</h2>
+						<p> Track your Progress Compete with your Friends</p>
+						<a href="about.html" class="da-link">Find out More</a>
+					</div>
+					<nav class="da-arrows">
+						<span class="da-arrows-prev"> </span>
+						<span class="da-arrows-next"> </span>
+					</nav>
+			</div>
+				<script type="text/javascript" src="resources/js/jquery.cslider.js"></script>
+				<script type="text/javascript">
+					$(function() {
+						$('#da-slider').cslider({
+							autoplay	: true,
+							bgincrement	: 450
+						});
+					
+					});
+				</script>
+			 </div>
+			</div>
+				<!---//End-da-slider----->
 			<!----//End-banner---->
 			<!----start-content--->
 			<div class="content">

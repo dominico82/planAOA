@@ -19,22 +19,9 @@
 %>
 <meta charset="UTF-8">
 <title>만족스러운 피트니스 Nfit</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-zF4BRsG/fLiTGfR9QL82DrilZxrwgY/+du4p/c7J72zZj+FLYq4zY00RylP9ZjiT" crossorigin="anonymous">
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!---shortcut icon--->
-<link rel="shortcut icon" type="image/x-icon" href="images/fav-icon.png" />
-
-<script type="application/x-javascript">
-	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
-</script>
-
-<!---strat-slider---->
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/slider-style.css" />
-<script type="text/javascript" src="js/modernizr.custom.28468.js"></script>
-<!---//strat-slider---->
-
 
 <!-----768px-menu----->
 <link type="text/css" rel="stylesheet" href="css/jquery.mmenu.all.css" />
@@ -49,6 +36,57 @@
 
 </head>
 <body>
+<!----- 새로운 부트스트랩 헤더메뉴 ----->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.do">Nfit</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">이용안내 <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">주변센터찾기</a></li>
+        <li><a href="#">고객센터</a></li>
+        <li><a href="#">공지사항</a></li>
+        <li><a href="coin.do">코인결제</a></li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search" style="padding-left:100px;">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <a href="memberJoin.do" class="btn btn-warning" style="margin-left:100px;">회원가입</a>
+      <a href="memberLogin.do" class="btn btn-danger">로그인</a>
+    </div>
+  </div>
+</nav>
+<!----- 새로운 부트스트랩 헤더메뉴 끝 ----->
+<!------반응형 축소메뉴 시작---->
+			<div id="page">
+				<div id="header">
+					<a class="navicon" href="#menu-left"> </a>
+				</div>
+				<nav id="menu-left">
+					<ul>
+						<li><a href="#">이용안내</a></li>
+						<li><a href="#">주변센터찾기</a></li>
+						<li><a href="#">고객센터</a></li>
+						<li><a href="#">공지사항</a></li>
+						<li><a href="coin.do">코인결제</a></li>
+					</ul>
+				</nav>
+			</div>
+<!------반응형 축소메뉴 끝---->
+
 	<c:choose>
 		<c:when test="${empty sessionScope.saveid }">
 			<!---start-wrap---->
