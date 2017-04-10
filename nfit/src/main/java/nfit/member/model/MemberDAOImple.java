@@ -24,7 +24,21 @@ public class MemberDAOImple implements MemberDAO {
 	
 	public int loginCheck(String member_id,String member_pwd){
 		MemberDTO dto = sqlMap.selectOne("memberLogin", member_id);
-		if(member_pwd.equals(dto.getMember_pwd())) {
+		try{
+			if(dto!=null){
+				if(member_pwd.equals(dto.getMember_pwd())) {
+					return LOGIN_OK;
+				}else{
+					return NOT_PWD;
+				}
+			}else{
+				return NOT_ID;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return  ERROR;
+		}
+		/*if(member_pwd.equals(dto.getMember_pwd())) {
 			return LOGIN_OK;
 		}else if(!member_pwd.equals(dto.getMember_pwd())){
 			return NOT_PWD;
@@ -32,7 +46,7 @@ public class MemberDAOImple implements MemberDAO {
 			return NOT_ID;
 		}else{
 			return ERROR;
-		}
+		}*/
 		
 	}
 	

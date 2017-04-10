@@ -2,6 +2,5 @@
     pageEncoding="UTF-8"%>
 <script>
 window.alert('${msg}');
-opener.location.reload();
-window.self.close();
+location.href='memberLogin.do';
 </script>

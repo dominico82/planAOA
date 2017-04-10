@@ -69,13 +69,13 @@ public class MemberController {
 			}
 		}else if(result==MemberDAOImple.NOT_ID){
 			msg="아이디가 잘못되었습니다.";
-			goPage="/member/memberLogin.do";
+			goPage="member/login_ok";
 		}else if(result==MemberDAOImple.NOT_PWD){
 			msg="비밀번호를 잘못입력하셨습니다.";
-			goPage="/member/memberLogin.do";
+			goPage="member/login_ok";
 		}else if(result==MemberDAOImple.ERROR){
 			msg="고객센터 연락바람";
-			goPage="/member/memberLogin.do";
+			goPage="member/login_ok";
 		}
 		mav.addObject("msg",msg);
 		mav.setViewName(goPage);
