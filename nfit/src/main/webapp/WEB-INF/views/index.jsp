@@ -13,9 +13,7 @@
 		<!---start-wrap---->
 			<!----start-content--->
 			<section class="engine"><a rel="external" href="#"></a>nfit</section><section class="mbr-section mbr-section-hero mbr-section-full header2 mbr-parallax-background mbr-after-navbar" id="header2-3" style="background-image: url(resources/images/mbr-2000x1333.jpg);">
-
-    <div class="mbr-overlay" style="opacity: 0.3; background-color: rgb(0, 0, 0);">
-    </div>
+			
 
     <div class="mbr-table mbr-table-full">
         <div class="mbr-table-cell">

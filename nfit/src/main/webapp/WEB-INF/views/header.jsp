@@ -19,7 +19,6 @@
 %>
 	<meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="resources/images/n-1x-170x128.jpg" type="image/x-icon">
   <meta name="description" content="">
@@ -35,15 +34,12 @@
   <link rel="stylesheet" href="resources/theme/css/style.css">
   <link rel="stylesheet" href="resources/mobirise/css/mbr-additional.css" type="text/css">
   
-  
-  
 </head>
 <body>
 <section id="menu-0">
 
     <nav class="navbar navbar-dropdown bg-color transparent navbar-fixed-top">
         <div class="container">
-
             <div class="mbr-table">
                 <div class="mbr-table-cell">
 
@@ -63,13 +59,24 @@
                     <li class="nav-item"><a class="nav-link link" href="index.do">이용안내</a></li>
                     <li class="nav-item"><a class="nav-link link" href="index.do">주변센터찾기</a></li>
                     <li class="nav-item"><a class="nav-link link" href="index.do">고객센터</a></li>
-                    <li class="nav-item dropdown"><a class="nav-link link dropdown-toggle" data-toggle="dropdown-submenu" href="index.do" aria-expanded="false">공지사항</a>
-                    <div class="dropdown-menu"><a class="dropdown-item" href="index.do">Forum</a><a class="dropdown-item" href="index.do">Tutorials</a>
-                    <a class="dropdown-item" href="index.do">Contact us</a></div></li>
+                    <li class="nav-item"><a class="nav-link link" href="index.do">공지사항</a></li>
                     <li class="nav-item"><a class="nav-link link" href="coin.do" aria-expanded="false">코인결제</a></li>
                     
+                    <c:choose>
+					<c:when test="${empty sessionScope.saveid }">
                     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="memberJoin.do">회원가입</a></li>
                     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="memberLogin.do">로그인</a></li>
+                    </c:when>
+					<c:when test="${sessionScope.saveid=='admin'}">
+                    <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="#">관리자페이지</a></li>
+                    <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="logout.do">로그아웃</a></li>
+                    </c:when>
+                    <c:when test="${!empty sessionScope.saveid }">
+                    <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="myPage.do">마이페이지</a></li>
+                    <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="logout.do">로그아웃</a></li>
+                    </c:when>
+                    </c:choose>
+                    
                     </ul>
                     
                     <button hidden="" class="navbar-toggler navbar-close" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
@@ -81,8 +88,9 @@
 
         </div>
     </nav>
-
 </section>
+
+
 			<!--  
 				<form class="navbar-form navbar-left" role="search">
 					<div class="form-group">
