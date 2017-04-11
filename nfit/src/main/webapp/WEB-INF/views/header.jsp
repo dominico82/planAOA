@@ -89,41 +89,7 @@
         </div>
     </nav>
 </section>
-
-
-			<!--  
-				<form class="navbar-form navbar-left" role="search">
-					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Search">
-					</div>
-				<button type="submit" class="btn btn-default">Submit</button>
-				</form>
-				<c:choose>
-				<c:when test="${empty sessionScope.saveid }">
-				<a href="memberJoin.do" class="btn btn-warning"
-					style="margin-left: 100px;">회원가입</a> <a href="memberLogin.do"
-					class="btn btn-danger">로그인</a>
-				</c:when>
-				<c:when test="${sessionScope.saveid=='admin'}">
-				<a href="#" class="btn btn-warning"
-					style="margin-left: 100px;">관리자 페이지</a> <a href="logout.do"
-					class="btn btn-danger">로그아웃</a>
-				</c:when>
-				<c:when  test="${!empty sessionScope.saveid }">
-				<a href="myPage.do" class="btn btn-warning"
-					style="margin-left: 100px;">마이페이지</a> <a href="logout.do"
-					class="btn btn-danger">로그아웃</a>
-				</c:when>
-				</c:choose>
-			</div>
-		</div>
-	</nav>
-	
-	-->
-	<!----- 새로운 부트스트랩 헤더메뉴 끝 ----->
-	
-
-	
-
+<div style="display:block;"></div>
+  
 </body>
 </html>
