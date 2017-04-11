@@ -22,13 +22,17 @@ public class MypageController {
 	@Autowired
 	private MemberDAO memberDao;
 	
+	//마이페이지 이동
 	@RequestMapping("memberInfo.do")
 	public String memberInfo(){
 		return "mypage/modifyForm";
 	}
 	
+	//마이페이지 에서 정보수정폼으로 이동
 	@RequestMapping("modifyForm.do")
 	public String modifyForm(){
 		return "mypage/modifyForm";
 	}
+	
+	
 }

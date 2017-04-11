@@ -1,12 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="resources/css/mypage.css"/>
-<link rel="stylesheet" href="resources/css/bootstrap.mypage.css"/>
+<script type="text/javascript" src="resources/js/httpRequest.js"></script>
+<script>
+function info(){
+	
+}
+</script>
 </head>
 <body>
 <div class="wrap">
@@ -19,10 +25,9 @@
 							<span class="userCircleImg"></span>
 						</span>
 						<h6>
-							이름 받아오기
-							<small>님</small>
+							${sessionScope.member_name}<small>님</small>
 							<br>
-							아이디 받아오기
+							${sessionScope.saveid}($sessionScope.)
 						</h6>
 						<div class="userPicComment upcOK">
 							<p class="text-anc">와~ 멋진 사진이네요!</p>
@@ -38,7 +43,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="" id="a_favorite_center">
+									<a href="" id="a_favorite_center" class="current">
 										<i class="fa fa-heart-o"></i>"가보고 싶은 센터"
 									</a>
 								</li>
@@ -53,9 +58,10 @@
 				</aside>
 				<div class="col-lg-10 col-md-9 col-sm-8 mypagePanel" id="inner_top">
 					<section class="myMembership">
-						<h3>
-							<i class="fa fa-clone"></i>"내 멤버십"
-						</h3>
+						<div>
+							<a onclick="info()" class="membershipApply">"체질량지수 보러가기"</a>
+						</div>
+						<h3><i class="fa fa-clone"></i>"내 멤버십"</h3>
 						<div class="notYetMembership">
 							<h4>필요한 만큼 결제하세요!</h4>
 							<p>
