@@ -46,7 +46,9 @@ public class MemberController {
 			@RequestParam(value="tel2",required=false)String tel2,
 			@RequestParam(value="tel3",required=false)String tel3,
 			@RequestParam(value="email1",required=false)String email1,
-			@RequestParam(value="email",required=false)String email
+			@RequestParam(value="email",required=false)String email,
+			@RequestParam(value="member_tall",required=false)int tall,
+			@RequestParam(value="member_weight",required=false)int weight
 			){
 		dto.setMember_tel(tel1+"-"+tel2+"-"+tel3);
 		dto.setMember_email(email1+"@"+email);

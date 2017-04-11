@@ -14,8 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				#{member_birth, jdbcType=VARCHAR},
 				#{member_email, jdbcType=VARCHAR},
 				#{member_tel, jdbcType=VARCHAR},
-				#{member_tall,jdbcType=INTEGER},
-				#{member_weight,jdbcType=INTEGER},0,0)
+				#{member_tall, jdbcType=INTEGER},
+				#{member_weight, jdbcType=INTEGER},0,0)
 	</insert>
 	
 	<select id="memberLogin" parameterType="String" resultType="nfit.member.model.MemberDTO">

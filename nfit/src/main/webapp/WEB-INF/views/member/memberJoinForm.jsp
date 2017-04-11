@@ -65,7 +65,7 @@ $(function(){
 </script>
 <script type="text/javascript">
 function email_change(){
-	if(document.join.email.options[document.join.email.selectedIndex].value == '0'){
+	if(document.join.email.options[document.join.email.selectedIndex].value == ' '){
 	 document.join.email2.disabled = true;
 	 document.join.email2.value = "";
 	}
@@ -77,14 +77,42 @@ function email_change(){
 	 document.join.email2.disabled = true;
 	 document.join.email2.value = document.join.email.options[document.join.email.selectedIndex].value;
 	}
-	}
+}
 </script>
+<script>
+		function onlyNumber(event){
+			event = event || window.event;
+			var keyID = (event.which) ? event.which : event.keyCode;
+			if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+				return;
+			else
+				return false;
+		}
+		function removeChar(event) {
+			event = event || window.event;
+			var keyID = (event.which) ? event.which : event.keyCode;
+			if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+				return;
+			else
+				event.target.value = event.target.value.replace(/[^0-9]/g, "");
+		}
+		function checkValue() {
+			if(document.join.member_pwd.length<8){
+				alert("8글자 이상 입력해주세요.");
+				return false;
+			}
+			if (document.join.member_pwd.value != document.join.member_pwd2.value) {
+				alert("비밀번호를 동일하게 입력하세요.");
+				return false;
+			}
+		}
+	</script>
 </head>
 <body>
 	<header>
 		<%@include file="../header.jsp"%>
 	</header>
-	<form id="formmain" action="memberJoin.do" method="post" name="join">
+	<form id="formmain" action="memberJoin.do" method="post" name="join" onsubmit="return checkValue()">
 		<fieldset>
 			<legend>필수 입력정보</legend>
 			<ol>
@@ -102,7 +130,7 @@ function email_change(){
 					id="member_sex-0" value="남자">남자 <input type="radio"
 					name="member_sex" id="member_sex-1" value="여자">여자</li>
 				<li><label>주소</label><input type="text" id="sample3_postcode"
-					placeholder="우편번호"> <input type="button"
+					placeholder="우편번호" required="required" disabled="disabled"> <input type="button"
 					onclick="sample3_execDaumPostcode()" value="우편번호 찾기"><br>
 
 					<div id="wrap"
@@ -113,7 +141,7 @@ function email_change(){
 							style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
 							onclick="foldDaumPostcode()" alt="접기 버튼">
 					</div> <input type="text" id="sample3_address" class="d_form large"
-					placeholder="주소" name="member_addr"></li>
+					placeholder="주소" name="member_addr" required="required"></li>
 			</ol>
 			<legend>추가 입력정보</legend>
 			<ol>
@@ -123,17 +151,17 @@ function email_change(){
 						<option value="017">017</option>
 						<option value="018">018</option>
 						<option value="019">019</option>
-				</select>- <input type="text" name="tel2" id="tel2" maxlength="4" />- <input
+				</select>- <input type="text" name="tel2" id="tel2" maxlength="4" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;' />- <input
 					type="text" name="tel3" id="tel3" maxlength="4" /></li>
 					
 				<li><label>생년월일</label> <input type="text" name="member_birth"
-					id="datepicker" placeholder="클릭하세요" /></li>
+					id="datepicker" placeholder="클릭하세요" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/></li>
 					
 				<li><label>이메일</label> <input type="text" name="email1"
-					value="이메일" onfocus="this.value='';"> @ <input type="text"
+					value=" " onfocus="this.value='';" placeholder="이메일"> @ <input type="text"
 					name="email2" value="" disabled> <select name="email"
 					onchange="email_change()">
-						<option value="0">선택하세요</option>
+						<option value=" ">선택하세요</option>
 						<option value="9">직접입력</option>
 						<option value="naver.com">naver.com</option>
 						<option value="nate.com">nate.com</option>
@@ -144,10 +172,10 @@ function email_change(){
 				</select></li>
 				
 				<li><label>신장</label> <input type="text" name="member_tall"
-					maxlength="3" max="3" placeholder="숫자만 입력하세요" id="onlyNumber"/>kg</li>
+					maxlength="3" placeholder="숫자만 입력하세요" id="onlyNumber" value="0" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>kg</li>
 					
-				<li><label>체중</label> <input type="number" name="member_weight"
-					maxlength="3" placeholder="숫자만 입력하세요" />cm</li>
+				<li><label>체중</label> <input type="text" name="member_weight" value="0" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'
+					maxlength="3" placeholder="숫자만 입력하세요"/>cm</li>
 					
 			</ol>
 		</fieldset>
