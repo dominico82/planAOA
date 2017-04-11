@@ -1,5 +1,16 @@
 package nfit.controller;
 
+import java.util.Properties;
+import java.util.Random;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeUtility;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import nfit.member.model.MemberDAO;
 import nfit.member.model.MemberDTO;
+import oracle.jdbc.OracleResultSetMetaData.SecurityAttribute;
 import nfit.member.model.MemberDAOImple;
 
 @Controller
@@ -22,12 +34,22 @@ public class MemberController {
 
 	@Autowired
 	private MemberDAO memberDao;
+	
 	@RequestMapping(value="/memberJoin.do",method=RequestMethod.GET)
 	public String bbsWriteForm(){
 		return "member/memberJoinForm";
 	}
+	
 	@RequestMapping(value="/memberJoin.do",method=RequestMethod.POST)
-	public ModelAndView bbsWrite(MemberDTO dto){
+	public ModelAndView bbsWrite(MemberDTO dto,
+			@RequestParam(value="tel1",required=false)String tel1,
+			@RequestParam(value="tel2",required=false)String tel2,
+			@RequestParam(value="tel3",required=false)String tel3,
+			@RequestParam(value="email1",required=false)String email1,
+			@RequestParam(value="email",required=false)String email
+			){
+		dto.setMember_tel(tel1+"-"+tel2+"-"+tel3);
+		dto.setMember_email(email1+"@"+email);
 		int result=memberDao.memberJoin(dto);
 		String msg=result>0?"회원가입완료":"회원가입 실패";
 		ModelAndView mav=new ModelAndView();
