@@ -4,10 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-
-</style>
+ <link rel="stylesheet" href="resources/css/style.css">
 
 </head>
 <body>

@@ -12,7 +12,7 @@
 		
 		<!---start-wrap---->
 			<!----start-content--->
-			<section class="engine"><a rel="external" href="https://mobirise.com">mobirise.com</a></section><section class="mbr-section mbr-section-hero mbr-section-full header2 mbr-parallax-background mbr-after-navbar" id="header2-3" style="background-image: url(resources/images/mbr-2000x1333.jpg);">
+			<section class="engine"><a rel="external" href="#"></a>nfit</section><section class="mbr-section mbr-section-hero mbr-section-full header2 mbr-parallax-background mbr-after-navbar" id="header2-3" style="background-image: url(resources/images/mbr-2000x1333.jpg);">
 
     <div class="mbr-overlay" style="opacity: 0.3; background-color: rgb(0, 0, 0);">
     </div>
@@ -31,7 +31,7 @@
                                 <p>오늘은 헬스, 내일은 요가! &nbsp; &nbsp;<br>&nbsp; 고민하지 마세요!!</p>
                             </div>
 
-                            <div class="mbr-section-btn"><a class="btn btn-secondary" href="https://mobirise.com">MORE</a></div>
+                            <div class="mbr-section-btn"><a class="btn btn-secondary" href="#">MORE</a></div>
 
                         </div>
                         <div class="mbr-table-cell mbr-valign-top mbr-left-padding-md-up col-md-7 image-size" style="width: 50%;">
