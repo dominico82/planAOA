@@ -5,12 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+
+</style>
+
 </head>
 <body>
 <div class="footer-grids">
 	<div class="wrap">
 		<div class="footer-grid">
-			<h3>Quick Links</h3>
+			<h3>Nfit </h3>
 			<ul>
 				<li><a href="#">Home</a></li>
 				<li><a href="#">About Features</a></li>
