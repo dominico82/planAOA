@@ -65,7 +65,7 @@ a.f_navFocus_pc span{color:#fff;display:inline-block;height:30px;line-height:30p
 .payPC_wrap .passList_pc>ul li a.on .p5Box{background:#00bff0;}
 .payPC_wrap .passList_pc>ul li a.on .p21Box{background:#00bff0;}
 .payPC_wrap .passList_pc>ul li a.on .p100Box{background:#00bff0;}
-.payPC_wrap .passList_pc>ul li a.on dl dt{color:#c9caca;letter-spacing:1px;font-size:15px;}
+.payPC_wrap .passList_pc>ul li a.on dl dt{color:#c9caca;letter-spacing:1px;font-size:15px;text-decoration: none;}
 .payPC_wrap .passList_pc ul li a.on dl dt span:last-child{color:#f00;background:#fff;}
 .payPC_wrap .passList_pc ul li a.on dl dt span:first-child{width:75px;display:inline-block;text-align:center;color:#00bff0;background:#fff;border-radius:5px;font-size:18px;margin-right:2px;line-height:30px;height:30px;letter-spacing:1px;position:absolute;left:5px;}
 .payPC_wrap .passList_pc ul li a.on dl dt #p5Box_month{left:94px;width:120px;}

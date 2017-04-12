@@ -69,7 +69,7 @@ var userAddr="${dto.member_addr}";
     <section class="content_inner pb0">
     <div class="myheadPC_wrap">
         <div class="myheadPC_back">
-            <img src="https://az792517.vo.msecnd.net/img/myHeadPc_pt.jpg">
+            <img src="resources/images/myHeadPc_pt.jpg">
         </div>        
         <div class="myheadPC_content">
             <div class="mP_nm">
