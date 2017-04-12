@@ -26,12 +26,15 @@ public class MypageController {
 	
 	//마이페이지 이동
 	@RequestMapping("memberInfo.do")
-	public ModelAndView memberInfo(@RequestParam("member_id") String member_id){
-
-		System.out.println("member_id"+member_id);
-		List<MemberDTO> info = memberDao.getMemberInfo(member_id);
+	public ModelAndView memberInfo(HttpSession session){
+		
+		String userid = (String)session.getAttribute("saveid");
+		
+		System.out.println("userid"+userid);
+		
+		MemberDTO dto = memberDao.getMemberInfo(userid);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("memberInfo",info);
+		mav.addObject("dto",dto);
 		mav.setViewName("mypage/modifyForm");
 		return mav;
 	}

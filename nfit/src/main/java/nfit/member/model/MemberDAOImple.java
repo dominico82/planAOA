@@ -56,9 +56,9 @@ public class MemberDAOImple implements MemberDAO {
 		return userInfo;
 	}
 	
-	public List<MemberDTO> getMemberInfo(String member_id){
-		List list = sqlMap.selectList("memberInfo", member_id);
-		return list;
+	public MemberDTO getMemberInfo(String userid){
+		MemberDTO dto = sqlMap.selectOne("memberInfo", userid);
+		return dto;
 	}
 	
 }

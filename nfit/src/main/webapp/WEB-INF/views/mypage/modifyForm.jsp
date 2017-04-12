@@ -9,6 +9,12 @@
 <link rel="stylesheet" type="text/css" href="resources/css/modifyForm.css"/>
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
 <script>
+var userName="${dto.member_name}";
+var userEmail="${dto.member_email}";
+var userTel="${dto.member_tel}";
+var userAddr="${dto.member_addr}";
+var userSex="${dto.member_sex}";
+
 function checkPwd(){
 	var pw1 = document.getElementById('password').value;
 	var pw2 = document.getElementById('password2').value;
@@ -30,17 +36,6 @@ function checkPwd(){
 					<div class="editMyInfo">
 						<h3>회원정보 수정</h3>
 						<form class="memberForm" name="modify_form">
-							<c:set var="info" value="${memberInfo}"/>
-							<c:forEach var="update" items="${info}">
-								<p>${update.member_name}</p>
-								<p>${update.member_birth}</p>
-								<p>${update.member_email}</p>
-								<p>${update.member_addr}</p>
-								<p>${update.member_sex}</p>
-								<p>${update.member_tall}</p>
-								<p>${update.member_weight}</p>
-								<p>${update.member_coin}</p>
-							</c:forEach>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
@@ -54,7 +49,7 @@ function checkPwd(){
 									</div>
 									<div class="form-group">
 										<label for="email">이메일</label>
-										<input type="email" class="form-control" id="email" placeholder="이메일" value="${update.member_email}" name="member_email">
+										<input type="email" class="form-control" id="email" placeholder="이메일" value="${dto.member_email}" name="member_email">
 									</div>
 									<div class="form-group">
 										<label>성별</label>
@@ -73,7 +68,7 @@ function checkPwd(){
 									<div class="form-group">
 										<label>휴대폰 번호</label>
 										<div class="input-group">
-											<input type="tel" class="form-control" placeholder="휴대폰 번호를 입력하세요" value="${update.member_tel}" name="member_tel" style="width: 400px;">
+											<input type="tel" class="form-control" placeholder="휴대폰 번호를 입력하세요" value="${dto.member_tel}" name="member_tel" style="width: 400px;">
 										</div>
 									</div>
 									<div class="panel panel-default">
@@ -138,7 +133,7 @@ function checkPwd(){
 										</div>
 									</div>
 									<div>
-										<input type="text" class="form-control" placeholder="상세주소를 입력하세요" name="user_addr2" id="user_addr2">
+										<input type="text" class="form-control" placeholder="상세주소를 입력하세요" name="user_addr2" id="user_addr2" value="${dto.member_addr}">
 									</div>
 									<div class="form-group">
 										<label>회사명</label>
