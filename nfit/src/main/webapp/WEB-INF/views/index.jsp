@@ -121,7 +121,7 @@
 
                         </div>
                         <div class="mbr-table-cell mbr-valign-top mbr-left-padding-md-up col-md-7 image-size" style="width: 50%;">
-                            <div class="mbr-figure"><iframe class="mbr-embedded-video" src="https://www.youtube.com/embed/ltXsiiDWxEU?rel=0&amp;amp;showinfo=0&amp;autoplay=1&amp;loop=1&amp;playlist=Tq7p44IA-1U" width="600" height="400" frameborder="0" allowfullscreen></iframe></div>
+                            <div class="mbr-figure"><iframe class="mbr-embedded-video" src="https://www.youtube.com/embed/ltXsiiDWxEU?rel=0&amp;amp;showinfo=0&amp;autoplay=1&amp;loop=1&amp;playlist=Tq7p44IA-1U" width="600" height="350" frameborder="0" allowfullscreen></iframe></div>
                         </div>
 
                     </div>
@@ -136,7 +136,9 @@
 <footer class="mbr-small-footer mbr-section mbr-section-nopadding" id="footer1-2" style="background-color: rgb(50, 50, 50); padding-top: 1.75rem; padding-bottom: 1.75rem;">
     
     <div class="container">
-        <p class="text-xs-center">Copyright (c) 2017 Team A.O.A </p><a href="broadcast.do">실시간 채팅상담</a>
+        <p class="text-xs-center">Copyright (c) 2017 Team A.O.A 
+    <input type="button" value="실시간채팅상담" onclick="window.open('broadcast.do', '채팅', 'width=420, height=240')">
+	</p> 
     </div>
 </footer>
 
