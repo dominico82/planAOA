@@ -26,4 +26,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select member_name from member_table where member_id=#{member_id}
 	</select>
 	
+	<select id="memberInfo" parameterType="String" resultType="nfit.member.model.MemberDTO">
+		select * from member_table
+		where name = #{name}
+	</select>
 </mapper>

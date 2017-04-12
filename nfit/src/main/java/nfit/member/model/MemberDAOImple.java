@@ -1,6 +1,7 @@
 package nfit.member.model;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -54,6 +55,39 @@ public class MemberDAOImple implements MemberDAO {
 		String userInfo=sqlMap.selectOne("getUserInfo",member_id);
 		return userInfo;
 	}
-
+	
+	public List<MemberDTO> getMemberInfo(String member_id){
+		List list = sqlMap.selectList("memberInfo", member_id);
+		return list;
+	}
 	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

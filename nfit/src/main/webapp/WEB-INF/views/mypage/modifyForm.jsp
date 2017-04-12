@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,9 @@ function checkPwd(){
 </script>
 </head>
 <body>
+<c:set var="info" value="${memberInfo}"/>
+<c:forEach var="update" items="${info}">
+</c:forEach>
 <div class="wrap">
 	<div class="container">
 		<div class="mypageWrap">
@@ -29,6 +33,7 @@ function checkPwd(){
 					<div class="editMyInfo">
 						<h3>회원정보 수정</h3>
 						<form class="memberForm" name="modify_form">
+							
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
@@ -42,18 +47,18 @@ function checkPwd(){
 									</div>
 									<div class="form-group">
 										<label for="email">이메일</label>
-										<input type="email" class="form-control" id="email" placeholder="이메일" value="" name="user_email">
+										<input type="email" class="form-control" id="email" placeholder="이메일" value="${update.member_email}" name="member_email">
 									</div>
 									<div class="form-group">
 										<label>성별</label>
 										&nbsp;&nbsp;&nbsp;
 										<label class="radio-inline male">
-											<input type="radio" name="gender_male" value="M" checked>
+											<input type="radio" name="member_sex" value="M" checked>
 												<i class="fa fa-mars"></i>
 												"남성" 
 										</label>
 										<label class="radio-inline female">
-											<input type="radio" name="gender_male" value="F" checked>
+											<input type="radio" name="member_sex" value="F" checked>
 												<i class="fa fa-venus"></i>
 												"여성" 
 										</label>
@@ -61,7 +66,7 @@ function checkPwd(){
 									<div class="form-group">
 										<label>휴대폰 번호</label>
 										<div class="input-group">
-											<input type="tel" class="form-control" placeholder="휴대폰 번호를 입력하세요" value="" name="user_phone" style="width: 400px;">
+											<input type="tel" class="form-control" placeholder="휴대폰 번호를 입력하세요" value="${update.member_tel}" name="member_tel" style="width: 400px;">
 										</div>
 									</div>
 									<div class="panel panel-default">

@@ -1,5 +1,7 @@
 package nfit.controller;
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,14 +26,12 @@ public class MypageController {
 	
 	//마이페이지 이동
 	@RequestMapping("memberInfo.do")
-	public String memberInfo(){
-		return "mypage/modifyForm";
+	public ModelAndView memberInfo(@RequestParam("member_id") String member_id){
+		
+		List<MemberDTO> info = memberDao.getMemberInfo(member_id);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("memberInfo",info);
+		mav.setViewName("mypage/modifyForm");
+		return mav;
 	}
-	
-	//마이페이지 에서 정보수정폼으로 이동
-	@RequestMapping("modifyForm.do")
-	public String modifyForm(){
-		return "mypage/modifyForm";
-	}
-	
 }
