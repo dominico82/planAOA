@@ -27,7 +27,8 @@ public class MypageController {
 	//마이페이지 이동
 	@RequestMapping("memberInfo.do")
 	public ModelAndView memberInfo(@RequestParam("member_id") String member_id){
-		
+
+		System.out.println("member_id"+member_id);
 		List<MemberDTO> info = memberDao.getMemberInfo(member_id);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("memberInfo",info);

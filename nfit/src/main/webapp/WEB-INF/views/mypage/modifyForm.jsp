@@ -22,9 +22,6 @@ function checkPwd(){
 </script>
 </head>
 <body>
-<c:set var="info" value="${memberInfo}"/>
-<c:forEach var="update" items="${info}">
-</c:forEach>
 <div class="wrap">
 	<div class="container">
 		<div class="mypageWrap">
@@ -33,7 +30,17 @@ function checkPwd(){
 					<div class="editMyInfo">
 						<h3>회원정보 수정</h3>
 						<form class="memberForm" name="modify_form">
-							
+							<c:set var="info" value="${memberInfo}"/>
+							<c:forEach var="update" items="${info}">
+								<p>${update.member_name}</p>
+								<p>${update.member_birth}</p>
+								<p>${update.member_email}</p>
+								<p>${update.member_addr}</p>
+								<p>${update.member_sex}</p>
+								<p>${update.member_tall}</p>
+								<p>${update.member_weight}</p>
+								<p>${update.member_coin}</p>
+							</c:forEach>
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
