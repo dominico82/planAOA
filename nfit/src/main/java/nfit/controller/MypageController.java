@@ -30,8 +30,6 @@ public class MypageController {
 		
 		String userid = (String)session.getAttribute("saveid");
 		
-		System.out.println("userid"+userid);
-		
 		MemberDTO dto = memberDao.getMemberInfo(userid);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("dto",dto);

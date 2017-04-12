@@ -9,12 +9,6 @@
 <link rel="stylesheet" type="text/css" href="resources/css/modifyForm.css"/>
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
 <script>
-var userName="${dto.member_name}";
-var userEmail="${dto.member_email}";
-var userTel="${dto.member_tel}";
-var userAddr="${dto.member_addr}";
-var userSex="${dto.member_sex}";
-
 function checkPwd(){
 	var pw1 = document.getElementById('password').value;
 	var pw2 = document.getElementById('password2').value;
@@ -23,6 +17,41 @@ function checkPwd(){
 		  p1.innerHTML = '<h4 style = "color:red;">비밀번호를 동일하게 입력해주세요~</h4>';
 	  }else if(pw1 == pw2){
 		  p1.innerHTML = '<h4 style = "color:blue;">비밀번호가 일치합니다!</h4>'; 
+	}
+}
+function onlyNumber(event){
+	event = event || window.event;
+	var keyID = (event.which) ? event.which : event.keyCode;
+	if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+		return;
+	else
+		return false;
+}
+function removeChar(event) {
+	event = event || window.event;
+	var keyID = (event.which) ? event.which : event.keyCode;
+	if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+		return;
+	else
+		event.target.value = event.target.value.replace(/[^0-9]/g, "");
+}
+function checkValue() {
+	var form=document.join
+	if(form.member_pwd.length<6){
+		alert("6글자 이상 입력해주세요.");
+		return false;
+	}
+	if(form.idDupliction.value!="idCheck"){
+		alert("아이디 중복체크를 해 주세요.");
+		return false;
+	}
+	if (!form.member_sex.value) {
+		alert("성별을 선택해 주세요");
+		return false;
+	}
+	if(!isNaN(form.member_name.value)){
+		alert("이름은 문자만 입력가능합니다.");
+		return false;
 	}
 }
 </script>
@@ -35,7 +64,7 @@ function checkPwd(){
 				<div class="col-lg-10 col-md-9 col-sm-8" id="inner_top">
 					<div class="editMyInfo">
 						<h3>회원정보 수정</h3>
-						<form class="memberForm" name="modify_form">
+						<form class="memberForm" name="modify_form" onsubmit="return checkValue()">
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
@@ -68,23 +97,14 @@ function checkPwd(){
 									<div class="form-group">
 										<label>휴대폰 번호</label>
 										<div class="input-group">
-											<input type="tel" class="form-control" placeholder="휴대폰 번호를 입력하세요" value="${dto.member_tel}" name="member_tel" style="width: 400px;">
+											<input type="tel" class="form-control" placeholder="휴대폰 번호를 입력하세요" value="${dto.member_tel}" name="member_tel" style="width: 400px;" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'>
 										</div>
 									</div>
-									<div class="panel panel-default">
-										<div class="panel-heading">
-											<h3 class="panel-title">마케팅 정보 수신동의</h3>
-										</div>
-										<div class="panel-body">
-											<label>중요한 알림 및 각종 혜택 알림을 수신합니다.</label>
-											<div>
-												<label class="checkbox-inline">
-													<input type="checkbox" name="chk_sms" value="y">SMS
-												</label>
-												<label class="checkbox-inline">
-													<input type="checkbox" name="chk_sms" value="y">이메일
-												</label>
-											</div>
+									<div class="form-group">
+										<label>키, 몸무게</label>
+										<div class="input-group">
+											<input type="text" class="form-control" value="${dto.member_tall}cm" name="member_tall" style="width: 400px;" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'><br>
+											<input type="text" class="form-control" value="${dto.member_weight}kg" name="member_weight" style="width: 400px;" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'>
 										</div>
 									</div>
 								</div>
@@ -124,7 +144,7 @@ function checkPwd(){
 									<div class="form-group">
 										<label>주소</label>
 										<div class="input-group postNumber">
-											<input type="text" class="form-control" placeholder="우편번호" readonly name="user_post" id="user_post" style="width: 620px;">
+											<input type="text" class="form-control" placeholder="우편번호" readonly name="user_post" id="user_post">
 											<span class="input-group-btn">
 												<button type="button" class="btn btn-default" onclick="get_post();">
 												우편번호 검색</button>
@@ -139,13 +159,31 @@ function checkPwd(){
 										<label>회사명</label>
 										<input type="text" class="form-control" placeholder="회사 이름을 입력하세요" name="company_name">
 									</div>
+									<div class="panel panel-default">
+											<div class="panel-heading">
+												<h3 class="panel-title">마케팅 정보 수신동의</h3>
+											</div>
+											<div class="panel-body">
+												<label>중요한 알림 및 각종 혜택 알림을 수신합니다.</label>
+												<div>
+													<label class="checkbox-inline">
+														<input type="checkbox" name="chk_sms" value="y">SMS
+													</label>
+													<label class="checkbox-inline">
+														<input type="checkbox" name="chk_sms" value="y">이메일
+													</label>
+												</div>
+											</div>
+										</div>
 								</div>
 							</div>
 							<div class="form-group submitLine forMbileAppFloat">
 								<button type="submit" class="btn btn-lg btn-primary btn_mobileAppFloat">
 									<i class="fa fa-check"></i>저장하기
 								</button>
-								<span class="withdraw"><button type="button" class="btn btn-sm btn-link">탈퇴신청</button></span>
+								<button type="button" class="btn btn-sm btn-link" href="">
+								<i class="fa fa-check"></i>탈퇴신청
+								</button>
 							</div>
 						</form>
 					</div>
