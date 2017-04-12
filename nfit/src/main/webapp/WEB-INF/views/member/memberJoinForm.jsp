@@ -142,22 +142,75 @@
 			objEv.value = "";
 		}
 	}
-	function openIdChk(){
-		
-		window.name = "parentForm";
-		window.open("member/IdCheckForm.jsp",
-				"chkForm", "width=500, height=300, resizable = no, scrollbars = no");	
-	}
-	function inputIdChk(){
-		document.userInfo.idDuplication.value ="idUncheck";
-	}
+</script>
+<script type="text/javascript" src="resources/js/httpRequest.js"></script>
+<script>
+	var checkFirst = false;
+	var lastKeyword = '';
+	var loopSendKeyword = false;
 
+	function idCheck() {
+		if (checkFirst == false) {
+			setTimeout("sendId();", 500);
+			loopSendKeyword = true;
+		}
+		checkFirst = true;
+	}
+	function sendId() {
+		if (loopSendKeyword == false)
+			return;
+		var userId = document.join.member_id.value;
+		if (userId == '') {
+			lastKeyword = '';
+			hide('idCheck');
+		} else if (userId != lastKeyword) {
+			lastKeyword = userId;
+			if (userId != '') {
+				var param = "member_id=" + encodeURIComponent(userId);
+				sendRequest("idCheckResult.do", param, displayResult, 'POST');
+			} else {
+				hide('idCheck');
+			}
+		}
+		setTimeout("sendId();", 500);
+	}
+	function displayResult() {
+		if (XHR.readyState == 4) {
+			if (XHR.status == 200) {
+				var result = XHR.responseText;
+				if (result == null && result.equals('')) {
+					hide('idCheck');
+				} else {
+					var msg = '';
+					msg = result;
+					var idView = document.getElementById('idCheckResult');
+					idView.innerHTML = msg;
+					show('idCheck');
+				}
+			} else {
+				alert("에러발생: " + XHR.status);
+			}
+		}
+	}
+	function show(elementId) {
+		var element = document.getElementById(elementId);
+		if (element) {
+			element.style.display = '';
+		}
+	}
+	function hide(elementId) {
+		var element = document.getElementById(elementId);
+		if (element) {
+			element.style.display = 'none';
+		}
+	}
 </script>
 </head>
 <body>
 	<header>
 		<%@include file="../header.jsp"%>
 	</header>
+	<div style="margin-top: 200px; margin-bottom: 200px;">
 	<form id="formmain" action="memberJoin.do" method="post" name="join"
 		onsubmit='return checkValue();'>
 		<fieldset>
@@ -165,9 +218,10 @@
 			<ol>
 				<li><label for="userid">아이디</label> <input id="input"
 					name="member_id" type="text" required="required" autofocus
-					maxlength="12" onkeydown="checkNumber();"><input
-					type="button" value="중복확인" onclick='openIdChk()'>
-					<input type="hidden" name="idDuplication" value="idUncheck" ><!-- auto focus: 처음 위치 지정 --></li>
+					maxlength="12" onkeydown="idCheck();">
+					<div id="idCheck">
+						<div id="idCheckResult"></div>
+					</div><!-- auto focus: 처음 위치 지정 --></li>
 				<li><label for="pwd1">비밀번호</label> <input      id="input"
 					name="member_pwd" type="password" maxlength="12"></li>
 				<li><label for="pwd2">비밀번호확인</label> <input id="input"
@@ -234,6 +288,7 @@
 			type="reset" id="button" value="다시작성"> <input type="button"
 			id="button" onclick="location.href='index.do'" value="메인화면">
 	</form>
+	</div>
 
 	<footer>
 		<%@include file="../footer.jsp"%>

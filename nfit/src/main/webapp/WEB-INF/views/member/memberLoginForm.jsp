@@ -24,7 +24,8 @@
 	<header>
 		<%@include file="../header.jsp"%>
 	</header>
-	<div class="site__container" >
+
+	<div class="site__container" style="margin-top:200px;">
 
 		<div class="grid__container">
 

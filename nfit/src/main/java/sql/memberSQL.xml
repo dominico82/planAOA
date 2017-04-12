@@ -30,4 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from member_table
 		where member_id = #{member_id}
 	</select>
+	<select id="idCheck" parameterType="String" resultType="String">
+		select member_id from member_table where member_id=#{member_id}
+	</select>
 </mapper>

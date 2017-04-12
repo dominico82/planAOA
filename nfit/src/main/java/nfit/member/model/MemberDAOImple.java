@@ -60,6 +60,12 @@ public class MemberDAOImple implements MemberDAO {
 		MemberDTO dto = sqlMap.selectOne("memberInfo", userid);
 		return dto;
 	}
+	public String idCheck(String member_id){
+		String result=sqlMap.selectOne("idCheck",member_id);
+//		System.out.println(result);
+		return result;
+		
+	}
 	
 }
 
