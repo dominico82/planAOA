@@ -39,6 +39,10 @@ public class MemberController {
 	public String bbsWriteForm(){
 		return "member/memberJoinForm";
 	}
+	@RequestMapping(value="/idCheck.do")
+	public String idCheckForm(){
+		return "member/idCheckForm";
+	}
 	
 	@RequestMapping(value="/memberJoin.do",method=RequestMethod.POST)
 	public ModelAndView bbsWrite(MemberDTO dto,

@@ -78,6 +78,7 @@ function email_change(){
 	 document.join.email2.value = document.join.email.options[document.join.email.selectedIndex].value;
 	}
 }
+
 </script>
 <script>
 		function onlyNumber(event){
@@ -97,12 +98,21 @@ function email_change(){
 				event.target.value = event.target.value.replace(/[^0-9]/g, "");
 		}
 		function checkValue() {
-			if(document.join.member_pwd.length<8){
-				alert("8글자 이상 입력해주세요.");
+			var form=document.join
+			if(form.member_pwd.length<6){
+				alert("6글자 이상 입력해주세요.");
 				return false;
 			}
-			if (document.join.member_pwd.value != document.join.member_pwd2.value) {
-				alert("비밀번호를 동일하게 입력하세요.");
+			if(form.idDupliction.value!="idCheck"){
+				alert("아이디 중복체크를 해 주세요.");
+				return false;
+			}
+			if (!form.member_sex.value) {
+				alert("성별을 선택해 주세요");
+				return false;
+			}
+			if(!isNaN(form.member_name.value)){
+				alert("이름은 문자만 입력가능합니다.");
 				return false;
 			}
 		}
@@ -117,13 +127,13 @@ function email_change(){
 			<legend>필수 입력정보</legend>
 			<ol>
 				<li><label for="userid">아이디</label> <input id="input"
-					name="member_id" type="text" required="required" autofocus
-					maxlength="12" /> <!-- auto focus: 처음 위치 지정 --></li>
+					name="member_id" id="member_id" type="text" required="required" autofocus
+					maxlength="12" onkeydown="checkId()"><!-- auto focus: 처음 위치 지정 --></li>
 				<li><label for="pwd1">비밀번호</label> <input id="input"
 					name="member_pwd" type="password" required="required"
-					maxlength="12" /></li>
+					maxlength="12"></li>
 				<li><label for="pwd2">비밀번호확인</label> <input id="input"
-					name="pwd2" type="password" required="required" maxlength="12" /></li>
+					name="pwd2" type="password" required="required" maxlength="12"></li>
 				<li><label>이름</label><input type="text" name="member_name"
 					id="input" required="required"></li>
 				<li><label>성별</label> <input type="radio" name="member_sex"
@@ -181,7 +191,7 @@ function email_change(){
 		</fieldset>
 
 		<div>
-			<input type="submit" id="button" value="가입"><input
+			<input type="submit" value="가입"><input
 				type="reset" id="button" value="다시작성"> <input type="button"
 				id="button" onclick="location.href='index.do'" value="메인화면">
 		</div>
