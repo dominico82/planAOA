@@ -10,7 +10,17 @@
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
 <script>
 function info(){
-	
+	var tall = 1.8;
+	var weight = 130;
+	var bmi = weight/(tall*tall);
+	var p1 = document.getElementById('bmi');
+	  if(bmi <= 18.5){
+		  p1.innerHTML = '너무 마르셨네요~ 저체중이세요~ 잘 먹고 운동합시다!';
+	  }else if(bmi >= 18.5 && bmi <= 24){
+		  p1.innerHTML = '정상이십니다~ 그럼 탄탄한 몸을 위해서 운동해볼까요!'; 
+	  }else if(bmi > 25){
+		  p1.innerHTML = '운동이 필요해요~ 건강한 몸을 위해서 운동해볼까요!';
+	  }
 }
 </script>
 </head>
@@ -59,13 +69,14 @@ function info(){
 				<div class="col-lg-10 col-md-9 col-sm-8 mypagePanel" id="inner_top">
 					<section class="myMembership">
 						<div>
-							<a onclick="info()" class="membershipApply">"체질량지수 보러가기"</a>
+							<a onclick="info();" class="membershipApply">"비만도 체크해보기"</a><br>
+							<span id="bmi"></span>
 						</div>
 						<h3><i class="fa fa-clone"></i>"내 멤버십"</h3>
 						<div class="notYetMembership">
 							<h4>필요한 만큼 결제하세요!</h4>
 							<p>
-								<a href="" class="membershipApply">
+								<a href="coin.do" class="membershipApply">
 									<i class="fa fa-clone"></i>"멤버십 신청하기"
 								</a>
 							</p>

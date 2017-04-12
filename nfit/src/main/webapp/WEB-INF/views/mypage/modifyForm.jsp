@@ -9,9 +9,9 @@
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
 <script>
 function checkPwd(){
-	  var pw1 = document.getElementById('password').value;
-	  var pw2 = document.getElementById('password2').value;
-	  var p1 = document.getElementById('check_pwd');
+	var pw1 = document.getElementById('password').value;
+	var pw2 = document.getElementById('password2').value;
+	var p1 = document.getElementById('check_pwd');
 	  if(pw1 != pw2){
 		  p1.innerHTML = '<h4 style = "color:red;">비밀번호를 동일하게 입력해주세요~</h4>';
 	  }else if(pw1 == pw2){

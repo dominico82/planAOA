@@ -34,5 +34,4 @@ public class MypageController {
 		return "mypage/modifyForm";
 	}
 	
-	
 }
