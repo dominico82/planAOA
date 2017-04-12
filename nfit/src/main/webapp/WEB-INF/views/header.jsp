@@ -67,7 +67,7 @@
                     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="memberLogin.do">로그인</a></li>
                     </c:when>
 					<c:when test="${sessionScope.saveid=='admin'}">
-                    <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="#">관리자페이지</a></li>
+                    <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="adminPage.do">관리자페이지</a></li>
                     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="logout.do">로그아웃</a></li>
                     </c:when>
                     <c:when test="${!empty sessionScope.saveid }">

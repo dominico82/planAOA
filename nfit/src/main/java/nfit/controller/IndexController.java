@@ -13,4 +13,12 @@ public class IndexController {
 		mav.setViewName("index");
 		return mav;
 	}
+	
+	@RequestMapping("/broadcast.do")
+	public ModelAndView broadcast(){
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("broadcast");
+		return mav;
+	}
+	
 }
