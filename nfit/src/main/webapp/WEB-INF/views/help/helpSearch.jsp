@@ -125,61 +125,6 @@
   }
 </script>
 
-    <footer class="footer">
-        <div class="inner">
-            <div class="row">
-                <div class="col-sm-5">
-                    <a href="/" class="logo"><img src="/images/tlx_pass_logo_text_alt.svg"></a>
-                    <p class="copyrights">
-                        © 2008 ~ 2017 TLX PASS.
-                    </p>
-                    <div class="companyInfo">
-                        <p>
-                            (주)티엘엑스 <small>|</small> 대표이사 : 김혁, 강영준 <small>|</small> 경기 성남시 분당구 성남대로 331번길8 1402호(정자동,킨스타워)<br>
-                            사업자등록번호 129-86-21810 <small>|</small>  통신판매업신고 : 제2008-경기성남-1061호   <a href="http://www.ftc.go.kr/info/bizinfo/communicationView.jsp?apv_perm_no=2008378019330200570&amp;area1=&amp;area2=&amp;currpage=1&amp;searchKey=04&amp;searchVal=1298621810&amp;stdate=&amp;enddate=" target="blank">사업자정보확인</a><br>
-                            <span>고객센터 <i class="fa fa-phone"></i> 1644-3578</span>
-                        </p>
-                        <p class="mailList">
-                            <span><i class="fa fa-envelope"></i> 사업/서비스 제휴 문의  <a href="mailto:contact@tlx.co.kr">contact@tlx.co.kr</a></span>
-                            <span><i class="fa fa-envelope"></i> 기타 문의 <a href="mailto:help@tlx.co.kr">help@tlx.co.kr</a></span>
-                            <span><a class="btn_applyPartner" href="/help/partner"><i class="fa fa-handshake-o"></i> 센터 제휴 문의</a></span>
-                        </p>
-                    </div>
-                    <ul class="util">
-                        <li><a href="/contents/terms/">이용약관</a></li>
-                        <li><a href="/contents/privacy/">개인정보취급방침</a></li>
-                        <li><a href="/notice/thread/">공지사항</a></li>
-                        <li><a href="/help/">고객센터</a></li>
-                        <!-- <li><a href="/contents/b2b" target="_blank">TLX BIZ 임직원 건강관리 솔루션</a></li> -->
-                    </ul>
-                </div>
-                <div class="col-sm-3">
-                    <div class="customerCenter">
-                        <h5>고객센터</h5>
-                        <a href="javascript:void($zopim.livechat.window.openPopout());" class="goChat"><i class="fa fa-comments-o"></i> 실시간 채팅상담</a>
-                        <span>로그인 후 이용하시면 더 빠르게 상담 받을 수 있습니다 <strong><a href="/member/login/">로그인하기</a></strong></span>
-                        <span>운영시간 평일 09:30 ~ 17:30</span>
-                        <span>이외의 시간은 로그인 후 <a href="/mypage/query/">1:1문의</a>를 이용해주세요.</span>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="mobileApp">
-                        <h5>모바일 앱</h5>
-                        <a href="http://tlx.co.kr/contents/app" class="go"><i class="fa fa-mobile"></i>모바일 앱</a>
-                        <span>스마트폰에서 TLX PASS 를 보다 편리하게 이용하실 수 있습니다. 아이폰 안드로이드 모두 이용하실 수 있습니다.</span>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="tlxBiz">
-                        <h5>기업/단체 우대 서비스 제휴 문의</h5>
-                        <a href="/contents/b2b" class="aq go" target="_blank">TLX BIZ</a>
-                        <span>법인 계약 할인/혜택 프로그램입니다.</span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </footer>
 
 </div>
 <%@include file="../footer.jsp" %>

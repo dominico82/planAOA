@@ -34,8 +34,5 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="E:/lib/smtp.jar"/>
-	<classpathentry kind="lib" path="E:/lib/activation.jar"/>
-	<classpathentry kind="lib" path="E:/lib/mailapi.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
