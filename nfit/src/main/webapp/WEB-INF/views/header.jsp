@@ -17,7 +17,7 @@
 		}
 	}
 %>
-	<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="resources/images/n-1x-170x128.jpg" type="image/x-icon">
@@ -33,12 +33,11 @@
   <link rel="stylesheet" href="resources/animate.css/animate.min.css">
   <link rel="stylesheet" href="resources/theme/css/style.css">
   <link rel="stylesheet" href="resources/mobirise/css/mbr-additional.css" type="text/css">
-  
 </head>
+
 <body>
 <section id="menu-0">
-
-    <nav class="navbar navbar-dropdown bg-color transparent navbar-fixed-top">
+    <nav class="navbar navbar-dropdown bg-color navbar-fixed-top">
         <div class="container">
             <div class="mbr-table">
                 <div class="mbr-table-cell">
@@ -89,7 +88,5 @@
         </div>
     </nav>
 </section>
-<div style="display:block;"></div>
-  
 </body>
 </html>
