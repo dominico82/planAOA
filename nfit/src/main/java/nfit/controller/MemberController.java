@@ -125,5 +125,9 @@ public class MemberController {
 		
 		return "mypage/myPage";
 	}
-		
+	@RequestMapping("/memberFind.do")
+	public String memberFind(){
+
+	return "member/memberFind";
+	}
 }

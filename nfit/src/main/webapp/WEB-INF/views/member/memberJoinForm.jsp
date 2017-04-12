@@ -11,7 +11,11 @@
 <script type="application/x-javascript">
 	
 	
+	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } 
+
+
 
 
 </script>
@@ -50,98 +54,133 @@
 <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css" />
 <script>
-$(function(){
-	$("#datepicker").datepicker({
-		dateFormat:'yy-mm-dd',
-		monthNamesShort:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-		dayNmaeMin:['일','월','화','수','목','금','토',],
-		changeMonth:true,
-		changeYear:true,
-		showMonthAfterYear:true,
-		yearRange:'c-99:c+0'
+	$(function() {
+		$("#datepicker").datepicker(
+				{
+					dateFormat : 'yy-mm-dd',
+					monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월',
+							'7월', '8월', '9월', '10월', '11월', '12월' ],
+					dayNmaeMin : [ '일', '월', '화', '수', '목', '금', '토', ],
+					changeMonth : true,
+					changeYear : true,
+					showMonthAfterYear : true,
+					yearRange : 'c-99:c+0'
+				});
 	});
-});
-
 </script>
 <script type="text/javascript">
-function email_change(){
-	if(document.join.email.options[document.join.email.selectedIndex].value == ' '){
-	 document.join.email2.disabled = true;
-	 document.join.email2.value = "";
+	function email_change() {
+		if (document.join.email.options[document.join.email.selectedIndex].value == ' ') {
+			document.join.email2.disabled = true;
+			document.join.email2.value = "";
+		}
+		if (document.join.email.options[document.join.email.selectedIndex].value == '9') {
+			document.join.email2.disabled = false;
+			document.join.email2.value = "";
+			document.join.email2.focus();
+		} else {
+			document.join.email2.disabled = true;
+			document.join.email2.value = document.join.email.options[document.join.email.selectedIndex].value;
+		}
 	}
-	if(document.join.email.options[document.join.email.selectedIndex].value == '9'){
-	 document.join.email2.disabled = false;
-	 document.join.email2.value = "";
-	 document.join.email2.focus();
-	} else{
-	 document.join.email2.disabled = true;
-	 document.join.email2.value = document.join.email.options[document.join.email.selectedIndex].value;
-	}
-}
-
 </script>
 <script>
-		function onlyNumber(event){
-			event = event || window.event;
-			var keyID = (event.which) ? event.which : event.keyCode;
-			if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
-				return;
-			else
-				return false;
+	function onlyNumber(event) {
+		event = event || window.event;
+		var keyID = (event.which) ? event.which : event.keyCode;
+		if ((keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105)
+				|| keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39)
+			return;
+		else
+			return false;
+	}
+	function removeChar(event) {
+		event = event || window.event;
+		var keyID = (event.which) ? event.which : event.keyCode;
+		if (keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39)
+			return;
+		else
+			event.target.value = event.target.value.replace(/[^0-9]/g, "");
+	}
+</script>
+<script type="text/javascript">
+	function checkValue() {
+
+		if (document.join.member_pwd.length < 6) {
+			alert("6글자 이상 입력해주세요.");
+			return false;
 		}
-		function removeChar(event) {
-			event = event || window.event;
-			var keyID = (event.which) ? event.which : event.keyCode;
-			if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
-				return;
-			else
-				event.target.value = event.target.value.replace(/[^0-9]/g, "");
+		if (!document.join.member_pwd.value) {
+			alert("비밀번호를 입력하세요.");
+			return false;
 		}
-		function checkValue() {
-			var form=document.join
-			if(form.member_pwd.length<6){
-				alert("6글자 이상 입력해주세요.");
-				return false;
-			}
-			if(form.idDupliction.value!="idCheck"){
-				alert("아이디 중복체크를 해 주세요.");
-				return false;
-			}
-			if (!form.member_sex.value) {
-				alert("성별을 선택해 주세요");
-				return false;
-			}
-			if(!isNaN(form.member_name.value)){
-				alert("이름은 문자만 입력가능합니다.");
-				return false;
-			}
+		if (document.join.member_pwd.value != document.join.member_pwd2.value) {
+			alert("비밀번호를 동일하게 입력하세요.");
+			return false;
 		}
-	</script>
+		if (!form.member_sex.value) {
+			alert("성별을 선택해 주세요");
+			return false;
+		}
+		if (!isNaN(form.member_name.value)) {
+			alert("이름은 문자만 입력가능합니다.");
+			return false;
+		}
+	}
+	function checkNumber() {
+		var objEv = event.srcElement;
+		var num = "{}[]()<>?_|~`!@#$%^&*-+\"'\\/ "; //입력을 막을 특수문자 기재.
+		event.returnValue = true;
+
+		for (var i = 0; i < objEv.value.length; i++) {
+			if (-1 != num.indexOf(objEv.value.charAt(i)))
+				event.returnValue = false;
+		}
+
+		if (!event.returnValue) {
+			alert("특수문자는 입력하실 수 없습니다.");
+			objEv.value = "";
+		}
+	}
+	function openIdChk(){
+		
+		window.name = "parentForm";
+		window.open("member/IdCheckForm.jsp",
+				"chkForm", "width=500, height=300, resizable = no, scrollbars = no");	
+	}
+	function inputIdChk(){
+		document.userInfo.idDuplication.value ="idUncheck";
+	}
+
+</script>
 </head>
 <body>
 	<header>
 		<%@include file="../header.jsp"%>
 	</header>
-	<form id="formmain" action="memberJoin.do" method="post" name="join" onsubmit="return checkValue()">
+	<form id="formmain" action="memberJoin.do" method="post" name="join"
+		onsubmit='return checkValue();'>
 		<fieldset>
 			<legend>필수 입력정보</legend>
 			<ol>
 				<li><label for="userid">아이디</label> <input id="input"
-					name="member_id" id="member_id" type="text" required="required" autofocus
-					maxlength="12" onkeydown="checkId()"><!-- auto focus: 처음 위치 지정 --></li>
-				<li><label for="pwd1">비밀번호</label> <input id="input"
-					name="member_pwd" type="password" required="required"
-					maxlength="12"></li>
+					name="member_id" type="text" required="required" autofocus
+					maxlength="12" onkeydown="checkNumber();"><input
+					type="button" value="중복확인" onclick='openIdChk()'>
+					<input type="hidden" name="idDuplication" value="idUncheck" ><!-- auto focus: 처음 위치 지정 --></li>
+				<li><label for="pwd1">비밀번호</label> <input      id="input"
+					name="member_pwd" type="password" maxlength="12"></li>
 				<li><label for="pwd2">비밀번호확인</label> <input id="input"
-					name="pwd2" type="password" required="required" maxlength="12"></li>
+					name="member_pwd2" type="password" maxlength="12"></li>
 				<li><label>이름</label><input type="text" name="member_name"
-					id="input" required="required"></li>
+					id="input" required="required" onkeydown="checkNumber();"></li>
 				<li><label>성별</label> <input type="radio" name="member_sex"
 					id="member_sex-0" value="남자">남자 <input type="radio"
 					name="member_sex" id="member_sex-1" value="여자">여자</li>
 				<li><label>주소</label><input type="text" id="sample3_postcode"
-					placeholder="우편번호" required="required" disabled="disabled"> <input type="button"
-					onclick="sample3_execDaumPostcode()" value="우편번호 찾기"><br>
+					placeholder="우편번호" required="required" disabled="disabled">
+					<input type="button" onclick="sample3_execDaumPostcode()"
+					value="우편번호 찾기"><br>
 
 					<div id="wrap"
 						style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
@@ -151,26 +190,24 @@ function email_change(){
 							style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
 							onclick="foldDaumPostcode()" alt="접기 버튼">
 					</div> <input type="text" id="sample3_address" class="d_form large"
-					placeholder="주소" name="member_addr" required="required"></li>
+					placeholder="우편번호 찾기 후 세부주소작성" name="member_addr" required="required" onkeydown="checkNumber();"></li>
 			</ol>
 			<legend>추가 입력정보</legend>
 			<ol>
-				<li><label>전화번호</label> <select name="tel1">
-						<option value="010">010</option>
-						<option value="016">016</option>
-						<option value="017">017</option>
-						<option value="018">018</option>
-						<option value="019">019</option>
-				</select>- <input type="text" name="tel2" id="tel2" maxlength="4" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;' />- <input
-					type="text" name="tel3" id="tel3" maxlength="4" /></li>
-					
+				<li><label>전화번호</label><input type="text" name="member_tel"
+					id="tel2" maxlength="11" onkeydown='return onlyNumber(event)'
+					onkeyup='removeChar(event)' style='ime-mode: disabled;'
+					placeholder="-없이 숫자만 입력가능합니다." /></li>
+
 				<li><label>생년월일</label> <input type="text" name="member_birth"
-					id="datepicker" placeholder="클릭하세요" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/></li>
-					
+					id="datepicker" placeholder="클릭하세요"
+					onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'
+					style='ime-mode: disabled;' /></li>
+
 				<li><label>이메일</label> <input type="text" name="email1"
-					value=" " onfocus="this.value='';" placeholder="이메일"> @ <input type="text"
-					name="email2" value="" disabled> <select name="email"
-					onchange="email_change()">
+					value=" " onfocus="this.value='';" placeholder="이메일"> @ <input
+					type="text" name="email2" value="" disabled> <select
+					name="email" onchange="email_change()">
 						<option value=" ">선택하세요</option>
 						<option value="9">직접입력</option>
 						<option value="naver.com">naver.com</option>
@@ -178,24 +215,24 @@ function email_change(){
 						<option value="daum.net">daum.net</option>
 						<option value="gmail.com">gmail.com</option>
 						<option value="outlook.com">outlook.com</option>
-						
+
 				</select></li>
-				
+
 				<li><label>신장</label> <input type="text" name="member_tall"
-					maxlength="3" placeholder="숫자만 입력하세요" id="onlyNumber" value="0" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'/>kg</li>
-					
-				<li><label>체중</label> <input type="text" name="member_weight" value="0" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)' style='ime-mode:disabled;'
-					maxlength="3" placeholder="숫자만 입력하세요"/>cm</li>
-					
+					maxlength="3" placeholder="숫자만 입력하세요" id="onlyNumber" value="0"
+					onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'
+					style='ime-mode: disabled;' />kg</li>
+
+				<li><label>체중</label> <input type="text" name="member_weight"
+					value="0" onkeydown='return onlyNumber(event)'
+					onkeyup='removeChar(event)' style='ime-mode: disabled;'
+					maxlength="3" placeholder="숫자만 입력하세요" />cm</li>
+
 			</ol>
 		</fieldset>
-
-		<div>
-			<input type="submit" value="가입"><input
-				type="reset" id="button" value="다시작성"> <input type="button"
-				id="button" onclick="location.href='index.do'" value="메인화면">
-		</div>
-
+		<input type="submit" value="가입" name='submit'><input
+			type="reset" id="button" value="다시작성"> <input type="button"
+			id="button" onclick="location.href='index.do'" value="메인화면">
 	</form>
 
 	<footer>

@@ -50,7 +50,7 @@
 				<p class="text--center">
 					<input type="checkbox" name="saveid" value="on"
 						${empty cookie.saveid.value?'':'checked' }>ID저장
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#"> ID/비밀번호 찾기</a> <span
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="memberFind.do"> ID/비밀번호 찾기</a> <span
 						class="fontawesome-arrow-right"></span>
 				</p>
 			</form>
