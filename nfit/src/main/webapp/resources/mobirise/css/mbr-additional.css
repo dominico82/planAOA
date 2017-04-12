@@ -415,14 +415,14 @@ h6,
   display: none !important;
 }
 #menu-0 .navbar-caption {
-  color: #269cbf;
+  color: #ffffff;
 }
 #menu-0 .navbar-toggler {
-  color: #269cbf;
+  color: #ffffff;
 }
 #menu-0 .link,
 #menu-0 .dropdown-item {
-  color: #269cbf;
+  color: #ffffff;
 }
 #menu-0 .link {
   font-size: 0.75rem;
@@ -451,10 +451,10 @@ h6,
 #menu-0 .nav-dropdown-sm,
 #menu-0 .nav-dropdown-sm .link[aria-expanded="true"],
 #menu-0 .nav-dropdown-sm .dropdown-menu {
-  background: #d0edf1;
+  background: #282828;
 }
 #menu-0 .bg-color.transparent .link {
-  color: #269cbf;
+  color: #ffffff;
   transition: none;
 }
 #menu-0 .bg-color.transparent.opened .link {
