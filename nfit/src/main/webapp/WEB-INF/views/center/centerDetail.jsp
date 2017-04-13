@@ -16,13 +16,24 @@
 </head>
 <style>
 .coin_num{
-width:30px; height:30px; background-repeat: no-reapeat; background-position: center center;
+width:30px; 
+height:30px; 
+background-repeat: no-reapeat; background-position: center center;
+color:white;
 text-align:center;
+vertical-align:bottom;
 }
-#coin_num span{
-position:absolute;
-top:15px;
-left:22px;
+.coin_num #coin{
+
+}
+.coin_cont_back{
+background-size: 100% 100%;
+background-repea:no-reapeat; 
+background-position: 0% 0%;
+padding-top: 15px;
+padding-bottom: 15px;
+padding-left: 20px;
+padding-right: 20px;
 }
 </style>
 
@@ -57,13 +68,26 @@ left:22px;
 				<ul class="list-group">
 				<li class="list-group-item">
 				<ul class="list-inline" id="content_list">
-				<li><div class="coin_num" id="coin_num_<%=cnt%>"><span>${con.content_coin}</span></div></li>
-				<li>${con.content1}</li>
-				<li>${con.content2}</li>
-				<li>${con.content3}</li>
-				<li>${con.content4}</li>
-				<li>${con.content5}</li>
-				<li>${con.content6}</li>
+				<li><div class="coin_num" id="coin_num_<%=cnt%>">${con.content_coin}</div></li>
+				<c:if test="${!empty con.content1}">
+				<li><div class="coin_cont_back contbg_<%=cnt%> conigb_1"><span id="coin_cont_icon" class="glyphicon glyphicon-record"></span><span id="coin_cont">${con.content1}</span></div></li>
+				</c:if>
+				<c:if test="${!empty con.content2}">
+				<li><div class="coin_cont_back contbg_<%=cnt%> conigb_1"><span id="coin_cont_icon" class="glyphicon glyphicon-record"></span><span id="coin_cont">${con.content2}</span></div></li>
+				</c:if>
+				<c:if test="${!empty con.content3}">
+				<li><div class="coin_cont_back contbg_<%=cnt%> conigb_1"><span id="coin_cont_icon" class="glyphicon glyphicon-record"></span><span id="coin_cont">${con.content3}</span></div></li>
+				</c:if>
+				<c:if test="${!empty con.content4}">
+				<li><div class="coin_cont_back contbg_<%=cnt%> conigb_1"><span id="coin_cont_icon" class="glyphicon glyphicon-record"></span><span id="coin_cont">${con.content4}</span></div></li>
+				</c:if>
+				<c:if test="${!empty con.content5}">
+				<li><div class="coin_cont_back contbg_<%=cnt%> conigb_1"><span id="coin_cont_icon" class="glyphicon glyphicon-record"></span><span id="coin_cont">${con.content5}</span></div></li>
+				</c:if>
+				<c:if test="${!empty con.content6}">
+				<li><div class="coin_cont_back contbg_<%=cnt%> conigb_1"><span id="coin_cont_icon" class="glyphicon glyphicon-record"></span><span id="coin_cont">${con.content6}</span></div></li>
+				</c:if>
+				
 				</ul>
 				</li>
 				</ul>
@@ -73,11 +97,13 @@ left:22px;
 				</div>
 				<hr>
 				<script type="text/javascript">
-				/*이용상품 coin에 따른 색 변경*/
-				var count = $("#content_list > li > div").length;
+				/*이용상품 coin에 따른 coin 색 변경*/
+				var count = $("#content_list > li > .coin_num").length;
+				console.log();
 				var coin=[];
 				for(var i=0; i<count; i++){
-					coin[i] = document.getElementById("coin_num_"+i).lastChild.innerHTML;
+					coin[i] = document.getElementById("coin_num_"+i).innerHTML;
+					console.log("coin[]",coin[i]);
 					var num = 0;
 					if(coin[i]>=0 && coin[i]<=10){
 						num=0;
@@ -87,9 +113,9 @@ left:22px;
 						num=2;
 					}
 					switch(num){
-					case 0 : $("#coin_num_"+i).css("background-image","URL(resources/images/1pass.png)");break;
-					case 1 : $("#coin_num_"+i).css("background-image","URL(resources/images/10pass.png)");break;
-					case 2 : $("#coin_num_"+i).css("background-image","URL(resources/images/20pass.png)");break;
+					case 0 : $("#coin_num_"+i).css("background-image","URL(resources/images/1pass.png)"); $(".contbg_"+i); break;
+					case 1 : $("#coin_num_"+i).css("background-image","URL(resources/images/10pass.png)"); $(".contbg_"+i);break;
+					case 2 : $("#coin_num_"+i).css("background-image","URL(resources/images/20pass.png)"); $(".contbg_"+i);break;
 					}
 				}
 				</script>
