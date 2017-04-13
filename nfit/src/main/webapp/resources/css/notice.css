@@ -1,0 +1,424 @@
+@CHARSET "UTF-8";
+/* ---------------------------
+=Notice
+--------------------------- */
+.noticeWrap {
+  /*
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+  */
+}
+.noticeWrap .list-group a {
+  background-image: url(../images/chevron-thin-right.png);
+  background-position: 97% center;
+  background-repeat: no-repeat;
+  background-size: 10px 17px;
+
+  transition: all 0.5s;
+}
+.noticeWrap .list-group a:hover {
+  background-position: 98% center;
+}
+.noticeWrap .list-group .list-group-ietm-heading {
+  padding-right: 4%;
+}
+
+.noticeWrap .list-group span.date {
+  color: #999;
+  font-size: 13px;
+}
+.noticeWrap .list-group .label-default {
+  background: none;
+  color: #444;
+  border: 1px solid #ddd;
+}
+
+.noticeWrap article {
+  font-size: 16px;
+  color: #777;
+  border-top: 1px solid #ddd;
+  padding-top: 30px;
+}
+.noticeWrap article img {
+  max-width: 100%;
+  height: auto !important;
+}
+.noticeWrap article .forMobile {
+  display: none;
+}
+.noticeWrap article .forDesktop {
+  display: block;
+}
+.noticeWrap .articleTail {
+  padding: 20px 0;
+  margin: 20px 0;
+  border-top: 1px solid #ddd;
+}
+/* bootstrap overwrite */
+.table > tbody > tr > td,
+.table > tbody > tr > th,
+.table > tfoot > tr > td,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > thead > tr > th {
+  padding: 15px 10px;
+}
+.table-condensed > tbody > tr > td, .table-condensed > tbody > tr > th, .table-condensed > tfoot > tr > td, .table-condensed > tfoot > tr > th, .table-condensed > thead > tr > td, .table-condensed > thead > tr > th {
+  padding: 7px;
+}
+
+/*
+.noticeBanner a {
+}
+.noticeBanner a:hover {
+  text-decoration: none;
+}
+.nbBox {
+  background: url(../images/bg/shutterstock_190004864.jpg) no-repeat center center;
+  background-size: cover;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 16px;
+  font-weight: 200;
+  color: #fff;
+}
+.nbBox span {
+  display: block;
+}
+.nbBox .mbb {
+
+}
+.nbBox u {
+  font-weight: 300;
+}
+.nbBox .aq {
+  font-size: 20px;
+  margin-top: 5px;
+  display: inline-block;
+}
+
+.nbBox .overlay {
+  padding: 30px 30px 25px;
+  background: rgba(0,0,0,0.3);
+}
+
+.nbBox .membershipApply {
+  margin: 15px 0 0;
+}
+*/
+
+/* ---------------------------
+=register
+--------------------------- */
+
+body.register {
+
+}
+.subWrap {
+  /* 기업회원 가입 후 기본 배경 화면 보이도록 추가 hi8ar */
+  background: #00bff0 url(../images/bg/register_1.jpg) no-repeat center center fixed;
+  background-size: cover;
+}
+body.register .subWrap {
+  background: #00bff0 url(../images/bg/register_1.jpg) no-repeat center center fixed;
+  background-size: cover;
+}
+body.login .subWrap {
+  background: #00bff0 url(../images/bg/login_1.jpg) no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* toDo :: 다른 페이지에서 사용하는 것 확인 후 삭제 */
+.page-header {
+  border: 0 none;
+}
+.page-header h2 {
+  font-size: 30px;
+  font-weight: 300;
+  letter-spacing: -2px;
+  color: #555;
+}
+.page-header h2 small {
+  display: block;
+  font-size: 16px;
+  font-weight: 300;
+  color: #888;
+  margin: 10px 2px 0;
+  letter-spacing: -1px;
+  line-height: 1.5;
+}
+.page-header h2 small strong {
+  color: #00bff0;
+}
+
+
+/*  새 회원가입  */
+.memberWrap {
+  margin: 30px 0 50px;
+}
+.forBizMemberAnc {
+  color: #fff;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+  margin-top: 50px;
+}
+.forBizMemberAnc p {
+  margin: 0;
+}
+.forBizMemberAnc .btn_BizMemberAnc {
+  display: inline-block;
+  margin-top: 10px;
+  color: #fff;
+
+  padding: 7px 30px;
+  border-radius: 100px;
+  border: 2px solid #fff;
+  color: #fff;
+}
+.forBizMemberAnc .btn_BizMemberAnc:hover {
+  color: #00bff0;
+  border-color: #fff;
+  background: #fff;
+  text-decoration: none;
+}
+
+
+
+.memberBox {
+  background: #fff;
+  padding: 40px;
+  border-radius: 4px;
+  color: #555;
+  box-shadow: 10px 10px rgba(230,230,230,0.8);
+}
+.memberBox h2 {
+  margin: 0 0 40px;
+  font-weight: 100;
+  font-size: 20px;
+  letter-spacing: -1px;
+  line-height: 1.3;
+}
+.memberBox h2 small.tip {
+  display: block;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+.memberBox h2 span {
+  display: block;
+}
+.memberBox h2 b {
+  font-weight: 600;
+}
+.memberBox h2 strong.aq {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.register_type_select {
+  margin: 30px 0;
+}
+.register_type_select a {
+  display: block;
+  height: 40px;
+  text-align: center;
+  font-size: 13px;
+  background: #eee;
+  border-radius: 4px;
+  margin: 0 0 10px;
+  padding-top: 10px;
+  text-decoration: none;
+}
+.register_type_select a:hover {
+  text-decoration: none;
+  opacity: 0.8;
+}
+.register_type_select a b {
+  font-weight: 600;
+}
+.register_type_select a img.ico {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  margin-top: -3px;
+}
+.register_type_select .via_facebook {
+  background: #3b5998;
+  color: #fff;
+}
+.register_type_select .via_kakaotalk {
+  background: #ffeb00;
+  color: #3c1e1e;
+}
+.register_type_select .via_naver {
+  background: #1ec800;
+  color: #fff;
+}
+
+/* ios login btn bug */
+/* 다음 ios 앱 업데이트 까지  */
+.register_type_select .via_facebook2 {
+  background: #3b5998;
+  color: #fff;
+}
+.register_type_select .via_kakaotalk2 {
+  background: #ffeb00;
+  color: #3c1e1e;
+}
+.register_type_select .via_naver2 {
+  background: #1ec800;
+  color: #fff;
+}
+
+
+
+.register_type_select .via_email {
+  background: #00bff0;
+  color: #fff;
+}
+
+
+.register_type_select .divLine {
+  text-align: center;
+  border-top: 1px dotted #eee;
+  position: relative;
+  margin: 35px 0 5px;
+}
+.register_type_select .divLine span {
+  display: inline-block;
+  padding: 5px 20px;
+  top: -18px;
+  position: relative;
+  background: #fff;
+  color: #888;
+  letter-spacing: -0.5px;
+  font-size: 12px;
+}
+
+.alreadyMember {
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: -10px;
+}
+.alreadyMember p {
+  color: #888;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+.alreadyMember p a {
+  font-size: 12px;
+  color: #00bff0;
+  text-decoration: underline;
+  font-weight: 500;
+}
+.mb_footDeco {
+  text-align: center;
+  margin: 50px 0 0;
+}
+.mb_footDeco .tlx_symbol {
+  width: 48px;
+  height: 48px;
+}
+
+
+
+
+
+
+
+
+.memberForm .memberBox_left .form-group {
+  margin: 0 0 20px;
+}
+.memberForm .memberBox_right .form-group {
+  margin: 0 0 30px;
+}
+.memberBox_right {
+}
+
+.memberForm label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  color: #00bff0;
+
+  z-index: 5 /* 크롬 비밀번호 자동 입력시 autofill 영역에 가려지는것을 방지 */
+}
+
+.memberForm .form-control {
+  border: 0 none;
+  border-bottom: 1px solid #ddd;
+  border-radius: 0;
+  background: none;
+  font-size: 15px;
+  font-weight: 300;
+  height: 45px;
+  padding: 0;
+
+  -webkit-appearance:none;
+  /*
+  margin-top: 5px;
+  opacity: 0.9;
+  */
+}
+.memberForm .form-control:-webkit-autofill {
+  /* 크롬 autofill 노랑색을 보이지 않도록 */
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+.memberForm .has-error .form-control {
+  border-color: #a94442;
+  color: #a94442;
+  box-shadow: none;
+}
+
+.memberForm .form-control:hover {
+  border-color: #888;
+  opacity: 1;
+}
+.memberForm .form-control:focus {
+  box-shadow: none;
+  border-bottom:3px solid #888;
+  color: #222;
+}
+.memberForm .btn_inputHover {
+  position: absolute;
+  margin-top: -35px;
+  right: 20px;
+
+  border: 1px solid #00bff0;
+  background: #fff;
+  background: rgba(255,255,255,0.9);
+  color: #00bff0;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 2px;
+}
+
+.memberForm label.checkbox-inline {
+  font-size: 14px;
+  font-weight: 400;
+  color: #555;
+}
+.memberForm .help-block {
+  letter-spacing: -0.6px;
+  margin: 5px 0;
+  line-height: 1.3;
+}
+.memberForm .help-block span {
+  display: inline-block;
+}
+
+/* password show & hide **/
+#password_div {}
+#password_div .input-group-addon {
+  padding: 0 18px;
+  background: #f5f5f5;
+  border: 0 none;
+  border-radius: 50%;
+}
+
+
+.agreementLine a {
+  color: #00bff0;
+  text-decoration: underline;
+}

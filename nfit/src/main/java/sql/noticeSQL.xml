@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nfit.notice">
+	<select id="getNoticeList" resultType="nfit.notice.model.NoticeDTO" parameterType="Map">
+		select * from 
+		(select rownum as rnum, a.* from
+		(select * from notice_bbs order by notice_top desc, notice_idx desc)a)b
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+	</select>
+	<select id="totalCnt" resultType="Integer">
+		select count(*) from notice_bbs
+	</select>
+	<select id="getNoticeContents" resultType="nfit.notice.model.NoticeDTO">
+		select * from notice_bbs where notice_idx = #{notice_idx}
+	</select>
+	<insert id="setNoticeContens" parameterType="nfit.notice.model.NoticeDTO">
+		insert into 
+			notice_bbs
+		values(
+			notice_bbs_idx.nextval,
+			#{notice_subject},
+			#{notice_content},
+			#{notice_top},
+			#{notice_event},
+			sysdate
+		)
+	</insert>
+</mapper>
