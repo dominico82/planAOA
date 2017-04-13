@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.net.InetAddress" %>
+<%
+InetAddress inet = InetAddress.getLocalHost();
+String svrIP = inet.getHostAddress();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +21,7 @@
 </body>
     <script type="text/javascript">
         var textarea = document.getElementById("messageWindow");
-        var webSocket = new WebSocket('ws://localhost:9090/nfit/broadcasting');
+        var webSocket = new WebSocket('ws://<%= svrIP %>:9090/nfit/broadcasting');
         var inputMessage = document.getElementById('inputMessage');
     webSocket.onerror = function(event) {
       onError(event)
@@ -31,7 +36,7 @@
         textarea.value += "상대 : " + event.data + "\n";
     }
     function onOpen(event) {
-        textarea.value += "연결 성공\n";
+        textarea.value += "연결에  성공하였습니다.\n";
     }
     function onError(event) {
       alert(event.data);

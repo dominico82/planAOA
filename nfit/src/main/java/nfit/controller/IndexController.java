@@ -1,8 +1,11 @@
 package nfit.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class IndexController {
@@ -15,10 +18,9 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/broadcast.do")
-	public ModelAndView broadcast(){
+	public ModelAndView broadcast(HttpServletRequest request, HttpSession sess){
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("broadcast");
 		return mav;
 	}
-	
 }
