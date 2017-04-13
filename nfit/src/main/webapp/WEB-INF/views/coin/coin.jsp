@@ -7,6 +7,7 @@
 <html>
 	<head>
 		<title>만족스러운 피트니스 Nfit</title>
+		<%@include file="../header.jsp" %>
 		<link href="resources/css/style.css" rel='stylesheet' type='text/css' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" type="image/x-icon" href="resources/images/fav-icon.png" />
@@ -45,25 +46,10 @@ var userAddr="${dto.member_addr}";
 </script>
 	</head>
 	<body>
-	<%@include file="../header.jsp" %>
+	<br><br><br><br>
 		<!---start-wrap---->
 		<!------start-768px-menu---->
-			<div id="page">
-					<div id="header">
-						<a class="navicon" href="#menu-left"> </a>
-					</div>
-					<nav id="menu-left">
-						<ul>
-							<li><a href="resources/index.html">Home</a></li>
-							<li><a href="resources/about.html">About</a></li>
-							<li><a href="resources/features.html">Features</a></li>
-							<li><a href="coin.do">코인결제</a></li>
-							<div class="clear"> </div>
-						</ul>
-					</nav>
-			</div>
-		<!------start-768px-menu---->
-<div>
+		
 	<section id="sub_section"  class="payPC_wrap">
 
     <section class="content_inner pb0">

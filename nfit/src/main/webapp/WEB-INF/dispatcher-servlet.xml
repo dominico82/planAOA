@@ -38,6 +38,11 @@
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean" />
 	</bean>
     <!-- service -->
+    <bean id="noticeDao" class="nfit.notice.model.NoticeDAOImple">
+    	<constructor-arg>
+    		<ref bean="sqlSessionTemplate"/>
+    	</constructor-arg>
+    </bean>
 	<bean id="memberDao" class="nfit.member.model.MemberDAOImple">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate"/>

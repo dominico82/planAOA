@@ -5,9 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@include file="../header.jsp" %>
+<link href="http://tlx.co.kr/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link href="resources/css/help.css" rel="stylesheet" type="text/css">
+<link href="resources/css/notice.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<%@include file="../header.jsp" %>
+
+<br><br><br>
 <div class="wrap">
 
     <div class="container">
@@ -24,7 +30,7 @@
             <div class="col-md-9">
 
               <div class="searchFormBox">
-                <form action="/help/search"><div class="input-group input-group-lg">
+                <form action="/help/search"><div class="input-group input-group-lg" style="line-height: 46px;">
 
                     <input type="text" class="form-control" placeholder="어떤 도움이 필요하세요?" name="keyword">
                     <span class="input-group-btn">
@@ -107,7 +113,15 @@
 
                 </div>
               </div><!-- /.helpTagsBoxWrap -->
-
+           	<div class="innerBox col-xs-6 col-sm-12">
+                <h3>1:1 문의</h3>
+                <p class="help-block">
+                  <span>게시판에 문의사항을 남겨주시면 정확하게 답변해 드립니다.</span>
+                </p>
+                <a href="/mypage/query/" class="btn btn-default">
+                  1:1 문의 남기기
+                </a>
+              </div>
               <div class="faqList">
                 <h3>FAQ <small><span class="label label-info">TOP 5</span></small></h3>
                 <ul>
@@ -120,85 +134,8 @@
               </div>
 
 
-
-              <!-- <div class="fastLink">
-                <div class="row">
-                  <div class="col-sm-12">
-                    <h3>빠른링크</h3>
-<a href="/mypage/suspend/" class="btn btn-link">멤버십 일시정지</a>                  </div>
-                </div>
-              </div> -->
-
-
-            </div><!-- /.col -->
-            <aside class="col-md-3">
-              <div class="row">
-
-                <div class="innerBox col-xs-6 col-sm-12">
-                  <h3>실시간 채팅 상담</h3>
-                  <p class="help-block">
-                    <span><strong>운영시간 평일 09:30 ~ 17:30</strong></span>
-                    <span>이외의 시간은</span> <span>1:1 게시판 문의를 이용해주세요.</span>
-                  </p>
-                  <p class="help-block">
-                  </p>
-                  <a href="javascript:void($zopim.livechat.window.show());" class="btn btn-default">
-                    <i class="fa fa-comments-o"></i> 실시간 채팅상담
-                  </a>
-
-
-                </div>
-
-                <div class="innerBox col-xs-6 col-sm-12">
-                  <h3>1:1 문의</h3>
-                  <p class="help-block">
-                    <span>게시판에 문의사항을 남겨주시면 정확하게 답변해 드립니다.</span>
-                  </p>
-                  <a href="/mypage/query/" class="btn btn-default">
-                    1:1 문의 남기기
-                  </a>
-                </div>
-              </div>
-              <div class="row">
-
-
-                <div class="innerBox col-xs-6 col-sm-12">
-                  <h3>유선상담</h3>
-                  <h4>
-                    <i class="fa fa-phone"></i> 1644-3578
-                  </h4>
-                  <p class="help-block">
-                    <span>운영시간</span>
-                    <span><strong>평일 오전 9:30 ~ 오전 11:30</strong></span>
-                    <span>이외의 시간은 1:1 문의 혹은 채팅상담을 이용해주세요.</span>
-                  </p>
-                </div>
-
-                <div class="innerBox col-xs-6 col-sm-12">
-                  <h3>공지사항</h3>
-                  <p class="help-block">
-                    공지사항을 확인하세요!
-                  </p>
-                  <a href="/notice/thread/" class="btn btn-default">
-                    공지사항 보기
-                  </a>
-                </div>
-
-
-  <!-- 페이지 개발 되는되면 노출 -->
-                <div class="innerBox col-xs-6 col-sm-12">
-                  <h3>센터 사장님이신가요?</h3>
-                  <p class="help-block">
-                    성공파트너 TLX PASS 의 제휴센터가 되어 주세요!
-                  </p>
-                  <a class="btn btn-default" href="/help/partner/"><i class="fa fa-handshake-o"></i> 제휴센터문의</a>
-                </div>
-
-              </div><!-- /.row -->
-            </aside><!-- /aside.col -->
-
-
-
+           </div><!-- /.col -->
+           
           </div>
 
         </div><!-- /.helpCenterWrap -->
@@ -207,12 +144,6 @@
       </div> <!-- /.content -->
     </div><!-- /.row -->
   </div><!-- /container -->
-
-<script>
-  if ($('.fastLink a').size() == 0) {
-      $('.fastLink').remove();
-  }
-</script>
 
 
 </div>
