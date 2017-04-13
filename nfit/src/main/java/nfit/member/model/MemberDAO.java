@@ -10,4 +10,5 @@ public interface MemberDAO {
 	public MemberDTO getMemberInfo(String userid);
 	public String idCheck(String member_id);
 	public int memberModify(MemberDTO dto);
+	public String memberIdFind(String member_name,String member_email);
 }

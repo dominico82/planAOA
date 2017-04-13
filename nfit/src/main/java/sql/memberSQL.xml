@@ -46,6 +46,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  		member_weight=#{member_weight}
 	  		where member_name=#{member_name}
 	</insert>
+	
+	<select id="membeIdFind" parameterType="String" resultType="String">
+		select member_email from member_table where member_name=#{member_name}
+	</select>
+	
+	<select id="memberIdfind2" parameterType="String" resultType="String">
+		select member_id from member_table where member_email=#{member_email}
+	</select>
 </mapper>
 
 

@@ -129,8 +129,22 @@ public class MemberController {
 	}
 	@RequestMapping("/memberFind.do")
 	public String memberFind(){
-
 	return "member/memberFind";
 	}
-	
+	@RequestMapping("memberFindId.do")
+	public ModelAndView memberIdFind(MemberDTO dto,
+			@RequestParam(value="member_name",required=false)String name,
+			@RequestParam(value="email1",required=false)String email1,
+			@RequestParam(value="email2",required=false)String email2){
+		String member_email=email1+"@"+email2;
+		String member_name=name;
+		System.out.println(member_name);
+		System.out.println(member_email);
+		ModelAndView mav=new ModelAndView();
+		String result=memberDao.memberIdFind(member_name,member_email);
+		String msg=result;
+		mav.addObject("msg", msg);
+		mav.setViewName("/member/memberFindMsg");
+		return mav;
+	}
 }
