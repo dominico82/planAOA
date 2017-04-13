@@ -43,10 +43,7 @@ public class MemberController {
 	@RequestMapping(value="/idCheckResult.do", method=RequestMethod.POST)
 	public ModelAndView idCheckResult(@RequestParam(value="member_id")String member_id){
 		String userid=member_id.trim();
-		System.out.println("중복검사할 ID:"+userid);
 		String result=memberDao.idCheck(userid);
-		System.out.println(result);
-		
 		String msg=result.equals(userid)?"<div style='color: red;'>이미 사용중인 ID입니다!</div>":"<div style='color: blue;'>사용 가능한 ID입니다.</div>";
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("msg", msg);
@@ -129,11 +126,6 @@ public class MemberController {
 		mav.addObject("msg",msg);
 		mav.setViewName("/member/memberMsg");
 		return mav;
-	}
-	@RequestMapping("/myPage.do")
-	public String memberForm(){
-		
-		return "mypage/myPage";
 	}
 	@RequestMapping("/memberFind.do")
 	public String memberFind(){

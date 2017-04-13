@@ -62,7 +62,9 @@ public class MemberDAOImple implements MemberDAO {
 	}
 	public String idCheck(String member_id){
 		String result=sqlMap.selectOne("idCheck",member_id);
-//		System.out.println(result);
+		if(result==null){
+			result="";
+		}
 		return result;
 		
 	}
