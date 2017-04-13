@@ -14,4 +14,4 @@ CREATE SEQUENCE content_idx minvalue 0 start with 1;
 CREATE TABLE FEEDBACK_TABLE(feedback_index NUMBER NOT NULL PRIMARY KEY, co_idx NUMBER , member_id VARCHAR2(50) , feedback_date DATE , feedback_score NUMBER , feedback_content VARCHAR2(500) );	
 CREATE SEQUENCE feedback_idx minvalue 0 start with 1;
 
-commit
+commit;

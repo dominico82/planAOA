@@ -199,4 +199,4 @@ INSERT INTO USETIME_TABLE VALUES(usetime_idx.NEXTVAL, 50, '토요일', '11:00 ~ 
 INSERT INTO USETIME_TABLE VALUES(usetime_idx.NEXTVAL, 50, '일요일', '');
 INSERT INTO USETIME_TABLE VALUES(usetime_idx.NEXTVAL, 50, '휴무일', '일요일 및 명절 당일');
 
-commit
+commit;

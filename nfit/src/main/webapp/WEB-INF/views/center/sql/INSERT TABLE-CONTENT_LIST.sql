@@ -77,4 +77,4 @@ INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 50, 7.5, '왁싱', '', '', 
 INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 50, 13.5, '속눈썹', '', '', '', '', '' );
 INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 50, 13.5, '젤네일', '', '', '', '', '' );
 
-commit
+commit;
