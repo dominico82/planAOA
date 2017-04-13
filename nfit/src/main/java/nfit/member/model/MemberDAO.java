@@ -9,4 +9,5 @@ public interface MemberDAO {
 	public String getUserInfo(String member_id);
 	public MemberDTO getMemberInfo(String userid);
 	public String idCheck(String member_id);
+	public int memberModify(MemberDTO dto);
 }

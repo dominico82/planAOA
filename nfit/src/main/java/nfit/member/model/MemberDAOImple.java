@@ -69,6 +69,11 @@ public class MemberDAOImple implements MemberDAO {
 		
 	}
 	
+	public int memberModify(MemberDTO dto){
+		int count=sqlMap.insert("memberUpdate",dto);
+		return count;
+	}
+	
 }
 
 

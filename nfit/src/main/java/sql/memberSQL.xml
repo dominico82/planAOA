@@ -33,4 +33,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="idCheck" parameterType="String" resultType="String">
 		select member_id from member_table where member_id=#{member_id}
 	</select>
+	
+	<insert id="memberUpdate" parameterType="nfit.member.model.MemberDTO">
+		update member_table
+  		set member_pwd=#{member_pwd},
+	  		member_addr=#{member_addr},
+	  		member_sex=#{member_sex},
+	  		member_birth=#{member_birth},
+	  		member_email=#{member_email},
+	  		member_tel=#{member_tel},
+	  		member_tall=#{member_tall},
+	  		member_weight=#{member_weight}
+	  		where member_name=#{member_name}
+	</insert>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

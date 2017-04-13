@@ -10,8 +10,9 @@
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
 <script>
 function info(){
-	var tall = 1.8;
-	var weight = 130;
+	var tall1 = ${dto.member_tall};
+	var tall = tall1*0.01
+	var weight = ${dto.member_weight};
 	var bmi = weight/(tall*tall);
 	var p1 = document.getElementById('bmi');
 	  if(bmi <= 18.5){
@@ -19,7 +20,7 @@ function info(){
 	  }else if(bmi >= 18.5 && bmi <= 24){
 		  p1.innerHTML = '정상이십니다~ 그럼 탄탄한 몸을 위해서 운동해볼까요!'; 
 	  }else if(bmi > 25){
-		  p1.innerHTML = '운동이 필요해요~ 건강한 몸을 위해서 운동해볼까요!';
+		  p1.innerHTML = '운동이 필요하시네요~ 건강한 몸을 위해서 운동해볼까요!';
 	  }
 }
 </script>
@@ -35,9 +36,9 @@ function info(){
 							<span class="userCircleImg"></span>
 						</span>
 						<h6>
-							${sessionScope.member_name}<small>님</small>
+							${dto.member_name}}<small>님</small>
 							<br>
-							${sessionScope.saveid}($sessionScope.)
+							${dto.member_id}(${dto.member_email})
 						</h6>
 						<div class="userPicComment upcOK">
 							<p class="text-anc">와~ 멋진 사진이네요!</p>

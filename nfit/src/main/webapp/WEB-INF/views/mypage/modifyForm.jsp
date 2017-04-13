@@ -64,12 +64,12 @@ function checkValue() {
 				<div class="col-lg-10 col-md-9 col-sm-8" id="inner_top">
 					<div class="editMyInfo">
 						<h3>회원정보 수정</h3>
-						<form class="memberForm" name="modify_form" onsubmit="return checkValue()">
+						<form class="memberForm" name="modify_form" onsubmit="return checkValue()" action="modifyGo.do" method="post">
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
 										<label for="password">비밀번호</label>
-										<input type="password" class="form-control" id="password" placeholder="비밀번호" name="password1">
+										<input type="password" class="form-control" id="password" placeholder="비밀번호" name="member_pwd">
 									</div>
 									<div class="form-group">
 										<label for="password2">비밀번호 다시 입력</label>
@@ -84,14 +84,14 @@ function checkValue() {
 										<label>성별</label>
 										&nbsp;&nbsp;&nbsp;
 										<label class="radio-inline male">
-											<input type="radio" name="member_sex" value="M" checked>
+											<input type="radio" name="member_sex" value=남자 checked>
 												<i class="fa fa-mars"></i>
-												"남성" 
+												남자
 										</label>
 										<label class="radio-inline female">
-											<input type="radio" name="member_sex" value="F" checked>
+											<input type="radio" name="member_sex" value=여자 checked>
 												<i class="fa fa-venus"></i>
-												"여성" 
+												여자
 										</label>
 									</div>
 									<div class="form-group">
@@ -153,7 +153,7 @@ function checkValue() {
 										</div>
 									</div>
 									<div>
-										<input type="text" class="form-control" placeholder="상세주소를 입력하세요" name="user_addr2" id="user_addr2" value="${dto.member_addr}">
+										<input type="text" class="form-control" placeholder="상세주소를 입력하세요" name="member_addr" id="user_addr2" value="${dto.member_addr}">
 									</div>
 									<div class="form-group">
 										<label>회사명</label>
@@ -182,7 +182,7 @@ function checkValue() {
 									<i class="fa fa-check"></i>저장하기
 								</button>
 								<button type="button" class="btn btn-sm btn-link" href="">
-								<i class="fa fa-check"></i>탈퇴신청
+									<i class="fa fa-check"></i>탈퇴신청
 								</button>
 							</div>
 						</form>
