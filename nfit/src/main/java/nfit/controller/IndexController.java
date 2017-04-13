@@ -18,9 +18,17 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/broadcast.do")
-	public ModelAndView broadcast(HttpServletRequest request, HttpSession sess){
+	public ModelAndView broadcast(){
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("broadcast");
 		return mav;
 	}
+	
+	@RequestMapping("/about.do")
+	public ModelAndView about(){
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("notice/about");
+		return mav;
+	}
+	
 }
