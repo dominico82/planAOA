@@ -42,6 +42,42 @@ function email_change() {
 		document.join.email2.value = document.join.email.options[document.join.email.selectedIndex].value;
 	}
 }
+function checkNumber() {
+	var objEv = event.srcElement;
+	var num = "{}[]()<>?_|~`!@#$%^&*-+\"'\\/ "; //입력을 막을 특수문자 기재.
+	event.returnValue = true;
+
+	for (var i = 0; i < objEv.value.length; i++) {
+		if (-1 != num.indexOf(objEv.value.charAt(i)))
+			event.returnValue = false;
+	}
+
+	if (!event.returnValue) {
+		alert("특수문자는 입력하실 수 없습니다.");
+		objEv.value = "";
+	}
+}
+function checkNumber1() {
+	var objEv = event.srcElement;
+	var num = "{}[]()<>?_|~`!@#$%^&*-+\"'\\/"; //입력을 막을 특수문자 기재
+	var check=/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+	event.returnValue = true;
+
+	for (var i = 0; i < objEv.value.length; i++) {
+		if (-1 != num.indexOf(objEv.value.charAt(i)))
+			event.returnValue = false;
+	}
+	if(check.test(objEv.value)){
+		alert('특수문자&한글은 입력하실 수 없습니다.');
+		objEv.value = "";
+		return false;
+	}
+
+	if (!event.returnValue) {
+		alert("특수문자&한글은 입력하실 수 없습니다.");
+		objEv.value = "";
+	}
+}
 </script>
 </head>
 <body>
@@ -56,17 +92,16 @@ function email_change() {
 					<li><label>이름</label><input type="text" name="member_name"
 						required="required" onkeydown="checkNumber();"></li>
 					<li><label>이메일</label> <input id="customerEmailLocal"
-						name="email1" type="text"> @ <input title="이메일 도메인 입력"
-						name="email2" type="text"> <select title="이메일 도메인 선택"
+						name="email1" type="text" onkeydown="checkNumber1();"> @ <input title="이메일 도메인 입력"
+						name="email2" type="text" onkeyup="checkNumber1();"> <select title="이메일 도메인 선택"
 						name="emailprovidor"
 						onchange="this.form.email2.value=this[this.selectedIndex].value;">
-							<option value="" selected="selected">선택</option>
+							<option value="" selected="selected">직접입력</option>
 							<option value="naver.com">네이버</option>
 							<option value="nate.com">네이트</option>
 							<option value="hanmail.net">다음</option>
 							<option value="hotmail.com">핫메일</option>
 							<option value="yahoo.co.kr">야후</option>
-							<option value="">직접입력</option>
 					</select></li>
 				</ol>
 			</fieldset>
@@ -80,22 +115,21 @@ function email_change() {
 				비밀번호 찾기
 				<ol>
 					<li><label for="userid">아이디</label> <input id="input"
-						name="member_id" type="text" required="required" autofocus
-						maxlength="12" placeholder="아이디를 입력하세요"></li>
+						name="member_id" type="text" required="required"
+						maxlength="12" placeholder="아이디를 입력하세요" onkeyup="checkNumber1();"></li>
 					<li><label>이름</label><input type="text" name="member_name"
 						required="required" onkeydown="checkNumber();"></li>
 					<li><label>이메일</label> <input id="customerEmailLocal"
-						name="email1" type="text"> @ <input title="이메일 도메인 입력"
-						name="email2" type="text"> <select title="이메일 도메인 선택"
+						name="email1" type="text" onkeyup="checkNumber1();"> @ <input title="이메일 도메인 입력"
+						name="email2" type="text" onkeyup="checkNumber1();"> <select title="이메일 도메인 선택"
 						name="emailprovidor"
 						onchange="this.form.email2.value=this[this.selectedIndex].value;">
-							<option value="" selected="selected">선택</option>
+							<option value="" selected="selected">직접입력</option>
 							<option value="naver.com">네이버</option>
 							<option value="nate.com">네이트</option>
 							<option value="hanmail.net">다음</option>
 							<option value="hotmail.com">핫메일</option>
 							<option value="yahoo.co.kr">야후</option>
-							<option value="">직접입력</option>
 					</select></li>
 				</ol>
 			</fieldset>

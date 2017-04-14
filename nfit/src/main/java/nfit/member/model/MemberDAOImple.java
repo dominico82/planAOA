@@ -94,12 +94,14 @@ public class MemberDAOImple implements MemberDAO {
 		}
 		
 	}
-	/*public String membmerPwdFind(String member_id,String member_name,String member_email){
+	public String membmerPwdFind(String member_id,String member_name,String member_email){
 		MemberDTO dto=sqlMap.selectOne("memberPw1",member_id);
 		if(dto!=null){
 			if(member_name.equals(dto.getMember_name())){
 				if(member_email.equals(dto.getMember_email())){
-					
+					String id=sqlMap.selectOne("memberPw2",member_id);
+					String result="찾으시는 ID의 비밀번호는 "+id+"입니다. 비밀번호를 변경해주세요";
+					return result;
 				}else{
 					String result="이메일이 일치하지 않습니다.";
 					return result;
@@ -109,11 +111,11 @@ public class MemberDAOImple implements MemberDAO {
 				return result;
 			}
 		}else{
-			String result="없는 ID입니다.";
+			String result="존재하지 않는 ID입니다.";
 			return result;
 		}
 		
-	}*/
+	}
 
 	/*
 	 * public int loginCheck(String member_id,String member_pwd){ MemberDTO dto

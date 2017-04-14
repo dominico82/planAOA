@@ -118,21 +118,7 @@
 			objEv.value = "";
 		}
 	}
-	function checkNumber3() {
-		var objEv = event.srcElement;
-		var num = "{}[]()<>?_|~`!@#$%^&*-+\"'\\/ "; //입력을 막을 특수문자 기재.
-		event.returnValue = true;
 
-		for (var i = 0; i < objEv.value.length; i++) {
-			if (-1 != num.indexOf(objEv.value.charAt(i)))
-				event.returnValue = false;
-		}
-
-		if (!event.returnValue) {
-			alert("특수문자는 입력하실 수 없습니다.");
-			objEv.value = "";
-		}
-	}
 	function onlyNumber(event) {
 		event = event || window.event;
 		var keyID = (event.which) ? event.which : event.keyCode;
@@ -267,8 +253,8 @@
 					style='ime-mode: disabled;' /></li>
 
 				<li><label>이메일</label> <input id="customerEmailLocal"
-						name="email1" type="text"> @ <input title="이메일 도메인 입력"
-						name="email2" type="text"> <select title="이메일 도메인 선택"
+						name="email1" type="text" onkeyup="checkNumber1();"> @ <input title="이메일 도메인 입력"
+						name="email2" type="text" onkeyup="checkNumber1();"> <select title="이메일 도메인 선택"
 						name="emailprovidor"
 						onchange="this.form.email2.value=this[this.selectedIndex].value;">
 							<option value="" selected="selected">직접입력</option>

@@ -58,9 +58,9 @@ public class MemberController {
 			@RequestParam(value="member_tall",required=false)int tall,
 			@RequestParam(value="member_weight",required=false)int weight
 			){
-		dto.setMember_email(email1+"@"+email2);
-		dto.setMember_tall(tall);
-		dto.setMember_weight(weight);
+		String email=email1+"@"+email2;
+		System.out.println(email);
+		dto.setMember_email(email);
 		int result=memberDao.memberJoin(dto);
 		String msg=result>0?"회원가입완료":"회원가입 실패";
 		ModelAndView mav=new ModelAndView();
@@ -154,7 +154,10 @@ public class MemberController {
 		String member_email=email1+"@"+email2;
 		String member_name=name;
 		ModelAndView mav=new ModelAndView();
-		String result=memberDao.memberIdFind(member_name,member_email);
-		return null;
+		String result=memberDao.membmerPwdFind(member_id,member_name,member_email);
+		String msg=result;
+		mav.addObject("msg",msg);
+		mav.setViewName("/member/memberFindMsg");
+		return mav;
 	}
 }
