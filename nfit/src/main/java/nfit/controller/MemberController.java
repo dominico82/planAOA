@@ -58,9 +58,7 @@ public class MemberController {
 	@RequestMapping(value="/memberJoin.do",method=RequestMethod.POST)
 	public ModelAndView bbsWrite(MemberDTO dto,
 			@RequestParam(value="email1",required=false)String email1,
-			@RequestParam(value="email2",required=false)String email2,
-			@RequestParam(value="member_tall",required=false)int tall,
-			@RequestParam(value="member_weight",required=false)int weight
+			@RequestParam(value="email2",required=false)String email2
 			){
 		String email=email1+"@"+email2;
 		System.out.println(email);
