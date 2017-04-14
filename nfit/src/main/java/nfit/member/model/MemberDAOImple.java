@@ -73,24 +73,47 @@ public class MemberDAOImple implements MemberDAO {
 	}
 
 	public String memberIdFind(String member_name,String member_email) {
-		String dto = sqlMap.selectOne("membeIdFind", member_name);
-		
-		if (dto != null) {
-			String find = sqlMap.selectOne("memberIdfind2", member_email);
-			if(find!=null){
-				String result="찾으시는 아이디는 "+find+"입니다.";
-				return result;
+		MemberDTO dto = sqlMap.selectOne("membeIdFind", member_name);
+		if(dto!=null){
+			if(member_email.equals(dto.getMember_email())){
+				String find = sqlMap.selectOne("memberIdfind2", member_email);
+				if(find!=null){
+					String result="찾으시는 아이디는 "+find+"입니다.";
+					return result;
+				}else{
+					String result="잘못된 이메일 입니다.";
+					return result;
+				}
 			}else{
-				String result="잘못된 이메일 입니다.";
+				String result="이름과 이메일이 일치하지 않습니다.";
 				return result;
 			}
-		} else {
+		}else{
 			String result = "잘못 된 이름입니다.";
 			return result;
 		}
 		
-
 	}
+	/*public String membmerPwdFind(String member_id,String member_name,String member_email){
+		MemberDTO dto=sqlMap.selectOne("memberPw1",member_id);
+		if(dto!=null){
+			if(member_name.equals(dto.getMember_name())){
+				if(member_email.equals(dto.getMember_email())){
+					
+				}else{
+					String result="이메일이 일치하지 않습니다.";
+					return result;
+				}
+			}else{
+				String result="이름이 일치하지 않습니다.";
+				return result;
+			}
+		}else{
+			String result="없는 ID입니다.";
+			return result;
+		}
+		
+	}*/
 
 	/*
 	 * public int loginCheck(String member_id,String member_pwd){ MemberDTO dto

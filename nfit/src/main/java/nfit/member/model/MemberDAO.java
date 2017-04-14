@@ -11,4 +11,5 @@ public interface MemberDAO {
 	public String idCheck(String member_id);
 	public int memberModify(MemberDTO dto);
 	public String memberIdFind(String member_name,String member_email);
+	//public String membmerPwdFind(String member_id,String member_name,String member_email);
 }

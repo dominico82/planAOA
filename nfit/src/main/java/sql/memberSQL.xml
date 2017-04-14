@@ -47,12 +47,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  		where member_name=#{member_name}
 	</insert>
 	
-	<select id="membeIdFind" parameterType="String" resultType="String">
-		select member_email from member_table where member_name=#{member_name}
+	<select id="membeIdFind" parameterType="String" resultType="nfit.member.model.MemberDTO">
+		select * from member_table where member_name=#{member_name}
 	</select>
 	
 	<select id="memberIdfind2" parameterType="String" resultType="String">
 		select member_id from member_table where member_email=#{member_email}
+	</select>
+	
+	<select id="memberPw1" parameterType="String" resultType="nfit.member.model.MemberDTO">
+		select * from member_table where member_id=#{member_id}
+	</select>
+	<select id="memberPw2" parameterType="String" resultType="String">
+		select member_pwd from member_table where member_id=#{member_id}
 	</select>
 </mapper>
 

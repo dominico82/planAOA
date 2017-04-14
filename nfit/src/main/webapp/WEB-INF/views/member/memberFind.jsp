@@ -75,7 +75,7 @@ function email_change() {
 		</form>
 	</div>
 	<div>
-		<form id="formmain" action="memberJoin.do" method="post" name="join">
+		<form id="formmain" action="memberPwdFind.do" method="post" name="join">
 			<fieldset>
 				비밀번호 찾기
 				<ol>

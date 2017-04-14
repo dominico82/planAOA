@@ -266,19 +266,18 @@
 					onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'
 					style='ime-mode: disabled;' /></li>
 
-				<li><label>이메일</label> <input type="text" name="email1"
-					value=" " onfocus="this.value='';" placeholder="이메일"> @ <input
-					type="text" name="email2" value="" disabled> <select
-					name="email" onchange="email_change()">
-						<option value=" ">선택하세요</option>
-						<option value="9">직접입력</option>
-						<option value="naver.com">naver.com</option>
-						<option value="nate.com">nate.com</option>
-						<option value="daum.net">daum.net</option>
-						<option value="gmail.com">gmail.com</option>
-						<option value="outlook.com">outlook.com</option>
-
-				</select></li>
+				<li><label>이메일</label> <input id="customerEmailLocal"
+						name="email1" type="text"> @ <input title="이메일 도메인 입력"
+						name="email2" type="text"> <select title="이메일 도메인 선택"
+						name="emailprovidor"
+						onchange="this.form.email2.value=this[this.selectedIndex].value;">
+							<option value="" selected="selected">직접입력</option>
+							<option value="naver.com">네이버</option>
+							<option value="nate.com">네이트</option>
+							<option value="hanmail.net">다음</option>
+							<option value="hotmail.com">핫메일</option>
+							<option value="yahoo.co.kr">야후</option>
+					</select></li>
 
 				<li><label>신장</label> <input type="text" name="member_tall"
 					maxlength="3" placeholder="숫자만 입력하세요" id="onlyNumber" value="0"

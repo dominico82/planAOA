@@ -61,7 +61,6 @@ public class MemberController {
 			@RequestParam(value="member_tall",required=false)int tall,
 			@RequestParam(value="member_weight",required=false)int weight
 			){
-		dto.setMember_tel(tel1+"-"+tel2+"-"+tel3);
 		dto.setMember_email(email1+"@"+email);
 		int result=memberDao.memberJoin(dto);
 		String msg=result>0?"회원가입완료":"회원가입 실패";
@@ -138,13 +137,25 @@ public class MemberController {
 			@RequestParam(value="email2",required=false)String email2){
 		String member_email=email1+"@"+email2;
 		String member_name=name;
-		System.out.println(member_name);
-		System.out.println(member_email);
 		ModelAndView mav=new ModelAndView();
 		String result=memberDao.memberIdFind(member_name,member_email);
 		String msg=result;
 		mav.addObject("msg", msg);
 		mav.setViewName("/member/memberFindMsg");
 		return mav;
+	}
+	
+	@RequestMapping("memberPwdFind.do")
+	public ModelAndView memberPwdFind(MemberDTO dto,
+			@RequestParam(value="member_id",required=false)String id,
+			@RequestParam(value="member_name",required=false)String name,
+			@RequestParam(value="email1",required=false)String email1,
+			@RequestParam(value="email2",required=false)String email2){
+		String member_id=id;
+		String member_email=email1+"@"+email2;
+		String member_name=name;
+		ModelAndView mav=new ModelAndView();
+		String result=memberDao.memberIdFind(member_name,member_email);
+		return null;
 	}
 }
