@@ -15,7 +15,7 @@
 	<select id="getNoticeContents" resultType="nfit.notice.model.NoticeDTO">
 		select * from notice_bbs where notice_idx = #{notice_idx}
 	</select>
-	<insert id="setNoticeContens" parameterType="nfit.notice.model.NoticeDTO">
+	<insert id="setNoticeContents" parameterType="nfit.notice.model.NoticeDTO">
 		insert into 
 			notice_bbs
 		values(

@@ -29,6 +29,11 @@ public class NoticeDAOImple implements NoticeDAO {
 		return dto;
 	}
 	
+	public int setNoticeContents(NoticeDTO dto) {
+		int count=sqlMap.insert("setNoticeContents", dto);
+		return count;
+	}
+	
 	public int getTotalCnt() {
 		int count=sqlMap.selectOne("totalCnt");
 		return count;
