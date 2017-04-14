@@ -53,15 +53,14 @@ public class MemberController {
 	
 	@RequestMapping(value="/memberJoin.do",method=RequestMethod.POST)
 	public ModelAndView bbsWrite(MemberDTO dto,
-			@RequestParam(value="tel1",required=false)String tel1,
-			@RequestParam(value="tel2",required=false)String tel2,
-			@RequestParam(value="tel3",required=false)String tel3,
 			@RequestParam(value="email1",required=false)String email1,
-			@RequestParam(value="email",required=false)String email,
+			@RequestParam(value="email2",required=false)String email2,
 			@RequestParam(value="member_tall",required=false)int tall,
 			@RequestParam(value="member_weight",required=false)int weight
 			){
-		dto.setMember_email(email1+"@"+email);
+		dto.setMember_email(email1+"@"+email2);
+		dto.setMember_tall(tall);
+		dto.setMember_weight(weight);
 		int result=memberDao.memberJoin(dto);
 		String msg=result>0?"회원가입완료":"회원가입 실패";
 		ModelAndView mav=new ModelAndView();
