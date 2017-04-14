@@ -16,12 +16,12 @@
 	src="resources/js/modernizr.custom.28468.js"></script>
 <!---//strat-slider---->
 <!---start-login-script--->
-<script src="resources/js/login.js"></script>
 <!---//End-login-script--->
 <!-----768px-menu----->
 <link type="text/css" rel="stylesheet"
 	href="resources/css/jquery.mmenu.all.css" />
-<link type="text/css" rel="Stylesheet" href="resources/css/Join.css" />
+<link rel="stylesheet" type="text/css"
+	href="resources/css/modifyForm.css" />
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
@@ -38,7 +38,7 @@
 					changeMonth : true,
 					changeYear : true,
 					showMonthAfterYear : true,
-					yearRange : 'c-99:c+0'
+					yearRange : 'c-40:c+30'
 				});
 	});
 </script>
@@ -100,14 +100,14 @@
 	function checkNumber1() {
 		var objEv = event.srcElement;
 		var num = "{}[]()<>?_|~`!@#$%^&*-+\"'\\/"; //입력을 막을 특수문자 기재
-		var check=/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+		var check = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
 		event.returnValue = true;
 
 		for (var i = 0; i < objEv.value.length; i++) {
 			if (-1 != num.indexOf(objEv.value.charAt(i)))
 				event.returnValue = false;
 		}
-		if(check.test(objEv.value)){
+		if (check.test(objEv.value)) {
 			alert('특수문자&한글은 입력하실 수 없습니다.');
 			objEv.value = "";
 			return false;
@@ -204,84 +204,132 @@
 	<header>
 		<%@include file="../header.jsp"%>
 	</header>
-	<div style="margin-top: 200px; margin-bottom: 200px;">
-	<form id="formmain" action="memberJoin.do" method="post" name="join"
-		onsubmit='return checkValue();'>
-		<fieldset>
-			<legend>필수 입력정보</legend>
-			<ol>
-				<li><label for="userid">아이디</label> <input id="input"
-					name="member_id" type="text" required="required" autofocus
-					maxlength="12" onkeydown="idCheck();" onkeyup="checkNumber1();" placeholder="아이디를 입력해주세요">
-					<div id="idCheck">
-						<div id="idCheckResult"></div>
-					</div><!-- auto focus: 처음 위치 지정 --></li>
-				<li><label for="pwd1">비밀번호</label> <input id="input"
-					name="member_pwd" type="password" maxlength="12"></li>
-				<li><label for="pwd2">비밀번호확인</label> <input id="input"
-					name="member_pwd2" type="password" maxlength="12"></li>
-				<li><label>이름</label><input type="text" name="member_name"
-					id="input" required="required" onkeydown="checkNumber();"></li>
-				<li><label>성별</label> <input type="radio" name="member_sex"
-					id="member_sex-0" value="남자">남자 <input type="radio"
-					name="member_sex" id="member_sex-1" value="여자">여자</li>
-				<li><label>주소</label><input type="text" id="sample3_postcode"
-					placeholder="우편번호" required="required" disabled="disabled">
-					<input type="button" onclick="sample3_execDaumPostcode()"
-					value="우편번호 찾기"><br>
+	<div class="wrap">
+		<div class="container" style="margin: 0px auto;">
+			<div class="mypageWrap">
+				<div class="row">
+					<div class="col-lg-10 col-md-9 col-sm-8" id="inner_top">
+						<div class="editMyInfo" style="margin-top: 100px;">
+							<h3>회원가입</h3>
+							<form class="memberForm" action="memberJoin.do" method="post"
+								name="join" onsubmit='return checkValue();'>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="userid">*아이디</label> <input id="input"
+												name="member_id" type="text" required="required" autofocus
+												maxlength="12" onkeydown="idCheck();"
+												onkeyup="checkNumber1();" placeholder="아이디를 입력해주세요"
+												class="form-control">
+											<div id="idCheck">
+												<div id="idCheckResult"></div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="password">*비밀번호</label> <input id="input"
+												name="member_pwd" type="password" maxlength="12"
+												class="form-control">
+										</div>
+										<div class="form-group">
+											<label for="password2">*비밀번호확인</label> <input id="input"
+												name="member_pwd2" type="password" maxlength="12"
+												class="form-control">
+										</div>
+										<div class="form-group">
+											<label for="name">*이름</label><input type="text"
+												name="member_name" id="input" required="required"
+												onkeydown="checkNumber();" class="form-control">
+										</div>
+										<div class="form-group">
+											<label>*성별</label> &nbsp;&nbsp;&nbsp; <label
+												class="radio-inline male"> <input type="radio"
+												name="member_sex" id="member_sex" value="남자" checked><i
+												class="fa fa-mars"></i>남자
+											</label> <label class="radio-inline female"> <input
+												type="radio" name="member_sex" value=여자 checked><i
+												class="fa fa-venus"></i>여자
+											</label>
+										</div>
+										<div class="form-group">
+											<label>*주소</label>
+											<div class="input-group postNumber">
+												<input type="text" id="sample3_postcode" placeholder="우편번호"
+													required="required" disabled="disabled"> <input
+													type="button" onclick="sample3_execDaumPostcode()"
+													value="우편번호 찾기" ><br>
+											</div>
+											<div id="wrap"
+												style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
+												<img
+													src="//t1.daumcdn.net/localimg/localimages/07/postcode/320/close.png"
+													id="btnFoldWrap"
+													style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
+													onclick="foldDaumPostcode()" alt="접기 버튼">
+											</div>
+											<input type="text" id="sample3_address" class="form-control"
+												placeholder="우편번호 찾기 후 세부주소작성" name="member_addr"
+												required="required">
+										</div>
+										<div class="form-group">
+										<label>전화번호</label><input type="text" name="member_tel"
+									id="tel2" maxlength="11" onkeydown='return onlyNumber(event)'
+									onkeyup='removeChar(event)' style='ime-mode: disabled;'
+									placeholder="-없이 숫자만 입력가능합니다." class="form-control"/>
+										</div>
+										<div class="form-group">
+										<label>생년월일</label> <input
+									type="text" name="member_birth" id="datepicker"
+									placeholder="클릭하세요" onkeydown='return onlyNumber(event)'
+									onkeyup='removeChar(event)' style='ime-mode: disabled;' class="form-control" />
+										</div>
+										<div class="form-group">
+										<label>이메일</label><br>
+								<input id="customerEmailLocal" name="email1" type="text"
+									onkeyup="checkNumber1();"> @ <input title="이메일 도메인 입력"
+									name="email2" type="text" onkeyup="checkNumber1();"> <select
+									title="이메일 도메인 선택" name="emailprovidor"
+									onchange="this.form.email2.value=this[this.selectedIndex].value;">
+									<option value="" selected="selected">직접입력</option>
+									<option value="naver.com">네이버</option>
+									<option value="nate.com">네이트</option>
+									<option value="hanmail.net">다음</option>
+									<option value="hotmail.com">핫메일</option>
+									<option value="yahoo.co.kr">야후</option>
+								</select>
+										</div>
+										<div class="form-group">
+										<label>신장</label> <input type="text" name="member_tall"
+									maxlength="3" placeholder="숫자만 입력하세요" id="onlyNumber" value="0cm"
+									onkeydown='return onlyNumber(event)'
+									onkeyup='removeChar(event)' style='ime-mode: disabled;' class="form-control"/>
+										</div>
+										<div class="form-group">
+										<label>체중</label>
+								<input type="text" name="member_weight" value="0kg"
+									onkeydown='return onlyNumber(event)'
+									onkeyup='removeChar(event)' style='ime-mode: disabled;'
+									maxlength="3" placeholder="숫자만 입력하세요" class="form-control"/>
+										</div>
+										<div class="form-group submitLine forMbileAppFloat">
+										<input
+									type="submit" value="가입" name='submit' class="btn btn-lg btn-primary btn_mobileAppFloat"><input
+									type="reset" id="button" value="다시작성" class="btn btn-lg btn-primary btn_mobileAppFloat"> <input
+									type="button" id="button" onclick="location.href='index.do'"
+									value="메인화면" class="btn btn-lg btn-primary btn_mobileAppFloat">
+										</div>
+									</div>
+								</div>
 
-					<div id="wrap"
-						style="display: none; border: 1px solid; width: 500px; height: 300px; margin: 5px 0; position: relative">
-						<img
-							src="//t1.daumcdn.net/localimg/localimages/07/postcode/320/close.png"
-							id="btnFoldWrap"
-							style="cursor: pointer; position: absolute; right: 0px; top: -1px; z-index: 1"
-							onclick="foldDaumPostcode()" alt="접기 버튼">
-					</div> <input type="text" id="sample3_address" class="d_form large"
-					placeholder="우편번호 찾기 후 세부주소작성" name="member_addr" required="required" onkeydown="checkNumber();"></li>
-			</ol>
-			<legend>추가 입력정보</legend>
-			<ol>
-				<li><label>전화번호</label><input type="text" name="member_tel"
-					id="tel2" maxlength="11" onkeydown='return onlyNumber(event)'
-					onkeyup='removeChar(event)' style='ime-mode: disabled;'
-					placeholder="-없이 숫자만 입력가능합니다." /></li>
+								    
+							</form>
 
-				<li><label>생년월일</label> <input type="text" name="member_birth"
-					id="datepicker" placeholder="클릭하세요"
-					onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'
-					style='ime-mode: disabled;' /></li>
-
-				<li><label>이메일</label> <input id="customerEmailLocal"
-						name="email1" type="text" onkeyup="checkNumber1();"> @ <input title="이메일 도메인 입력"
-						name="email2" type="text" onkeyup="checkNumber1();"> <select title="이메일 도메인 선택"
-						name="emailprovidor"
-						onchange="this.form.email2.value=this[this.selectedIndex].value;">
-							<option value="" selected="selected">직접입력</option>
-							<option value="naver.com">네이버</option>
-							<option value="nate.com">네이트</option>
-							<option value="hanmail.net">다음</option>
-							<option value="hotmail.com">핫메일</option>
-							<option value="yahoo.co.kr">야후</option>
-					</select></li>
-
-				<li><label>신장</label> <input type="text" name="member_tall"
-					maxlength="3" placeholder="숫자만 입력하세요" id="onlyNumber" value="0"
-					onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'
-					style='ime-mode: disabled;' />kg</li>
-
-				<li><label>체중</label> <input type="text" name="member_weight"
-					value="0" onkeydown='return onlyNumber(event)'
-					onkeyup='removeChar(event)' style='ime-mode: disabled;'
-					maxlength="3" placeholder="숫자만 입력하세요" />cm</li>
-
-			</ol>
-		</fieldset>
-		<input type="submit" value="가입" name='submit'><input
-			type="reset" id="button" value="다시작성"> <input type="button"
-			id="button" onclick="location.href='index.do'" value="메인화면">
-	</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+
 
 	<footer>
 		<%@include file="../footer.jsp"%>
