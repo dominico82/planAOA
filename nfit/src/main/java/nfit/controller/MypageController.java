@@ -44,6 +44,7 @@ public class MypageController {
 		String userid = (String)session.getAttribute("saveid");
 		
 		MemberDTO dto = memberDao.getMemberInfo(userid);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("dto",dto);
 		mav.setViewName("mypage/modifyForm");
@@ -52,8 +53,11 @@ public class MypageController {
 	
 	//회원정보 수정
 	@RequestMapping(value="modifyGo.do",method=RequestMethod.POST)
-	public ModelAndView infoModify(MemberDTO dto){
+	public ModelAndView infoModify(MemberDTO dto,
+			@RequestParam(value="email1",required=false)String email1,
+			@RequestParam(value="email2",required=false)String email2){
 		
+		dto.setMember_email(email1+"@"+email2);
 		int result = memberDao.memberModify(dto);
 		
 		String msg = result>0?"정보수정 완료":"정보수정 실패";

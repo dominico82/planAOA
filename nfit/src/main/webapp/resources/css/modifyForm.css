@@ -55,8 +55,6 @@ form {
 .col-md-6 {
 	position: relative;
     min-height: 1px;
-    width: 550px;
-    float: left;
 }
 .form-group {
     margin-bottom: 15px;
@@ -306,7 +304,6 @@ input[type=checkbox] {
     padding: 10px 16px;
     font-size: 18px;
     line-height: 1.3333333;
-    margin-top: 100px;
 }
 .withraw {
 	margin-top: 100px;

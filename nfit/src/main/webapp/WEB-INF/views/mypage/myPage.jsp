@@ -36,7 +36,7 @@ function info(){
 							<span class="userCircleImg"></span>
 						</span>
 						<h6>
-							${dto.member_name}}<small>님</small>
+							${dto.member_name}<small>님</small>
 							<br>
 							${dto.member_id}(${dto.member_email})
 						</h6>
