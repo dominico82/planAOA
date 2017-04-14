@@ -386,7 +386,7 @@
 .btn-white-outline {
   background: none;
   border-color: #fff;
-  color: #fff; }
+  color: #f7afaf; }
   .btn-white-outline:focus, .btn-white-outline.focus, .btn-white-outline:active, .btn-white-outline.active {
     color: #535353;
     background-color: #fff;

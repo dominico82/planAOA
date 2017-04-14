@@ -20,14 +20,14 @@ public class IndexController {
 	@RequestMapping("/broadcast.do")
 	public ModelAndView broadcast(){
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("broadcast");
+		mav.setViewName("info/broadcast");
 		return mav;
 	}
 	
 	@RequestMapping("/about.do")
 	public ModelAndView about(){
 		ModelAndView mav=new ModelAndView();
-		mav.setViewName("notice/about");
+		mav.setViewName("info/about");
 		return mav;
 	}
 	
