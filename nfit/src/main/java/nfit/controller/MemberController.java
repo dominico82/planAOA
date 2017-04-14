@@ -34,6 +34,10 @@ public class MemberController {
 
 	@Autowired
 	private MemberDAO memberDao;
+	@RequestMapping("/rule.do")
+	public String rule(){
+		return "member/rule";
+	}
 	
 	@RequestMapping(value="/memberJoin.do",method=RequestMethod.GET)
 	public String bbsWriteForm(){

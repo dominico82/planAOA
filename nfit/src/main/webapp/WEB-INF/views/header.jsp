@@ -63,7 +63,7 @@
                     
                     <c:choose>
 					<c:when test="${empty sessionScope.saveid }">
-                    <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="memberJoin.do">회원가입</a></li>
+                    <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="rule.do">회원가입</a></li>
                     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="memberLogin.do">로그인</a></li>
                     </c:when>
 					<c:when test="${sessionScope.saveid=='admin'}">

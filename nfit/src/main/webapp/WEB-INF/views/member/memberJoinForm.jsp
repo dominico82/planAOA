@@ -61,7 +61,7 @@
 <script type="text/javascript">
 	function checkValue() {
 
-		if (document.join.member_pwd.length < 6) {
+		if (document.join.member_pwd.size < 6) {
 			alert("6글자 이상 입력해주세요.");
 			return false;
 		}
@@ -228,7 +228,7 @@
 										<div class="form-group">
 											<label for="password">*비밀번호</label> <input id="input"
 												name="member_pwd" type="password" maxlength="12"
-												class="form-control">
+												class="form-control" >
 										</div>
 										<div class="form-group">
 											<label for="password2">*비밀번호확인</label> <input id="input"
@@ -299,13 +299,13 @@
 										</div>
 										<div class="form-group">
 										<label>신장</label> <input type="text" name="member_tall"
-									maxlength="3" placeholder="숫자만 입력하세요" id="onlyNumber" value="0cm"
+									maxlength="3" placeholder="숫자만 입력하세요" id="onlyNumber" value="0"
 									onkeydown='return onlyNumber(event)'
 									onkeyup='removeChar(event)' style='ime-mode: disabled;' class="form-control"/>
 										</div>
 										<div class="form-group">
 										<label>체중</label>
-								<input type="text" name="member_weight" value="0kg"
+								<input type="text" name="member_weight" value="0"
 									onkeydown='return onlyNumber(event)'
 									onkeyup='removeChar(event)' style='ime-mode: disabled;'
 									maxlength="3" placeholder="숫자만 입력하세요" class="form-control"/>
