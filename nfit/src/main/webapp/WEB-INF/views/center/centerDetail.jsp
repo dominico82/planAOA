@@ -64,8 +64,8 @@ padding-right: 20px;
 				<tr><td>이용상품 없음</td></tr>
 				</c:if>
 				<% int cnt = 0; %>
-				<c:forEach var="con" items="${contentlist_set}">
 				<ul class="list-group">
+				<c:forEach var="con" items="${contentlist_set}">
 				<li class="list-group-item">
 				<ul class="list-inline" id="content_list">
 				<li><div class="coin_num" id="coin_num_<%=cnt%>">${con.content_coin}</div></li>
@@ -87,12 +87,11 @@ padding-right: 20px;
 				<c:if test="${!empty con.content6}">
 				<li><div class="coin_cont_back contbg_<%=cnt%> conigb_1"><span id="coin_cont_icon" class="glyphicon glyphicon-record"></span><span id="coin_cont">${con.content6}</span></div></li>
 				</c:if>
-				
 				</ul>
 				</li>
-				</ul>
 				<%cnt++; %>
 				</c:forEach>
+				</ul>
 				</div>
 				</div>
 				<hr>
@@ -122,7 +121,7 @@ padding-right: 20px;
 				</div>
 				<div id="co_avail">
 				<div class="panel panel-default">
-					<div class="panel-heading">이용가능<span id="coAv" style="visibility:hidden">${dtos.co_avail}</span></div>
+					<div class="panel-heading">이용가능<span id="coAv" style="display:none">${dtos.co_avail}</span></div>
 					<div class="panel-body" >
 					<ul class="list-inline" id="result">
 					</ul>
@@ -178,7 +177,7 @@ padding-right: 20px;
 				</table>
 				<div class="panel panel-default">
 				<div class="panel-heading">
-				부가서비스 <span id="co_extra" style="visibility:hidden">${dtos.co_extra}</span>
+				부가서비스 <span id="co_extra" style="display:none">${dtos.co_extra}</span>
 				</div>
 				<div class="panel-body" id="co_extra_content">
 				
@@ -186,13 +185,14 @@ padding-right: 20px;
 				</div>
 				<div class="panel panel-default">
 				<div class="panel-heading">
-				이용규정<span id="co_regul" style="visibility:hidden">${dtos.co_regul}</span>
+				이용규정<span id="co_regul" style="display:none">${dtos.co_regul}</span>
 				</div>
 				<div class="panel-body" id="co_regul_content">
 				</div>
 				</div>
 				<hr>
 				<script type="text/javascript">
+				/**/
 				/*이용규정 StringTokenizer*/
 				var coExtra = $("#co_extra").text();
 				var splitEx= coExtra.split("|");
@@ -201,7 +201,11 @@ padding-right: 20px;
 				var HTMLex ='';
 				for(var i=0; i<coExtraSize; i++){
 					coeStr[i]=splitEx[i];
+					if(coeStr[i]==''){
+					HTMLex += "<p><span class=''>&nbsp;</span>"+coeStr[i]+"</p>";
+					}else{
 					HTMLex += "<p><span class='glyphicon glyphicon-ok-circle'>&nbsp;</span>"+coeStr[i]+"</p>";
+					}
 				}
 				document.getElementById("co_extra_content").innerHTML = HTMLex;
 				
@@ -213,7 +217,12 @@ padding-right: 20px;
 				var HTMLre = '';
 				for(var i=0; i<coRegSize; i++){
 					corStr[i]=splitReg[i];
+					console.log("constr",corStr[i]);
+					if(corStr[i]==''){
+					HTMLre += "<p><span class=''>&nbsp;</span>"+corStr[i]+"</p>";
+					}else{
 					HTMLre += "<p><span class='glyphicon glyphicon-ok-circle'>&nbsp;</span>"+corStr[i]+"</p>";
+					}
 				}
 				document.getElementById("co_regul_content").innerHTML = HTMLre;
 				</script>
