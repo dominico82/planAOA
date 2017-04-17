@@ -35,6 +35,11 @@ function info(){
 						<span class="userCircleImgWrap">
 							<span class="userCircleImg"></span>
 						</span>
+						<form name="upload2" action="fileUpload.do" method="post" enctype="multipart/form-data"> <!-- 파일 업로드를 구현하는 폼 -->
+							작성자:<input type="text" name="writer"><br>
+							파일선택:<input type="file" name="upload"><br> <!-- input type="file" 업로드할 파일을 선택하는 속성 -->
+							<input type="submit" value="파일올리기">
+						</form>
 						<h6>
 							${dto.member_name}<small>님</small>
 							<br>

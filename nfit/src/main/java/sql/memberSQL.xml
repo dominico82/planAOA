@@ -34,7 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select member_id from member_table where member_id=#{member_id}
 	</select>
 	
-	<insert id="memberUpdate" parameterType="nfit.member.model.MemberDTO">
+	<update id="memberUpdate" parameterType="nfit.member.model.MemberDTO">
 		update member_table
   		set member_pwd=#{member_pwd},
 	  		member_addr=#{member_addr},
@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  		member_tall=#{member_tall},
 	  		member_weight=#{member_weight}
 	  		where member_name=#{member_name}
-	</insert>
+	</update>
 	
 	<select id="membeIdFind" parameterType="String" resultType="nfit.member.model.MemberDTO">
 		select * from member_table where member_name=#{member_name}

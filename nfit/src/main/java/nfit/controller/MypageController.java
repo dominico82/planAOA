@@ -1,17 +1,23 @@
 package nfit.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.DefaultEditorKit.CopyAction;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import nfit.member.model.MemberDAO;
@@ -65,6 +71,32 @@ public class MypageController {
 		mav.addObject("msg", msg);
 		mav.setViewName("mypage/modifyMsg");
 		return mav;
+	}
+	
+	//프로필사진 업로드
+	@RequestMapping("fileUpload.do")
+	public String fileUpload(MultipartHttpServletRequest req){
+		String writer = req.getParameter("writer");
+		MultipartFile upload = req.getFile("upload");
+		copyInto(writer,upload);
+		return "mypage/fileSuccess";
+	}
+	
+	//파일 복사 관련 사용자 정의 메서드
+	private void copyInto(String writer, MultipartFile upload){
+		
+		try {
+			byte bytes[] = upload.getBytes();
+			System.out.println("작성자:"+writer);
+			System.out.println("파일명:"+upload.getOriginalFilename());
+			File outFile = new File("c:/wonjun/upload/"+upload.getOriginalFilename());
+			FileOutputStream fos = new FileOutputStream(outFile);
+			fos.write(bytes);
+			fos.close();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
 
