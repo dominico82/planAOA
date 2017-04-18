@@ -14,8 +14,7 @@ public class ContentDTO {
 	private String content6;
 	public ContentDTO() {
 		super();
-		// TODO Auto-generated constructor stub
-	}
+		}
 	public ContentDTO(int content_idx, int co_idx, int content_coin, String content1, String content2, String content3,
 			String content4, String content5, String content6) {
 		super();

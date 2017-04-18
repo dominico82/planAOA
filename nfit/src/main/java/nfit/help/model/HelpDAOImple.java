@@ -12,7 +12,6 @@ private SqlSessionTemplate sqlMap;
 	}
 	
 	public String faqTop5() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }  
