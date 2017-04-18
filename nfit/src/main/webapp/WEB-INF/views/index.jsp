@@ -120,9 +120,13 @@
                             <div class="mbr-section-btn"><a class="btn btn-secondary" href="#">MORE</a></div>
 
                         </div>
+                        
+                        <!-- 동영상 트래픽으로 추후오픈예정 
                         <div class="mbr-table-cell mbr-valign-top mbr-left-padding-md-up col-md-7 image-size" style="width: 50%;">
                             <div class="mbr-figure"><iframe class="mbr-embedded-video" src="https://www.youtube.com/embed/ltXsiiDWxEU?rel=0&amp;amp;showinfo=0&amp;autoplay=1&amp;loop=1&amp;playlist=Tq7p44IA-1U" width="600" height="350" frameborder="0" allowfullscreen></iframe></div>
                         </div>
+                        -->
+                        
                     </div>
                 </div>
             </div>
