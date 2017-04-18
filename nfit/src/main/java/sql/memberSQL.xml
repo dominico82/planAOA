@@ -61,6 +61,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="memberPw2" parameterType="String" resultType="String">
 		select member_pwd from member_table where member_id=#{member_id}
 	</select>
+	
+	<insert id="setUpload" parameterType="String">
+		insert into
+			pic_table
+		values(
+			pic_table_idx.nextval,
+			0,
+			member_idx.currval,
+			#{pic_name}
+	</insert>
 </mapper>
 
 

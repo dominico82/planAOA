@@ -89,7 +89,8 @@ public class MypageController {
 			byte bytes[] = upload.getBytes();
 			System.out.println("작성자:"+writer);
 			System.out.println("파일명:"+upload.getOriginalFilename());
-			File outFile = new File("c:/wonjun/upload/"+upload.getOriginalFilename());
+			File outFile = new File("c:/Users/wonjun/git/planAOA/nfit/src/main/webapp/resources/upload_images/"+upload.getOriginalFilename());
+			//C:/Users/wonjun/git/planAOA/nfit/src/main/webapp/resources/upload_images/
 			FileOutputStream fos = new FileOutputStream(outFile);
 			fos.write(bytes);
 			fos.close();
