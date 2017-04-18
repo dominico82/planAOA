@@ -80,7 +80,8 @@ $(":file").filestyle({input: false});
 			</div>
 
 			<div class="form-group">
-			<input type="file" id="files" name="files[]" multiple class="filestyle" accept="image/*" data-input="false">
+			
+			<input type="file" id="files" name="files" multiple class="filestyle" accept="image/*" data-input="false">
 			<output id="list"></output>
 			</div>
 			

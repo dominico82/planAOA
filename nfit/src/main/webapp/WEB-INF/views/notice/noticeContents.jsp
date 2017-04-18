@@ -30,6 +30,13 @@
         <div class="noticeWrap">
           <article class="notice">
 			<div>
+				<c:if test="${!empty pics}">
+					<c:forEach var="picList" items="${pics}">
+						<img src="resources/file/upload/${picList}">
+					</c:forEach>
+				</c:if>
+			</div>
+			<div>			
 				${dto.notice_content}
 			</div>
           </article>

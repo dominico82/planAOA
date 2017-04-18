@@ -26,5 +26,19 @@
 			#{notice_event},
 			sysdate
 		)
+	</insert>	
+	<insert id="setNoticePics" parameterType="String">
+		insert into
+			pic_table
+		values(
+			pic_table_idx.nextval,
+			notice_bbs_idx.currval,
+			0,
+			#{pic_name}
+		)			
 	</insert>
+	<select id="getNoticePics" resultType="String">
+		select pic_name from pic_table 
+			where notice_idx=#{notice_idx}  
+	</select>
 </mapper>
