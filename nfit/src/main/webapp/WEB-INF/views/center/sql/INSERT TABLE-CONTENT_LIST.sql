@@ -34,10 +34,8 @@ INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 23, 4, '킥복싱', '', '',
 INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 24, 2, '골프', '사우나', '자유수영', '헬스', '', '' );
 INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 25, 3, '요가', '필라테스', '', '', '', '' );
 INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 25, 10, 'PT', '', '', '', '', '' );
-INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 26, 1, '사우나', '', '', '', '', '' );
-INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 27, 4.5, '기본케어', '', '', '', '', '' );
-INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 27, 11, '젤네일', '', '', '', '', '' );
-INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 27, 14, '속눈썹연장', '', '', '', '', '' );
+INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 26, 1, '헬스', 'G.X', '', '', '', '' );
+INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 27, 4, '요가', '', '', '', '', '' );
 INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 28, 1, '헬스', '골프', '사우나', '', '', '' );
 INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 29, 2, '체조명상호흡', '', '', '', '', '' );
 INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 30, 4, '기본케어', '', '', '', '', '' );
@@ -76,5 +74,3 @@ INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 49, 5, '크로스핏(18:20 
 INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 50, 7.5, '왁싱', '', '', '', '', '' );
 INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 50, 13.5, '속눈썹', '', '', '', '', '' );
 INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 50, 13.5, '젤네일', '', '', '', '', '' );
-
-commit;
