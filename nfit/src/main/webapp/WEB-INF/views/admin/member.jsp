@@ -43,6 +43,7 @@
 	href="resources/css/jquery.mmenu.all.css" />
 <link href="resources/css/font-awesome.min.css" rel="stylesheet">
 <link href="resources/css/simple-line-icons.css" rel="stylesheet">
+<link href="resources/css/table.css" rel="stylesheet">
 
 </head>
 
@@ -70,7 +71,7 @@
 <body
 	class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
 	<header>
-		<%@include file="../header.jsp"%>
+		<jsp:include page="../header.jsp"/>
 	</header>
 
 	<div class="app-body">
@@ -98,8 +99,8 @@
 		<!-- Main content -->
 		<main class="main">
 		<div class="container-fluid">
-			<div id="ui-view">회원 관리페이지</div>
-			<table>
+			<div id="ui-view">
+			<table class="blueone">
 				<thead>
 					<tr>
 						<th>회원번호</th>
@@ -137,6 +138,7 @@
 				</tbody>
 				
 			</table>
+			</div>
 			<nav>
 				<ul>
 				<li>${pageStr }</li>
