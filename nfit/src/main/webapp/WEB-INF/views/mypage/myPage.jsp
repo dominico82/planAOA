@@ -36,7 +36,8 @@ function info(){
 							<span class="userCircleImg"></span>
 						</span>
 						<form name="upload" action="fileUpload.do" method="post" enctype="multipart/form-data"> <!-- 파일 업로드를 구현하는 폼 -->
-							사진선택:<input type="file" name="files" id="files" accept="image/*"><!-- input type="file" 업로드할 파일을 선택하는 속성 -->
+							사진선택:<input type="file" name="files" id="files" accept="image/*" modelAttribute="uploadForm"><!-- input type="file" 업로드할 파일을 선택하는 속성 -->
+							<input type="hidden" value="${dto.member_id}" name="id">
 							<input type="submit" value="파일올리기">
 						</form>
 						<h6>

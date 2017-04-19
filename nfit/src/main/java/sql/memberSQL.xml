@@ -68,8 +68,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(
 			pic_table_idx.nextval,
 			0,
-			member_idx.currval,
+			#{member_id},
 			#{pic_name}
+		)
 	</insert>
 </mapper>
 

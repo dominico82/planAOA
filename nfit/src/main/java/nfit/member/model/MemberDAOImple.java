@@ -118,21 +118,21 @@ public class MemberDAOImple implements MemberDAO {
 			return result;
 		}
 		
+		
 	}
 	
-	public int setImage(MemberDTO member_idx, List<MultipartFile> files) throws IllegalStateException, IOException {
+	public int setImage(String id, MultipartFile files) throws IllegalStateException, IOException {
 		
-		String savePath = "C:/Users/wonjun/git/planAOA/nfit/src/main/webapp/resources/upload_images";
+		String savePath = "C:/Users/wonjun/git/planAOA/nfit/src/main/webapp/resources/upload_images/";
 		
-		int count = sqlMap.insert("setUpload", member_idx);
+		HashMap map = new HashMap();
+		map.put("member_id", id);
+		map.put("pic_name", files.getOriginalFilename());
+		int count = sqlMap.insert("setUpload", map);
 		
-		for(int i=0; i<files.size(); i++){
-//			System.out.println("사진 이름: "+files.get(i).getOriginalFilename());
-			String fileName=files.get(i).getOriginalFilename();//파일을 저장하기 위해 이름을 가져온다.
-			files.get(i).transferTo(new File(savePath+fileName));//파일을 업로드한다.
-			int fcount=sqlMap.insert("setNoticePics", fileName);//DB에 사진 이름을 저장한다.
-		}
-		 return count;
+		files.transferTo(new File(savePath+files.getOriginalFilename()));//파일을 업로드한다.
+		return count;
+		
 	}
 
 	/*
