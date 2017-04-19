@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import nfit.member.model.MemberDAO;
@@ -28,6 +29,10 @@ public class AdminController {
 		mav.setViewName("admin/member");
 		return mav;
 	}
+	/*@RequestMapping("/memberDeleteAdmin.do")
+	public String memberDeleteAdmin(@RequestParam String member_id){
+		
+	}*/
 	@RequestMapping("/cooperateAdmin.do")
 	public String cooperAdmin(){
 		return "admin/cooperate";

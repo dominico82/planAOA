@@ -109,9 +109,8 @@
 						<th>생일</th>
 						<th>이메일</th>
 						<th>연락처</th>
-						<th>키</th>
-						<th>체중</th>
 						<th>코인</th>
+						<th>삭제</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -130,9 +129,9 @@
 							<td>${admin.member_birth }</td>
 							<td>${admin.member_email }</td>
 							<td>${admin.member_tel }</td>
-							<td>${admin.member_tall }</td>
-							<td>${admin.member_weight }</td>
 							<td>${admin.member_coin }</td>
+							<td><input type="button" value="삭제" 
+							onclick="location.href='memberDeleteAdmin.do?${admin.member_id}'"></td>
 						</tr>
 					</c:forEach>
 				</tbody>
