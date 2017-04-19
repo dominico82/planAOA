@@ -97,7 +97,9 @@
         <!-- Main content -->
        <main class="main">
             <div class="container-fluid">
-                 <div id="ui-view">관리자 메인페이지</div>
+                 <div id="ui-view">
+                 메인화면
+                 </div>
             </div>
             <!-- /.conainer-fluid -->
         </main>

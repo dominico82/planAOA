@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import nfit.coin.model.CoinDTO;
 import nfit.member.model.MemberDAO;
 import nfit.member.model.MemberDTO;
 import nfit.member.model.MemberDAOImple;
@@ -35,10 +36,12 @@ public class MypageController {
 	public ModelAndView myPage(HttpSession session){
 		
 		String userid = (String)session.getAttribute("saveid");
-		
 		MemberDTO dto = memberDao.getMemberInfo(userid);
+		int useridx = dto.getMember_idx();
+		List<CoinDTO> dta = memberDao.getPayInfo(useridx);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("dto",dto);
+		mav.addObject("dta",dta);
 		mav.setViewName("mypage/myPage");
 		return mav;
 	}
@@ -100,18 +103,23 @@ public class MypageController {
 		}
 	}
 	
+	//프로필 사진 DB에 업로드
 	@RequestMapping(value="fileUpload.do", method=RequestMethod.POST)
-	public ModelAndView saveImage(@RequestParam("id") String id, @RequestParam("files") MultipartFile files) throws IllegalStateException, IOException {
+	public ModelAndView saveImage(@RequestParam("id") String id, @RequestParam("files") MultipartFile files, @RequestParam("idx") int idx) throws IllegalStateException, IOException {
 		
 		System.out.println("member_id"+id+"files"+files.getOriginalFilename());
 		int result = memberDao.setImage(id, files);
+		String pic = memberDao.getImage(idx);
+		
 		String msg = result>0?"사진 업로드 완료":"업로드 실패";
 		
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("pic", pic);
 		mav.addObject("msg", msg);
 		mav.setViewName("mypage/fileSuccess");
 		return mav;
 	}
+	
 }
 
 

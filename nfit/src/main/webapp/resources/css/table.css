@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+body { background: #fff; }
+.blueone {
+  border-collapse: collapse;
+  width: 100%;
+}  
+.blueone th {
+  padding: 10px;
+  color: #168;
+  border-bottom: 3px solid #168;
+  text-align: left;
+  font-size: 15px;
+}
+.blueone td {
+  color: #669;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 12px;
+}
+.blueone tr:hover td {
+  color: #004;
+}

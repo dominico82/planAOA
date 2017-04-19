@@ -61,7 +61,6 @@ public class MemberController {
 			@RequestParam(value="email2",required=false)String email2
 			){
 		String email=email1+"@"+email2;
-		System.out.println(email);
 		dto.setMember_email(email);
 		int result=memberDao.memberJoin(dto);
 		String msg=result>0?"회원가입완료":"회원가입 실패";

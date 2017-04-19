@@ -4,9 +4,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.web.multipart.MultipartFile;
+
+import nfit.coin.model.CoinDTO;
+
 
 public class MemberDAOImple implements MemberDAO {
 
@@ -135,13 +139,49 @@ public class MemberDAOImple implements MemberDAO {
 		
 	}
 
-	/*
-	 * public int loginCheck(String member_id,String member_pwd){ MemberDTO dto
-	 * = sqlMap.selectOne("memberLogin", member_id); try{ if(dto!=null){
-	 * if(member_pwd.equals(dto.getMember_pwd())) { return LOGIN_OK; }else{
-	 * return NOT_PWD; } }else{ return NOT_ID; } }catch(Exception e){
-	 * e.printStackTrace(); return ERROR; }
-	 * 
-	 * }
-	 */
+	public List<MemberDTO>memberList(int cp,int ls){
+		int startnum=(cp-1)*ls+1;
+		int endnum=cp*ls;
+		Map param=new HashMap();
+		param.put("startnum", startnum);
+		param.put("endnum", endnum);
+		List<MemberDTO> list=sqlMap.selectList("adminList",param);
+		return list;
+	}
+	public int getTotalCnt() {
+		int count=sqlMap.selectOne("membertotalCnt");
+		return count;
+	}
+	
+	public List<CoinDTO> getPayInfo(int member_idx){
+		List<CoinDTO> dto = sqlMap.selectList("payInfo", member_idx);
+		return dto;
+	}
+	
+	public String getImage(int member_idx){
+		String pic = sqlMap.selectOne("getPic", member_idx);
+		return pic;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
