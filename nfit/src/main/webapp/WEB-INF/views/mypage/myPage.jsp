@@ -18,7 +18,7 @@ function info(){
 	  if(bmi <= 18.5){
 		  p1.innerHTML = '너무 마르셨네요~ 저체중이세요~ 잘 먹고 운동합시다!';
 	  }else if(bmi >= 18.5 && bmi <= 24){
-		  p1.innerHTML = '정상이십니다~ 그럼 탄탄한 몸을 위해서 운동해볼까요!'; 
+		  p1.innerHTML = '정상이시네요~ 그럼 탄탄한 몸을 위해서 운동해볼까요!'; 
 	  }else if(bmi > 25){
 		  p1.innerHTML = '운동이 필요하시네요~ 건강한 몸을 위해서 운동해볼까요!';
 	  }
@@ -75,18 +75,52 @@ function info(){
 				<div class="col-lg-10 col-md-9 col-sm-8 mypagePanel" id="inner_top">
 					<section class="myMembership">
 						<div>
-							<a onclick="info();" class="membershipApply">"비만도 체크해보기"</a><br>
+							<a onclick="info();" class="membershipApply">"비만도 체크하기"</a><br>
 							<span id="bmi"></span>
 						</div>
-						<h3><i class="fa fa-clone"></i>"내 멤버십"</h3>
-						<div class="notYetMembership">
-							<h4>필요한 만큼 결제하세요!</h4>
-							<p>
-								<a href="coin.do" class="membershipApply">
-									<i class="fa fa-clone"></i>"멤버십 신청하기"
-								</a>
-							</p>
-						</div>
+						<c:choose>
+							<c:when test="${empty dto.member_coin}">
+			                    <h3><i class="fa fa-clone"></i>"내 멤버십"</h3>
+								<div class="notYetMembership">
+									<h4>필요한 만큼 결제하세요!</h4>
+									<p>
+										<a href="coin.do" class="membershipApply">
+											<i class="fa fa-clone"></i>"멤버십 신청하기"
+										</a>
+									</p>
+								</div>
+		                    </c:when>
+							<c:when test="${!empty dto.member_coin}">
+				                <div class="notYetMembership">
+				                    <table>
+				                    	<thead>
+					                    	<tr>
+					                    		<td>결제일</td>
+					                    		<td>결제방법</td>
+					                    		<td>구매가격</td>
+					                    		<td>구매코인</td>
+					                    		<td>현재보유코인</td>
+					                    	</tr>
+				                    	</thead>
+				                    	<tbody>
+				                    		<tr>
+				                    			<td>${dta.pay_price}</td>
+				                    			<td>${dta.pay_method}</td>
+				                    			<td>${dta.pay_price}</td>
+				                    			<td>${dta.pay_coin}</td>
+				                    			<td>${dto.member_coin}coin</td>
+				                    		</tr>
+				                    	</tbody>
+				                    </table>
+			                    	<h4>필요한 만큼 결제하세요!</h4>
+									<p>
+										<a href="coin.do" class="membershipApply">
+											<i class="fa fa-clone"></i>"멤버십 신청하기"
+										</a>
+									</p>
+								</div>
+							</c:when>
+	                    </c:choose>
 					</section>
 				</div>
 			</div>

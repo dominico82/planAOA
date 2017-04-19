@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import nfit.coin.model.CoinDTO;
+
 public interface MemberDAO {
 
 	public int memberJoin(MemberDTO dto);
@@ -17,4 +19,5 @@ public interface MemberDAO {
 	public String membmerPwdFind(String member_id,String member_name,String member_email);
 	public int setImage(String id, MultipartFile files) throws IllegalStateException, IOException;
 	public List<MemberDTO>memberList();
+	public CoinDTO getPayInfo(int member_idx);
 }
