@@ -16,5 +16,5 @@ public interface MemberDAO {
 	public String memberIdFind(String member_name,String member_email);
 	public String membmerPwdFind(String member_id,String member_name,String member_email);
 	public int setImage(String id, MultipartFile files) throws IllegalStateException, IOException;
-	
+	public List<MemberDTO>memberList();
 }

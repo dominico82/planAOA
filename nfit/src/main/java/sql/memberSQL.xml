@@ -72,6 +72,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{pic_name}
 		)
 	</insert>
+	<select id="adminList" resultType="nfit.member.model.MemberDTO">
+		select * from member_table order by member_idx
+	</select>
 </mapper>
 
 

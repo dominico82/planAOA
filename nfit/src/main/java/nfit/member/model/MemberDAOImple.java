@@ -8,6 +8,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+
 public class MemberDAOImple implements MemberDAO {
 
 	public static final int NOT_ID = 1;
@@ -135,13 +136,8 @@ public class MemberDAOImple implements MemberDAO {
 		
 	}
 
-	/*
-	 * public int loginCheck(String member_id,String member_pwd){ MemberDTO dto
-	 * = sqlMap.selectOne("memberLogin", member_id); try{ if(dto!=null){
-	 * if(member_pwd.equals(dto.getMember_pwd())) { return LOGIN_OK; }else{
-	 * return NOT_PWD; } }else{ return NOT_ID; } }catch(Exception e){
-	 * e.printStackTrace(); return ERROR; }
-	 * 
-	 * }
-	 */
+	public List<MemberDTO>memberList(){
+		List list=sqlMap.selectList("adminList");
+		return list;
+	}
 }
