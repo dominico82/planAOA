@@ -33,11 +33,12 @@ function info(){
 				<aside class="col-lg-2 col-md-3 col-sm-4 mypageMenuAside">
 					<div class="userInfo">
 						<span class="userCircleImgWrap">
-							<span class="userCircleImg"></span>
+							<span class="userCircleImg"><img src="resources/file/upload/${pic}"></span>
 						</span>
 						<form name="upload" action="fileUpload.do" method="post" enctype="multipart/form-data"> <!-- 파일 업로드를 구현하는 폼 -->
 							사진선택:<input type="file" name="files" id="files" accept="image/*" modelAttribute="uploadForm"><!-- input type="file" 업로드할 파일을 선택하는 속성 -->
 							<input type="hidden" value="${dto.member_id}" name="id">
+							<input type="hidden" value="${dto.member_idx}" name="idx">
 							<input type="submit" value="파일올리기">
 						</form>
 						<h6>
@@ -103,6 +104,7 @@ function info(){
 					                    	</tr>
 				                    	</thead>
 				                    	<tbody>
+				                    	<c:forEach var="dta" items="${dta}">
 				                    		<tr>
 				                    			<td>${dta.pay_price}</td>
 				                    			<td>${dta.pay_method}</td>
@@ -110,6 +112,7 @@ function info(){
 				                    			<td>${dta.pay_coin}</td>
 				                    			<td>${dto.member_coin}coin</td>
 				                    		</tr>
+				                    	</c:forEach>
 				                    	</tbody>
 				                    </table>
 			                    	<h4>필요한 만큼 결제하세요!</h4>
