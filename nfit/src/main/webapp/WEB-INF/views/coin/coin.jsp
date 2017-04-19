@@ -11,28 +11,14 @@
 		<link href="resources/css/style.css" rel='stylesheet' type='text/css' />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="shortcut icon" type="image/x-icon" href="resources/images/fav-icon.png" />
-		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-		</script>
+		
+		
 	    <!---strat-slider---->
 	    <script type="text/javascript" src="resources/js/jquery.min.js"></script>
-	    <link rel="stylesheet" type="text/css" href="resources/css/slider-style.css" />
-		<script type="text/javascript" src="resources/js/modernizr.custom.28468.js"></script>
-		<!---//strat-slider---->
-		<!---start-login-script--->
-		<script src="resources/js/login.js"></script>
-		<!---//End-login-script--->
-		<!-----768px-menu----->
-		<link type="text/css" rel="stylesheet" href="resources/css/jquery.mmenu.all.css" />
+	    <!-----768px-menu----->
+		
 		<link type="text/css" rel="stylesheet" href="resources/css/coin.css" />
-		<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="resources/js/jquery.mmenu.js"></script>
-			<script type="text/javascript">
-				//	The menu on the left
-				$(function() {
-					$('nav#menu-left').mmenu();
-				});
-		</script>
+
 		<!-----//768px-menu----->
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 <script type="text/javascript" src="resources/js/pwstabs.js"></script>
@@ -48,10 +34,7 @@ var userAddr="${dto.member_addr}";
 	<body>
 	<br><br><br><br>
 		<!---start-wrap---->
-		<!------start-768px-menu---->
-		
 	<section id="sub_section"  class="payPC_wrap">
-
     <section class="content_inner pb0">
     <div class="myheadPC_wrap">
         <div class="myheadPC_back">

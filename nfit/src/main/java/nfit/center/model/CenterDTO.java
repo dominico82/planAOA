@@ -16,7 +16,6 @@ public class CenterDTO {
 	private String co_avail;
 	public CenterDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public CenterDTO(int co_idx, String co_name, String co_address, String co_class, String co_phone, String co_regul,
 			String co_extra, String co_view, int co_usecount, int co_lat, int co_lng, String co_avail) {

@@ -1,9 +1,12 @@
 package nfit.member.model;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
 public class MemberDAOImple implements MemberDAO {
 
@@ -114,6 +117,21 @@ public class MemberDAOImple implements MemberDAO {
 			String result="존재하지 않는 ID입니다.";
 			return result;
 		}
+		
+		
+	}
+	
+	public int setImage(String id, MultipartFile files) throws IllegalStateException, IOException {
+		
+		String savePath = "C:/Users/wonjun/git/planAOA/nfit/src/main/webapp/resources/upload_images/";
+		
+		HashMap map = new HashMap();
+		map.put("member_id", id);
+		map.put("pic_name", files.getOriginalFilename());
+		int count = sqlMap.insert("setUpload", map);
+		
+		files.transferTo(new File(savePath+files.getOriginalFilename()));//파일을 업로드한다.
+		return count;
 		
 	}
 

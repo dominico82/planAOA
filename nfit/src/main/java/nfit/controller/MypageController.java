@@ -73,14 +73,14 @@ public class MypageController {
 		return mav;
 	}
 	
-	//프로필사진 업로드
+	/**프로필사진 업로드
 	@RequestMapping("fileUpload.do")
 	public String fileUpload(MultipartHttpServletRequest req){
 		String writer = req.getParameter("writer");
 		MultipartFile upload = req.getFile("upload");
 		copyInto(writer,upload);
 		return "mypage/fileSuccess";
-	}
+	} */
 	
 	//파일 복사 관련 사용자 정의 메서드
 	private void copyInto(String writer, MultipartFile upload){
@@ -89,7 +89,8 @@ public class MypageController {
 			byte bytes[] = upload.getBytes();
 			System.out.println("작성자:"+writer);
 			System.out.println("파일명:"+upload.getOriginalFilename());
-			File outFile = new File("c:/wonjun/upload/"+upload.getOriginalFilename());
+			File outFile = new File("c:/Users/wonjun/git/planAOA/nfit/src/main/webapp/resources/upload_images/"+upload.getOriginalFilename());
+			//C:/Users/wonjun/git/planAOA/nfit/src/main/webapp/resources/upload_images/
 			FileOutputStream fos = new FileOutputStream(outFile);
 			fos.write(bytes);
 			fos.close();
@@ -97,6 +98,19 @@ public class MypageController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(value="fileUpload.do", method=RequestMethod.POST)
+	public ModelAndView saveImage(@RequestParam("id") String id, @RequestParam("files") MultipartFile files) throws IllegalStateException, IOException {
+		
+		System.out.println("member_id"+id+"files"+files.getOriginalFilename());
+		int result = memberDao.setImage(id, files);
+		String msg = result>0?"사진 업로드 완료":"업로드 실패";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.setViewName("mypage/fileSuccess");
+		return mav;
 	}
 }
 

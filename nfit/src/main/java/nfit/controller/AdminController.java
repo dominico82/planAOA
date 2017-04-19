@@ -10,4 +10,8 @@ public class AdminController {
 	public String AdminForm(){
 		return "admin/main";
 	}
+	@ RequestMapping("/widgets.do")
+	public String WidgetsForm(){
+		return "admin/widgets";
+	}
 }

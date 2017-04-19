@@ -12,10 +12,12 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	  <script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=edd938c4fc341b07f90ed69064de3f92&libraries=services"></script>
 	  <link rel="shortcut icon" href="resources/images/n-1x-170x128.jpg" type="image/x-icon">
 <title>Insert title here</title>
 <style>
+#infowindow{
+z-index:500;
+}
 #map_part{
 z-index:100;
 }
@@ -109,12 +111,15 @@ edd938c4fc341b07f90ed69064de3f92<br>
 		</tbody>
 		</table>
 		</div>
+		
 <!-- 맵 부분 -->
 			<div class="col-sm-8" id="map_part">
 				<h3>map area</h3>
 				<div id="map" style="width: 100%; height:500px;"></div>
 			</div>
 		</div>
+		
+<!--  업체 백업 부분 -->
 		<div class="row">
 		<div class="col-sm-12" id="center_list">
 			<h3>search area</h3>
@@ -151,8 +156,87 @@ edd938c4fc341b07f90ed69064de3f92<br>
 			<input type="hidden" value="<%=cnt%>" id="count">
 			</div>
 		</div>
+
+<!-- 더보기 테스트 -->
+		<hr>
+		<div class="row">
+		<div class="col-sm-12" id="test1">
+		<table class="table">
+		<thead>
+		<tr>
+		<th>co_idx</th>
+		<th>co_name</th>
+		</tr>
+		</thead>
+		<tbody id="tbodyTest">
+		<c:set var="testCenter" value="${list}"/>
+		<c:if test="${empty testCenter}">
+		<tr><td colspan="2">No Result</td></tr>
+		</c:if>
+		<c:forEach var="testList" items="${testCenter}" begin="0" step="1" end="2" varStatus="status">
+		<tr>
+		<td>${testList.co_idx}<span id="idxTest" style="display:none;">${status.index}</span></td>
+		<td>${testList.co_name}</td>
+		</tr>
+		</c:forEach>
+		</tbody>
+		</table>
+		</div>
+			<div class="col-sm-4" id="viewMoreBtn">
+			<a href="javascript:test1()" class="btn btn-default">더보기 test1</a>
+			</div>
+			<hr>
+		</div>
 	</div>
-	
+	<script type="text/javascript">
+	var count;
+	var startCheck=false;
+	var co_idx =0;
+	var test2 = 0;
+	count = $("#tbodyTest > tr").length;
+	function test1(){
+		co_idx = $("#tbodyTest > tr > td > #idxTest").length;
+		if(startCheck==false){
+			co_idx++;
+			startCheck==true;
+		}
+		var totalCnt = $("#count").val();
+		for(var i=0; i<5; i++){
+			setTimeout(appendHtml(co_idx),200);
+			console.log("co_idx=",co_idx);
+			co_idx++;
+		}
+			if(co_idx==totalCnt){
+				$("#viewMoreBtn").empty();
+			} //이 위 if문 totalCnt end
+		 //for문 end
+		}//function test1문 end
+		
+		function appendHtml(co_idx){
+			$.ajax({
+				url:'centerCompany.do',
+				type:'GET',
+				data: {"co_idx": co_idx},
+				success: function(data){
+					$("#ajax").remove();
+					var dataObj = JSON.parse(data)
+					if(!data){ 
+						alert("ajax fail");
+						return false;
+					}else{
+						console.log("dataObj.co_idx=",dataObj.co_idx);
+						append(dataObj.co_idx, dataObj.co_name);
+						return dataObj;
+					}//if문 !data end
+				}//ajax문 success end
+			});//ajax문 end	
+		}//appendHtml 문 end
+		function append(co_idx, co_name){
+			var htmlTest  ='';
+			htmlTest = '<tr><td>'+co_idx+'<span id="idxTest" style="display:none;">${status.index}</span></td><td>'+co_name+'</td></tr>';
+			$("#tbodyTest").append(htmlTest);
+		}
+	</script>
 <!-- 제휴업체 패널 부분 -->
 <div class="container" id="centerInfo">
 <div class="panel panel-default" id="centerInfo_panel">
@@ -164,7 +248,7 @@ edd938c4fc341b07f90ed69064de3f92<br>
 </div>
 <div class="panel-body" id="centerInfo_body">
 <div class="row" id="coImg">
-<img alt="center" src="resources/images/K-010.jpg" class="img-rounded img-responsive">
+<img alt="center" src="resources/images/K-010.jpg" class="img-rounded img-responsive" id="centerInfo_img">
 </div>
 <div class="row" id="coAddr">
 <div class="col-sm-12">
@@ -227,6 +311,119 @@ edd938c4fc341b07f90ed69064de3f92<br>
 <hr>
 <%@include file="../footer.jsp" %>
 <script type="text/javascript">
+/*geolocation 구현*/
+var mapContainer = document.getElementById('map');
+var mapOption = {
+	center : new daum.maps.LatLng(37.566535, 126.97796919999999),
+	level : 3
+};
+var map = new daum.maps.Map(mapContainer, mapOption);
+
+var markers=[];
+searchMark();
+
+if(navigator.geolocation){
+navigator.geolocation.getCurrentPosition(function(position){
+	var lat = position.coords.latitude;
+	var lon = position.coords.longitude;
+	var locPosition = new daum.maps.LatLng(lat, lon);
+	window.alert('현재위치로 이동합니다.');
+	goCenter(locPosition)
+});
+}else{
+var locPosition = new daum.maps.LatLng(33.450701, 126.570667);
+window.alert('현재 위치를 찾을 수 없습니다.');
+}
+function goCenter(locPosition){
+map.setCenter(locPosition);
+}
+
+/*이름과 주소 가져오기*/
+var count = $("#count").val();
+console.log("count", count)
+var coName =[];
+var addr=[];
+var co_idx=[];
+var centerListUrl=[];
+for(var i=0; i<count;i++){
+	coName[i]=document.getElementById('co_name_'+i).innerHTML;
+	addr[i]=document.getElementById('co_address_'+i).value;
+	co_idx[i]=document.getElementById('co_idx_idx_'+i).innerHTML;
+	centerListUrl[i]=document.getElementById('centerUrl_'+i).innerHTML;
+	getMarker(addr[i], coName[i], co_idx[i], centerListUrl[i]);
+}
+
+/*지도 확대 축소 컨트롤러*/
+var zoomControl = new daum.maps.ZoomControl();
+map.addControl(zoomControl, daum.maps.ControlPosition.BOTTOMLEFT);
+
+/*지도 움직일 때 마크 및 리스트 생성*/
+
+daum.maps.event.addListener(map, 'idle', searchMark);
+function searchMark(){
+	listRemove();
+	if(markers!=null||markers!=''){
+	removeMarker();
+	var proj = map.getProjection();
+	var bounds=map.getBounds();
+	var coList_html='';
+	var $coList_name='';
+	var $coList_idx='';
+	var coList_url='';
+	var num=1;
+	for(var i=0; i<markers.length; i++){
+		if(bounds.contain(markers[i].getPosition())){
+			markers[i].setMap(map);
+			$coList_name=$("#co_name_"+i).text();
+			$coList_idx=$("#co_idx_idx_"+i).text();
+			coList_url='"';
+			coList_url+=document.getElementById("centerUrl_"+i).innerHTML;
+			coList_url+='"';
+			coList_html="<tr><td><span id='centerInfo_list_coIdx_"+i+"'>"+$coList_idx+"</span></td><td><a href='javascript:show("+$coList_idx+","+coList_url+")' id='centerInfo_list_coName_"+i+"'>"+$coList_name+"</a></td><tr>";
+			$("#centerInfo_list").append(coList_html);
+		}else{
+			markers[i].setMap(null);
+		}
+	}
+	}
+}
+function listRemove(){
+		$("#centerInfo_list").empty();
+}
+
+
+/*마커 생성 및 클릭 이벤트*/
+var infoWindows=[];
+function getMarker(addr, name, co_idx, centerListUrl){
+	var geocoder = new daum.maps.services.Geocoder();
+	var marker;
+	var infowindow;
+	geocoder.addr2coord(addr, function(status, result) {
+	     if (status === daum.maps.services.Status.OK) {
+	        var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+	        marker = new daum.maps.Marker({
+	            map: map,
+	        	position: coords,
+	            clickable: true
+	        });
+	        markers.push(marker);
+	        infowindow = new daum.maps.InfoWindow({
+	            content: '<div id="infowindow">'+name+'</div>'
+	        });
+	        infoWindows.push(infowindow);
+	        daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infowindow, co_idx, centerListUrl));
+	    }
+	});
+	function makeClickListener(){
+		return function(){
+				closeAllMarkInfo();
+				infowindow.open(map, marker);
+				show(co_idx, centerListUrl);
+			}
+	}
+}
+
+
 	/*업체 상세 aside 떠오르기*/
 	function show(co_idx, centerListUrl){
 		$("#centerInfo_panel").animate({
@@ -270,6 +467,11 @@ edd938c4fc341b07f90ed69064de3f92<br>
 				var coUsecount_html='';
 				coUsecount_html = '<p id="centerInfo_usecount"><span class="glyphicon glyphicon-stats"></span>총 이용 횟수 : '+dataObj.co_usecount+'</p>';
 				$("#centerInfo_usecount").replaceWith(coUsecount_html);
+				
+				/*co_view*/
+				var coView_html='';
+				coView_html='<img alt="center" src="resources/centerImage/'+dataObj.co_view+'/'+dataObj.co_view+'_1.jpg" class="img-rounded img-responsive" id="centerInfo_img">';
+				$("#centerInfo_img").replaceWith(coView_html);
 				
 				/*co_avail*/
 				var coAvail=dataObj.co_avail; 
@@ -421,121 +623,19 @@ edd938c4fc341b07f90ed69064de3f92<br>
 		window.location.href=centerListUrl;
 	}
 
-	/*이름과 주소 가져오기*/
-	var count = $("#count").val();
-	console.log("count", count)
-	var coName =[];
-	var addr=[];
-	var co_idx=[];
-	var centerListUrl=[];
-	for(var i=0; i<count;i++){
-		coName[i]=document.getElementById('co_name_'+i).innerHTML;
-		addr[i]=document.getElementById('co_address_'+i).value;
-		co_idx[i]=document.getElementById('co_idx_idx_'+i).innerHTML;
-		centerListUrl[i]=document.getElementById('centerUrl_'+i).innerHTML;
-		getMarker(addr[i], coName[i], co_idx[i], centerListUrl[i]);
-	}
-	
-	/*geolocation 구현*/
-			var mapContainer = document.getElementById('map');
-			var mapOption = {
-				center : new daum.maps.LatLng(37.566535, 126.97796919999999),
-				level : 3
-			};
-			var map = new daum.maps.Map(mapContainer, mapOption);
-			
-		if(navigator.geolocation){
-			navigator.geolocation.getCurrentPosition(function(position){
-				var lat = position.coords.latitude;
-				var lon = position.coords.longitude;
-				var locPosition = new daum.maps.LatLng(lat, lon);
-				window.alert('현재위치로 이동합니다.');
-				goCenter(locPosition)
-			});
-		}else{
-			var locPosition = new daum.maps.LatLng(33.450701, 126.570667);
-			window.alert('현재 위치를 찾을 수 없습니다.');
-		}
-		function goCenter(locPosition){
-			map.setCenter(locPosition);
-		}
 		
-		/*지도 확대 축소 컨트롤러*/
-		var zoomControl = new daum.maps.ZoomControl();
-		map.addControl(zoomControl, daum.maps.ControlPosition.BOTTOMLEFT);
-		
-		/*지도 움직일 때 마크 및 리스트 생성*/
-		var markers=[];
-		daum.maps.event.addListener(map, 'idle', searchMark);
-		function searchMark(){
-			listRemove();
-			removeMarker();
-			var proj = map.getProjection();
-			var bounds=map.getBounds();
-			var coList_html='';
-			var $coList_name='';
-			var $coList_idx='';
-			var coList_url='';
-			var num=1;
-			for(var i=0; i<markers.length; i++){
-				if(bounds.contain(markers[i].getPosition())){
-					markers[i].setMap(map);
-					$coList_name=$("#co_name_"+i).text();
-					$coList_idx=$("#co_idx_idx_"+i).text();
-					coList_url='"';
-					coList_url+=document.getElementById("centerUrl_"+i).innerHTML;
-					coList_url+='"';
-					coList_html="<tr><td><span id='centerInfo_list_coIdx_"+i+"'>"+$coList_idx+"</span></td><td><a href='javascript:show("+$coList_idx+","+coList_url+")' id='centerInfo_list_coName_"+i+"'>"+$coList_name+"</a></td><tr>";
-					$("#centerInfo_list").append(coList_html);
-				}else{
-					markers[i].setMap(null);
-				}
-			}
-		}
-		function listRemove(){
-				$("#centerInfo_list").empty();
-		}
-
-		
-		/*마커 생성 및 클릭 이벤트*/
-		var infoWindows=[];
-		function getMarker(addr, name, co_idx, centerListUrl){
-			var geocoder = new daum.maps.services.Geocoder();
-			var marker;
-			var infowindow;
-			geocoder.addr2coord(addr, function(status, result) {
-			     if (status === daum.maps.services.Status.OK) {
-			        var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
-			        marker = new daum.maps.Marker({
-			            map: map,
-			        	position: coords,
-			            clickable: true
-			        });
-			        markers.push(marker);
-			        infowindow = new daum.maps.InfoWindow({
-			            content: '<div>'+name+'</div>'
-			        });
-			        infoWindows.push(infowindow);
-			        daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infowindow, co_idx, centerListUrl));
-			    }
-			});
-			function makeClickListener(){
-				return function(){
-						closeAllMarkInfo();
-						infowindow.open(map, marker);
-						console.log("centerListUrl=",centerListUrl);
-						show(co_idx, centerListUrl);
-					}
-			}
-		}
 		function closeAllMarkInfo(){
 			for(var i=0; i<infoWindows.length; i++){
 				infoWindows[i].close();
 			}
 		}
 		function removeMarker(){
+			if(markers==null){
+			return;
+			}else{
 			for(var i=0; i<markers.length; i++){
 				markers[i].setMap(null);
+			}
 			}
 		}
 	/*주소 불러오기*/

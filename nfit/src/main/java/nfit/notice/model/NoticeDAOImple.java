@@ -68,7 +68,7 @@ public class NoticeDAOImple implements NoticeDAO {
 	
 	public int setNoticeContents(NoticeDTO dto, List<MultipartFile> files) throws IllegalStateException, IOException {
 		//저장경로
-		String savePath="C:/Users/Administrator/Documents/AOA_Enfit/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/nfit/resources/file/upload/";
+		String savePath="C:/Users/wonjun/git/planAOA/nfit/src/main/webapp/resources/upload_images";
 		
 		int count=sqlMap.insert("setNoticeContents", dto);
 		for(int i=0; i<files.size(); i++){
