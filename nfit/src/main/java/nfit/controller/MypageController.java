@@ -109,8 +109,11 @@ public class MypageController {
 	@RequestMapping(value="fileUpload.do", method=RequestMethod.POST)
 	public ModelAndView saveImage(@RequestParam("id") String id, @RequestParam("files") MultipartFile files) throws IllegalStateException, IOException {
 		
+		
 		System.out.println("member_id"+id+"files"+files.getOriginalFilename());
 		int result = memberDao.setImage(id, files);
+		
+		
 		String msg = result>0?"사진 업로드 완료":"업로드 실패";
 		
 		ModelAndView mav = new ModelAndView();
