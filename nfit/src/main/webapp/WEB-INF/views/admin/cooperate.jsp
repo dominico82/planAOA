@@ -97,7 +97,9 @@
         <!-- Main content -->
        <main class="main">
             <div class="container-fluid">
-                 <div id="ui-view">제휴관리 페이지</div>
+                 <div id="ui-view">
+                 
+                 </div>
             </div>
             <!-- /.conainer-fluid -->
         </main>

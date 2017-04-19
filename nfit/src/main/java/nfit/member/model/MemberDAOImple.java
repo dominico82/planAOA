@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.web.multipart.MultipartFile;
@@ -138,9 +139,18 @@ public class MemberDAOImple implements MemberDAO {
 		
 	}
 
-	public List<MemberDTO>memberList(){
-		List list=sqlMap.selectList("adminList");
+	public List<MemberDTO>memberList(int cp,int ls){
+		int startnum=(cp-1)*ls+1;
+		int endnum=cp*ls;
+		Map param=new HashMap();
+		param.put("startnum", startnum);
+		param.put("endnum", endnum);
+		List<MemberDTO> list=sqlMap.selectList("adminList",param);
 		return list;
+	}
+	public int getTotalCnt() {
+		int count=sqlMap.selectOne("membertotalCnt");
+		return count;
 	}
 	
 	public CoinDTO getPayInfo(int member_idx){

@@ -21,17 +21,26 @@ public class AdminController {
 	public String AdminForm(){
 		return "admin/main";
 	}
-	@RequestMapping("/memberAdmin.do")
-	public ModelAndView memberAdmin(){
-		List<MemberDTO> list=memberDao.memberList();
+	@RequestMapping(value="memberAdmin.do")
+	public ModelAndView memberAdmin(
+			@RequestParam(value="cp",defaultValue="1")int cp){
+		int totalCnt=memberDao.getTotalCnt();
+		totalCnt=totalCnt==0?1:totalCnt;
+		int listSize=20;
+		int pageSize=5;
+		List<MemberDTO> list=memberDao.memberList(cp,listSize);
+		String pageStr=nfit.page.PageModule.makePage("memberAdmin.do", totalCnt, listSize, pageSize, cp);
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("memberList",list);
+		mav.addObject("pageStr", pageStr);
 		mav.setViewName("admin/member");
 		return mav;
 	}
 	/*@RequestMapping("/memberDeleteAdmin.do")
-	public String memberDeleteAdmin(@RequestParam String member_id){
-		
+	public ModelAndView memberDeleteAdmin(
+			@RequestParam(value="member_id") String id){
+		String member_id=id;
+		String result=
 	}*/
 	@RequestMapping("/cooperateAdmin.do")
 	public String cooperAdmin(){

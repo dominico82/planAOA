@@ -18,6 +18,7 @@ public interface MemberDAO {
 	public String memberIdFind(String member_name,String member_email);
 	public String membmerPwdFind(String member_id,String member_name,String member_email);
 	public int setImage(String id, MultipartFile files) throws IllegalStateException, IOException;
-	public List<MemberDTO>memberList();
+	public List<MemberDTO>memberList(int cp,int ls);
 	public CoinDTO getPayInfo(int member_idx);
+	public int getTotalCnt();
 }

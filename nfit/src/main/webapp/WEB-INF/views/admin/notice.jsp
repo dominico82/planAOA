@@ -97,7 +97,7 @@
         <!-- Main content -->
        <main class="main">
             <div class="container-fluid">
-                 <div id="ui-view">문의사항 메인페이지</div>
+                 <div id="ui-view">공지사항 페이지</div>
             </div>
             <!-- /.conainer-fluid -->
         </main>

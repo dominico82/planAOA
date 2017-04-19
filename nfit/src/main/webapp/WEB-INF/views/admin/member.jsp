@@ -135,7 +135,13 @@
 						</tr>
 					</c:forEach>
 				</tbody>
+				
 			</table>
+			<nav>
+				<ul>
+				<li>${pageStr }</li>
+				</ul>
+				</nav>
 		</div>
 		<!-- /.conainer-fluid --> </main>
 
