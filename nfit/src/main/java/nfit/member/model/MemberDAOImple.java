@@ -153,9 +153,14 @@ public class MemberDAOImple implements MemberDAO {
 		return count;
 	}
 	
-	public CoinDTO getPayInfo(int member_idx){
-		CoinDTO dto = sqlMap.selectOne("payInfo", member_idx);
+	public List<CoinDTO> getPayInfo(int member_idx){
+		List<CoinDTO> dto = sqlMap.selectList("payInfo", member_idx);
 		return dto;
+	}
+	
+	public String getImage(int member_idx){
+		String pic = sqlMap.selectOne("getPic", member_idx);
+		return pic;
 	}
 }
 
