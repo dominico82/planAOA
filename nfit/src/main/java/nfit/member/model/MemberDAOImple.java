@@ -8,6 +8,8 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import nfit.coin.model.CoinDTO;
+
 
 public class MemberDAOImple implements MemberDAO {
 
@@ -140,4 +142,31 @@ public class MemberDAOImple implements MemberDAO {
 		List list=sqlMap.selectList("adminList");
 		return list;
 	}
+	
+	public CoinDTO getPayInfo(int member_idx){
+		CoinDTO dto = sqlMap.selectOne("payInfo", member_idx);
+		return dto;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
