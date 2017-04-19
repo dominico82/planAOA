@@ -17,115 +17,181 @@
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 
 <script>
-var page = 1;                       //페이지 변수를 1로 초기화
-var searchKey = '';                 //검색기능을 위해 검색 변수 초기화
 
-$.ajax({
-	type : 'POST',
-	url : "notice.do"
-        dataType : "json",
-        data : {
-	        'page' : page,
-	        'searchKeyword' : searchKey
-	},
-	success : function (result) {
-
-respone = result.lists;          	       	 //반환값중 데이터목록을 response변수에 삽입
-	       	
-
-paging = result.paging;             //페이징관련 데이터들을 paging변수에 삽입
-	       			    	
-
-	       	$("데이터가 삽입될 객체 table").empty();    //데이터가 삽입될 객체를 비워준다. (들어가있던 전데이터들을 지워주기위해)
-
-
-	       	if(respone.length == 0){                //가져온 데이터가 없으면 목록이 없다는 문구를 삽입.
-	       		$("데이터가 삽입될 tbody").append("<td colspan=20 style='padding:30px;'>데이터가 없습니다.</td>");
-	       	}else{                                    //데이터가있으면 목록을 each로 반복
-	            _.each(respone, function(item){
-			var contentHtml = _.template($('데이터가 삽입될 템플릿').html(), item );      //언더스코어를 이용 템플릿을 제작
-			$("데이터가 삽입될 tbody").append(contentHtml);
-	      });		
-	       	}						
-
-	       	//이부분이 페이징처리
-	        $(".pagination").empty();  //페이징에 필요한 객체내부를 비워준다.
-	        	
-	        if(paging.page != 1){            // 페이지가 1페이지 가아니면
-	        	$(".pagination").append("<li class=\"goFirstPage\"><a><<</a></li>");        //첫페이지로가는버튼 활성화
-	        }else{
-	        	$(".pagination").append("<li class=\"disabled\"><a><<</a></li>");        //첫페이지로가는버튼 비활성화
-	        }
-
-	        if(paging.block != 1){            //첫번째 블럭이 아니면
-	        	$(".pagination").append("<li class=\"goBackPage\"><a><</a></li>");        //뒤로가기버튼 활성화
-	        }else{
-	        	$(".pagination").append("<li class=\"disabled\"><a><</a></li>");        //뒤로가기버튼 비활성화
-	        }
-	        	
-	        for(var i = paging.startPage ; i <= paging.endPage ; i++){        //시작페이지부터 종료페이지까지 반복문
-	        	if(paging.page == i){                            //현재페이지가 반복중인 페이지와 같다면
-	                	$(".pagination").append("<li class=\"disabled active\"><a>"+i+"</a></li>");    //버튼 비활성화
-	        	}else{
-	        		$(".pagination").append("<li class=\"goPage\" data-page=\""+i+"\"><a>"+i+"</a></li>"); //버튼 활성화
-	        	}
-	        }
-
-	        if(paging.block < paging.totalBlock){            //전체페이지블럭수가 현재블럭수보다 작을때
-	        	$(".pagination").append("<li class=\"goNextPage\"><a>></a></li>");         //다음페이지버튼 활성화
-	        }else{
-	        	$(".pagination").append("<li class=\"disabled\"><a>></a></li>");        //다음페이지버튼 비활성화
-	        }
-  
-          if(paging.page < paging.totalPage){                //현재페이지가 전체페이지보다 작을때
-        		$(".pagination").append("<li class=\"goLastPage\"><a>>></a></li>");    //마지막페이지로 가기 버튼 활성화
-        	}else{
-        		$(".pagination").append("<li class=\"disabled\"><a>>></a></li>");        //마지막페이지로 가기 버튼 비활성화
-        	}
-
-//첫번째 페이지로 가기 버튼 이벤트
-        	$(".goFirstPage").click(function(){
-		       	page = 1;
-		       	pageFlag = 1;
-		       	$("상단 ajax를 함수로 만들어 재귀호출");
-		       	pageFlag = 0;
-	        });
-
-//뒷페이지로 가기 버튼 이벤트
-		$(".goBackPage").click(function(){
-		      	page = Number(paging.startPage) - 1;
-		       	pageFlag = 1;
-		       	$("상단 ajax를 함수로 만들어 재귀호출");
-		       	pageFlag = 0;
-	        });
-
-//클릭된 페이지로 가기 이벤트
-		$(".goPage").click(function(){
-			page = $(this).attr("data-page");
-			pageFlag = 1;
-		       	$("상단 ajax를 함수로 만들어 재귀호출");
-		       	pageFlag = 0;
-		});
-
-//다음페이지로 가기 클릭이벤트
-		$(".goNextPage").click(function(){
-			page = Number(paging.endPage) + 1;
-			pageFlag = 1;
-		      	$("상단 ajax를 함수로 만들어 재귀호출");
-		       	pageFlag = 0;
-	        });
-
-//마지막페이지로 가기 클릭이벤트
-	        $(".goLastPage").click(function(){
-	        	page = paging.totalPage;
-	        	pageFlag = 1;
-		       	$("상단 ajax를 함수로 만들어 재귀호출");
-		      	pageFlag = 0;
-	        });
-	    }
-    });
+$(document).ready(function(){
+	boardMain.init();
 });
+
+var boardMain = {
+		
+		init : function(){
+			
+			var _this = this;
+			_this.btnEvent();
+			_this.getBoardList();
+			
+		}
+		,btnEvent : function(){
+			
+			/* 게시글 제목 클릭 상세보기 */
+			$('.boardTitle').on('click',function(){
+				var popUrl = "/spring/boardDetail?docnum="+$(this).attr('id');	//팝업창에 출력될 페이지 URL
+				var popOption = "width=570, height=360, resizable=no, scrollbars=no, status=no;";//팝업창 옵션(optoin)
+				window.open(popUrl,"",popOption);
+
+			});
+			
+			/* 작성하기 클릭  */
+			$('input[type=button]').on('click',function(){
+				var url = "/spring/boardWrite";//팝업창에 출력될 페이지 URL
+				location.href = url;
+			});
+			
+		}
+		// ************ 3번영역  ***************** 
+		,getBoardList : function(no){
+
+			var pageNo = (no || 1);
+			
+			$.ajax({
+				type:"GET",
+				url:  '/spring/boardList',
+				dataType:  "json",
+				data :  "countPerPage="+10+ "&amp;pageNo="+pageNo,
+				contentType: "application/json; charset=UTF-8",
+				cache 	: false,
+				success : function(resData){
+					
+					var item=resData.result;
+					var selectHtml=[];
+					var len=item.length;
+					
+					var page=resData.page;  //페이징 변수</span>
+					var page_boardList = Paging(page.totalCount, 10, 10 ,pageNo,  "boardList");  //공통 페이징 처리 함수 호출
+				
+					 //데이타 그리기</span>
+					 if(len >0){
+						$(item).each(function(i, item){
+	 						
+							selectHtml.push( '<tr>');
+							selectHtml.push( '<th ><a href="#" >'+item.DOCNUM+ '</a></th>');
+							selectHtml.push( '<th class="boardTitle" id="'+item.DOCNUM+ '"><a href="#">'+(item.TITLE ||  "제목없음")+ '</a></th>');
+							selectHtml.push( '<td>'+item.ADD_USR_NM+ '</td>');
+							selectHtml.push( '<td>'+item.VIEWCOUNT+ '</td>');
+							selectHtml.push( '</tr>');
+						});
+					} else{
+						selectHtml.push( '<tr>');
+						selectHtml.push( '<td colspan="3">조회된 결과가 없습니다.</td>');
+						selectHtml.push( '</tr>');
+					}
+					
+					$( "#boardList").empty().html(selectHtml.join( ''));
+					
+					 //페이징 그리기</span>
+					$( "#paging").empty().html(page_boardList);
+					
+				},
+				 /* ajax error 확인방법 */
+				error 	: function(request,status,error){
+				    console.log(request);
+				    console.log(status);
+				    console.log(error);
+				}
+			});
+			
+			
+		}
+		
+		
+}
+
+ //************ 4번영역  ***************** 
+var goPaging_boardList = function(cPage){
+	boardMain.getBoardList(cPage);  // boardAdmin 개체의 getBoardList 함수를 다시 호출
+};	
+
+
+ // ************ 2번영역  ***************** --> 목록 페이징 함수
+Paging = function(totalCnt, dataSize, pageSize, pageNo, token){
+           totalCnt = parseInt(totalCnt);	 // 전체레코드수
+           dataSize = parseInt(dataSize);    // 페이지당 보여줄 데이타수
+           pageSize = parseInt(pageSize);    // 페이지 그룹 범위       1 2 3 5 6 7 8 9 10
+           pageNo = parseInt(pageNo);        // 현재페이지
+          
+           var  html =  new Array();
+            if(totalCnt == 0){
+                       return "";
+           }
+          
+            // 페이지 카운트
+           var pageCnt = totalCnt % dataSize;         
+            if(pageCnt == 0){
+                      pageCnt = parseInt(totalCnt / dataSize);
+           } else{
+                      pageCnt = parseInt(totalCnt / dataSize) + 1;
+           }
+          
+           var pRCnt = parseInt(pageNo / pageSize);
+            if(pageNo % pageSize == 0){
+                      pRCnt = parseInt(pageNo / pageSize) - 1;
+           }
+          
+            //이전 화살표
+            if(pageNo > pageSize){
+                      var s2;
+                       if(pageNo % pageSize == 0){
+                                  s2 = pageNo - pageSize;
+                      } else{
+                                  s2 = pageNo - pageNo % pageSize;
+                      }
+                      html.push( '<a href=javascript:goPaging_' + token +  '("');
+                      html.push(s2);
+                      html.push( '");>');
+                      html.push( '◀ ');
+                      html.push( "</a>");
+           } else</span>{
+                      html.push( '<a href="#">\n');
+                      html.push( '◀ ');
+                      html.push( '</a>');
+           }
+          
+            //paging Bar
+            for(var index=pRCnt * pageSize + 1;index<(pRCnt + 1)*pageSize + 1;index++){
+                       if(index == pageNo){
+                                  html.push( '<strong>');
+                                  html.push(index);
+                                  html.push( '</strong>');
+                      } else{
+                                  html.push( '<a href=javascript:goPaging_' + token +  '("');
+                                  html.push(index);
+                                  html.push( '");>');
+                                  html.push(index);
+                                  html.push( '</a>');
+                      }
+                       if(index == pageCnt){
+                                   break;
+                      } else html.push( '  |  ');
+           }
+            
+            //다음 화살표
+            if(pageCnt > (pRCnt + 1) * pageSize){
+                      html.push( '<a href=javascript:goPaging_' + token +  '("');
+                      html.push((pRCnt + 1)*pageSize+1);
+                      html.push( '");>');
+                      html.push( ' ▶');
+                      html.push( '</a>');
+           } else{
+                      html.push( '<a href="#">');
+                      html.push( ' ▶');
+                      html.push( '</a>');
+           }
+ 
+            return html.join( "");
+}
 </script>
+
+
 </head>
 <body>
 
@@ -192,6 +258,33 @@ paging = result.paging;             //페이징관련 데이터들을 paging변�
     </div><!-- /.row -->
   </div><!-- /container -->
   
+
+	<table class="tbl_port" style="border: 1px solid #ccc">
+		<caption style= "background-color: #ccc">목록</caption>
+		<colgroup>
+			<col width= "10%"/>
+			<col width= "*"/>
+			<col width= "15%"/>
+			<col width= "10%"/>
+		</colgroup>
+		<thead>
+			<tr>
+				<th scope= "col">글번호</th>
+				<th scope= "col">제목</th>
+				<th scope= "col">작성자</th>
+				<th scope= "col">조회수</th>
+			</tr>
+		</thead>
+		<!-- ************* 1번영역  ***************** -->
+		<tbody id= "boardList">
+			
+		</tbody>
+	</table>
+	<br/>
+	<div id= "paging" style= "margin-left: 190px;"></div>
+	<br/>
+	<div ><input type= "button" value= "작성하기 " style= "margin-left: 440px;"/></div>
+
   
 
 </div> <!-- /.wrap -->

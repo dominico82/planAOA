@@ -3,11 +3,17 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="nfit.notice">
-	<select id="getNoticeList" resultType="nfit.notice.model.NoticeDTO" parameterType="Map">
-		select * from 
-		(select rownum as rnum, a.* from
-		(select * from notice_bbs order by notice_top desc, notice_idx desc)a)b
-		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+	<select id="getNoticeList" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		SELECT * FROM 
+			(SELECT ROW_NUMBER() OVER(ORDER BY notice_idx DESC) 
+					notice_idx,
+					notice_subject,
+					nocitce_content,
+					notice_top,
+					notice_event,
+					notice_date
+			FROM notice_bbs ) X WHERE X.RNUM BETWEEN #{first} AND #{last}
+
 	</select>
 	<select id="totalCnt" resultType="Integer">
 		select count(*) from notice_bbs
