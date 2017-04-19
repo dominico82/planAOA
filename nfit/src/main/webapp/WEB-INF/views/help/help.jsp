@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,7 +31,7 @@
             <div class="col-md-9">
 
               <div class="searchFormBox">
-                <form action="/help/search"><div class="input-group input-group-lg" style="line-height: 46px;">
+                <form action="helpSearch.do"><div class="input-group input-group-lg" style="line-height: 46px;">
 
                     <input type="text" class="form-control" placeholder="어떤 도움이 필요하세요?" name="keyword">
                     <span class="input-group-btn">
@@ -46,73 +47,100 @@
 
               <div class="helpTagsBoxWrap">
                 <div class="row">
-
-                  <div class="col-sm-6 col-md-6 col-lg-3">
-                    <div class="panel panel-default phType_1">
-                      <div class="panel-heading">
-                        <h5 class="panel-title"><a href="/help/search?category=1">센터이용/오류</a></h5>
-                      </div>
-                      <div class="panel-body">
-                        <a href="/help/search?tag=1" class="label-faq">센터이용</a>
-                        <a href="/help/search?tag=3" class="label-faq">인증오류</a>
-                        <a href="/help/search?tag=27" class="label-faq">센터입장</a>
-                        <a href="/help/search?tag=30" class="label-faq">PASS변경</a>
-                        <a href="/help/search?tag=23" class="label-faq">원플레이스멤버십</a>
-                        <a href="/help/search?tag=29" class="label-faq">제휴문의</a>
-                      </div>
-                    </div><!-- /.panel -->
-                  </div><!-- /.col -->
-                  <div class="col-sm-6 col-md-6 col-lg-3">
-                    <div class="panel panel-default phType_2">
-                      <div class="panel-heading">
-                        <h5 class="panel-title"><a href="/help/search?category=2">결제/환불</a></h5>
-                      </div>
-                      <div class="panel-body">
-                        <a href="/help/search?tag=4" class="label-faq">결제</a>
-                        <a href="/help/search?tag=5" class="label-faq">환불</a>
-                        <a href="/help/search?tag=32" class="label-faq">결제방법변경</a>
-                        <a href="/help/search?tag=37" class="label-faq">할인코드</a>
-                        <a href="/help/search?tag=6" class="label-faq">현금영수증</a>
-                        <a href="/help/search?tag=36" class="label-faq">가입비</a>
-                        <a href="/help/search?tag=97" class="label-faq">상품권</a>
-                      </div>
-                    </div><!-- /.panel -->
-                  </div><!-- /.col -->
-                  <div class="col-sm-6 col-md-6 col-lg-3">
-                    <div class="panel panel-default phType_3">
-                      <div class="panel-heading">
-                        <h5 class="panel-title"><a href="/help/search?category=3">멤버십</a></h5>
-                      </div>
-                      <div class="panel-body">
-                        <a href="/help/search?tag=65" class="label-faq">해지</a>
-                        <a href="/help/search?tag=64" class="label-faq">변경</a>
-                        <a href="/help/search?tag=10" class="label-faq">일시정지</a>
-                        <a href="/help/search?tag=12" class="label-faq">멤버십이용</a>
-                        <a href="/help/search?tag=66" class="label-faq">재이용</a>
-                        <a href="/help/search?tag=13" class="label-faq">카드발급</a>
-                        <a href="/help/search?tag=53" class="label-faq">재가입</a>
-                        <a href="/help/search?tag=8" class="label-faq">멤버십연장</a>
-                        <a href="/help/search?tag=75" class="label-faq">추가이용</a>
-                        <a href="/help/search?tag=99" class="label-faq">친구초대</a>
-                      </div>
-                    </div><!-- /.panel -->
-                  </div><!-- /.col -->
-                  <div class="col-sm-6 col-md-6 col-lg-3">
-                    <div class="panel panel-default phType_4">
-                      <div class="panel-heading">
-                        <h5 class="panel-title"><a href="/help/search?category=4">회원정보</a></h5>
-                      </div>
-                      <div class="panel-body">
-                        <a href="/help/search?tag=19" class="label-faq">가족회원</a>
-                        <a href="/help/search?tag=52" class="label-faq">제휴임직원회원</a>
-                        <a href="/help/search?tag=15" class="label-faq">이메일인증</a>
-                        <a href="/help/search?tag=56" class="label-faq">비빌번호찾기</a>
-                      </div>
-                    </div><!-- /.panel -->
-                  </div><!-- /.col -->
+                <c:if test="${empty helpList}">
+                	<div>등록된 게시글이 없습니다.</div>
+                </c:if>
+                <div class="col-sm-6 col-md-6 col-lg-3">
+					<div class="panel panel-default phType_1">
+						<div class="panel-heading">
+							<c:url var="category1" value="helpSearch.do">
+								<c:param name="category">센터이용/오류</c:param>
+							</c:url>
+							<h5 class="panel-title"><a href="${category1}">센터이용/오류</a></h5>
+						</div>
+						<div class="panel-body">	
+							<c:forEach var="tag" items="${helpList}">
+								<c:if test="${tag.faq_category=='센터이용/오류'}">
+									<c:url var="tag1" value="helpSearch.do">
+										<c:param name="tag">${tag.faq_tag}</c:param>
+									</c:url>
+									<a href="${tag1}" class="label-faq">${tag.faq_tag}</a>
+								</c:if>
+							</c:forEach>
+						</div>								
+					</div>							
+				</div>
+                <div class="col-sm-6 col-md-6 col-lg-3">
+					<div class="panel panel-default phType_2">
+						<div class="panel-heading">
+							<c:url var="category2" value="helpSearch.do">
+								<c:param name="category">결제/환불</c:param>
+							</c:url>
+							<h5 class="panel-title"><a href="${category2}">결제/환불</a></h5>
+						</div>
+						<div class="panel-body">	
+							<c:forEach var="tag" items="${helpList}">
+								<c:if test="${tag.faq_category=='결제/환불'}">
+									<c:url var="tag2" value="helpSearch.do">
+										<c:param name="tag">${tag.faq_tag}</c:param>
+									</c:url>
+									<a href="${tag2}" class="label-faq">${tag.faq_tag}</a>
+								</c:if>
+							</c:forEach>
+						</div>								
+					</div>							
+				</div>
+             	<div class="col-sm-6 col-md-6 col-lg-3">
+					<div class="panel panel-default phType_3">
+						<div class="panel-heading">
+							<c:url var="category3" value="helpSearch.do">
+								<c:param name="category">코인</c:param>
+							</c:url>
+							<h5 class="panel-title"><a href="${category3}">코인</a></h5>
+						</div>
+						<div class="panel-body">	
+							<c:forEach var="tag" items="${helpList}">
+								<c:if test="${tag.faq_category=='코인'}">
+									<c:url var="tag3" value="helpSearch.do">
+										<c:param name="tag">${tag.faq_tag}</c:param>
+									</c:url>
+									<a href="${tag3}" class="label-faq">${tag.faq_tag}</a>
+								</c:if>
+							</c:forEach>
+						</div>								
+					</div>							
+				</div>
+                <div class="col-sm-6 col-md-6 col-lg-3">
+					<div class="panel panel-default phType_4">
+						<div class="panel-heading">
+							<c:url var="category4" value="helpSearch.do">
+								<c:param name="category">회원정보</c:param>
+							</c:url>
+							<h5 class="panel-title"><a href="${category4}">회원정보</a></h5>
+						</div>
+						<div class="panel-body">	
+							<c:forEach var="tag" items="${helpList}">
+								<c:if test="${tag.faq_category=='회원정보'}">
+									<c:url var="tag4" value="helpSearch.do">
+										<c:param name="tag">${tag.faq_tag}</c:param>
+									</c:url>
+									<a href="${tag4}" class="label-faq">${tag.faq_tag}</a>
+								</c:if>
+							</c:forEach>
+						</div>								
+					</div>							
+				</div>
+                
+                
+                  
 
                 </div>
               </div><!-- /.helpTagsBoxWrap -->
+              
+              <div>
+              	<a href="helpWrite.do" class="btn btn-default">작성</a><br>
+              </div>
+              
            	<div class="innerBox col-xs-6 col-sm-12">
                 <h3>1:1 문의</h3>
                 <p class="help-block">

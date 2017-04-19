@@ -28,10 +28,18 @@ public class NoticeController {
 	@Autowired NoticeDAO noticeDao;
 	
 	@RequestMapping(value="notice.do")
-	public ModelAndView notice(Map param){
+	public ModelAndView notice(@RequestParam(value="cp", defaultValue="1") int cp){
+		int totalCnt=noticeDao.getTotalCnt();
+		totalCnt=totalCnt==0?1:totalCnt;
+		int listSize=10;
+		int pageSize=5;
+		List<NoticeDTO> list=noticeDao.noticeList(cp, listSize);
+		String pageStr=nfit.page.PageModule.makePage("notice.do", totalCnt, listSize, pageSize, cp);
+		
 		ModelAndView mav=new ModelAndView();
-		Map ls=noticeDao.noticeList(param);
-		mav.addObject("list", ls);
+//		Map ls=noticeDao.noticeList(param);
+		mav.addObject("pageStr", pageStr);
+		mav.addObject("list", list);
 		mav.setViewName("notice/notice");
 		return mav;
 	}

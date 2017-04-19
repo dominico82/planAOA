@@ -8,5 +8,6 @@
 		<mapper resource="sql/coinSQL.xml"/>
 		<mapper resource="sql/centerSQL.xml"/>
 		<mapper resource="sql/noticeSQL.xml"/>
+		<mapper resource="sql/helpSQL.xml"/>
 	</mappers>
 </configuration>

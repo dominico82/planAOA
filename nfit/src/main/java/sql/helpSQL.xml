@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nfit.help">
+	<insert id="setHelpContents" parameterType="nfit.help.model.HelpDTO">
+		insert into 
+			faq_table
+		values(
+			faq_table_idx.nextval,
+			#{faq_category},
+			#{faq_tag},
+			#{faq_subject},
+			#{faq_content},
+			0
+		)
+	</insert>	
+	<select id="getHelpList" resultType="nfit.help.model.HelpDTO">
+		select * from faq_table
+	</select>
+	<select id="getHelpSearch" resultType="nfit.help.model.HelpDTO">
+		<if test='key!="faq_content"'>
+			select * from faq_table
+				where
+			${key} = #{value}
+		</if>
+		<if test='key=="faq_content"'>
+			select * from faq_table
+				where faq_content
+					like '%'||#{value}||'%'
+		</if>		
+	</select>
+	<select id="getHelpContents" resultType="nfit.help.model.HelpDTO">
+		select * from faq_table
+			where faq_idx=#{idx}
+	</select>
+	<update id="helpUpdate" parameterType="nfit.help.model.HelpDTO">
+		update faq_table
+		set
+			faq_category=#{faq_category},
+			faq_tag=#{faq_tag},
+			faq_subject=#{faq_subject},
+			faq_content=#{faq_content}
+		where
+			faq_idx=#{faq_idx}
+	</update>
+</mapper>
