@@ -5,9 +5,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="resources/css/mypage.css"/>
+<title>만족스러운 피트니스 Nfit 회원정보 보기</title>
+<jsp:include page="../header.jsp"/>
+<link rel="stylesheet" type="text/css" href="resources/css/mypage1.css"/>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
+  <script>
+  $( function() {
+    $( "#progressbar" ).progressbar({
+      value: 37
+    });
+  } );
+  </script>
 <script>
 function info(){
 	var tall1 = ${dto.member_tall};
@@ -34,7 +46,7 @@ function info(){
 					<div class="userInfo">
 						<span class="userCircleImgWrap">
 							<span class="userCircleImg">
-							<c:forEach var="pics" items="${pic}"><img src="resources/upload_images/${pics}"></c:forEach>
+							<c:forEach var="pics" items="${pic}"><img class="imgsize" src="resources/upload_images/${pics}"></c:forEach>
 							</span>
 						</span>
 						<form name="upload" action="fileUpload.do" method="post" enctype="multipart/form-data"> <!-- 파일 업로드를 구현하는 폼 -->
@@ -66,11 +78,6 @@ function info(){
 										<i class="fa fa-heart-o"></i>"가보고 싶은 센터"
 									</a>
 								</li>
-								<li>
-									<span class="disabledLink">
-										<i class="fa fa-bar-chart"></i>"이용 기록"
-									</span>
-								</li>
 							</ul>
 						</div>
 					</div>
@@ -80,7 +87,15 @@ function info(){
 						<div>
 							<a onclick="info();" class="membershipApply">"비만도 체크하기"</a><br>
 							<span id="bmi"></span>
+							<div id="progressbar"></div>
 						</div>
+						
+						<div class="myheadPC_myCoin">
+				            <ul>
+				                <li class="mP_coin" id="mP_coin">${dto.member_coin}</li>
+				                <li class="mP_ctxt">COIN</li>
+				            </ul>
+				        </div>
 						<c:choose>
 							<c:when test="${empty dto.member_coin}">
 			                    <h3><i class="fa fa-clone"></i>"내 멤버십"</h3>
@@ -95,28 +110,30 @@ function info(){
 		                    </c:when>
 							<c:when test="${!empty dto.member_coin}">
 				                <div class="notYetMembership">
-				                    <table>
-				                    	<thead>
-					                    	<tr>
-					                    		<td>결제일</td>
-					                    		<td>결제방법</td>
-					                    		<td>구매가격</td>
-					                    		<td>구매코인</td>
-					                    		<td>현재보유코인</td>
-					                    	</tr>
-				                    	</thead>
-				                    	<tbody>
-				                    	<c:forEach var="dta" items="${dta}">
-				                    		<tr>
-				                    			<td>${dta.pay_price}</td>
-				                    			<td>${dta.pay_method}</td>
-				                    			<td>${dta.pay_price}</td>
-				                    			<td>${dta.pay_coin}</td>
-				                    			<td>${dto.member_coin}coin</td>
-				                    		</tr>
-				                    	</c:forEach>
-				                    	</tbody>
-				                    </table>
+				                	<div class="mypayInfo" id="mypayInfom">
+					                    <table>
+					                    	<thead>
+						                    	<tr>
+						                    		<td>결제일</td>
+						                    		<td>결제방법</td>
+						                    		<td>구매가격</td>
+						                    		<td>구매코인</td>
+						                    	</tr>
+					                    	</thead>
+					                    	<tbody>
+					                    	
+					                    	<c:forEach var="dta" items="${dta}">
+					                    		<tr class="info">
+					                    			<td>${dta.pay_date}</td>
+					                    			<td>${dta.pay_method}</td>
+					                    			<td>${dta.pay_price}</td>
+					                    			<td>${dta.pay_coin}</td>
+					                    		</tr>
+					                    	</c:forEach>
+					                    	
+					                    	</tbody>
+					                    </table>
+									</div>
 			                    	<h4>필요한 만큼 결제하세요!</h4>
 									<p>
 										<a href="coin.do" class="membershipApply">
@@ -132,6 +149,7 @@ function info(){
 		</div>
 	</div>
 </div>
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
 

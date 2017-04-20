@@ -71,7 +71,7 @@ public class MypageController {
 		dto.setMember_email(email1+"@"+email2);
 		int result = memberDao.memberModify(dto);
 		
-		String msg = result>0?"정보수정 완료":"정보수정 실패";
+		String msg = result>0?"정보가 수정되었습니다.":"정보수정 실패";
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", msg);
 		mav.setViewName("mypage/modifyMsg");
