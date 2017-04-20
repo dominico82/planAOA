@@ -1,31 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!--
- * CoreUI - Open Source Bootstrap Admin Template
+ * CoreUI - Open Source Bootstrap list Template
  * @version v1.0.0-alpha.4
  * @link http://coreui.io
  * Copyright (c) 2017 creativeLabs Łukasz Holeczek
  * @license MIT
  -->
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
-    <meta name="author" content="Łukasz Holeczek">
-    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
-    <link rel="shortcut icon" href="resources/img/favicon.png">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description"
+	content="CoreUI - Open Source Bootstrap list Template">
+<meta name="author" content="Łukasz Holeczek">
+<meta name="keyword"
+	content="Bootstrap,list,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
+<link rel="shortcut icon" href="resources/img/favicon.png">
 
-    <title>CoreUI - Open Source Bootstrap Admin Template</title>
+<title>CoreUI - Open Source Bootstrap list Template</title>
 
-    <!-- Icons -->
- 
+<!-- Icons -->
 
-    <!-- Main styles for this application -->
-    <link href="resources/css/adminstyle.css" rel="stylesheet">
-    <link href="resources/css/style.css" rel='stylesheet' type='text/css' />
+
+<!-- Main styles for this application -->
+<link href="resources/css/adminstyle.css" rel="stylesheet">
+<link href="resources/css/style.css" rel='stylesheet' type='text/css' />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon"
 	href="resources/images/fav-icon.png" />
@@ -36,9 +41,9 @@
 <!-----768px-menu----->
 <link type="text/css" rel="stylesheet"
 	href="resources/css/jquery.mmenu.all.css" />
-	   <link href="resources/css/font-awesome.min.css" rel="stylesheet">
-    <link href="resources/css/simple-line-icons.css" rel="stylesheet">
-
+<link href="resources/css/font-awesome.min.css" rel="stylesheet">
+<link href="resources/css/simple-line-icons.css" rel="stylesheet">
+<link href="resources/css/table.css" rel="stylesheet">
 </head>
 
 <!-- BODY options, add following classes to body to change options
@@ -62,64 +67,106 @@
 
 -->
 
-<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
-    <header>
-		<%@include file="../header.jsp"%>
+<body
+	class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+	<header>
+		<jsp:include page="../header.jsp" />
 	</header>
 
-    <div class="app-body">
-        <div class="sidebar">
-            <nav class="sidebar-nav">
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="icon-speedometer"></i>Test<span class="badge badge-info">NEW</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="memberAdmin.do"><i class="icon-people"></i> 회원관리</a>
-                       
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="cooperateAdmin.do"><i class="icon-briefcase"></i>제휴업체 등록/삭제</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="coinAdmin.do"><i class="icon-credit-card"></i>코인 관리</a>
-                    </li>
-                    <li class="nav-item">
-                    	<a class="nav-link" href="questionAdmin.do"><i class="icon-check"></i>문의 관리</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="noticeAdmin.do"><i class="icon-list"></i>공지사항 관리</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+	<div class="app-body">
+		<div class="sidebar">
+			<nav class="sidebar-nav">
+				<ul class="nav">
+					<li class="nav-item"><a class="nav-link" href="#"><i
+							class="icon-speedometer"></i>Test<span class="badge badge-info">NEW</span></a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="memberAdmin.do"><i
+							class="icon-people"></i> 회원관리</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="cooperateAdmin.do"><i class="icon-briefcase"></i>제휴업체
+							등록/삭제</a></li>
+					<li class="nav-item"><a class="nav-link" href="coinAdmin.do"><i
+							class="icon-credit-card"></i>코인 관리</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="questionAdmin.do"><i class="icon-check"></i>문의 관리</a></li>
+					<li class="nav-item"><a class="nav-link" href="noticeAdmin.do"><i
+							class="icon-list"></i>공지사항 관리</a></li>
+				</ul>
+			</nav>
+		</div>
 
-        <!-- Main content -->
-       <main class="main">
-            <div class="container-fluid">
-                 <div id="ui-view">공지사항 페이지</div>
-            </div>
-            <!-- /.conainer-fluid -->
-        </main>
+		<!-- Main content -->
+		<main class="main">
+		<div class="container-fluid">
+			<div id="ui-view">
+				<table class="blueone">
+					<thead>
+						<tr>
+							<th class="num">공지사항 번호</th>
+							<th class="sub">공지사항 제목</th>
+							<th class="content">공지사항 내용</th>
+							<th class="not">공지 표시</th>
+							<th class="mark">알림 표시</th>
+							<th class="date">작성일</th>
+							<th class="delete">삭제</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:set var="nlist" value="${noticelist}" />
+						<c:if test="${empty nlist }">
+							<tr>
+								<td colspan="10" align="center">등록된 공지 글이 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:forEach var="list" items="${nlist }">
+							<tr>
+								<td class="center">${list.notice_idx }</td>
+								<td class="center">${list.notice_subject }</td>
+								<td>${list.notice_content }</td>
+								<td class="center">${list.notice_top }</td>
+								<td class="center">${list.notice_event }</td>
+								<td class="center">${list.notice_date }</td>
+								<td class="center"><input type="button" value="삭제" 
+								onclick="location.href='noticeDeleteAdmin.do?notice_idx=${list.notice_idx}'">
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+
+				</table>
+			</div>
+			<div>
+				<ul>
+					<li class="wirte"><input type="button" value="공지작성"></li>
+				</ul>
+			</div>
+			<div >
+				<ul>
+					<li class="bottom">${pageStr }</li>
+				</ul>
+				
+			</div>
+		</div>
+		<!-- /.conainer-fluid --> </main>
 
 
-    </div>
+	</div>
 
-    <footer class="app-footer">
-        <%@include file="../footer.jsp"%>
-    </footer>
+	<footer class="app-footer">
+		<%@include file="../footer.jsp"%>
+	</footer>
 
-    <!-- Bootstrap and necessary plugins -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/tether/dist/js/tether.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="bower_components/pace/pace.min.js"></script>
+	<!-- Bootstrap and necessary plugins -->
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/tether/dist/js/tether.min.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/pace/pace.min.js"></script>
 
 
 
-    <!-- GenesisUI main scripts -->
+	<!-- GenesisUI main scripts -->
 
-    <script src="resources/js/app.js"></script>
+	<script src="resources/js/app.js"></script>
 
 </body>
 
