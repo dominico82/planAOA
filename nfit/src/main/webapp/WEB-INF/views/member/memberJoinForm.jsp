@@ -318,16 +318,17 @@
 									</div>
 								</div>
 								<div class="row" style="margin: 0px auto; width: 600px;">
-								<div class="form-group submitLine forMbileAppFloat"
-									style="border-top: 0px; width:525px; margin: 0px auto; margin-bottom: 40px;">
-									<input type="submit" value="가입" name='submit'
-										class="btn btn-lg btn-primary btn_mobileAppFloat"><input
-										type="reset" id="button" value="다시작성"
-										class="btn btn-lg btn-primary btn_mobileAppFloat"> <input
-										type="button" id="button" onclick="location.href='index.do'"
-										value="메인화면" class="btn btn-lg btn-primary btn_mobileAppFloat">
+									<div class="form-group submitLine forMbileAppFloat"
+										style="border-top: 0px; width: 525px; margin: 0px auto; margin-bottom: 40px;">
+										<input type="submit" value="가입" name='submit'
+											class="btn btn-lg btn-primary btn_mobileAppFloat"><input
+											type="reset" id="button" value="다시작성"
+											class="btn btn-lg btn-primary btn_mobileAppFloat"> <input
+											type="button" id="button" onclick="location.href='index.do'"
+											value="메인화면"
+											class="btn btn-lg btn-primary btn_mobileAppFloat">
+									</div>
 								</div>
-</div>
 							</form>
 
 						</div>
