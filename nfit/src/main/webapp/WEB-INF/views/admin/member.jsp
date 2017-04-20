@@ -132,7 +132,7 @@
 							<td>${admin.member_tel }</td>
 							<td>${admin.member_coin }</td>
 							<td><input type="button" value="삭제" 
-							onclick="location.href='memberDeleteAdmin.do?${admin.member_id}'"></td>
+							onclick="location.href='memberDeleteAdmin.do?member_id=${admin.member_id}'"></td>
 						</tr>
 					</c:forEach>
 				</tbody>

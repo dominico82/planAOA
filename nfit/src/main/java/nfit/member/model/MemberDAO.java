@@ -22,4 +22,5 @@ public interface MemberDAO {
 	public List<CoinDTO> getPayInfo(int member_idx);
 	public String getImage(int member_idx);
 	public int getTotalCnt();
+	public int memberDelete(String member_id);
 }

@@ -89,7 +89,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select pic_name from pic_table
 			where member_idx = #{member_idx}
 	</select>
-	
+	<delete id="memberDeleteAdmin" parameterType="String">
+		delete from member_table where member_id=#{member_id}
+	</delete>
 </mapper>
 
 
