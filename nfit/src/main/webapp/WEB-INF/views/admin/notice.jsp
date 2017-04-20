@@ -137,7 +137,8 @@
 			</div>
 			<div>
 				<ul>
-					<li class="wirte"><input type="button" value="공지작성"></li>
+					<li class="wirte"><input type="button" value="공지작성"
+					 onclick="location.href='noticeWrite.do'"></li>
 				</ul>
 			</div>
 			<div >
