@@ -21,11 +21,11 @@ public class AdminController {
 	MemberDAO memberDao;
 	@Autowired
 	NoticeDAO noticeDao;
-<<<<<<< HEAD
 
-=======
 
->>>>>>> branch 'master' of https://github.com/dominico82/planAOA
+
+
+
 	@RequestMapping("/adminPage.do")
 	public String AdminForm() {
 		return "admin/main";

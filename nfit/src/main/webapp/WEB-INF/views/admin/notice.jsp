@@ -126,8 +126,8 @@
 								<td class="center">${list.notice_top }</td>
 								<td class="center">${list.notice_event }</td>
 								<td class="center">${list.notice_date }</td>
-								<td class="center"><input type="button" value="삭제" 
-								onclick="location.href='noticeDeleteAdmin.do?notice_idx=${list.notice_idx}'">
+								<td class="center"><input type="button" value="삭제"
+									onclick="location.href='noticeDeleteAdmin.do?notice_idx=${list.notice_idx}'">
 								</td>
 							</tr>
 						</c:forEach>
@@ -137,19 +137,16 @@
 			</div>
 			<div>
 				<ul>
-<<<<<<< HEAD
 					<li class="wirte"><input type="button" value="공지작성"></li>
-=======
 					<li class="wirte"><input type="button" value="공지작성"
-					 onclick="location.href='noticeWrite.do'"></li>
->>>>>>> branch 'master' of https://github.com/dominico82/planAOA
+						onclick="location.href='noticeWrite.do'"></li>
 				</ul>
 			</div>
-			<div >
+			<div>
 				<ul>
 					<li class="bottom">${pageStr }</li>
 				</ul>
-				
+
 			</div>
 		</div>
 		<!-- /.conainer-fluid --> </main>
