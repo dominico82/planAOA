@@ -25,7 +25,9 @@ public class HelpController {
 	public ModelAndView help(){
 		ModelAndView mav=new ModelAndView();
 		List<HelpDTO> dtos=helpDao.getHelpList();
+		List<HelpDTO> top5=helpDao.getFaqTop5();
 		mav.addObject("helpList", dtos);
+		mav.addObject("top5", top5);
 		mav.setViewName("help/help");
 		return mav;
 	}
@@ -53,6 +55,8 @@ public class HelpController {
 	@RequestMapping(value="helpContents.do")
 	public ModelAndView helpContents(@RequestParam(value="idx")int idx){
 		HelpDTO dto=helpDao.getHelpContents(idx);
+		int readnum=dto.getFaq_readnum()+1;
+		int result=helpDao.increaseReadnum(idx, readnum);
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("helpContents", dto);
 		mav.setViewName("help/helpContents");		

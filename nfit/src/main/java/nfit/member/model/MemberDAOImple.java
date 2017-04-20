@@ -127,7 +127,7 @@ public class MemberDAOImple implements MemberDAO {
 	
 	public int setImage(String id, MultipartFile files) throws IllegalStateException, IOException {
 		
-		String savePath = "C:/Users/wonjun/git/planAOA/nfit/src/main/webapp/resources/upload_images/";
+		String savePath = "C:/wonjun/jspstudy/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/nfit/resources/upload_images/";
 		HashMap map = new HashMap();
 		map.put("member_id", id);
 		map.put("pic_name", id+".jpg");

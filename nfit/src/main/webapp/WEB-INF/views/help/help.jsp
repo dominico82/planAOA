@@ -157,11 +157,30 @@
               <div class="faqList">
                 <h3>FAQ <small><span class="label label-info">TOP 5</span></small></h3>
                 <ul>
-                  <li><strong class="phType phType_3">멤버십</strong> <a href="/help/contents/40"> 멤버십을 일시 정지 하고 싶어요. </a></li>
-                  <li><strong class="phType phType_3">멤버십</strong> <a href="/help/contents/42"> 멤버십을 해지 하고싶어요. </a></li>
-                  <li><strong class="phType phType_2">결제/환불</strong> <a href="/help/contents/27"> 멤버십 결제 취소/환불 안내  </a></li>
-                  <li><strong class="phType phType_1">센터이용/오류</strong> <a href="/help/contents/9"> 멤버십 신청 완료 했는데 센터 입장이 안됩니다. </a></li>
-                  <li><strong class="phType phType_1">센터이용/오류</strong> <a href="/help/contents/13"> 이용하던 제휴센터의 차감 PASS가 변경되었어요. </a></li>
+                	<c:if test="${empty top5}"><div>게시글이 없습니다.</div></c:if>
+                	<c:forEach var="list" items="${top5}">
+                		<li>
+							<c:if test="${list.faq_category=='센터이용/오류'}">
+			               		<strong class="phType phType_1">${list.faq_category}</strong>
+			               	</c:if>
+			               	<c:if test="${list.faq_category=='결제/환불'}">
+			               		<strong class="phType phType_2">${list.faq_category}</strong>
+			               	</c:if>
+			               	<c:if test="${list.faq_category=='코인'}">
+			               		<strong class="phType phType_3">${list.faq_category}</strong>
+			               	</c:if>
+			               	<c:if test="${list.faq_category=='회원정보'}">
+			               		<strong class="phType phType_4">${list.faq_category}</strong>
+			               	</c:if>
+	                		<c:url var="contents" value="helpContents.do">
+								<c:param name="idx">${list.faq_idx}</c:param>
+							</c:url>
+                			<a href="${contents}"> ${list.faq_subject} </a>
+                		</li>
+                	</c:forEach>
+                
+                
+                
                 </ul>
               </div>
 

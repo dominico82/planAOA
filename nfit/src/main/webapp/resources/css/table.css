@@ -8,8 +8,8 @@ body { background: #fff; }
   padding: 10px;
   color: #168;
   border-bottom: 3px solid #168;
-  text-align: left;
-  font-size: 15px;
+  text-align: center;
+  font-size: 14px;
 }
 .blueone td {
   color: #669;
@@ -19,4 +19,35 @@ body { background: #fff; }
 }
 .blueone tr:hover td {
   color: #004;
+}
+.blueone .num {
+	width:8%;
+}
+.blueone .sub {
+	width:12%;
+}
+.blueone .content {
+	width:35%;
+}
+.blueone .not {
+	width:5%;
+}
+.blueone .mark {
+	width:5%;
+}
+.blueone .date{
+	width:20%;
+}
+.blueone .delete{
+	width:5%;
+}
+.write{
+	text-align: right;
+}
+.bottom{
+	text-align: center;
+	font-size: 20px;
+}
+.center{
+	text-align: center;
 }

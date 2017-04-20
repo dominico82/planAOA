@@ -48,4 +48,14 @@
 		delete faq_table
 		where faq_idx=#{faq_idx}
 	</delete>
+	<update id="increaseReadnum" parameterType="int">
+		update faq_table
+		set
+			faq_readnum=#{faq_readnum}
+		where
+			faq_idx=#{faq_idx}
+	</update>
+	<select id="getFaqTop5" resultType="nfit.help.model.HelpDTO">
+		select * from (select * from faq_table order by faq_readnum desc) where rownum <![CDATA[<=]]> 5
+	</select>
 </mapper>

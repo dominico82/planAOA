@@ -36,8 +36,9 @@ private SqlSessionTemplate sqlMap;
 		return dtos;
 	}
 	
-	public String faqTop5() {
-		return null;
+	public List<HelpDTO> getFaqTop5() {
+		List<HelpDTO> top5=sqlMap.selectList("getFaqTop5");
+		return top5;
 	}
 	
 	public int setHelpContents(HelpDTO dto) {
@@ -65,5 +66,34 @@ private SqlSessionTemplate sqlMap;
 		int result=sqlMap.delete("helpDel", idx);
 		return result;
 	}
+	
+	public int increaseReadnum(int idx, int readnum) {
+		HashMap map=new HashMap();
+		map.put("faq_idx", idx);
+		map.put("faq_readnum", readnum);
+		int result=sqlMap.update("increaseReadnum", map);
+		return result;
+	}
 }  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

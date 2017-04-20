@@ -6,8 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="resources/css/modifyForm.css"/>
+<title>만족스러운 피트니스 Nfit 회원정보 수정</title>
+<jsp:include page="../header.jsp"/>
+<link rel="stylesheet" type="text/css" href="resources/css/mypage1.css"/>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css"/>
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
@@ -191,6 +192,8 @@ function checkValue() {
 											style="width: 400px;" onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'>
 										</div>
 									</div>
+								</div>
+								<div class="col-md-6">
 									<div class="form-group">
 										<label>생년월일</label>
 										<div class="form-inline birthday">
@@ -258,6 +261,7 @@ function checkValue() {
 		</div>
 	</div>
 </div>
+<jsp:include page="../footer.jsp"/>
 </body>
 </html>
 <script>

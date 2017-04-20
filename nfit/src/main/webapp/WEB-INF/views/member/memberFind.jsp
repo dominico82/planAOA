@@ -21,13 +21,13 @@
 <!-----768px-menu----->
 <link type="text/css" rel="stylesheet"
 	href="resources/css/jquery.mmenu.all.css" />
-<link type="text/css" rel="Stylesheet"
-	href="resources/css/modifyForm.css" />
+
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css" />
+<link rel="stylesheet" type="text/css" href="resources/css/modifyForm.css"/>
 <script type="text/javascript">
 	function email_change() {
 		if (document.join.email.options[document.join.email.selectedIndex].value == "") {
@@ -86,14 +86,14 @@
 		<%@include file="../header.jsp"%>
 	</header>
 	<div class="wrap">
-		<div class="container" style="margin: 0px auto;">
+		<div class="container" style="width:600px; margin: 0px auto;">
 			<div class="mypageWrap">
 				<div class="row">
 					<div class="col-lg-10 col-md-9 col-sm-8" id="inner_top">
-						<div class="editMyInfo" style="margin-top: 100px;">
+						<div class="editMyInfo" style="margin-top: 150px;">
 							<h3>아이디 찾기</h3>
 							<form id="formmain" action="memberFindId.do" method="post"
-								name="join">
+								name="join" class="memberForm">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -116,13 +116,16 @@
 												<option value="yahoo.co.kr">야후</option>
 											</select>
 										</div>
-										<div class="form-group submitLine forMbileAppFloat">
+										
+									</div>
+								</div>
+								<div class="row" style="margin: 0px auto; width: 600px;">
+								<div class="form-group submitLine forMbileAppFloat" style="border-top: 0px; width: 455px; margin: 0px auto; margin-bottom: 40px;">
 											<input type="submit" value="아이디 찾기" name='submit'
 												class="btn btn-lg btn-primary btn_mobileAppFloat"><input
 												type="reset" id="button" value="다시작성"
 												class="btn btn-lg btn-primary btn_mobileAppFloat">
 										</div>
-									</div>
 								</div>
 							</form>
 						</div>
@@ -132,14 +135,14 @@
 		</div>
 	</div>
 	<div class="wrap">
-		<div class="container" style="margin: 0px auto;">
+		<div class="container" style="width:600px; margin: 0px auto;">
 			<div class="mypageWrap">
 				<div class="row">
 					<div class="col-lg-10 col-md-9 col-sm-8" id="inner_top">
-						<div class="editMyInfo" style="margin-top: 100px;">
+						<div class="editMyInfo" style="margin-top: 100px; margin-bottom: 100px;">
 							<h3>비빌번호 찾기</h3>
 							<form id="formmain" action="memberPwdFind.do" method="post"
-								name="join">
+								name="join" class="memberForm">
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
@@ -168,13 +171,16 @@
 												<option value="yahoo.co.kr">야후</option>
 											</select>
 										</div>
-										<div class="form-group submitLine forMbileAppFloat">
+										
+									</div>
+								</div>
+								<div class="row" style="margin: 0px auto; width: 600px;">
+								<div class="form-group submitLine forMbileAppFloat" style="border-top: 0px; width: 465px; margin: 0px auto; margin-bottom: 40px;">
 											<input type="submit" value="비밀번호 찾기" name='submit'
 												class="btn btn-lg btn-primary btn_mobileAppFloat"><input
 												type="reset" id="button" value="다시작성"
 												class="btn btn-lg btn-primary btn_mobileAppFloat"> 
 										</div>
-									</div>
 								</div>
 							</form>
 						</div>

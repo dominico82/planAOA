@@ -71,7 +71,7 @@
 <body
 	class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
 	<header>
-		<jsp:include page="../header.jsp"/>
+		<jsp:include page="../header.jsp" />
 	</header>
 
 	<div class="app-body">
@@ -100,50 +100,51 @@
 		<main class="main">
 		<div class="container-fluid">
 			<div id="ui-view">
-			<table class="blueone">
-				<thead>
-					<tr>
-						<th>회원번호</th>
-						<th>이름</th>
-						<th>주소</th>
-						<th>성별</th>
-						<th>생일</th>
-						<th>이메일</th>
-						<th>연락처</th>
-						<th>코인</th>
-						<th>삭제</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:set var="list" value="${memberList}" />
-					<c:if test="${empty list }">
+				<table class="blueone">
+					<thead>
 						<tr>
-							<td colspan="10" align="center">등록된 회원이 없습니다.</td>
+							<th>회원번호</th>
+							<th>이름</th>
+							<th>주소</th>
+							<th>성별</th>
+							<th>생일</th>
+							<th>이메일</th>
+							<th>연락처</th>
+							<th>코인</th>
+							<th>삭제</th>
 						</tr>
-					</c:if>
-					<c:forEach var="admin" items="${list }">
-						<tr>
-							<td>${admin.member_idx }</td>
-							<td>${admin.member_name}</td>
-							<td>${admin.member_addr }</td>
-							<td>${admin.member_sex }</td>
-							<td>${admin.member_birth }</td>
-							<td>${admin.member_email }</td>
-							<td>${admin.member_tel }</td>
-							<td>${admin.member_coin }</td>
-							<td><input type="button" value="삭제" 
-							onclick="location.href='memberDeleteAdmin.do?member_id=${admin.member_id}'"></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-				
-			</table>
+					</thead>
+					<tbody>
+						<c:set var="list" value="${memberList}" />
+						<c:if test="${empty list }">
+							<tr>
+								<td colspan="10" align="center">등록된 회원이 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:forEach var="admin" items="${list }">
+							<tr>
+								<td class="center">${admin.member_idx }</td>
+								<td class="center">${admin.member_name}</td>
+								<td>${admin.member_addr }</td>
+								<td class="center">${admin.member_sex }</td>
+								<td class="center">${admin.member_birth }</td>
+								<td class="center">${admin.member_email }</td>
+								<td class="center"">${admin.member_tel }</td>
+								<td class="center">${admin.member_coin }</td>
+								<td class="center"><input type="button" value="삭제"
+									onclick="location.href='memberDeleteAdmin.do?member_id=${admin.member_id}'">
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+
+				</table>
 			</div>
 			<nav>
 				<ul>
-				<li>${pageStr }</li>
+					<li class="bottom">${pageStr }</li>
 				</ul>
-				</nav>
+			</nav>
 		</div>
 		<!-- /.conainer-fluid --> </main>
 

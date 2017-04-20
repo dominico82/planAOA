@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,10 +18,10 @@
 		</script>
 </head>
 <body>
-<header>
+	<header>
 		<%@include file="../header.jsp"%>
 	</header>
-<section>
+	<section>
 		<article>
 			<br>
 			<table align="center">
@@ -125,19 +125,22 @@
 </textarea>
 
 								</div>
-								
-								
-							
-							
+
+
+
+
 							</div>
 							<div
 								style="width: 780px; height: 18px; background: url('../img/gnb/rule_bottom.png') no-repeat;"></div>
-						
-						
+
+
 						</div>
-<div style="margin: 0px auto" align="center">
-						<form name="check" action="memberJoin.do" >
-							<input type="checkbox" name="agree">모든 약관 내용을 이해했으며 이에 동의합니다.&nbsp;&nbsp;<a href="javascript:check();"><input type="button" value="동의"></a></form>
+						<div style="margin: 0px auto" align="center">
+							<form name="check" action="memberJoin.do">
+								<input type="checkbox" name="agree">모든 약관 내용을 이해했으며 이에
+								동의합니다.&nbsp;&nbsp;<a href="javascript:check();"><input
+									type="button" value="동의"></a>
+							</form>
 						</div>
 						<div style="height: 30px;">&nbsp;</div></td>
 				</tr>

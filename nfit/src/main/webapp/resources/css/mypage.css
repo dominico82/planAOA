@@ -19,8 +19,10 @@ body {
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
-    width: 1150px;
-    height: 900px;
+}
+.imgsize {
+	width: 160px;
+	height: 200px;
 }
 .row {
     margin-right: -15px;
@@ -56,8 +58,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 .mypageMenuAside .userInfo .userCircleImgWrap {
     border-radius: 50%;
     overflow: hidden;
-    width: 140px;
-    height: 140px;
+    width: 200px;
+    height: 200px;
     display: inline-block;
 }
 .mypageMenuAside .userInfo {
@@ -65,8 +67,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 .mypageMenuAside .userInfo .userCircleImg {
     display: inline-block;
-    width: 140px;
-    height: 140px;
+    width: 200px;
+    height: 200px;
 }
 .mypageMenuAside .userInfo h6 {
     font-size: 16px;
