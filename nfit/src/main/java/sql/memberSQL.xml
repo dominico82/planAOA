@@ -85,11 +85,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select * from member_table order by member_idx desc)a)b
 		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
 	</select>
-	
-	<select id="payInfo" resultType="nfit.coin.model.CoinDTO">
-		select * from pay_table where member_idx = #{member_idx}
-	</select>
-	
 	<select id="getPic" resultType="String">
 		select pic_name from pic_table
 			where member_idx = #{member_idx}
