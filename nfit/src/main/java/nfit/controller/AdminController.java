@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,12 +36,18 @@ public class AdminController {
 		mav.setViewName("admin/member");
 		return mav;
 	}
-	/*@RequestMapping("/memberDeleteAdmin.do")
+	@RequestMapping(value="memberDeleteAdmin.do")
 	public ModelAndView memberDeleteAdmin(
 			@RequestParam(value="member_id") String id){
+		System.out.println(id);
 		String member_id=id;
-		String result=
-	}*/
+		int result=memberDao.memberDelete(member_id);
+		String msg=result>0?"회원삭제 완료":"회원삭제 실패";
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("msg",msg);
+		mav.setViewName("admin/adminMsg");
+		return mav;
+	}
 	@RequestMapping("/cooperateAdmin.do")
 	public String cooperAdmin(){
 		return "admin/cooperate";

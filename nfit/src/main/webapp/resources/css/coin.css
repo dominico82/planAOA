@@ -1,5 +1,4 @@
-a:link, a:visited, a:active { text-decoration:none; color:#78787a;} 
-a:hover { text-decoration:none; } 
+
 
 article.buy_pass_pc > div > ul > li > a > dl {background-color: white !important;border-color: #00bff0 !important;height:auto !important;}
 .paypc-dt {letter-spacing:-1px !important;font-size: 18px !important;color: #66717a;font-weight: bold !important;border-bottom:1px solid #00bff0;margin:0 !important;padding:10px 0;}

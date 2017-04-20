@@ -9,6 +9,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon"
 	href="resources/images/fav-icon.png" />
+	
+<link href="http://tlx.co.kr/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="resources/css/notice.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="js/httpRequest.js"></script>
+<script type="text/javascript" src="resources/js/jquery.min.js"></script>
 
 <!---start-login-script--->
 <script src="resources/js/login.js"></script>
@@ -24,8 +29,24 @@
 	<header>
 		<%@include file="../header.jsp"%>
 	</header>
-
-	<div class="site__container" style="margin-top:200px;">
+<br><br><br><br>
+<div class="wrap">
+    <div class="wrap">
+	  <div class="container">
+    	<div class="row">
+    	  <div class="content col-md-12">
+       		 <div class="page-header">
+          <h2>
+            로그인
+            <small>로그인후 이용하세요!</small>
+          </h2>
+        </div>
+        	</div>
+        	</div>
+        	</div>
+        	</div>
+        	</div>
+	<div class="site__container" style="margin-top:50px;">
 
 		<div class="grid__container">
 
@@ -57,6 +78,7 @@
 			</form>
 		</div>
 	</div>
+	<br><br><br>
 	<footer>
 		<%@include file="../footer.jsp"%>
 	</footer>

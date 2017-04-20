@@ -9,27 +9,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@include file="../header.jsp" %>
 
 <link href="http://tlx.co.kr/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="resources/css/notice.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 
-
 </head>
 <body>
-
+	<header>
+		<jsp:include page="../header.jsp"/>
+	</header>
 <br><br><br>
 <div class="wrap">
-
     <div class="wrap">
-
-
-  <div class="container">
-    <div class="row">
-      <div class="content col-md-12">
-        <div class="page-header">
+	  <div class="container">
+    	<div class="row">
+    	  <div class="content col-md-12">
+       		 <div class="page-header">
           <h2>
             공지사항
             <small>이벤트와 새로운 알림을 확인하세요!</small>
@@ -93,35 +90,10 @@
 	
 
   
-
-</div> <!-- /.wrap -->
-<div class="spinnerWrap" id="spinner" style="display:none;">
-    <div class="loader">Loading...</div>
 </div>
-
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/wow.min.js"></script>
-
-<!--<![endif]-->
-<script src="/js/lightgallery-all.min.js"></script>
-<script src="/js/jquery.bgswitcher.js"></script>
-
-<!-- IE8 / no SVG support browser -->
-<script src="/js/svgeezy.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-<script src="/js/daterangepicker.js"></script>
-<script src="/js/waypoints.min.js"></script>
-<script src="/js/jquery.counterup.min.js"></script>
-<script src="/js/jquery.bxslider.min.js"></script>
-<script src="/js/sweetalert.min.js"></script>
-<!--
-<script src="/js/chromeSmoothScroll.min.js"></script>
--->
-<script src="/js/tlx_front.js?v=20160812"></script>
-
-
 </div>
-<%@include file="../footer.jsp" %>
+	<footer>
+		<jsp:include page="../footer.jsp"/>
+	</footer>
 </body>
 </html>

@@ -128,13 +128,12 @@ public class MemberDAOImple implements MemberDAO {
 	public int setImage(String id, MultipartFile files) throws IllegalStateException, IOException {
 		
 		String savePath = "C:/Users/wonjun/git/planAOA/nfit/src/main/webapp/resources/upload_images/";
-		
 		HashMap map = new HashMap();
 		map.put("member_id", id);
-		map.put("pic_name", files.getOriginalFilename());
+		map.put("pic_name", id+".jpg");
 		int count = sqlMap.insert("setUpload", map);
 		
-		files.transferTo(new File(savePath+files.getOriginalFilename()));//파일을 업로드한다.
+		files.transferTo(new File(savePath+id+".jpg"));//파일을 업로드한다.
 		return count;
 		
 	}
@@ -158,9 +157,13 @@ public class MemberDAOImple implements MemberDAO {
 		return dto;
 	}
 	
-	public String getImage(int member_idx){
-		String pic = sqlMap.selectOne("getPic", member_idx);
+	public List<String> getImage(String member_id){
+		List<String> pic = sqlMap.selectList("getPic", member_id);
 		return pic;
+	}
+	public int memberDelete(String member_id){
+		int count=sqlMap.delete("memberDeleteAdmin",member_id);
+		return count;
 	}
 }
 
