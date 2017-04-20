@@ -87,34 +87,7 @@
 	<div ><input type= "button" value= "작성하기 " style= "margin-left: 440px;"/></div>
 
   
-
-</div> <!-- /.wrap -->
-<div class="spinnerWrap" id="spinner" style="display:none;">
-    <div class="loader">Loading...</div>
 </div>
-
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/wow.min.js"></script>
-
-<!--<![endif]-->
-<script src="/js/lightgallery-all.min.js"></script>
-<script src="/js/jquery.bgswitcher.js"></script>
-
-<!-- IE8 / no SVG support browser -->
-<script src="/js/svgeezy.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-<script src="/js/daterangepicker.js"></script>
-<script src="/js/waypoints.min.js"></script>
-<script src="/js/jquery.counterup.min.js"></script>
-<script src="/js/jquery.bxslider.min.js"></script>
-<script src="/js/sweetalert.min.js"></script>
-<!--
-<script src="/js/chromeSmoothScroll.min.js"></script>
--->
-<script src="/js/tlx_front.js?v=20160812"></script>
-
-
 </div>
 	<footer>
 		<jsp:include page="../footer.jsp"/>
