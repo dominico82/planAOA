@@ -9,27 +9,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@include file="../header.jsp" %>
 
 <link href="http://tlx.co.kr/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="resources/css/notice.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="js/httpRequest.js"></script>
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 
-
 </head>
 <body>
-
+	<header>
+		<jsp:include page="../header.jsp"/>
+	</header>
 <br><br><br>
 <div class="wrap">
-
     <div class="wrap">
-
-
-  <div class="container">
-    <div class="row">
-      <div class="content col-md-12">
-        <div class="page-header">
+	  <div class="container">
+    	<div class="row">
+    	  <div class="content col-md-12">
+       		 <div class="page-header">
           <h2>
             공지사항
             <small>이벤트와 새로운 알림을 확인하세요!</small>
@@ -119,6 +116,8 @@
 
 
 </div>
-<%@include file="../footer.jsp" %>
+	<footer>
+		<jsp:include page="../footer.jsp"/>
+	</footer>
 </body>
 </html>
