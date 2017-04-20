@@ -137,7 +137,12 @@
 			</div>
 			<div>
 				<ul>
+<<<<<<< HEAD
 					<li class="wirte"><input type="button" value="공지작성"></li>
+=======
+					<li class="wirte"><input type="button" value="공지작성"
+					 onclick="location.href='noticeWrite.do'"></li>
+>>>>>>> branch 'master' of https://github.com/dominico82/planAOA
 				</ul>
 			</div>
 			<div >
