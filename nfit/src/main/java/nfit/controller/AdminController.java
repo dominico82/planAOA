@@ -22,10 +22,6 @@ public class AdminController {
 	@Autowired
 	NoticeDAO noticeDao;
 
-
-
-
-
 	@RequestMapping("/adminPage.do")
 	public String AdminForm() {
 		return "admin/main";
