@@ -37,11 +37,13 @@ public class MypageController {
 		
 		String userid = (String)session.getAttribute("saveid");
 		MemberDTO dto = memberDao.getMemberInfo(userid);
+		List<String> pic = memberDao.getImage(userid);
 		int useridx = dto.getMember_idx();
 		List<CoinDTO> dta = memberDao.getPayInfo(useridx);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("dto",dto);
 		mav.addObject("dta",dta);
+		mav.addObject("pic", pic);
 		mav.setViewName("mypage/myPage");
 		return mav;
 	}
@@ -83,7 +85,7 @@ public class MypageController {
 		MultipartFile upload = req.getFile("upload");
 		copyInto(writer,upload);
 		return "mypage/fileSuccess";
-	} */
+	} 
 	
 	//파일 복사 관련 사용자 정의 메서드
 	private void copyInto(String writer, MultipartFile upload){
@@ -101,22 +103,18 @@ public class MypageController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	//프로필 사진 DB에 업로드
 	@RequestMapping(value="fileUpload.do", method=RequestMethod.POST)
-	public ModelAndView saveImage(@RequestParam("id") String id, @RequestParam("files") MultipartFile files, @RequestParam("idx") int idx) throws IllegalStateException, IOException {
+	public ModelAndView saveImage(@RequestParam("id") String id, @RequestParam("files") MultipartFile files) throws IllegalStateException, IOException {
 		
-		System.out.println("member_id"+id+"files"+files.getOriginalFilename());
 		int result = memberDao.setImage(id, files);
-		String pic = memberDao.getImage(idx);
-		
 		String msg = result>0?"사진 업로드 완료":"업로드 실패";
 		
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("pic", pic);
 		mav.addObject("msg", msg);
-		mav.setViewName("mypage/fileSuccess");
+		mav.setViewName("mypage/myPage_ok");
 		return mav;
 	}
 	

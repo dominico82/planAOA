@@ -76,19 +76,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="payInfo" resultType="nfit.coin.model.CoinDTO">
 		select * from pay_table where member_idx = #{member_idx}
 	</select>
+	
 	<select id="membertotalCnt" resultType="Integer">
 		select count(*) from member_table
 	</select>
+	
 	<select id="adminList" resultType="nfit.member.model.MemberDTO" parameterType="Map">
 		select * from 
 		(select rownum as rnum, a.* from
 		(select * from member_table order by member_idx desc)a)b
 		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
 	</select>
-	<select id="getPic" resultType="String">
-		select pic_name from pic_table
-			where member_idx = #{member_idx}
+	
+	<select id="getPic" resultType="String" parameterType="String">
+		select pic_name from
+			(select * from pic_table where member_id = #{member_id} order by pic_idx desc)
+			where rownum = 1
 	</select>
+	
 	<delete id="memberDeleteAdmin" parameterType="String">
 		delete from member_table where member_id=#{member_id}
 	</delete>

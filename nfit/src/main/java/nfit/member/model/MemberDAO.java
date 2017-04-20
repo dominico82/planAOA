@@ -20,7 +20,7 @@ public interface MemberDAO {
 	public int setImage(String id, MultipartFile files) throws IllegalStateException, IOException;
 	public List<MemberDTO>memberList(int cp,int ls);
 	public List<CoinDTO> getPayInfo(int member_idx);
-	public String getImage(int member_idx);
+	public List<String> getImage(String id);
 	public int getTotalCnt();
 	public int memberDelete(String member_id);
 }

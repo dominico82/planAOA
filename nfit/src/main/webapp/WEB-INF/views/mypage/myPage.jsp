@@ -33,7 +33,9 @@ function info(){
 				<aside class="col-lg-2 col-md-3 col-sm-4 mypageMenuAside">
 					<div class="userInfo">
 						<span class="userCircleImgWrap">
-							<span class="userCircleImg"><img src="resources/file/upload/${pic}"></span>
+							<span class="userCircleImg">
+							<c:forEach var="pics" items="${pic}"><img src="resources/upload_images/${pics}"></c:forEach>
+							</span>
 						</span>
 						<form name="upload" action="fileUpload.do" method="post" enctype="multipart/form-data"> <!-- 파일 업로드를 구현하는 폼 -->
 							사진선택:<input type="file" name="files" id="files" accept="image/*" modelAttribute="uploadForm"><!-- input type="file" 업로드할 파일을 선택하는 속성 -->
