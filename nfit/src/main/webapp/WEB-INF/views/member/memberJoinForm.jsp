@@ -20,13 +20,14 @@
 <!-----768px-menu----->
 <link type="text/css" rel="stylesheet"
 	href="resources/css/jquery.mmenu.all.css" />
-<link rel="stylesheet" type="text/css"
-	href="resources/css/modifyForm.css" />
+
 <link rel="stylesheet"
 	href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css" />
+<link rel="stylesheet" type="text/css"
+	href="resources/css/modifyForm.css" />
 <script>
 	$(function() {
 		$("#datepicker").datepicker(
@@ -202,7 +203,7 @@
 </head>
 <body>
 	<header>
-		<%@include file="../header.jsp"%>
+		<jsp:include page="../header.jsp"/>
 	</header>
 	<div class="wrap">
 		<div class="container" style="margin: 0px auto; width: 600px;">
@@ -340,7 +341,7 @@
 
 
 	<footer>
-		<%@include file="../footer.jsp"%>
+		<jsp:include page="../footer.jsp"/>
 	</footer>
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script>

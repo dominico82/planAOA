@@ -108,6 +108,7 @@
 							<th class="not">공지 표시</th>
 							<th class="mark">알림 표시</th>
 							<th class="date">작성일</th>
+							<th class="delete">수정</th>
 							<th class="delete">삭제</th>
 						</tr>
 					</thead>
@@ -126,8 +127,9 @@
 								<td class="center">${list.notice_top }</td>
 								<td class="center">${list.notice_event }</td>
 								<td class="center">${list.notice_date }</td>
+								<td class="center"><input type="button" value="수정" onclick="location.href='noticeUpdate.do?idx=${list.notice_idx}'"></td>
 								<td class="center"><input type="button" value="삭제"
-									onclick="location.href='noticeDeleteAdmin.do?notice_idx=${list.notice_idx}'">
+									onclick="location.href='noticeDel.do?idx=${list.notice_idx}'">
 								</td>
 							</tr>
 						</c:forEach>
@@ -135,9 +137,8 @@
 
 				</table>
 			</div>
-			<div>
+			<div style="margin-top: 10px;">
 				<ul>
-					<li class="wirte"><input type="button" value="공지작성"></li>
 					<li class="wirte"><input type="button" value="공지작성"
 						onclick="location.href='noticeWrite.do'"></li>
 				</ul>
@@ -155,7 +156,7 @@
 	</div>
 
 	<footer class="app-footer">
-		<%@include file="../footer.jsp"%>
+		<jsp:include page="../footer.jsp"/>
 	</footer>
 
 	<!-- Bootstrap and necessary plugins -->

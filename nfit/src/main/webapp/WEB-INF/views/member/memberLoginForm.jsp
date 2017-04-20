@@ -27,7 +27,7 @@
 </head>
 <body >
 	<header>
-		<%@include file="../header.jsp"%>
+		<jsp:include page="../header.jsp"/>
 	</header>
 <br><br><br><br>
 <div class="wrap">
@@ -80,7 +80,7 @@
 	</div>
 	<br><br><br>
 	<footer>
-		<%@include file="../footer.jsp"%>
+		<jsp:include page="../footer.jsp"/>
 	</footer>
 </body>
 </html>

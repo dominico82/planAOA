@@ -152,7 +152,7 @@
 	</div>
 
 	<footer class="app-footer">
-		<%@include file="../footer.jsp"%>
+		<jsp:include page="../footer.jsp"/>
 	</footer>
 
 	<!-- Bootstrap and necessary plugins -->

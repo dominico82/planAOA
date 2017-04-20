@@ -19,7 +19,7 @@
 </head>
 <body>
 	<header>
-		<%@include file="../header.jsp"%>
+		<jsp:include page="../header.jsp"/>
 	</header>
 	<section>
 		<article>
@@ -150,7 +150,7 @@
 		</article>
 	</section>
 	<footer>
-		<%@include file="../footer.jsp"%>
+		<jsp:include page="../footer.jsp"/>
 	</footer>
 </body>
 </html>

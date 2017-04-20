@@ -83,7 +83,7 @@
 </head>
 <body>
 	<header>
-		<%@include file="../header.jsp"%>
+		<jsp:include page="../header.jsp"/>
 	</header>
 	<div class="wrap">
 		<div class="container" style="width:600px; margin: 0px auto;">
@@ -193,7 +193,7 @@
 
 	<div></div>
 	<footer>
-		<%@include file="../footer.jsp"%>
+		<jsp:include page="../footer.jsp"/>
 	</footer>
 </body>
 </html>

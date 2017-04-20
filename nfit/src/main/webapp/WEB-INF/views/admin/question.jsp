@@ -64,7 +64,7 @@
 
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
     <header>
-		<%@include file="../header.jsp"%>
+		<jsp:include page="../header.jsp"/>
 	</header>
 
     <div class="app-body">
@@ -106,7 +106,7 @@
     </div>
 
     <footer class="app-footer">
-        <%@include file="../footer.jsp"%>
+        <jsp:include page="../footer.jsp"/>
     </footer>
 
     <!-- Bootstrap and necessary plugins -->

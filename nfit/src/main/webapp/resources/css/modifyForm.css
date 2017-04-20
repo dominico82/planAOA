@@ -184,7 +184,7 @@ label {
 }
 .editMyInfo .radio-inline {
 	border: 1px solid #ddd;
-    padding: 5px 10px 5px;
+    padding: 5px 10px 5px 30px;
     border-radius: 3px;
 } 
 .memberForm .male {
