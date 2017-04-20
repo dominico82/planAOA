@@ -14,8 +14,7 @@ import nfit.member.model.MemberDTO;
 @Controller
 public class AdminController {
 
-	@Autowired
-	private MemberDAO memberDao;
+	@Autowired MemberDAO memberDao;
 	
 	@RequestMapping("/adminPage.do")
 	public String AdminForm(){

@@ -64,6 +64,12 @@
 				</c:url>
               	<a href="${helpUpdate}" class="btn btn-default">수정</a><br>
               </div>
+              <div>
+              	<c:url var="helpDel" value="helpDel.do">
+					<c:param name="idx">${contents.faq_idx}</c:param>
+				</c:url>
+              	<a href="${helpDel}" class="btn btn-default">삭제</a><br>
+              </div>
 
 
               <div class="orCantFindHelp">

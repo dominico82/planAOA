@@ -46,6 +46,7 @@
           	<div class="form-group">          	
           		<label>제목</label>
           		<input type="text" name="faq_subject" size="60" class="form-control" required="required" value="${content.faq_subject}">
+          		<input type="hidden" name="faq_idx" value="${content.faq_idx}">
           	</div>
 			<div class="form-group">
 				<label>내용</label>

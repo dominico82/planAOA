@@ -28,18 +28,49 @@
 			sysdate
 		)
 	</insert>	
-	<insert id="setNoticePics" parameterType="String">
-		insert into
-			pic_table
-		values(
-			pic_table_idx.nextval,
-			notice_bbs_idx.currval,
-			'0',
-			#{pic_name}
-		)			
+	<insert id="setNoticePics">
+		<if test='1>notice_idx'>		
+			insert into
+				pic_table
+			values(
+				pic_table_idx.nextval,
+				notice_bbs_idx.currval,
+				'0',
+				#{pic_name}
+			)		
+		</if>	
+		<if test='notice_idx>0'>
+			insert into
+				pic_table
+			values(
+				pic_table_idx.nextval,
+				#{notice_idx},
+				'0',
+				#{pic_name}
+			)			
+		</if>	
+		
 	</insert>
 	<select id="getNoticePics" resultType="String">
 		select pic_name from pic_table 
 			where notice_idx=#{notice_idx}  
 	</select>
+	<update id="noticeUpdate" parameterType="nfit.notice.model.NoticeDTO">
+		update notice_bbs
+		set
+			notice_subject=#{notice_subject},
+			notice_content=#{notice_content},
+			notice_top=#{notice_top},
+			notice_event=#{notice_event}
+		where
+			notice_idx=#{notice_idx}
+	</update>
+	<delete id="noticePicDel" >
+		delete pic_table
+		where notice_idx=#{notice_idx}
+	</delete>
+	<delete id="noticeDel">
+		delete notice_bbs
+		where notice_idx=#{notice_idx}
+	</delete>
 </mapper>

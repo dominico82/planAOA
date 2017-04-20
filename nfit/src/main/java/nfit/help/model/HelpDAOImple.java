@@ -31,7 +31,6 @@ private SqlSessionTemplate sqlMap;
 			search.put("key", "faq_tag");
 			search.put("value", tag);
 		}
-		System.out.println(category);
 		List<HelpDTO> dtos=sqlMap.selectList("getHelpSearch", search);
 		
 		return dtos;
@@ -52,13 +51,19 @@ private SqlSessionTemplate sqlMap;
 	}
 	
 	public int helpUpdate(HelpDTO dto) {
-		System.out.println(dto.getFaq_idx());
-		System.out.println(dto.getFaq_category());
-		System.out.println(dto.getFaq_tag());
-		System.out.println(dto.getFaq_subject());
-		System.out.println(dto.getFaq_content());
+//		System.out.println("faq_idx는:"+dto.getFaq_idx());
+//		System.out.println(dto.getFaq_category());
+//		System.out.println(dto.getFaq_tag());
+//		System.out.println(dto.getFaq_subject());
+//		System.out.println(dto.getFaq_content());
 		int count=sqlMap.update("helpUpdate", dto);
+//		System.out.println("업데이트된 갯수:"+count);
 		return count;
+	}
+	
+	public int helpDel(int idx) {
+		int result=sqlMap.delete("helpDel", idx);
+		return result;
 	}
 }  
 

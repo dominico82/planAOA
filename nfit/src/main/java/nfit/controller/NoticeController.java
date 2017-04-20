@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.oreilly.servlet.MultipartRequest;
 
+import nfit.help.model.HelpDTO;
 import nfit.notice.model.NoticeDAO;
 import nfit.notice.model.NoticeDTO;
 
@@ -61,7 +62,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="noticeWrite.do", method=RequestMethod.POST)
-	public ModelAndView noticeWrite(NoticeDTO dto, @RequestParam("files") List<MultipartFile> files)throws IllegalStateException, IOException{
+	public ModelAndView noticeWrite(NoticeDTO dto, @RequestParam(value="files") List<MultipartFile> files)throws IllegalStateException, IOException{
 		
 		int result=noticeDao.setNoticeContents(dto, files);
 		ModelAndView mav=new ModelAndView();
@@ -70,6 +71,37 @@ public class NoticeController {
 		return mav;
 	}
 	
+	@RequestMapping(value="noticeUpdate.do")
+	public ModelAndView noticeUpdateForm(@RequestParam(value="idx")int idx){
+		NoticeDTO dto=noticeDao.getNoticeContents(idx);
+		List<String> pics=noticeDao.getNoticePics(idx);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("contents", dto);
+		mav.addObject("pics", pics);
+		mav.setViewName("notice/noticeUpdate");
+		return mav;
+	}
+	
+	@RequestMapping(value="noticeUpdate.do", method=RequestMethod.POST)
+	public ModelAndView noticeUpdate(NoticeDTO dto, @RequestParam(value="files") List<MultipartFile> files)throws IllegalStateException, IOException{	
+
+	ModelAndView mav=new ModelAndView();
+	int result=noticeDao.noticeUpdate(dto, files);
+	mav.addObject("result", result);
+	mav.setViewName("notice/noticeUpdate_ok");
+	
+	return mav;
+	}
+	
+	@RequestMapping(value="noticeDel.do")
+	public ModelAndView noticeDel(@RequestParam(value="idx")int idx){
+		ModelAndView mav=new ModelAndView();
+		int result=noticeDao.noticeDel(idx);
+		String msg=result>0?"삭제성공!":"삭제실패!";
+		mav.addObject("msg", msg);
+		mav.setViewName("notice/noticeDel");
+		return mav;
+	}
 
 }
 

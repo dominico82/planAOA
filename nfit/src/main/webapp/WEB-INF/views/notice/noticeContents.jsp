@@ -37,7 +37,7 @@
 				</c:if>
 			</div>
 			<div>			
-				${dto.notice_content}
+				<p>${dto.notice_content}</p>
 			</div>
           </article>
 
@@ -47,6 +47,20 @@
           <div class="articleTail">
             <a href="javascript:history.go(-1)" class="btn btn-default"><i class="fa fa-arrow-left"></i> 목록으로 돌아가기</a>
           </div>
+          
+          <div>
+           	<c:url var="noticeUpdate" value="noticeUpdate.do">
+				<c:param name="idx">${dto.notice_idx}</c:param>
+			</c:url>
+          	<a href="${noticeUpdate}" class="btn btn-default">수정</a><br>
+          </div>
+          <div>
+           	<c:url var="noticeDel" value="noticeDel.do">
+				<c:param name="idx">${dto.notice_idx}</c:param>
+			</c:url>
+          	<a href="${noticeDel}" class="btn btn-default">삭제</a><br>
+          </div>
+              
         </div><!-- /.noticeWrap -->
 
 

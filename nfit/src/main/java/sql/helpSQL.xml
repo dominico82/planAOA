@@ -16,7 +16,7 @@
 		)
 	</insert>	
 	<select id="getHelpList" resultType="nfit.help.model.HelpDTO">
-		select * from faq_table
+		select * from faq_table where rowid in(select max(rowid) from faq_table group by faq_tag)
 	</select>
 	<select id="getHelpSearch" resultType="nfit.help.model.HelpDTO">
 		<if test='key!="faq_content"'>
@@ -44,4 +44,8 @@
 		where
 			faq_idx=#{faq_idx}
 	</update>
+	<delete id="helpDel">
+		delete faq_table
+		where faq_idx=#{faq_idx}
+	</delete>
 </mapper>

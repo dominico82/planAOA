@@ -67,6 +67,9 @@
               
           </div><!-- /.list-group -->
 
+			<div>
+		       	<a href="noticeWrite.do" class="btn btn-default">글쓰기</a><br>
+		    </div>		
           <nav>
             <ul class="pagination">
             	<li>${pageStr}</li>
@@ -87,7 +90,7 @@
 	<br/>
 	<div id= "paging" style= "margin-left: 190px;"></div>
 	<br/>
-	<div ><input type= "button" value= "작성하기 " style= "margin-left: 440px;"/></div>
+	
 
   
 

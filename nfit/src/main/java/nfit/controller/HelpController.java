@@ -97,6 +97,16 @@ public class HelpController {
 	
 	return mav;
 	}
+	
+	@RequestMapping(value="helpDel.do")
+	public ModelAndView helpDel(@RequestParam(value="idx")int idx){
+		ModelAndView mav=new ModelAndView();
+		int result=helpDao.helpDel(idx);
+		String msg=result>0?"삭제성공!":"삭제실패!";
+		mav.addObject("msg", msg);
+		mav.setViewName("help/helpDel");
+		return mav;
+	}
 }
 
 

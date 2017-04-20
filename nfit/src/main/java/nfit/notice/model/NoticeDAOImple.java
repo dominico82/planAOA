@@ -67,15 +67,18 @@ public class NoticeDAOImple implements NoticeDAO {
 	}
 	
 	public int setNoticeContents(NoticeDTO dto, List<MultipartFile> files) throws IllegalStateException, IOException {
-		//저장경로
-		String savePath="C:/Users/Administrator/Documents/AOA_Enfit/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/nfit/resources/file/upload/";
-		
 		int count=sqlMap.insert("setNoticeContents", dto);
-		for(int i=0; i<files.size(); i++){
-//			System.out.println("사진 이름: "+files.get(i).getOriginalFilename());
-			String fileName=files.get(i).getOriginalFilename();//파일을 저장하기 위해 이름을 가져온다.
-			files.get(i).transferTo(new File(savePath+fileName));//파일을 업로드한다.
-			int fcount=sqlMap.insert("setNoticePics", fileName);//DB에 사진 이름을 저장한다.
+//		System.out.println("업로드0번째 파일 이름"+files.get(0).getOriginalFilename());
+		if(!((files.get(0).getOriginalFilename()).equals(""))){
+			HashMap map=new HashMap();
+			for(int i=0; i<files.size(); i++){
+	//			System.out.println("사진 이름: "+files.get(i).getOriginalFilename());
+				String fileName=files.get(i).getOriginalFilename();//파일을 저장하기 위해 이름을 가져온다.
+				map.put("notice_idx", 0);
+				map.put("pic_name", fileName);
+				files.get(i).transferTo(new File(SAVEPATH+fileName));//파일을 업로드한다.
+				int fcount=sqlMap.insert("setNoticePics", map);//DB에 사진 이름을 저장한다.
+			}
 		}
 
 		
@@ -93,5 +96,50 @@ public class NoticeDAOImple implements NoticeDAO {
 //		int result = sqlMap.selectOne("totalCnt", param);
 //		return result;
 //	}
+	
+	public int noticeUpdate(NoticeDTO dto, List<MultipartFile> files) throws IllegalStateException, IOException {
+		//저장경로
+		
+		int count=sqlMap.update("noticeUpdate", dto);
+		if(!((files.get(0).getOriginalFilename()).equals(""))){
+			int result=sqlMap.delete("noticePicDel", dto.getNotice_idx());
+			HashMap map=new HashMap();
+			for(int i=0; i<files.size(); i++){
+	//			System.out.println("사진 이름: "+files.get(i).getOriginalFilename());
+				String fileName=files.get(i).getOriginalFilename();//파일을 저장하기 위해 이름을 가져온다.
+				map.put("notice_idx", dto.getNotice_idx());
+				map.put("pic_name", fileName);
+				files.get(i).transferTo(new File(SAVEPATH+fileName));//파일을 업로드한다.
+				int fcount=sqlMap.insert("setNoticePics", map);//DB에 사진 이름을 저장한다.
+			}
+		}
+		return count;
+	}
+	
+	public int noticeDel(int idx) {
+		int result=sqlMap.delete("noticeDel", idx);
+		return result;
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
