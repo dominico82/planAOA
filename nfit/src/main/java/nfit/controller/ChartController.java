@@ -42,7 +42,7 @@ public class ChartController {
 	@Resource(name="uploadPath")
 	String uploadPath;
 	@Autowired
-	private CompanyDAO companyDao;
+	CompanyDAO companyDao;
 	
 	@RequestMapping(value="chart.do",method=RequestMethod.GET)
 	public String view(){
@@ -92,16 +92,6 @@ public class ChartController {
 		File target=new File(uploadPath,saveName);
 		FileCopyUtils.copy(fileData, target);
 		return saveName;
-	}
-	//의미없는 메소드
-	@RequestMapping("chart1.do")
-	public String chart1(){
-		return "center/admin/chart01";
-	}
-	//DB데이터를 차트로 나타내기 
-	@RequestMapping("chart2.do")
-	public String chartTest2(){
-		return "center/admin/chart02";
 	}
 	//json 표기법
 	//{"변수명":[{0},{1}],"변수명":"값"}

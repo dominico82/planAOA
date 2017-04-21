@@ -1,6 +1,7 @@
 package nfit.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import nfit.center2.model.CompanyDAO;
+import nfit.center2.model.CompanyListDTO;
 import nfit.member.model.MemberDAO;
 import nfit.member.model.MemberDTO;
 import nfit.notice.model.NoticeDAO;
@@ -21,6 +24,9 @@ public class AdminController {
 	MemberDAO memberDao;
 	@Autowired
 	NoticeDAO noticeDao;
+	//제휴업체 Dao
+	@Autowired
+	CompanyDAO companyDao;
 
 	@RequestMapping("/adminPage.do")
 	public String AdminForm() {
@@ -72,7 +78,39 @@ public class AdminController {
 	}
 
 	@RequestMapping("/cooperateAdmin.do")
-	public String cooperAdmin() {
+	public String cooperAdmin(Map map,@RequestParam(value="pagenum",defaultValue="1")String pagenum_o) {
+		//페이징 로직
+		int pagenum=Integer.parseInt(pagenum_o);
+		//시작,끝 게시글번호
+		int start=((pagenum-1)*10)+1;
+		int end=pagenum*10;
+		
+		int startpage=(pagenum/10*10)+1;
+		
+		if(pagenum%10==0){
+			startpage=startpage-10;
+		}
+		//마지막페이지
+		int endpage=startpage+9;
+		//실제 게시물의 갯수의 변수
+		int datacount = companyDao.companyListcount();
+		//총 페이지가 될 변수
+		int totalpage=0;	
+		//총게시물 조건식
+		if(datacount%10!=0){
+			totalpage=datacount/10+1;
+		}else{
+			totalpage=datacount/10;
+		}	
+		//최종 게시물 조건식
+		if(totalpage<endpage){
+			endpage=totalpage;
+		}
+		List<CompanyListDTO> list = companyDao.companyListborad(start, end);
+		map.put("startpage", startpage);
+		map.put("endpage", endpage);
+		map.put("totalpage", totalpage);
+		map.put("list", list);
 		return "admin/cooperate";
 	}
 

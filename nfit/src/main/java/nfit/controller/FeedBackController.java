@@ -21,7 +21,7 @@ import nfit.feedback.model.FeedbackDTO;
 public class FeedBackController {
 
 	@Autowired
-	private FeedbackDAO feedbackDao;
+	FeedbackDAO feedbackDao;
 	
 	//페이지이동
 	@RequestMapping("page.do")
