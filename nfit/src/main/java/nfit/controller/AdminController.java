@@ -78,7 +78,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(value="cooperateAdmin.do")
-	public String cooperAdmin(Map map,@RequestParam(value="pagenum",defaultValue="1")String pagenum_o) {
+	public String cooperAdmin(Map map,@RequestParam(value="pagenum",defaultValue="1")String pagenum_o){
 		//페이징 로직
 		int pagenum=Integer.parseInt(pagenum_o);
 		//시작,끝 게시글번호

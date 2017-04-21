@@ -72,7 +72,7 @@ public class ChartController {
 			//파일 오리지널 이름
 			String filename=co_view2.getOriginalFilename();	
 			//중복 해결 메소드 호출
-			filename = uploadFile(filename, co_view2.getBytes());
+			//filename = uploadFile(filename, co_view2.getBytes());
 			File target = new File(uploadPath,filename);
 			FileCopyUtils.copy(co_view2.getBytes(),target);
 			
