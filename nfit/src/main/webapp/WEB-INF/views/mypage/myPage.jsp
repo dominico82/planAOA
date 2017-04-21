@@ -8,33 +8,21 @@
 <title>만족스러운 피트니스 Nfit 회원정보 보기</title>
 <jsp:include page="../header.jsp"/>
 <link rel="stylesheet" type="text/css" href="resources/css/mypage1.css"/>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="resources/css/progressBar.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
-  <script>
-  $( function() {
-    $( "#progressbar" ).progressbar({
-      value: 37
-    });
-  } );
-  </script>
 <script>
-function info(){
-	var tall1 = ${dto.member_tall};
-	var tall = tall1*0.01
-	var weight = ${dto.member_weight};
-	var bmi = weight/(tall*tall);
-	var p1 = document.getElementById('bmi');
-	  if(bmi <= 18.5){
-		  p1.innerHTML = '너무 마르셨네요~ 저체중이세요~ 잘 먹고 운동합시다!';
-	  }else if(bmi >= 18.5 && bmi <= 24){
-		  p1.innerHTML = '정상이시네요~ 그럼 탄탄한 몸을 위해서 운동해볼까요!'; 
-	  }else if(bmi > 25){
-		  p1.innerHTML = '운동이 필요하시네요~ 건강한 몸을 위해서 운동해볼까요!';
-	  }
-}
+$(document).ready(function(){ //DOM이 준비되고
+    $('#bmiCheck').click(function(){ // ID가 toggleButton인 요소를 클릭하면
+        var state = $('#bmiResult').css('display'); // state 변수에 ID가 moreMenu인 요소의 display의 속성을 '대입'
+        if(state == 'none'){ // state가 none 상태일경우
+            $('#bmiResult').show();
+        }else{ // 그 외에는
+            $('#bmiResult').hide();       
+        }
+    });
+});
 </script>
 </head>
 <body>
@@ -84,12 +72,46 @@ function info(){
 				</aside>
 				<div class="col-lg-10 col-md-9 col-sm-8 mypagePanel" id="inner_top">
 					<section class="myMembership">
-						<div>
-							<a onclick="info();" class="membershipApply">"비만도 체크하기"</a><br>
-							<span id="bmi"></span>
-							<div id="progressbar"></div>
+						<div id="bmi">
+							<a onclick="info();" class="membershipApply" id="bmiCheck">"비만도 체크하기"</a><br>
+							<div id="bmiResult">
+								<c:set var="bmi" value="18"/>
+								<c:choose>
+									<c:when test="${bmi < '18'}">
+									<div class="progress">
+										<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2}%">
+									    ${bmi}
+										</div>
+									</div>
+										<span>'체중미달' 너무 마르셨어요~ 규칙적인 식사와 꾸준한 운동을 합시다~</span>
+									</c:when>
+									<c:when test="${bmi >= '18' && bmi < '23'}">
+									<div class="progress">
+										<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2}%">
+									    ${bmi}
+										</div>
+									</div>
+										<span>체질량 지수는 '보통'! 그럼 근육량을 늘리러 운동할까요?</span>
+									</c:when>
+									<c:when test="${bmi >= '23' && bmi < '25'}">
+									<div class="progress">
+										<div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.3}%">
+									    ${bmi}
+										</div>
+									</div>
+										<span>조금 높은 '과체중' 이시네요 이제부터 운동하면 좋아지실거에요~</span>
+									</c:when>
+									<c:otherwise>
+									<div class="progress">
+										<div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.7}%">
+									    ${bmi}
+										</div>
+									</div>
+										<span>헉!! '비만' 이시네요 함께 열심히 운동해볼까요?</span>
+									</c:otherwise>
+								</c:choose>
+							</div>
 						</div>
-						
 						<div class="myheadPC_myCoin">
 				            <ul>
 				                <li class="mP_coin" id="mP_coin">${dto.member_coin}</li>

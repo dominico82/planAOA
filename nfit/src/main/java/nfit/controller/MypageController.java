@@ -40,9 +40,14 @@ public class MypageController {
 		List<String> pic = memberDao.getImage(userid);
 		int useridx = dto.getMember_idx();
 		List<CoinDTO> dta = memberDao.getPayInfo(useridx);
+		int tall1 = dto.getMember_tall();
+		double tall = (tall1*0.01);
+		int weight = dto.getMember_weight();
+		int bmi = (int)(weight/(tall*tall));
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("dto",dto);
 		mav.addObject("dta",dta);
+		mav.addObject("bmi",bmi);
 		mav.addObject("pic", pic);
 		mav.setViewName("mypage/myPage");
 		return mav;
