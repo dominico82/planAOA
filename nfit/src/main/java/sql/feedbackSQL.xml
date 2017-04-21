@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="feedBack">
 	<!-- 댓글추가부분 아이디값과 co_idx 부분은 결합시 바꿔줘야함 -->
 	<!-- 댓글추가 -->
-	<insert id="FeedBackinsert" parameterType="nfitBU.feedback.model.FeedbackDTO">
+	<insert id="FeedBackinsert" parameterType="nfit.feedback.model.FeedbackDTO">
 	insert into feedback_table 
 	values(feedback_idx.nextval,5,'kimjae55',sysdate, #{feedback_score} , #{feedback_content} )
 	</insert>
@@ -16,19 +16,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where feedback_index =#{feedback_index}
 	</delete>
 	<!-- 댓글 수정 -->
-	<update id="FeedBackupdate" parameterType="nfitBU.feedback.model.FeedbackDTO">
+	<update id="FeedBackupdate" parameterType="nfit.feedback.model.FeedbackDTO">
 		update feedback_table set feedback_content=#{feedback_content}, 
 		feedback_score=#{feedback_score}
 		where feedback_index=#{feedback_index}
 	</update>
 	<!-- 댓글목록리스트 -->
-	<select id="FeedBacklist" resultType="nfitBU.feedback.model.FeedbackDTO" parameterType="int">
+	<select id="FeedBacklist" resultType="nfit.feedback.model.FeedbackDTO" parameterType="int">
 	select * from(select rownum as rnum,a.* from
 	(select * from feedback_table where co_idx= #{co_idx} order by feedback_index desc)a)
  	where rnum between 1 and 10
 	</select>
 	<!-- 댓글 상세 보기  -->
-	<select id="FeedBackdetail" resultType="nfitBU.feedback.model.FeedbackDTO" parameterType="int">
+	<select id="FeedBackdetail" resultType="nfit.feedback.model.FeedbackDTO" parameterType="int">
 		select * from feedback_table
 		where feedback_index = #{feedback_index}
 	</select>
