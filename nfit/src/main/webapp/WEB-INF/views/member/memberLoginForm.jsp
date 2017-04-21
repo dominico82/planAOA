@@ -5,11 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="resources/css/style.css" rel='stylesheet' type='text/css' />
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/x-icon"
-	href="resources/images/fav-icon.png" />
-	
 <link href="http://tlx.co.kr/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="resources/css/notice.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="js/httpRequest.js"></script>

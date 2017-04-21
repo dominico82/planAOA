@@ -14,7 +14,7 @@
 			}else{
 				check.submit();
 			}
-		}
+// 		}
 		</script>
 </head>
 <body>
