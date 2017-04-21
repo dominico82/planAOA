@@ -24,34 +24,34 @@ public class UploadFileUtils {
 			// a.jpg / aaa.bbb.ccc.jpg
 					String formatName = originalName.substring(
 							originalName.lastIndexOf(".") + 1);
-					String uploadedFileName = null;
-					//이미지 파일은 썸네일 사용
-					if (MediaUtils.getMediaType(formatName)!=null) {
-						//썸네일 생성
-						uploadedFileName = 
-			makeThumbnail(uploadPath, savedPath, savedName);
-					} else {
-						uploadedFileName = 
-			makeIcon(uploadPath, savedPath, savedName);
-					}
+						String uploadedFileName = null;
+						//이미지 파일은 썸네일 사용
+						if (MediaUtils.getMediaType(formatName)!=null) {
+							//썸네일 생성
+							uploadedFileName = 
+				makeThumbnail(uploadPath, savedPath, savedName);
+						} else {
+							uploadedFileName = 
+				makeIcon(uploadPath, savedPath, savedName);
+						}
 					return uploadedFileName;
 				}
-	private static String makeIcon(
-			String uploadPath, String path, String fileName) 
-					throws Exception {
-					//아이콘의 이름
-					String iconName = uploadPath + path 
-							+ File.separator + fileName;
-					//아이콘 이름을 리턴
-			// File.separatorChar : 디렉토리 구분자
-			// 윈도우 \ , 유닉스(리눅스) / 		
-					return iconName.substring(
-			uploadPath.length()).replace(File.separatorChar, '/');
-				}
-	private static String makeThumbnail(String uploadPath, String path, String fileName) throws Exception {
-					//이미지를 읽기 위한 버퍼
-		BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path, fileName));
-					//100픽셀 단위의 썸네일 생성
+				private static String makeIcon(
+						String uploadPath, String path, String fileName) 
+								throws Exception {
+								//아이콘의 이름
+								String iconName = uploadPath + path 
+										+ File.separator + fileName;
+								//아이콘 이름을 리턴
+						// File.separatorChar : 디렉토리 구분자
+						// 윈도우 \ , 유닉스(리눅스) / 		
+								return iconName.substring(
+						uploadPath.length()).replace(File.separatorChar, '/');
+							}
+				private static String makeThumbnail(String uploadPath, String path, String fileName) throws Exception {
+								//이미지를 읽기 위한 버퍼
+					BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path, fileName));
+								//100픽셀 단위의 썸네일 생성
 					BufferedImage destImg = Scalr.resize(sourceImg, 
 							Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 100);
 					//썸네일의 이름

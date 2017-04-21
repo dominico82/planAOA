@@ -37,36 +37,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script>
-	google.load('visualization', '1', {
-		'packages' : [ 'corechart','table' ]
-	});
-	google.setOnLoadCallback(drawChart);
-	function drawChart() {
-		var jsonData = $.ajax({
-			url : 'company_list.do',
-			dataType : 'json',
-			async : false
-		}).responseText;
-		console.log(jsonData);
-		var data = new google.visualization.DataTable(jsonData);
-		var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
-		chart.draw(data, {
-			title : '업체 누적 이용수',		
-			width : 900,
-			height : 1100
-		});
-	}
-	/* PieChart 도가능  */
-</script>
-<style>
-iframe{
- width: 0px;
- height: 0px;
- border: 0px;
-}
-</style>
 </head>
 <!-- BODY options, add following classes to body to change options
 
@@ -122,7 +92,7 @@ iframe{
        <main class="main">
             <div class="container-fluid">
                  <div id="ui-view">
-               		메인화면
+               		<jsp:include page="center/co_list.jsp"></jsp:include>
                  </div>
             </div>
             <!-- /.conainer-fluid -->
