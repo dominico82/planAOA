@@ -73,6 +73,16 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+	<bean id="feedbackDao" class="nfit.feedback.model.FeedbackDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	<bean id="companyDao" class="nfit.center2.model.CompanyImpl">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
     <!-- viewResolver -->
     <bean 
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -84,7 +94,10 @@
     <!-- 파일 다운로드 -->
     <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
         p:order="0"/>
-    
+    	<!-- 파일 업로드의 디렉토리 만들기 -->    
+    <bean id="uploadPath" class="java.lang.String">
+    	<constructor-arg value="c:/upload"/>
+    </bean>
     <!-- 파일 업로드 -->
     <bean id="multipartResolver"
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

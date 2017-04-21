@@ -9,5 +9,7 @@
 		<mapper resource="sql/centerSQL.xml"/>
 		<mapper resource="sql/noticeSQL.xml"/>
 		<mapper resource="sql/helpSQL.xml"/>
+		<mapper resource="sql/center2SQL.xml"/>
+		<mapper resource="sql/feedbackSQL.xml"/>
 	</mappers>
 </configuration>

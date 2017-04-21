@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="center">
+	<select id="centerList" resultType="nfit.center2.model.CompanyListDTO">
+	select * from company_list order by co_idx asc
+	</select>
+	<select id="centerKeyword" resultType="nfit.center2.model.CompanyListDTO">
+		select * from company_list
+		<if test="value != null">
+			where co_address like '%' || #{value} || '%'
+		</if>
+			order by co_idx desc
+	</select>
+	<insert id="companyadd"  parameterType="hashmap">
+		insert into company_list
+		values(co_idx.nextval,#{co_name},#{co_address},#{co_class},#{co_phone},#{co_regul},#{co_extra},#{co_view},0,0,0,#{co_avail})
+	</insert>
+	<!-- 업체상세보기 -->
+	<select id="companydetail" parameterType="int" resultType="nfit.center2.model.CompanyListDTO">
+	select * from company_list 
+	where co_idx = #{co_idx}
+	</select>
+	<!-- 이미지만수정 -->
+	<update id="co_viewupdate" parameterType="hashmap">
+		update  company_list
+		set co_view = #{co_view}
+		where co_idx = #{co_idx}
+	</update>
+	<!-- 이미지제외 업체정보수정 -->
+	<update id="co_listupdate" parameterType="nfit.center2.model.CompanyListDTO">
+		update company_list 
+		set co_name=#{co_name},
+		co_address=#{co_address},
+		co_class=#{co_class},
+		co_phone=#{co_phone},
+		co_regul=#{co_regul},
+		co_extra=#{co_extra},
+		co_avail=#{co_avail}
+		where co_idx=#{co_idx}
+	</update>
+	<!-- 업체정보삭제 -->
+	<delete id="co_listdelete" parameterType="int">
+		delete  from company_list
+		where co_idx=#{co_idx}
+	</delete>
+	<!-- 총 업체 숫자 -->
+	<select id="companyListcount" resultType="int">
+	select count(*) from company_list
+	</select>
+	<!-- 업체리스트 페이징 -->
+	<select id="companyListboard" resultType="nfit.center2.model.CompanyListDTO" parameterType="hashmap">
+	select * from(select rownum as rnum,a.* from(select * from company_list  order by co_idx asc)a) where rnum between #{start} and #{end}
+	</select>
+	<!-- 업체별 이용시간  -->
+	<select id="usetime_table" parameterType="int" resultType="nfit.center2.model.CompanyUseTimeDTO">
+	select * from usetime_table
+	where co_idx =#{co_idx}
+	</select>
+	<!-- 업체별 컨텐츠목록 -->
+	<select id="content_list" parameterType="int" resultType="nfit.center2.model.CompanyContentDTO">
+	select * from content_list
+	where co_idx = #{co_idx}
+	</select>
+	<!-- 업체 이용시간 수정  -->
+	<update id="usetime_table_update" parameterType="hashmap">
+		update  usetime_table
+		set usetime_time =#{usetime_time}
+		where usetime_idx =#{usetime_idx}
+	</update>
+	<!-- 업체 컨텐츠 수정 -->
+	<update id="content_list_update" parameterType="hashmap">
+	update content_list
+	set content_coin = #{content_coin},
+    content1 = #{content1},
+    content2 = #{content2},
+    content3 = #{content3},
+    content4 = #{content4},
+    content5 = #{content5},
+    content6 = #{content6}
+	where content_idx =#{content_idx}
+	</update>
+	<!-- 컨탠츠 로우 수정전에 배열 에 넣을 co_idx값 총갑구하는 sql -->
+	<select id="content_list_count" parameterType="int" resultType="int">
+	select count(*)
+	from content_list
+	where co_idx = #{co_idx}
+	</select>
+</mapper>
