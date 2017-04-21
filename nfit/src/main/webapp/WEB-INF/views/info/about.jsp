@@ -29,7 +29,6 @@ var userAddr="${dto.member_addr}";
 	<section>
 		<article>
 		<div style="margin-top:50px;">
-		
 		<div class="content">
 					<div class="about">
 						<div class="wrap">
@@ -46,12 +45,76 @@ var userAddr="${dto.member_addr}";
 								<div class="clear"> </div>
 							</div>
 						</div>
-						<!---start-testimonials---->
+						</div>
+		
+	
+			<div class="content">
+				<div class="wrap">
+					<!--- start-top-grids---->
+					<div class="top-grids">
+						<div class="top-grid">
+							<div class="product-pic frist-product-pic">
+								<img src="resources/images/img_step_1.png" width="280" height="280" title="watch" />
+							</div>
+							<span><label>1</label></span>
+							<div class="border"> </div>
+							<a href="#">회원가입 및 코인결제</a>
+						</div>
+						<div class="top-grid">
+							<div class="product-pic">
+								<img src="resources/images/img_step_2.png" width="280" height="280" title="shoe" />
+							</div>
+							<span><label>2</label></span>
+							<div class="border hide"> </div>
+							<a href="#">원하는 센터 검색 및 예약</a>
+						</div>
+						<div class="top-grid hide">
+							<div class="product-pic">
+								<img src="resources/images/img_step_3.png" width="280" height="280" title="laptop" />
+							</div>
+							<span><label>3</label></span>
+							<a href="#">센터 데스크 방문 인증 후 운동시작</a>
+						</div>
+						<div class="clear"> </div>
+					</div>
+					</div>
+					<!--- start-top-grids---->
+					<!---start-mid-grids--->
+					<div class="mid-grids">
+						<div class="wrap">
+						<div class="mid-grids-left">
+							<img src="resources/images/app-divices.jpg" title="divices" />
+							<span> </span>
+						</div>
+						<div class="mid-grids-right">
+							<h3> <span>Nfit</span> 모바일앱 을 설치하세요!! </h3>
+							<p>지금<big>앱스토어</big> 에서 <big>설치하세요.</big></p>
+							<ul class="fea">
+								<li><a href="#" style="decoration:none;">제휴시설 이용을 더욱 편리하게!</a></li>
+								<li><a href="#" style="decoration:none;">한번에 가입부터 결제까지 </a></li>
+								<li><a href="#" style="decoration:none;">나와 가까운 제휴시설 확인하기</a></li>
+								<li><a href="#" style="decoration:none;">제휴시설 상세검색하기</a></li>
+								<li><a href="#" style="decoration:none;">제휴시걸 입장하기</a></li>
+							</ul>
+							<div class="big-btns">
+								<ul>
+									<li><a class="and" href="#"> </a></li>
+									<li><a class="iphone" href="#"> </a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="clear"> </div>
+					</div>
+				</div>		
+			</div>
+		
+		
+	<!---start-testimonials---->
 						<div class="testimonials">
 							<div class="wrap">
 							<div class="testimonial-head">
-								<h1><span>Nfit</span> 추천의 글</h1>
-								<p>소중한 고객님들의 추천의 글들을 소개합니다.</p>
+								<h1><span>Runkeeper</span> Testimonials</h1>
+								<p>Kind words from our valuable customers</p>
 							</div>
 							<div class="testimonial-grids">
 								<div class="testimonial-grid">
@@ -78,102 +141,15 @@ var userAddr="${dto.member_addr}";
 						<div class="nbs-flexisel-container"><div class="nbs-flexisel-inner"><ul class="flexiselDemo3 nbs-flexisel-ul" style="left: -175.2px; display: block;">
 						<li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c3.png"></li><li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c4.png"></li><li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c1.png"></li><li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c2.png"></li><li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c3.png"></li><li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c4.png"></li><li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c1.png"></li><li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c2.png"></li></ul><div class="nbs-flexisel-nav-left" style="top: 13px;"></div><div class="nbs-flexisel-nav-right" style="top: 13px;"></div></div></div> 
 						<div class="clear"> </div>      
-							  <!---strat-image-cursuals---->
-							<script type="text/javascript" src="resources/js/jquery.flexisel.js"></script>
-							<!---End-image-cursuals---->
-							<script type="text/javascript">
-							$(window).load(function() {
-							    $(".flexiselDemo3").flexisel({
-							        visibleItems: 5,
-							        animationSpeed: 1000,
-							        autoPlay: true,
-							        autoPlaySpeed: 3000,            
-							        pauseOnHover: true,
-							        enableResponsiveBreakpoints: true,
-							        responsiveBreakpoints: { 
-							            portrait: { 
-							                changePoint:480,
-							                visibleItems: 1
-							            }, 
-							            landscape: { 
-							                changePoint:640,
-							                visibleItems: 2
-							            },
-							            tablet: { 
-							                changePoint:768,
-							                visibleItems: 3
-							            }
-							        }
-							    });
-							});
-							</script>
+							
+							
 						</div>
 						<!----start-clients-slider--->
 					</div>
 				</div>
+				</div>
 		
 		
-			<div class="content">
-				<div class="wrap">
-					<!--- start-top-grids---->
-					<div class="top-grids">
-						<div class="top-grid">
-							<div class="product-pic frist-product-pic">
-								<img src="resources/images/watch-img.png" title="watch" />
-							</div>
-							<span><label>1</label></span>
-							<div class="border"> </div>
-							<a href="#">Get a GPS Device</a>
-						</div>
-						<div class="top-grid">
-							<div class="product-pic">
-								<img src="resources/images/shoe-img.png" title="shoe" />
-							</div>
-							<span><label>2</label></span>
-							<div class="border hide"> </div>
-							<a href="#">Go for a run</a>
-						</div>
-						<div class="top-grid hide">
-							<div class="product-pic">
-								<img src="resources/images/lap-img.png" title="laptop" />
-							</div>
-							<span><label>3</label></span>
-							<a href="#">View your results</a>
-						</div>
-						<div class="clear"> </div>
-					</div>
-					</div>
-					<!--- start-top-grids---->
-					<!---start-mid-grids--->
-					<div class="mid-grids">
-						<div class="wrap">
-						<div class="mid-grids-left">
-							<img src="resources/images/app-divices.jpg" title="divices" />
-							<span> </span>
-						</div>
-						<div class="mid-grids-right">
-							<h3> 드디어 <span>Nfit</span> 모바일앱 출시!! </h3>
-							<p>지금<big>앱스토어</big> 에서 <big>설치하세요.</big></p>
-							<ul class="fea">
-								<li><a href="#" style="decoration:none;">제휴시설 이용을 더욱 편리하게!</a></li>
-								<li><a href="#" style="decoration:none;">한번에 가입부터 결제까지 </a></li>
-								<li><a href="#" style="decoration:none;">나와 가까운 제휴시설 확인하기</a></li>
-								<li><a href="#" style="decoration:none;">제휴시설 상세검색하기</a></li>
-								<li><a href="#" style="decoration:none;">제휴시걸 입장하기</a></li>
-							</ul>
-							<div class="big-btns">
-								<ul>
-									<li><a class="and" href="#"> </a></li>
-									<li><a class="iphone" href="#"> </a></li>
-									<div class="clear"> </div>
-								</ul>
-							</div>
-						</div>
-						<div class="clear"> </div>
-					</div>
-				</div>		
-			</div>
-		</div>
 		<div class="content">
 				<div class="content-feature-grids">
 					<div class="wrap"> 
@@ -242,7 +218,8 @@ var userAddr="${dto.member_addr}";
 				</div>
 				</div>
 			</div>
-		
+			
+			
 		</article>
 	</section>
 		<footer>

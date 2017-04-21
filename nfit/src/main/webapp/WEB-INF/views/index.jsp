@@ -117,7 +117,7 @@
                                 <p>오늘은 헬스, 내일은 요가! &nbsp; &nbsp;<br>&nbsp; 고민하지 마세요!!</p>
                             </div>
 
-                            <div class="mbr-section-btn"><a class="btn btn-secondary" href="#">MORE</a></div>
+                            <div class="mbr-section-btn"><a class="btn btn-secondary" href="about.do">MORE</a></div>
 
                         </div>
                         
