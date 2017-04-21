@@ -33,14 +33,15 @@ var userAddr="${dto.member_addr}";
 		<div class="content">
 					<div class="about">
 						<div class="wrap">
-							<h1>About <span>Nfit</span></h1>
+							<h1>About <span>Nfit</span> :: 이용안내</h1>
 							<div class="panels">
 								<div class="panel-left">
 									<span> </span>
 								</div>
 								<div class="panel-right">
-									<h3>Awesome <span>Runkeeper</span> App!</h3>
-									<p>iOS 7 started with a desire to take an experience people love and make it better. To make it even simpler, more useful, and more enjoyable  iOS 7 started with a desire to take an experience </p>
+									<h3>해당화면을 보여주기만하면  바로입장 가능 </h3>
+									<p>코인으로 원하시는 제휴센터의 프로그램 시간을 예약한 후 예약된 시간전에 방문 하시면 센터데스크에서 해당화면을 확인한 후 , 
+									  센터 담당자가 친절하게 구매 프로그램 진행을 도와드립니다. ^^ 부담없이 예약해 주세요. </p>
 								</div>
 								<div class="clear"> </div>
 							</div>
@@ -49,8 +50,8 @@ var userAddr="${dto.member_addr}";
 						<div class="testimonials">
 							<div class="wrap">
 							<div class="testimonial-head">
-								<h1><span>Runkeeper</span> Testimonials</h1>
-								<p>Kind words from our valuable customers</p>
+								<h1><span>Nfit</span> 추천의 글</h1>
+								<p>소중한 고객님들의 추천의 글들을 소개합니다.</p>
 							</div>
 							<div class="testimonial-grids">
 								<div class="testimonial-grid">
@@ -151,14 +152,14 @@ var userAddr="${dto.member_addr}";
 							<span> </span>
 						</div>
 						<div class="mid-grids-right">
-							<h3> Get <span>Runkeeper</span> for your mobile</h3>
-							<p>The Runkeeper app is available for both i<big>OS</big> and <big>Android</big> devices.</p>
+							<h3> 드디어 <span>Nfit</span> 모바일앱 출시!! </h3>
+							<p>지금<big>앱스토어</big> 에서 <big>설치하세요.</big></p>
 							<ul class="fea">
-								<li><a href="#"><i>Log</i> your runs</a></li>
-								<li><a href="#"><i>Track</i> your Progress </a></li>
-								<li><a href="#">Get a <i>Virtual trainer</i></a></li>
-								<li><a href="#"><i>Complete</i> with your friends </a></li>
-								<li><a href="#"><i>Share</i> your routes</a></li>
+								<li><a href="#" style="decoration:none;">제휴시설 이용을 더욱 편리하게!</a></li>
+								<li><a href="#" style="decoration:none;">한번에 가입부터 결제까지 </a></li>
+								<li><a href="#" style="decoration:none;">나와 가까운 제휴시설 확인하기</a></li>
+								<li><a href="#" style="decoration:none;">제휴시설 상세검색하기</a></li>
+								<li><a href="#" style="decoration:none;">제휴시걸 입장하기</a></li>
 							</ul>
 							<div class="big-btns">
 								<ul>
@@ -176,7 +177,7 @@ var userAddr="${dto.member_addr}";
 		<div class="content">
 				<div class="content-feature-grids">
 					<div class="wrap"> 
-						<h1><span>Runkeeper</span> Features</h1>
+						<h1><span>Nfit</span> 를 이용하시면</h1>
 					<div class="feature-grid">
 						<div class="feature-grid-left icon1">
 							<span> </span>
@@ -202,8 +203,8 @@ var userAddr="${dto.member_addr}";
 							<span> </span>
 						</div>
 						<div class="feature-grid-right">
-							<h2>Date to date Update</h2>
-							<p>iOS 7 started with a desire to take an experience people love and make it better. To make it even simpler, more useful, enjoyable </p>
+							<h2>매일 업데이트 되는 제휴업체정보</h2>
+							<p>저희와 제휴되는 업체들은 지금도 계속 늘어나고 있습니다. ^^</p>
 						</div>
 						<div class="clear"> </div>
 					</div>
@@ -212,8 +213,8 @@ var userAddr="${dto.member_addr}";
 							<span> </span>
 						</div>
 						<div class="feature-grid-right">
-							<h2>Instant messaging</h2>
-							<p>Control Center, AirDrop for iOS, and smarter multitasking are just a few of the great new features in iOS 7. And all your favorite apps</p>
+							<h2>SNS, 메신져를 통한 빠른 서비스</h2>
+							<p>서비스 이용시 불편함이 없도록 실시간 응답서비스를 해드리겠습니다.</p>
 						</div>
 						<div class="clear"> </div>
 					</div>
