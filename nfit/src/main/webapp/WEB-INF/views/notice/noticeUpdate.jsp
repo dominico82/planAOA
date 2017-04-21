@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@include file="../header.jsp" %>
+
 <link href="http://tlx.co.kr/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="resources/css/notice.css" rel="stylesheet" type="text/css">
@@ -47,10 +47,11 @@ $(":file").filestyle({input: false});
 
 </head>
 <body>
-<br><br><br>
+<%@include file="../header.jsp" %>
+
 <div class="wrap">
 
-    <div class="container">
+    <div class="container" style="margin-top:100px;">
     <div class="row">
       <div class="content col-md-12">
         <div class="page-header noticeViewHeader">
