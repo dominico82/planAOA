@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.ModelAndView;
 
 import nfit.help.model.HelpDAO;
@@ -110,6 +111,20 @@ public class HelpController {
 		mav.addObject("msg", msg);
 		mav.setViewName("help/helpDel");
 		return mav;
+	}
+	
+	@RequestMapping(value="helpMtom.do")
+	public ModelAndView helpMtom(){
+		ModelAndView mav=new ModelAndView();
+		
+		mav.setViewName("help/helpMtom");
+		return mav;
+	}
+	
+	@RequestMapping(value="helpMtom.do", method=RequestMethod.POST)
+	public ModelAndView helpMtomWrite(){
+		
+		return null;
 	}
 }
 

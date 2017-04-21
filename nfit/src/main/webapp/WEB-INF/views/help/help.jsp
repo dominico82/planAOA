@@ -11,6 +11,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="resources/css/help.css" rel="stylesheet" type="text/css">
 <link href="resources/css/notice.css" rel="stylesheet" type="text/css">
+
 </head>
 <body>
 
@@ -141,16 +142,12 @@
                 </div>
               </div><!-- /.helpTagsBoxWrap -->
               
-              <div>
-              	<a href="helpWrite.do" class="btn btn-default">작성</a><br>
-              </div>
-              
            	<div class="innerBox col-xs-6 col-sm-12">
                 <h3>1:1 문의</h3>
                 <p class="help-block">
                   <span>게시판에 문의사항을 남겨주시면 정확하게 답변해 드립니다.</span>
                 </p>
-                <a href="/mypage/query/" class="btn btn-default">
+                <a href="helpMtom.do" class="btn btn-default">
                   1:1 문의 남기기
                 </a>
               </div>
