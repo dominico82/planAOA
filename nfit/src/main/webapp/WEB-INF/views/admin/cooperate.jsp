@@ -59,7 +59,6 @@
 
 -->
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
-<c:set var="list" value="${list}"/>
 <header>
 	<jsp:include page="../header.jsp"/>
 </header>

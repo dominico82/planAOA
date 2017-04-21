@@ -59,7 +59,6 @@ iframe{
 	</c:if>
 </div>
 <!-- -------- -->
-
 <!-- 부트스트랩 모달 -->
 <div class="container" style="width: 100px;display:inline-block;">
   <!-- Trigger the modal with a button -->
