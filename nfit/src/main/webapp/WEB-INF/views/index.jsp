@@ -65,7 +65,7 @@
 
                     <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar">
                     <li class="nav-item"><a class="nav-link link" href="about.do">이용안내</a></li>
-                    <li class="nav-item"><a class="nav-link link" href="centerPage.do">주변센터찾기</a></li>
+                    <li class="nav-item"><a class="nav-link link" href="centerLoad.do">주변센터찾기</a></li>
                     <li class="nav-item"><a class="nav-link link" href="help.do">고객센터</a></li>
                     <li class="nav-item"><a class="nav-link link" href="notice.do">공지사항</a></li>
                     <li class="nav-item"><a class="nav-link link" href="coin.do" aria-expanded="false">코인결제</a></li>
