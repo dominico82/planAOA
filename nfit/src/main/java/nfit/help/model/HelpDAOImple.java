@@ -2,8 +2,12 @@ package nfit.help.model;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
+
+import nfit.mtom.model.MtomDTO;
+import nfit.notice.model.NoticeDTO;
 
 public class HelpDAOImple implements HelpDAO {
 
@@ -19,18 +23,24 @@ private SqlSessionTemplate sqlMap;
 		return dtos;
 	}
 	
-	public List<HelpDTO> getHelpSerch(String category, String keyword, String tag) {
-		HashMap<String, String> search=new HashMap<String, String >();
+	public List<HelpDTO> getHelpSerch(String category, String keyword, String tag, int cp, int ls) {
+		int startnum=(cp-1)*ls+1;
+		int endnum=cp*ls;
+		HashMap search=new HashMap<>();
 		if(!(category.equals("0"))){
 			search.put("key", "faq_category");
 			search.put("value", category);
 		}else if(!(keyword.equals("0"))){
 			search.put("key", "faq_content");
-			search.put("value", "%"+keyword+"%");
+			search.put("value", keyword);
 		}else if(!(tag.equals("0"))){
 			search.put("key", "faq_tag");
 			search.put("value", tag);
 		}
+
+		search.put("startnum", startnum);
+		search.put("endnum", endnum);
+		
 		List<HelpDTO> dtos=sqlMap.selectList("getHelpSearch", search);
 		
 		return dtos;
@@ -74,6 +84,24 @@ private SqlSessionTemplate sqlMap;
 		int result=sqlMap.update("increaseReadnum", map);
 		return result;
 	}
+	
+	public int getTotalSearchCnt(String category, String keyword, String tag) {
+		HashMap<String, String> search=new HashMap<String, String >();
+		if(!(category.equals("0"))){
+			search.put("key", "faq_category");
+			search.put("value", category);
+		}else if(!(keyword.equals("0"))){
+			search.put("key", "faq_content");
+			search.put("value", keyword);
+		}else if(!(tag.equals("0"))){
+			search.put("key", "faq_tag");
+			search.put("value", tag);
+		}
+		int count=sqlMap.selectOne("totalSearchCnt", search);
+		return count;
+	}
+	
+	
 }  
 
 

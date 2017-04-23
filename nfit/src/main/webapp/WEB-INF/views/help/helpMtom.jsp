@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +15,49 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <jsp:include page="../header.jsp"/>
+<c:if test="${empty list}">
+<script>
+$(document).ready(function(){
+	var $div=$("<div class='panel-group' id='accordion' role='tablist' aria-multiselectable='true'>"
+			+"<div class='panel panel-default'>"
+			+"<div class='panel-heading' role='tab' id='qaHeading1'>"
+			+"<h4 class='panel-title'><strong class='faqType faqType_18'>문의 내역이 없습니다.</strong>"
+            +"</div>");
+
+	$("div.panel").prepend($div);
+});
+</script>
+</c:if>
+<c:if test="${!empty list}">
+	<c:forEach var="qlist" items="${list}">
+		<script>
+		$(document).ready(function(){
+			var $divQ=$("<div class='panel-group' id='accordion' role='tablist' aria-multiselectable='true'>"
+					+"<div class='panel panel-default'>"
+					+"<div class='panel-heading' role='tab' id='qaHeading1'>"
+					+"<h4 class='panel-title'><strong class='faqType faqType_18'>단순이용문의</strong>"
+					+"<i class='fa fa-question-circle'></i>${qlist.qa_subject}"
+		            +"<span class='date'>&nbsp;<fmt:formatDate value='${qlist.qa_date}' pattern='yyyy-MM-dd HH:mm'/></span></h4>"
+		            +"<a role='button' data-toggle='collapse' data-parent='#accordion' href='#qa_185757' aria-expanded='false' aria-controls='qa2' class='btn btn-sm btn-success btnAnswer collapsed'>"
+		            +"답변보기</a></div>");
+			
+			var $divA=$("<div id='qa_185757' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOne' aria-expanded='false'>"
+		            +"<div class='panel-body'>"    
+		    		+"<div class='question'>"
+			    	+"<h5><i class='fa fa-question-circle'></i>${qlist.qa_subject}<small>${qlist.qa_date}</small></h5>"
+					+"<p>${qlist.qa_content}</p>"
+		    		+"</div><!-- /.question -->"
+		    		+"<div class='answer'>"
+		      		+"<p></p><h5><i class='fa fa-check-circle'></i> 답변 <small>${qlist.qa_adate}</small></h5><p></p>"
+		      		+"<p>안녕하세요 <b>강수석</b> 회원님<br>저희 티엘엑스를 이용해주셔서 대단히 감사합니다.<br></p><p></p></div><!-- /.answer -->)");
+			$("div.panel-heading").after($divA);
+			$("div.accordionList").prepend($divQ);
+		});
+		</script>
+	</c:forEach>
+
+</c:if>
+
 </head>
 <body>
 
@@ -46,51 +92,35 @@
           
           <h3>문의 내역</h3>
           <div class="accordionList">              
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+			
               <div class="panel panel-default">
 
                 <div class="panel-heading" role="tab" id="qaHeading1">
 
                   <h4 class="panel-title">
-                    <strong class="faqType faqType_18">단순이용문의</strong>
-                    <i class="fa fa-question-circle"></i> 멤버십관련 문의드립니다.
-                    <span class="date">2017-04-20 16:51</span>
+                    <i class="fa fa-question-circle"></i> a
+                    <span class="date">2017-04-23 14:26</span>
                   </h4>
-                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#qa_185757" aria-expanded="true" aria-controls="qa2" class="btn btn-sm btn-success btnAnswer">답변보기</a>
+                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#qa_185898" aria-expanded="true" aria-controls="qa1" class="btn btn-sm btn-default btnAnswer">답변대기</a>
                 </div>
-                <div id="qa_185757" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="height: 0px;">
+                <div id="qa_185898" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
                   <div class="panel-body">
                     
                     <div class="question">
 
-                      <h5><i class="fa fa-question-circle"></i> 멤버십관련 문의드립니다. <small>2017-04-20 16:51</small></h5>
+                      <h5><i class="fa fa-question-circle"></i> a <small>2017-04-23 14:26</small></h5>
 
                       <p>
-                        최소결제금액이 3만원정도인데 한번 체험해볼 수 있도록 더 저렴한요금제를 이용해볼 수 있는 방법은 없는건가요?
+                        a
                       </p>
                     </div><!-- /.question -->
-                    <div class="answer">
-                      <p>
-                        </p><h5><i class="fa fa-check-circle"></i> 답변 <small>2017-04-20 17:02</small></h5>
-                      <p></p>
-                      <p>
-                        안녕하세요 <b>강수석</b> 회원님<br>저희 티엘엑스를 이용해주셔서 대단히 감사합니다.<br>
-</p><div><br></div>
-<div>7패스 29990원 보다 저렴한 멤버십은 현재 없는 점 양해 바랍니다 : )</div>
-<div><br></div>
-<div>말씀 남겨주신 내용은 관련부서로 전달하여 추후 체험용으로 이용 가능한 멤버십 개편에 대해 논의 할 수 있도록</div>
-<div>하겠으며~</div>
-<div><br></div>
-<div>친구 초대로 가입 시 무료 패스 지급 되고 있으나(1패스 센터에서 무료 이용 가능)</div>
-<div><br></div>
-<div>3/17일 성원준 회원님의 초대로 가입 당시<br></div>
-<div>지급 되었던 무료 이용권 7일 : &nbsp;1패스는 기간 만료로 자동 소멸 되었습니다.</div>
-<div><br></div>
-<div>때문에 문의 해주신 계정으로 센터 이용은 멤버십 결제 하에만 가능한 점 참고 부탁드리며</div>
-<div>센터마다 차감되는 포인트가 다르오니 주변제휴센터찾기에서 이용 원하는 센터 정보 검색 후 결제 및 이용 바랍니다!<br><br>문의주신 내용에 대해 도움 되셨길 바라며<br> 추가적인 문의가 있을 경우 언제든지 다시 <a href="tlx.co.kr/mypage/query/">1:1 문의</a>를 이용하여 주시기 바랍니다 <br> 오늘 하루도 즐겁고 활기찬 하루 되시길 바랍니다. <br> 저는 티엘엑스 고객지원센터 <b>한유은</b> 이었습니다. 감사합니다.<br></div>
-                      <p></p>
-                    </div><!-- /.answer -->
+                    <div>
+                      <button type="button" class="btn btn-sm btn-default" onclick="show_modify_185898();"><i class="fa fa-edit"></i> 수정</button>
+                      <button type="button" class="btn btn-sm btn-danger" onclick="remove_item_(185898);"><i class="fa fa-trash-o"></i> 삭제</button>
+                    </div>
+
                    
                   </div><!-- /.panel-body -->
                 </div><!-- /.panel-collapse  -->
@@ -115,23 +145,23 @@
         <h4 class="modal-title">1:1 문의하기</h4>
       </div>
       <div class="modal-body">
-        <form name="form_qa11" action="helpMtom.do" method="post">
-        <input type="hidden" name="member_id" value="">
+        <form name="form_qa11" id="form_qa11" action="helpMtom.do" method="post">
+        <input type="hidden" name="member_id" value="${member_id}">
           <fieldset>
             <div class="form-group">
               <label>제목</label>
-              <input type="text" name="title" class="form-control" id="title" required="">
+              <input type="text" name="qa_subject" class="form-control" id="qa_subject" required="">
             </div>
             <div class="form-group">
               <label>내용</label>
-              <textarea rows="5" name="cont" class="form-control" id="cont" placeholder="어플리케이션 오류일 경우 앱버전과 상황을 자세히 입력하면 도움이 될 수 있습니다." required=""></textarea>
+              <textarea rows="5" name="qa_content" class="form-control" id="qa_content" placeholder="어플리케이션 오류일 경우 앱버전과 상황을 자세히 입력하면 도움이 될 수 있습니다." required=""></textarea>
             </div>            
         </fieldset>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-        <button type="submit" class="btn btn-primary">저장하기</button>
+        <button type="button" id="mtomWrite" class="btn btn-primary">저장하기</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -140,11 +170,32 @@
 <script>
 function open_form(){
 	$(document).ready(function(){
-		document.getElementById("title").value = "";
-        document.getElementById("cont").value = "";
+		document.getElementById("qa_subject").value = "";
+        document.getElementById("qa_content").value = "";
 		$('#qa11').modal();
 	});
 };
+</script>
+<script>
+$(function(){
+	$("#mtomWrite").click(function(){
+		var formData=$("#form_qa11").serialize();
+		
+			$.ajax({
+				type:"POST",
+				url: "helpMtom.do",
+				data: formData,
+				success: function(data){
+					alert("성공!!");
+				},
+				error: function(data){
+					alert("실패!!");
+				}
+			});
+			
+			$('#qa11').modal('hide');
+	});
+});
 </script>
 
 </div><!-- /.wrap -->

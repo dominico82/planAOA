@@ -20,15 +20,17 @@
 	</select>
 	<select id="getHelpSearch" resultType="nfit.help.model.HelpDTO">
 		<if test='key!="faq_content"'>
-			select * from faq_table
-				where
-			${key} = #{value}
+			select * from 
+				(select rownum as rnum, a.* from
+					(select * from faq_table where ${key}=#{value} order by faq_idx desc)a)b
+			where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
 		</if>
 		<if test='key=="faq_content"'>
-			select * from faq_table
-				where faq_content
-					like '%'||#{value}||'%'
-		</if>		
+			select * from 
+				(select rownum as rnum, a.* from
+					(select * from faq_table where faq_content like '%'||#{value}||'%' order by faq_idx desc)a)b
+			where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+		</if>	
 	</select>
 	<select id="getHelpContents" resultType="nfit.help.model.HelpDTO">
 		select * from faq_table
@@ -57,5 +59,20 @@
 	</update>
 	<select id="getFaqTop5" resultType="nfit.help.model.HelpDTO">
 		select * from (select * from faq_table order by faq_readnum desc) where rownum <![CDATA[<=]]> 5
+	</select>
+	<select id="totalSearchCnt" resultType="Integer">
+		<if test='key!="faq_content"'>
+			select count(*) from faq_table
+				where
+			${key} = #{value}
+		</if>
+		<if test='key=="faq_content"'>
+			select count(*) from faq_table
+				where faq_content
+					like '%'||#{value}||'%'
+		</if>
+	</select>
+	<select id="totalMtomCnt" resultType="Integer">
+			select count(*) from mtom_bbs		
 	</select>
 </mapper>

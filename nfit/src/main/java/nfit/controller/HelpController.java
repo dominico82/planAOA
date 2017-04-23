@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +17,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import nfit.help.model.HelpDAO;
 import nfit.help.model.HelpDTO;
+import nfit.member.model.MemberDTO;
+import nfit.mtom.model.MtomDAO;
+import nfit.mtom.model.MtomDTO;
+import nfit.notice.model.NoticeDTO;
 
 @Controller
 public class HelpController {
 	
 	@Autowired HelpDAO helpDao;
+	@Autowired MtomDAO mtomDao;
 	
 	@RequestMapping(value="help.do")
 	public ModelAndView help(){
@@ -36,8 +42,14 @@ public class HelpController {
 	@RequestMapping(value="helpSearch.do")
 	public ModelAndView helpSearch(@RequestParam(value="category", defaultValue="0")String category,
 									@RequestParam(value="keyword", defaultValue="0")String keyword,
-									@RequestParam(value="tag", defaultValue="0")String tag){
-		List<HelpDTO> dtos=helpDao.getHelpSerch(category, keyword, tag);
+									@RequestParam(value="tag", defaultValue="0")String tag,
+									@RequestParam(value="cp", defaultValue="1") int cp){
+		int totalCnt=helpDao.getTotalSearchCnt(category, keyword, tag);
+		totalCnt=totalCnt==0?1:totalCnt;
+		int listSize=5;
+		int pageSize=5;	
+		List<HelpDTO> dtos=helpDao.getHelpSerch(category, keyword, tag, cp, listSize);
+		String pageStr=nfit.page.PageModuleFAQ.makePageFAQ("helpSearch.do", totalCnt, listSize, pageSize, category, keyword, tag, cp);	
 		String searchText="";
 		if(!(category.equals("0"))){
 			searchText=category;
@@ -49,6 +61,7 @@ public class HelpController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("searchList", dtos);
 		mav.addObject("searchText", searchText);
+		mav.addObject("pageStr", pageStr);
 		mav.setViewName("help/helpSearch");
 		return mav;
 	}
@@ -114,17 +127,76 @@ public class HelpController {
 	}
 	
 	@RequestMapping(value="helpMtom.do")
-	public ModelAndView helpMtom(){
+	public ModelAndView helpMtom(HttpSession session){
+		String userid=(String)session.getAttribute("saveid");
 		ModelAndView mav=new ModelAndView();
-		
-		mav.setViewName("help/helpMtom");
+		if(userid==null || userid.equals("")){
+			mav.setViewName("member/memberLoginForm");
+		}else{
+			List<MtomDTO> dtos=mtomDao.getHelpMtom(userid);
+			for(int i=0;i<dtos.size();i++){
+				System.out.println("1:1문의 게시판 글 번호:"+dtos.get(i).getQa_idx());
+			}
+			mav.addObject("member_id", userid);
+			mav.addObject("list", dtos);
+			mav.setViewName("help/helpMtom");
+		}
 		return mav;
 	}
 	
 	@RequestMapping(value="helpMtom.do", method=RequestMethod.POST)
-	public ModelAndView helpMtomWrite(){
-		
-		return null;
+	public ModelAndView helpMtomWrite(MtomDTO dto){
+		String userid=dto.getMember_id();
+		int result=mtomDao.setHelpMtom(dto);
+		List<MtomDTO> dtos=mtomDao.getHelpMtom(userid);
+		System.out.println(dtos.get(0).getQa_subject());
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("result", result);
+		mav.addObject("list", dtos);
+		mav.setViewName("help/helpMtom");
+		return mav;
+	}
+	
+	@RequestMapping(value="helpMtomReply.do")
+	public ModelAndView helpMtomList(@RequestParam(value="cp", defaultValue="1") int cp){
+		int totalCnt=mtomDao.getTotalMtomCnt();
+		totalCnt=totalCnt==0?1:totalCnt;
+		int listSize=10;
+		int pageSize=5;	
+		List<MtomDTO> dtos=mtomDao.getHelpMtomList(cp, listSize);
+		String pageStr=nfit.page.PageModule.makePage("helpMtomReply.do", totalCnt, listSize, pageSize, cp);	
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("list", dtos);
+		mav.addObject("pageStr", pageStr);
+		mav.setViewName("help/helpMtomReply");
+		return mav;
+	}
+	
+	@RequestMapping(value="helpMtomContents.do")
+	public ModelAndView helpMtomContents(@RequestParam(value="idx")int idx){
+		MtomDTO dto=mtomDao.getHelpMtomContents(idx);
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("dto", dto);
+		mav.setViewName("help/helpMtomContents");
+		return mav;
+	}
+	@RequestMapping(value="helpMtomReplyWrite.do", method=RequestMethod.POST)
+	public ModelAndView helpMtomReplyWrite(MtomDTO dto){
+		ModelAndView mav=new ModelAndView();
+		int result=mtomDao.setHelpMtomReply(dto);
+		mav.addObject("result", result);
+		mav.setViewName("help/helpMtomReply_ok");
+		return mav;
+	}
+	
+	@RequestMapping(value="helpMtomDel.do")
+	public ModelAndView helpMtomDel(@RequestParam(value="idx")int idx){
+		ModelAndView mav=new ModelAndView();
+		int result=mtomDao.helpMtomDel(idx);
+		String msg=result>0?"삭제성공!":"삭제실패!";
+		mav.addObject("msg", msg);
+		mav.setViewName("help/helpMtomDel");
+		return mav;
 	}
 }
 

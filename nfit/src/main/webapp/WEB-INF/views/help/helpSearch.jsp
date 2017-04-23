@@ -78,12 +78,7 @@
                 </ul>
                 <nav>
                     <ul class="pagination pagination-sm">
-                        <li class=" active">
-                            <a href="/help/search/1/?category=1">1</a>
-                        </li>
-                        <li class="">
-                            <a href="/help/search/2/?category=1">2</a>
-                        </li>
+                        <li>${pageStr}</li>
                     </ul>
                 </nav>
               </div>

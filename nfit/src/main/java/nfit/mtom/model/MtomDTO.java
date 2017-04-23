@@ -7,7 +7,7 @@ public class MtomDTO {
 	String member_id;
 	String qa_subject;
 	String qa_content;
-	String qa_anwser;
+	String qa_answer;
 	String qa_checked;
 	java.util.Date qa_date;
 	java.util.Date qa_adate;
@@ -16,14 +16,14 @@ public class MtomDTO {
 		super();
 	}
 
-	public MtomDTO(int qa_idx, String member_id, String qa_subject, String qa_content, String qa_anwser,
+	public MtomDTO(int qa_idx, String member_id, String qa_subject, String qa_content, String qa_answer,
 			String qa_checked, Date qa_date, Date qa_adate) {
 		super();
 		this.qa_idx = qa_idx;
 		this.member_id = member_id;
 		this.qa_subject = qa_subject;
 		this.qa_content = qa_content;
-		this.qa_anwser = qa_anwser;
+		this.qa_answer = qa_answer;
 		this.qa_checked = qa_checked;
 		this.qa_date = qa_date;
 		this.qa_adate = qa_adate;
@@ -61,12 +61,12 @@ public class MtomDTO {
 		this.qa_content = qa_content;
 	}
 
-	public String getQa_anwser() {
-		return qa_anwser;
+	public String getqa_answer() {
+		return qa_answer;
 	}
 
-	public void setQa_anwser(String qa_anwser) {
-		this.qa_anwser = qa_anwser;
+	public void setqa_answer(String qa_answer) {
+		this.qa_answer = qa_answer;
 	}
 
 	public String getQa_checked() {

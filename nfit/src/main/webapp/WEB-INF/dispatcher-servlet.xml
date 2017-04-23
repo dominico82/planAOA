@@ -87,6 +87,11 @@
 			<ref bean="sqlSessionTemplate"/>
 		</constructor-arg>
 	</bean>
+	<bean id="mtomDao" class="nfit.mtom.model.MtomDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
     <!-- viewResolver -->
     <bean 
         class="org.springframework.web.servlet.view.InternalResourceViewResolver">

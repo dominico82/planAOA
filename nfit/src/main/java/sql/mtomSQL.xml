@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nfit.mtom">
+	<select id="getHelpMtom" parameterType="String" resultType="nfit.mtom.model.MtomDTO">
+		select * from mtom_bbs where member_id=#{member_id} order by qa_idx asc
+	</select>
+	<insert id="setHelpMtom" parameterType="nfit.mtom.model.MtomDTO">
+		insert into 
+			mtom_bbs
+		values(
+			mtom_bbs_idx.nextval,
+			#{member_id},
+			#{qa_subject},
+			#{qa_content},
+			null,
+			'n',
+			sysdate,
+			null
+		)		
+	</insert>
+	<select id="getHelpMtomList" resultType="nfit.mtom.model.MtomDTO" parameterType="java.util.HashMap">
+		select * from 
+		(select rownum as rnum, a.* from
+		(select * from mtom_bbs order by qa_idx desc)a)b
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+
+	</select>
+	<select id="getHelpMtomContents" resultType="nfit.mtom.model.MtomDTO">
+		select * from mtom_bbs where qa_idx = #{qa_idx}
+	</select>
+	<update id="setHelpMtomReply" parameterType="nfit.mtom.model.MtomDTO">
+		update mtom_bbs
+		set
+			qa_answer=#{qa_answer},
+			qa_checked='y',
+			qa_adate=sysdate
+		where
+			qa_idx=#{qa_idx}
+	</update>
+	<delete id="helpMtomDel">
+		delete mtom_bbs
+		where qa_idx=#{qa_idx}
+	</delete>
+</mapper>
