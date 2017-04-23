@@ -147,9 +147,12 @@ function checkValue() {
 										<label for="name">이름</label>
 										<input type="text" class="form-control" name="member_name" value="${dto.member_name}" readonly>
 									</div>
+									<div>
+										<input type="hidden" value="${dto.member_id}">
+									</div>
 									<div class="form-group">
 										<label for="password">비밀번호</label>
-										<input type="password" class="form-control" id="password" placeholder="비밀번호" name="member_pwd">
+										<input type="password" class="form-control" id="password" value="${dto.member_pwd}" placeholder="비밀번호" name="member_pwd">
 									</div>
 									<div class="form-group">
 										<label for="password2">비밀번호 다시 입력</label>
@@ -250,11 +253,50 @@ function checkValue() {
 								<button type="submit" class="btn btn-lg btn-primary btn_mobileAppFloat">
 									<i class="fa fa-check"></i>저장하기
 								</button>
-								<button type="button" class="btn btn-sm btn-link" href="">
-									<i class="fa fa-check"></i>탈퇴신청
-								</button>
+								<a class="btn btn-sm btn-link" onclick='leaveCheck()'>
+									<i class="fa fa-check"></i>탈퇴신청</a>
 							</div>
 						</form>
+						<div class="modal fade" tabindex="-1" role="dialog" id="qa11" style="display: none;">
+							<div class="modal-dialog">
+							  <div class="modal-content">
+							    <div class="modal-header">
+							      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							      <h4 class="modal-title">1:1 문의하기</h4>
+							    </div>
+							    <div class="modal-body">
+							      <form name="form_qa11" action="helpMtom.do" method="post">
+							      <input type="hidden" name="member_id" value="">
+							        <fieldset>
+							          <div class="form-group">
+							            <label>제목</label>
+							            <input type="text" name="title" class="form-control" id="title" required="">
+							          </div>
+							          <div class="form-group">
+							            <label>내용</label>
+							            <textarea rows="5" name="cont" class="form-control" id="cont" placeholder="어플리케이션 오류일 경우 앱버전과 상황을 자세히 입력하면 도움이 될 수 있습니다." required=""></textarea>
+							          </div>            
+							      </fieldset>
+							      </form>
+							    </div>
+							    <div class="modal-footer">
+							      <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+							      <button type="submit" class="btn btn-primary">저장하기</button>
+							    </div>
+							  </div><!-- /.modal-content -->
+							</div><!-- /.modal-dialog -->
+							</div>
+							
+
+<script type="text/javascript">
+function leaveCheck(){
+	$(document).ready(function(){
+		document.getElementById("title").value = "";
+        document.getElementById("cont").value = "";
+		$('#qa11').modal();
+	});
+};
+</script>
 					</div>
 				</div>
 			</div>

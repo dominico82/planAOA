@@ -161,6 +161,7 @@ public class MemberDAOImple implements MemberDAO {
 		List<String> pic = sqlMap.selectList("getPic", member_id);
 		return pic;
 	}
+	
 	public int memberDelete(String member_id){
 		int count=sqlMap.delete("memberDeleteAdmin",member_id);
 		return count;

@@ -123,6 +123,21 @@ public class MypageController {
 		return mav;
 	}
 	
+	@RequestMapping(value="memberLeave.do")
+	public ModelAndView memberLeave(HttpSession session){
+		
+		String userid = (String)session.getAttribute("saveid");
+		int result = memberDao.memberDelete(userid);
+		String msg = result>0?"이용해주셔서 감사합니다":"회원탈퇴 실패";
+
+		session.invalidate();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.setViewName("mypage/leaveMsg");
+		return mav;
+	}
+	
 }
 
 

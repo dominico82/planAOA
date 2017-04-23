@@ -75,7 +75,7 @@ $(document).ready(function(){ //DOM이 준비되고
 						<div id="bmi">
 							<a onclick="info();" class="membershipApply" id="bmiCheck">"비만도 체크하기"</a><br>
 							<div id="bmiResult">
-								<c:set var="bmi" value="18"/>
+								<c:set var="bmi" value="${bmi}"/>
 								<c:choose>
 									<c:when test="${bmi < '18'}">
 									<div class="progress">
