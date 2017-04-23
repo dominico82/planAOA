@@ -16,7 +16,6 @@
 <!-- Main styles for this application -->
 <link href="resources/css/adminstyle.css" rel="stylesheet">
 <link href="resources/css/style.css" rel='stylesheet' type='text/css' />
-<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" type="image/x-icon"href="resources/images/fav-icon.png" />
 <!---start-login-script--->
 <script src="resources/js/login.js"></script>
