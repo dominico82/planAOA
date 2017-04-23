@@ -5,14 +5,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import nfit.center.model.CenterDAO;
@@ -37,7 +40,9 @@ public class CenterController {
 	@RequestMapping("/centerPage.do")
 	public String centerPage(ModelMap model){
 		List<CenterDTO> list=centerDao.centerListDB();
+		List<ContentDTO> clist = contentDao.contentAllListDB();
 		model.addAttribute("list", list);
+		model.addAttribute("clist", clist);
 		return "/center/centerMap";
 	}
 	
@@ -56,7 +61,7 @@ public class CenterController {
 	@RequestMapping(value="/centerCompany.do", method=RequestMethod.GET)
 	public void companyAjax(
 			@RequestParam("co_idx") int  co_idx, HttpServletResponse response){
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		String companyJson;
 		CenterDTO company= centerDao.centerOneDB(co_idx);
 		if(company !=null){
@@ -83,7 +88,7 @@ public class CenterController {
 	}
 	@RequestMapping(value="/centerUsetime.do" , method=RequestMethod.GET)
 	public void useAjax(@RequestParam("co_idx") int co_idx, HttpServletResponse response){
-		response.setContentType("text/html;charset=utf-8"); 
+		response.setContentType("text/html;charset=UTF-8"); 
 		String useJson="{usetime:[";
 		List<UsetimeDTO> usetime=usetimeDao.usetimeDB(co_idx);
 		if(usetime!=null){
@@ -113,7 +118,7 @@ public class CenterController {
 	}
 	@RequestMapping(value="centerContent.do", method=RequestMethod.GET)
 	public void contentAjax(@RequestParam("co_idx") int co_idx, HttpServletResponse response){
-		response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/html;charset=UTF-8");
 		String contentJson="{content:[";
 		List<ContentDTO> content=contentDao.contentListDB(co_idx);
 		if(content!=null){
@@ -150,5 +155,116 @@ public class CenterController {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
+	}
+	@RequestMapping(value="centerCompanyList.do", method=RequestMethod.GET)
+	public void companyListAjax(HttpServletResponse response){
+		response.setContentType("text/html;charset=UTF-8");
+		String comListJson = "{center_list:[";
+		List<CenterDTO> companyList = centerDao.centerListDB();
+		if(companyList!=null){
+			for(int i=0; i<companyList.size(); i++){
+				if(i<companyList.size()-1){
+				comListJson +="{\"co_idx\":\""+companyList.get(i).getCo_idx()
+						+"\",\"co_name\":\""+companyList.get(i).getCo_name()
+						+"\",\"co_address\":\""+companyList.get(i).getCo_address()
+						+"\",\"co_class\":\""+companyList.get(i).getCo_class()
+						+"\",\"co_phone\":\""+companyList.get(i).getCo_phone()
+						+"\",\"co_regul\":\""+companyList.get(i).getCo_regul()
+						+"\",\"co_extra\":\""+companyList.get(i).getCo_extra()
+						+"\",\"co_view\":\""+companyList.get(i).getCo_view()
+						+"\",\"co_usecount\":\""+companyList.get(i).getCo_usecount()
+						+"\",\"co_lat\":\""+companyList.get(i).getCo_lat()
+						+"\",\"co_lng\":\""+companyList.get(i).getCo_lng()
+						+"\",\"co_avail\":\""+companyList.get(i).getCo_avail()+"\"},";
+				}else if(i==companyList.size()-1){
+					comListJson +="{\"co_idx\":\""+companyList.get(i).getCo_idx()
+							+"\",\"co_name\":\""+companyList.get(i).getCo_name()
+							+"\",\"co_address\":\""+companyList.get(i).getCo_address()
+							+"\",\"co_class\":\""+companyList.get(i).getCo_class()
+							+"\",\"co_phone\":\""+companyList.get(i).getCo_phone()
+							+"\",\"co_regul\":\""+companyList.get(i).getCo_regul()
+							+"\",\"co_extra\":\""+companyList.get(i).getCo_extra()
+							+"\",\"co_view\":\""+companyList.get(i).getCo_view()
+							+"\",\"co_usecount\":\""+companyList.get(i).getCo_usecount()
+							+"\",\"co_lat\":\""+companyList.get(i).getCo_lat()
+							+"\",\"co_lng\":\""+companyList.get(i).getCo_lng()
+							+"\",\"co_avail\":\""+companyList.get(i).getCo_avail()+"\"}";
+				}
+			}
+			comListJson+="]}";
+			System.out.println(comListJson);
+		}else{
+			comListJson="null";
+		}
+		try{
+			response.getWriter().print(comListJson);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value="centerLatLng.do", method=RequestMethod.GET)
+	public void centerLatLngAjax(
+			@RequestParam(value="latlngData") String latlngData,  HttpServletResponse response){
+	response.setContentType("text/html;charset=UTF-8");
+	StringTokenizer st = new StringTokenizer(latlngData, "/");
+	String array[]=new String[st.countTokens()];
+	int i=0;
+	while(st.hasMoreTokens()){
+		array[i++]=st.nextToken();
+	}
+	String co_idxs=array[0];
+	String co_lats=array[1];
+	String co_lngs=array[2];
+	System.out.println(co_idxs+"/"+co_lats+"/"+co_lngs);
+	int co_idx=Integer.parseInt(co_idxs);
+	double co_lat=Double.parseDouble(co_lats);
+	double co_lng=Double.parseDouble(co_lngs);
+	System.out.println(co_idx+"/"+co_lat+"/"+co_lng);
+	String latlngJson;
+	CenterDTO latlngdto=centerDao.centerOneDB(co_idx);
+	latlngdto.setCo_lat(co_lat);
+	latlngdto.setCo_lng(co_lng);
+	System.out.println("latlngdto="+latlngdto.getCo_lat()+", "+latlngdto.getCo_lng());
+	centerDao.InsertLatLngDB(latlngdto);
+	if(latlngdto!=null){
+		latlngJson="{\"co_idx\":\""+latlngdto.getCo_idx()
+		+"\",\"co_lat\":\""+latlngdto.getCo_lat()
+		+"\",\"co_lng\":\""+latlngdto.getCo_lng()+"\"}";
+	}else{
+		latlngJson="null";
+	}
+	try{
+		response.getWriter().print(latlngJson);
+	}catch(IOException e){
+		e.printStackTrace();
+	}
+}
+	@RequestMapping("/centerLoad.do")
+	public String centerLoad(){
+		return "/center/centerLoad";
+	}
+	
+	@RequestMapping(value="/centerSearch.do", method=RequestMethod.GET)
+	public void centerSearch(@RequestParam("keyword")String keyword, HttpServletResponse response){
+		response.setContentType("text/html;charset=UTF-8");
+		System.out.println("keyword="+keyword);
+		StringTokenizer st = new StringTokenizer(keyword);
+		String strArr[]=new String[st.countTokens()];
+		int n=0;
+		while(st.hasMoreTokens()){
+			strArr[n]=st.nextToken();
+			n++;
+		}
+		List<String> list = new ArrayList<String>();
+		for(int i=0; i<strArr.length; i++){
+			list.add(i, strArr[i]);
+			System.out.println("list("+i+")="+list.get(i).substring(0));
+		}
+		List<CenterDTO> searchResult = centerDao.centerSearchDB(keyword);
+		
+		
+//		List<CenterDTO> co=centerDao.centerSearch(keyword);
+		
 	}
 }

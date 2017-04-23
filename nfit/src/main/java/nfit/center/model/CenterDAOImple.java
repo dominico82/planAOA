@@ -14,13 +14,7 @@ public class CenterDAOImple implements CenterDAO {
 	}
 	
 	public List<CenterDTO> centerListDB() {
-		System.out.println("i reached here~2");
 		List<CenterDTO> list = sqlMap.selectList("centerListSQL");
-		if(list.size()>0){
-			System.out.println("data load success");
-		}else{
-			System.out.println("data load fail");
-		}
 		return list;
 	}
 	
@@ -28,5 +22,11 @@ public class CenterDAOImple implements CenterDAO {
 		CenterDTO dto = sqlMap.selectOne("centerOneSQL", co_idx);
 		return dto;
 	}
-
+	public void InsertLatLngDB(CenterDTO latlngdto) {
+		sqlMap.update("centerLatLngSQL", latlngdto);
+	}
+	public List<CenterDTO> centerSearchDB(String keyword) {
+		List<CenterDTO> list=sqlMap.selectList("centerSearchSQL", keyword);
+		return null;
+	}
 }

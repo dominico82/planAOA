@@ -11,14 +11,15 @@ public class CenterDTO {
 	private String co_extra;
 	private String co_view;
 	private int co_usecount;
-	private int co_lat;
-	private int co_lng;
+	private double co_lat;
+	private double co_lng;
 	private String co_avail;
 	public CenterDTO() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 	public CenterDTO(int co_idx, String co_name, String co_address, String co_class, String co_phone, String co_regul,
-			String co_extra, String co_view, int co_usecount, int co_lat, int co_lng, String co_avail) {
+			String co_extra, String co_view, int co_usecount, double co_lat, double co_lng, String co_avail) {
 		super();
 		this.co_idx = co_idx;
 		this.co_name = co_name;
@@ -87,16 +88,16 @@ public class CenterDTO {
 	public void setCo_usecount(int co_usecount) {
 		this.co_usecount = co_usecount;
 	}
-	public int getCo_lat() {
+	public double getCo_lat() {
 		return co_lat;
 	}
-	public void setCo_lat(int co_lat) {
+	public void setCo_lat(double co_lat) {
 		this.co_lat = co_lat;
 	}
-	public int getCo_lng() {
+	public double getCo_lng() {
 		return co_lng;
 	}
-	public void setCo_lng(int co_lng) {
+	public void setCo_lng(double co_lng) {
 		this.co_lng = co_lng;
 	}
 	public String getCo_avail() {
@@ -105,7 +106,5 @@ public class CenterDTO {
 	public void setCo_avail(String co_avail) {
 		this.co_avail = co_avail;
 	}
-	
-	
 	
 }

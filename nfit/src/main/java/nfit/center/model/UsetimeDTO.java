@@ -8,7 +8,8 @@ public class UsetimeDTO {
 	private String usetime_time;
 	public UsetimeDTO() {
 		super();
-		}
+		// TODO Auto-generated constructor stub
+	}
 	public UsetimeDTO(int usetime_idx, int co_idx, String usetime_day, String usetime_time) {
 		super();
 		this.usetime_idx = usetime_idx;

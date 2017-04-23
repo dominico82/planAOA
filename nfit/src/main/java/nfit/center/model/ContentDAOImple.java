@@ -16,4 +16,8 @@ public class ContentDAOImple implements ContentDAO {
 		List<ContentDTO> list = sqlMap.selectList("contentListSQL", co_idx);
 		return list;
 	}
+	public List<ContentDTO> contentAllListDB(){
+		List<ContentDTO> allList = sqlMap.selectList("contentAllListSQL");
+		return allList;
+	}
 }

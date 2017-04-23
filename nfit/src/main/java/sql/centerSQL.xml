@@ -15,4 +15,13 @@
   <select id="contentListSQL" parameterType="int" resultType="nfit.center.model.ContentDTO">
   select * from content_list where co_idx = #{co_idx}
   </select>
+  <select id="contentAllListSQL" resultType="nfit.center.model.ContentDTO">
+  select * from content_list order by content_idx asc
+  </select>
+  <update id="centerLatLngSQL" parameterType="nfit.center.model.CenterDTO">
+  update company_list set co_lat=#{co_lat}, co_lng=#{co_lng} where co_idx = #{co_idx}
+  </update>
+  <select id="centerSearchSQL" parameterType="String" resultType="nfit.center.model.CenterDTO">
+  SELECT DISTINCT CO.CO_IDX, CO.CO_NAME, CO.CO_ADDRESS, CO.CO_CLASS FROM COMPANY_LIST CO INNER JOIN CONTENT_LIST CT ON (CO.CO_IDX=CT.CO_IDX) WHERE CO.CO_NAME LIKE '%#{keyword}%' OR CO.CO_CLASS LIKE '%#{keyword}%' OR CO.CO_ADDRESS LIKE '%#{keyword}%' OR CT.CONTENT1 LIKE '%#{keyword}%' OR CT.CONTENT2 LIKE '%#{keyword}%' OR CT.CONTENT3 LIKE '%#{keyword}%' OR CT.CONTENT4 LIKE '%#{keyword}%' OR CT.CONTENT5 LIKE '%#{keyword}%' OR CT.CONTENT6 LIKE '%#{keyword}%' ORDER BY CO.CO_IDX;
+  </select>
   </mapper>
