@@ -101,16 +101,8 @@
 			<div id="ui-view">
 				<table class="blueone">
 					<thead>
-						<tr>
-							<th class="num">공지사항 번호</th>
-							<th class="sub">공지사항 제목</th>
-							<th class="content">공지사항 내용</th>
-							<th class="not">공지 표시</th>
-							<th class="mak">알림 표시</th>
-							<th class="date">작성일</th>
-							<th class="delete">수정</th>
-							<th class="delete">삭제</th>
-						</tr>
+					
+
 					</thead>
 					<tbody>
 						<c:set var="nlist" value="${noticelist}" />
