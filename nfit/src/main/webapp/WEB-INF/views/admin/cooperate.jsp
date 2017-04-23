@@ -62,6 +62,7 @@
 <header>
 	<jsp:include page="../header.jsp"/>
 </header>
+
     <div class="app-body">
         <div class="sidebar">
             <nav class="sidebar-nav">
@@ -90,8 +91,7 @@
         <!-- Main content -->
        <main class="main">
             <div class="container-fluid">
-                 <div id="ui-view">
-               		<jsp:include page="center/co_list.jsp"></jsp:include>
+				<div id="ui-view">
                  </div>
             </div>
             <!-- /.conainer-fluid -->

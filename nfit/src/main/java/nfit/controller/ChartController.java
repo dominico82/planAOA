@@ -188,7 +188,7 @@ public class ChartController {
 		map.put("endpage", endpage);
 		map.put("totalpage", totalpage);
 		map.put("list", list);
-		return "center/admin/co_list";
+		return "admin/center/co_list";
 	}
 	//모달 팝업에 데이터 넘기기
 	@RequestMapping("co_update.do")
@@ -196,7 +196,7 @@ public class ChartController {
 		//idx 로 업체 리스트 가져오기 
 		CompanyListDTO dto =companyDao.companydetail(co_idx);
 		map.put("list", dto);
-		return "center/admin/co_Detail";
+		return "admin/center/co_Detail";
 	}
 	////////////////////////////////////
 	@ResponseBody //view가 아닌 data 리턴
@@ -296,7 +296,7 @@ public class ChartController {
 		List<CompanyUseTimeDTO> list= companyDao.usetime_table(co_idx);
 		map.put("list", list);
 		map.put("usetime_co_idx", co_idx);
-		return "center/admin/usetime_table_list";
+		return "admin/center/usetime_table_list";
 	}
 	//업체별 컨텐츠 목록보기 
 	@RequestMapping("content_list.do")
@@ -307,7 +307,7 @@ public class ChartController {
 		map.put("count", count);
 		map.put("list",list);
 		map.put("co_idx", co_idx);
-		return "center/admin/content_list";
+		return "admin/center/content_list";
 	}
 	//이용시간 바꾸기(수정)
 	@ResponseBody

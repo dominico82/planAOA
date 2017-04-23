@@ -107,7 +107,7 @@
 	where co_idx = #{co_idx}
 	</delete>
 	<!-- content_list low 추가  -->
-	<insert id="content_low_insert" parameterType="nfit.center.model.CompanyContentDTO">
+	<insert id="content_low_insert" parameterType="nfit.center2.model.CompanyContentDTO">
 	insert into content_list
 	values(content_idx.nextval,
 	#{co_idx},#{content_coin}
@@ -117,7 +117,7 @@
 	#{content4},#{content5},#{content6})
 	</insert>
 	<!-- usetime_table low 추가 -->
-	<insert id="usetime_low_insert" parameterType="nfit.center.model.CompanyUseTimeDTO">
+	<insert id="usetime_low_insert" parameterType="nfit.center2.model.CompanyUseTimeDTO">
 	insert into usetime_table
 	values(usetime_idx.nextval,#{co_idx},#{usetime_day},#{usetime_time})
 	</insert>
@@ -132,7 +132,7 @@
 		where co_phone = #{co_phone}
 	</select>
 	 <!-- 기존업체 컨텐츠등록 -->
-	 <insert id="oldCompanyin" parameterType="nfit.center.model.CompanyContentDTO">
+	 <insert id="oldCompanyin" parameterType="nfit.center2.model.CompanyContentDTO">
 	 insert into content_list
 	  values(content_idx.nextval,
 	  #{co_idx},#{content_coin},

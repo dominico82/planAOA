@@ -76,7 +76,7 @@ public class AdminController {
 		mav.setViewName("admin/adminMsg");
 		return mav;
 	}
-
+	//보류페이지
 	@RequestMapping(value="cooperateAdmin.do")
 	public String cooperAdmin(Map map,@RequestParam(value="pagenum",defaultValue="1")String pagenum_o){
 		//페이징 로직
