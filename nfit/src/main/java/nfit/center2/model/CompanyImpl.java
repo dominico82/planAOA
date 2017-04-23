@@ -105,4 +105,54 @@ public class CompanyImpl implements CompanyDAO {
 		 
 		 sqlMap.update("content_list_update",map);
 	}
+	 // ajax로구현한 업체등록 
+	 public void company_add2(CompanyListDTO vo, String menu) {
+		 HashMap<String ,Object> map = new HashMap<String, Object>();
+		map.put("co_name",vo.getCo_name());
+		map.put("co_address", vo.getCo_address());
+		map.put("co_class", menu);
+		map.put("co_phone", vo.getCo_phone());
+		map.put("co_regul", vo.getCo_regul());
+		map.put("co_extra", vo.getCo_extra());
+		map.put("co_avail", vo.getCo_avail());
+		
+		sqlMap.insert("insertPath", map);
+	 }
+	 //업체 이미지파일만 등록
+	 public void updatenewfile(int co_idx, String co_view) {
+		HashMap<String, Object> map= new HashMap<String, Object>();
+		map.put("co_idx", co_idx);
+		map.put("co_view", co_view);
+		 sqlMap.update("Newupdate", map);
+	}
+	public int sonnco_idx(String co_phone) {
+		return sqlMap.selectOne("soonco_idx", co_phone);
+	}
+	//컨탠츠 테이블 로우삭제
+	public void content_delete(int co_idx) {
+		sqlMap.delete("content_delete", co_idx);
+	}
+	//usetime 테이블 로우삭제
+	public void usetime_delete(int co_idx) {
+		sqlMap.delete("usetime_delete", co_idx);
+	}
+	//max 함수이용 co_idx값 구하는 것
+	public int max_co_idx() {
+		return sqlMap.selectOne("maxco_idx");
+	}
+	//이용시간 등록 메소드
+	public void usetime_insert(CompanyUseTimeDTO vo) {
+		sqlMap.insert("usetime_low_insert", vo);
+	}
+	//컨텐츠 등록메소드
+	public void content_insert(CompanyContentDTO vo) {
+		sqlMap.insert("content_low_insert", vo);
+	}
+	//전화번호로 기존업체 조회
+	public int oldCompany(String co_phone) {
+		return sqlMap.selectOne("oldCompanycon", co_phone);
+	}
+	public void oldCompanyin(CompanyContentDTO vo) {
+		sqlMap.insert("oldCompanyin", vo);
+	}
 }

@@ -1,17 +1,21 @@
 package nfit.controller;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.logging.Logger;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
+import org.imgscalr.Scalr;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +30,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.multipart.MultipartRequest;
 
 import nfit.center2.model.CompanyContentDTO;
 import nfit.center2.model.CompanyDAO;
 import nfit.center2.model.CompanyListDTO;
 import nfit.center2.model.CompanyUseTimeDTO;
 import util.MediaUtils;
-import util.UploadFileUtils;
+
 
 @Controller
 public class ChartController {
@@ -42,58 +49,13 @@ public class ChartController {
 	@Resource(name="uploadPath")
 	String uploadPath;
 	@Autowired
-	CompanyDAO companyDao;
+	private CompanyDAO companyDao;
 	
 	@RequestMapping(value="chart.do",method=RequestMethod.GET)
 	public String view(){
 		return "center/admin/admin";
 	}
-	//업로드 버튼 =>임시디렉토리에 업로드 => 지정된 디렉토리로옴겨준다.
-	@RequestMapping(value="chart.do",method=RequestMethod.POST)
-	public String company_add(@RequestParam("co_class2")String[] co_class2,
-			Map map,@ModelAttribute CompanyListDTO vo,@RequestParam("co_view2")MultipartFile co_view2) throws Exception{
-			String menu="";
-			int check_box=0;	
-				for(int i=0;i<co_class2.length;i++){
-					check_box = Integer.parseInt(co_class2[i]);  
-				}
-			switch(check_box){
-			case 1: menu="헬스"; break;
-			case 2: menu="뷰티"; break;
-			case 3: menu="필라테스"; break;
-			case 4: menu="탁구"; break;
-			case 5: menu="복싱"; break;
-			case 6: menu="검도"; break;
-			case 7: menu="격투기"; break;
-			case 8: menu="크로스핏"; break;
-			case 9: menu="골프"; break;
-			case 10: menu="기타"; break;
-			}
-			//파일 오리지널 이름
-			String filename=co_view2.getOriginalFilename();	
-			//중복 해결 메소드 호출
-			//filename = uploadFile(filename, co_view2.getBytes());
-			File target = new File(uploadPath,filename);
-			FileCopyUtils.copy(co_view2.getBytes(),target);
-			
-			
-			//업체등록 서비스
-			int count = companyDao.company_add(vo,menu,filename);
-			
-			String result = count>0?"등록완료":"Error";
-			map.put("result", result);
-		return "center/admin/msg";
-	}
-	//파일명 중복 해결 
-	private String uploadFile(String originalName, byte[] fileData)throws Exception{
-		//uuid생성 (Universal Unique IDentifier ,범용 고유 식별자)
-		UUID uid= UUID.randomUUID();
-		String saveName =uid.toString()+"_"+originalName;
-		File target=new File(uploadPath,saveName);
-		FileCopyUtils.copy(fileData, target);
-		return saveName;
-	}
-	//json 표기법
+	//json 표기법 , 구글 차트 이용 한것
 	//{"변수명":[{0},{1}],"변수명":"값"}
 	@RequestMapping("company_list.do")
 	@ResponseBody
@@ -132,19 +94,58 @@ public class ChartController {
 		data.put("rows",body);
 		return data;
 	}
-	//ajax 를 이용하여 업로드하기
+	//ajax 를 이용  1.insert 하고 2.이미지upload 하기 
 	@RequestMapping(value="uploadAjax.do",method=RequestMethod.POST,produces="text/plan;charset=utf-8")
 	@ResponseBody//view 가아니라 data 리턴
-	public ResponseEntity<String> uploadAjax(MultipartFile file,@RequestParam("co_idx")int co_idx){
+	public ResponseEntity<String> uploadAjax(@RequestParam("checkbox")int checkbox,
+			@ModelAttribute CompanyListDTO vo,MultipartHttpServletRequest mreq){
+			System.out.println("컨트롤러에서찍은 checkbox : : : : : "+ checkbox);
+			String menu="";
+		System.out.println("uploadAjax.do:::::"+"를 타는지좀봅시다.");
 		ResponseEntity<String> entity= null;
-		System.out.println("컨트롤러에서찍은 co_idx ::::"+co_idx);
 		try{
-			//uuid 발급
-			UUID uid = UUID.randomUUID();
-			String savedName=uid.toString()+"_"+file.getOriginalFilename();
-			//서비스추가
-			companyDao.companyco_view(co_idx, savedName);
-			entity=new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, savedName, file.getBytes(), file.getOriginalFilename()),HttpStatus.OK);
+			switch(checkbox){
+			case 1: menu="헬스"; break;
+			case 2: menu="뷰티"; break;
+			case 3: menu="필라테스"; break;
+			case 4: menu="탁구"; break;
+			case 5: menu="복싱"; break;
+			case 6: menu="검도"; break;
+			case 7: menu="격투기"; break;
+			case 8: menu="크로스핏"; break;
+			case 9: menu="골프"; break;
+			case 10: menu="기타"; break;
+			}
+			System.out.println("컨트롤러에서찍은 메뉴 : ::"+ menu);
+			//서비스등록 
+			companyDao.company_add2(vo, menu);
+			//경로 구현 [절대경로]
+			uploadPath="c:/upload/";
+			//방금 등록한 업체 idx값 가져오기 
+			int co_idx = companyDao.sonnco_idx(vo.getCo_phone());
+			//실제 우리가 파일을 저장할 하위 폴더
+			String originalPath=co_idx+"_"+vo.getCo_phone();
+			//상위폴더와 하위폴더의 결합 
+			String maxPath=uploadPath+originalPath;
+			File mkdir=new File(uploadPath+originalPath);
+			//폴더생성
+			if(!mkdir.exists()){
+				mkdir.mkdirs();
+			}
+			companyDao.updatenewfile(co_idx,originalPath);
+			//폴더 생성끝
+			//파일생성 해야함 -------
+			List<MultipartFile> mfile = mreq.getFiles("files"); 
+			System.out.println("컨트롤러로넘어온 사이즈 ::::"+mfile.size());
+			for(int i =0;i<mfile.size();i++){
+				//String fileName=mfile.get(i).getOriginalFilename();
+				//파일 이름 j
+				String fileName=co_idx+"_"+vo.getCo_phone()+"_"+i+".jpg";
+				System.out.println("파일이름:"+fileName); // for문 안탐 
+				File target = new File(maxPath,fileName);
+				FileCopyUtils.copy(mfile.get(i).getBytes(),target);
+			}
+			entity = new ResponseEntity<String>("success" ,HttpStatus.OK);
 		}catch(Exception e){
 			e.printStackTrace();
 			entity=new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
@@ -197,7 +198,6 @@ public class ChartController {
 		map.put("list", dto);
 		return "center/admin/co_Detail";
 	}
-	
 	////////////////////////////////////
 	@ResponseBody //view가 아닌 data 리턴
 	@RequestMapping("displayFile.do")
@@ -205,6 +205,7 @@ public class ChartController {
 			@RequestParam("fileName")String fileName) throws Exception {
 		//서버의 파일을 다운로드하기 위한 스트림
 		InputStream in=null; //java.io
+		//이미지파일은 리턴값은 모두 바이트로 해야함 
 		ResponseEntity<byte[]> entity=null;
 		try{
 			//확장자 검사
@@ -260,7 +261,6 @@ public class ChartController {
 		return new ResponseEntity<String>("deleted",HttpStatus.OK);
 	}
 	//업체정보 수정
-	@ResponseBody
 	@RequestMapping(value="centerUpdate.do",method=RequestMethod.POST)
 	public ResponseEntity<String> centerUpdate(@RequestBody CompanyListDTO vo){
 		ResponseEntity<String> entity=null;
@@ -295,6 +295,7 @@ public class ChartController {
 		
 		List<CompanyUseTimeDTO> list= companyDao.usetime_table(co_idx);
 		map.put("list", list);
+		map.put("usetime_co_idx", co_idx);
 		return "center/admin/usetime_table_list";
 	}
 	//업체별 컨텐츠 목록보기 
@@ -305,6 +306,7 @@ public class ChartController {
 		System.out.println("컨트롤러에서찍은 count::::"+count);
 		map.put("count", count);
 		map.put("list",list);
+		map.put("co_idx", co_idx);
 		return "center/admin/content_list";
 	}
 	//이용시간 바꾸기(수정)
@@ -362,8 +364,152 @@ public class ChartController {
 			e.printStackTrace();
 			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
 		}
-		
-		
+		return entity;
+	}
+	//이미지만 수정하는로직
+	@ResponseBody
+	@RequestMapping(value="ajaxUpload.do")
+	public ResponseEntity<String[]> ajaxUpload(@RequestParam("co_idx")int co_idx,
+			MultipartHttpServletRequest mreq){
+		ResponseEntity<String[]> entity=null;
+		try{
+			//폴더 생성하기 [고정폴더]
+			uploadPath="c:/upload/";
+			//co_idx값으로 리스트 훍고 업체 핸드폰 번호 구하기 
+			CompanyListDTO dto = companyDao.companydetail(co_idx);
+			//실제 우리가 파일을 저장할 하위 폴더
+			String originalPath=co_idx+"_"+dto.getCo_phone();
+			//상위폴더와 하위폴더의 결합 
+			String maxPath=uploadPath+originalPath;
+			//상위 폴더 하위폴더 생성
+			File mkdir=new File(maxPath);
+			//폴더생성
+			if(!mkdir.exists()){
+				mkdir.mkdirs();
+			}
+			//폴더생성끝
+			companyDao.companyco_view(co_idx, originalPath);
+			//썸네일 작업하기 
+			String uploadFileName=null;
+			List<MultipartFile> mlist=mreq.getFiles("files");
+			String data[]=new String[mlist.size()];
+			for(int i=0;i<mlist.size();i++){
+				//String fileName=mlist.get(i).getOriginalFilename();
+				//파일 이름
+				String fileName=co_idx+"_"+dto.getCo_phone()+"_"+i+".jpg";
+				System.out.println("아작스 수정::"+fileName);
+				/*확장자 검사 마지막 맞침표 찾기 */
+				String formatName=fileName.substring(fileName.lastIndexOf(".")+1);
+				//이미지 파일은 썸네일을 사용한다.
+				File target =new File(maxPath,fileName);
+				FileCopyUtils.copy(mlist.get(i).getBytes(), target);
+				if(MediaUtils.getMediaType(formatName)!=null){
+					uploadFileName= makeThumbnail(uploadPath, originalPath, fileName);
+					data[i]=uploadFileName;
+					System.out.println("썸네일 이름 : : : :: "+uploadFileName);
+				}
+				entity =new ResponseEntity<String[]>(data,HttpStatus.OK);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return entity;
+	}
+	//썸네일 생성 메소드
+	public String makeThumbnail(String uploadPath, String path, String fileName) throws Exception {
+		//이미지를 읽기 위한 버퍼
+		BufferedImage sourceImg = ImageIO.read(new File(uploadPath + path, fileName));
+		//100픽셀 단위의 썸네일 생성
+		BufferedImage destImg = Scalr.resize(sourceImg,Scalr.Method.AUTOMATIC, Scalr.Mode.FIT_TO_HEIGHT, 100);
+		//썸네일의 이름
+		String thumbnailName = uploadPath + path + File.separator + "s_" + fileName;
+		File newFile = new File(thumbnailName);
+		String formatName = fileName.substring(fileName.lastIndexOf(".") + 1);
+		//썸네일 생성
+		ImageIO.write(destImg, formatName.toUpperCase(), newFile);
+		//썸네일의 이름을 리턴함
+		return thumbnailName.substring(
+				uploadPath.length()).replace(File.separatorChar, '/');
+	}
+	//컨텐츠 삭제 메소드
+	@ResponseBody
+	@RequestMapping("content_delete.do")
+	public ResponseEntity<String> content_delete(@RequestParam("content_co_idx")int co_idx){
+		ResponseEntity<String> entity = null;
+		try{
+			//DAO실행
+			companyDao.content_delete(co_idx);
+			entity =new ResponseEntity<String>("success",HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//이용시간삭제메소드
+	@RequestMapping("usetime_delete.do")
+	public ResponseEntity<String> usetime_delete(@RequestParam("usetime_co_idx")int co_idx){
+		ResponseEntity<String> entity=null;
+		try{
+			//Dao실행
+			companyDao.usetime_delete(co_idx);
+			entity = new ResponseEntity<String>("success",HttpStatus.OK);
+		}catch(Exception e){
+			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//이용시간 등록 메소드
+	@RequestMapping("usetime_insert.do")
+	public ResponseEntity<String> usetime_insert(@ModelAttribute CompanyUseTimeDTO vo){
+		ResponseEntity<String> entity =null;
+		try{
+			//최신 idx값가져오는 Dao호출
+			int co_idx= companyDao.max_co_idx();
+			//최신 idx값 담기
+			vo.setCo_idx(co_idx);
+			//insert 서비스 호출
+			companyDao.usetime_insert(vo);
+			entity = new ResponseEntity<String>("success",HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//컨탠츠 등록 메소드
+	@RequestMapping("content_insert.do")
+	public ResponseEntity<String> content_insert(@ModelAttribute CompanyContentDTO vo){
+		ResponseEntity<String> entity=null;
+		try{
+			//최신 idx값 가져오는 Dao호출
+			int co_idx=companyDao.max_co_idx();
+			vo.setCo_idx(co_idx);
+			companyDao.content_insert(vo);
+			entity =new ResponseEntity<String>("success",HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity =new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+		return entity;
+	}
+	//기존 업체 컨텐츠 등록 
+	@ResponseBody
+	@RequestMapping("oldCompanycon.do")
+	public ResponseEntity<String> oldCompanycon(
+			@ModelAttribute CompanyContentDTO vo,@RequestParam("co_phone")String co_phone){
+		ResponseEntity<String> entity=null;
+		try{
+			//기존 업체 idx갑구하기
+			int co_idx =companyDao.oldCompany(co_phone);
+			vo.setCo_idx(co_idx);
+			
+			companyDao.oldCompanyin(vo);
+			entity = new ResponseEntity<String>("success",HttpStatus.OK);
+		}catch(Exception e){
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
 		return entity;
 	}
 }

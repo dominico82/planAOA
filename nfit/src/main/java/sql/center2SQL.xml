@@ -6,17 +6,26 @@
 	<select id="centerList" resultType="nfit.center2.model.CompanyListDTO">
 	select * from company_list order by co_idx asc
 	</select>
-	<select id="centerKeyword" resultType="nfit.center2.model.CompanyListDTO">
-		select * from company_list
-		<if test="value != null">
-			where co_address like '%' || #{value} || '%'
-		</if>
-			order by co_idx desc
-	</select>
-	<insert id="companyadd"  parameterType="hashmap">
+	<!-- 업체등록 2번재 성공하면 첫번째꺼지움 -->
+	<insert id="insertPath" parameterType="hashmap">
 		insert into company_list
-		values(co_idx.nextval,#{co_name},#{co_address},#{co_class},#{co_phone},#{co_regul},#{co_extra},#{co_view},0,0,0,#{co_avail})
+		values(co_idx.nextval,#{co_name},
+		#{co_address},#{co_class},
+		#{co_phone},#{co_regul},
+		#{co_extra},0,0,0,0,#{co_avail})
 	</insert>
+	<!-- co_view컬럼에 폴더만 업로드 -->
+	<update id="Newupdate" parameterType="hashmap">
+		update company_list
+		set co_view =#{co_view}
+		where co_idx=#{co_idx}
+	</update>
+	<!--  업체 등록후 등록한 업체 idx값 바로 가져오기 -->
+	<select id="soonco_idx" resultType="int" parameterType="String">
+	select co_idx
+	from company_list
+	where co_phone = #{co_phone}
+	</select>
 	<!-- 업체상세보기 -->
 	<select id="companydetail" parameterType="int" resultType="nfit.center2.model.CompanyListDTO">
 	select * from company_list 
@@ -31,14 +40,14 @@
 	<!-- 이미지제외 업체정보수정 -->
 	<update id="co_listupdate" parameterType="nfit.center2.model.CompanyListDTO">
 		update company_list 
-		set co_name=#{co_name},
-		co_address=#{co_address},
-		co_class=#{co_class},
-		co_phone=#{co_phone},
-		co_regul=#{co_regul},
-		co_extra=#{co_extra},
-		co_avail=#{co_avail}
-		where co_idx=#{co_idx}
+		set co_name = #{co_name},
+		co_address = #{co_address},
+		co_class = #{co_class},
+		co_phone = #{co_phone},
+		co_regul = #{co_regul},
+		co_extra = #{co_extra},
+		co_avail = #{co_avail}
+		where co_idx = #{co_idx}
 	</update>
 	<!-- 업체정보삭제 -->
 	<delete id="co_listdelete" parameterType="int">
@@ -87,4 +96,48 @@
 	from content_list
 	where co_idx = #{co_idx}
 	</select>
+	<!-- content_list테이블 로우삭제 -->
+	<delete id="content_delete" parameterType="int">
+	delete from content_list
+	where co_idx = #{co_idx} 
+	</delete>
+	<!-- usetime_table 테이블 로우삭제 -->
+	<delete id="usetime_delete" parameterType="int">
+	delete from usetime_table
+	where co_idx = #{co_idx}
+	</delete>
+	<!-- content_list low 추가  -->
+	<insert id="content_low_insert" parameterType="nfit.center.model.CompanyContentDTO">
+	insert into content_list
+	values(content_idx.nextval,
+	#{co_idx},#{content_coin}
+	,#{content1},
+	#{content2},
+	#{content3},
+	#{content4},#{content5},#{content6})
+	</insert>
+	<!-- usetime_table low 추가 -->
+	<insert id="usetime_low_insert" parameterType="nfit.center.model.CompanyUseTimeDTO">
+	insert into usetime_table
+	values(usetime_idx.nextval,#{co_idx},#{usetime_day},#{usetime_time})
+	</insert>
+	<!-- 가장 높은 co_idx값을 반환하는 쿼리 -->
+	<select id="maxco_idx" resultType="int">
+	select max(co_idx) 
+	from company_list
+	</select>
+	<!-- 전화번호로 기존업체조회 -->
+	<select id="oldCompanycon" resultType="int" parameterType="String">
+		select co_idx from company_list
+		where co_phone = #{co_phone}
+	</select>
+	 <!-- 기존업체 컨텐츠등록 -->
+	 <insert id="oldCompanyin" parameterType="nfit.center.model.CompanyContentDTO">
+	 insert into content_list
+	  values(content_idx.nextval,
+	  #{co_idx},#{content_coin},
+	  #{content1},#{content2},
+	  #{content3},#{content4},
+	  #{content5},#{content6})
+	 </insert>
 </mapper>

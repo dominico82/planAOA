@@ -47,52 +47,57 @@ $(document).ready(function(){
 		event.preventDefault();
 		//드래그된 파일정보
 		var files= event.originalEvent.dataTransfer.files;
-		//첫번째 파일
-		var file= files[0];
+		//폼객체 생성
+		var formData=new FormData();
+		
+		for(var i=0;i<files.length;i++){
+		//파일 들 저장할 변수
+			var	file =files[i];
+			formData.append('files',file);
+		}
 		//idx값
 		var co_idx=$('#co_idx').val();
-		console.log(file);
 		//ajax로 전달할  폼 객체 
-		var formData=new FormData();
 		//폼 객체에 파일 추가 , append ('변수명',값)
-		formData.append('file',file);
 		formData.append('co_idx',co_idx);
 		//processData : false => post 방식
 		//contentType : false => multipart/form-data
+		var arr={};
 		$.ajax({
 			type : 'post',
-			url : 'uploadAjax.do',
+			url : 'ajaxUpload.do',
 			data : formData,
-			dataType:'text',
+			dataType :'json',
 			processData : false,
 			contentType: false,
 			success : function(data){
-				//alert(data);
-				console.log(data);
+				console.log('콘솔에서찍은 data::'+data.length);
+				console.log(data[0]);
 				var str='';
-				if(checkImageType(data)){//이미지파일인경우
-					str ='<div style="border:1px solid red;float:left;"><a href="displayFile.do?fileName='+getImageLink(data)+'">';		
-					str+='<img src="displayFile.do?fileName='+data+'"></a>';
-				}else{//이미지가 아닐경우
-					str ='<div style="border:1px solid red;float:left;">';
-					str +='<a href="displayFile.do?fileName='+data+'">'+getOriginalName(data)+'</a>';
+				for(var i=0;i<data.length;i++){
+					if(checkImageType(data[i])){//이미지파일인경우
+							str ='<div style="border:1px solid red;float:left;"><a href="displayFile.do?fileName='+getImageLink(data[i])+'">';		
+							str+='<img src="displayFile.do?fileName='+data[i]+'"></a>';
+							str+='<span data-src='+data[i]+'>[삭제]</span></div>';
+							$('.uploadedList').append(str);
+					}
 				}
-				str+='<span data-src='+data+'>[삭제]</span></div>';
-					$('.uploadedList').append(str);
 			}
+			
 		});
 	});
 	
 	//수정버튼 클릭시 실행되는 ajax 
 	$('#btnUpdate').click(function(){
-		var co_class=$('#co_class').val();
-		var co_idx=$('#co_idx').val();
-		var co_name=$('#co_name').val();
-		var co_address=$('#co_address').val();
-		var co_phone=$('#co_phone').val();
-		var co_avail=$('#co_avail').val();
-		var co_extra=$('#co_extra').val();
-		var co_regul=$('#co_regul').val();
+		var co_class=$('#co_class_1').val();
+		var co_idx = $('#co_idx').val();
+		var co_name = document.getElementById('co_name_1').value;
+		var co_address = $('#co_address_1').val();
+		var co_phone = $('#co_phone_1').val();
+		var co_avail = $('#co_avail_1').val();
+		var co_extra = $('#co_extra_1').val();
+		var co_regul = $('#co_regul_1').val();
+		
 		$.ajax({
 			type:'post',
 			url:'centerUpdate.do',
@@ -121,48 +126,38 @@ $(document).ready(function(){
 	//삭제버튼 클릭시 실행되는 ajax 
 	$('#btnDelete').click(function(){
 		var co_idx=$('#co_idx').val();
+		console.log('btnDelete에서찍은 co_idx::::::'+co_idx);
 		var param ='co_idx='+co_idx;
-		$.ajax({
-			type :'post',
-			url : 'co_listdelete.do',
-			data : param,
-			success : function(result){
-				if(result == 'success'){
-					if(confirm('정말삭제하시겠습니까?') == true){
+		if(confirm('정말 삭제하시겟습니까 ?')==true){
+			$.ajax({
+				type :'post',
+				url : 'co_listdelete.do',
+				data : param,
+				success : function(result){
+					if(result == 'success'){
 						alert('삭제되었습니다.');
 						window.location.reload();
-					}else{
-						alert('취소되었습니다.');
-						return;
 					}
 				}
-			}
-		});
+			});
+		}else{
+			alert('취소되었습니다.');
+			return;
+		}
 	});
 });
-function getOriginalName(data){
-	if(checkImageType(data)){
-		return;
-	}
-	//uuid 를 제외한 원래 파일 이름 리턴
-	var idx=data.indexOf('_')+1;
-	return data.substr(idx);
-}
 function getImageLink(data){
 	if(!checkImageType(data)){//이미지 형식이 아니면 
 		return; // 함수종료
 	}
 	//이미지 파일이면 
-	///2017/04/18/s_d108a854-1b51-4009-acbe-a072bdb11443_flower2.jpg
-	var front = data.substr(0,12); //연 월 일 추출
-	var end = data.substr(14); // s_제거 (썸네일이면 s_가 붙여짐)
-	return front+end;
+	var end = data.substr(); // s_제거 (썸네일이면 s_가 붙여짐)
+	return end;
 }
 function checkImageType(data){
 	// i : ignore case ( 대소문자 무관)
 	var pattern = /jpg|gif|png|jpeg/i; //정규식표현
 	return data.match(pattern);// 규칙에 맞으면 true
-	
 }
 //이용시간 테이블목록뽑기
 function usetime_table_list(){
@@ -197,6 +192,7 @@ span{
 }
 table{
 float: left;
+
 }
 .fileDrop{
 border: 1px dotted blue;
@@ -228,88 +224,88 @@ padding-right: 800px;
 <div class="modal-body">
 	<div class="row">
 		<div class="col-sm-4">
-			<table>
-				<tr>
-					<td>
-						<span>업체번호</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" readonly="readonly" value="${co_list.co_idx}" id="co_idx">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span>업체이름</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text"value="${co_list.co_name}"size="50" id="co_name">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span>업체주소</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" value="${co_list.co_address}" size="50" id="co_address">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span>업체전화번호</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" value="${co_list.co_phone}" size="50" id="co_phone">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span>업체종목</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" value="${co_list.co_class}" size="50" id="co_class">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span style="font-weight: bold;">이용 가능 서비스</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<textarea rows="5" cols="50" placeholder="avail" id="co_avail">${co_list.co_avail}</textarea>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span style="font-weight: bold;">부가서비스</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<textarea rows="5" cols="50" placeholder="extra" id="co_extra">${co_list.co_extra}</textarea> 		   
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<span style="font-weight: bold;">이용규정 및 준비물</span>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<textarea rows="5" cols="50" placeholder="regul" id="co_regul">${co_list.co_regul}</textarea> 		   
-					</td>
-				</tr>
-			</table>
+				<table>
+					<tr>
+						<td>
+							<span>업체번호</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" readonly="readonly" value="${co_list.co_idx}" id="co_idx">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span>업체이름</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" value="${co_list.co_name}"size="50" id="co_name_1">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span>업체주소</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" value="${co_list.co_address}" size="50" id="co_address_1">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span>업체전화번호</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" value="${co_list.co_phone}" size="50" id="co_phone_1">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span>업체종목</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="text" value="${co_list.co_class}" size="50" id="co_class_1">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span style="font-weight: bold;">이용 가능 서비스</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<textarea rows="5" cols="50" placeholder="avail" id="co_avail_1">${co_list.co_avail}</textarea>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span style="font-weight: bold;">부가서비스</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<textarea rows="5" cols="50" placeholder="extra" id="co_extra_1">${co_list.co_extra}</textarea> 		   
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<span style="font-weight: bold;">이용규정 및 준비물</span>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<textarea rows="5" cols="50" placeholder="regul" id="co_regul_1">${co_list.co_regul}</textarea> 		   
+						</td>
+					</tr>
+				</table>
 		</div>
 		<!-- 파일 업로드할 영역  -->
 		<!-- <div class="col-sm-4"> -->
@@ -332,7 +328,6 @@ padding-right: 800px;
 </div>
 <!-- Footer -->
 <div class="modal-footer">
-	<!-- 닫기버튼  -->
 	<button type="button" class="btn btn" id="btnUpdate">UpDate</button>
 	<button type="button" class="btn btn" id="btnDelete">Delete</button>
   <button type="button" class="btn btn" data-dismiss="modal">Close</button>

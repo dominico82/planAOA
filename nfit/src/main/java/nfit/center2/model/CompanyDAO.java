@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import nfit.center2.model.*;
+import nfit.center.model.*;
 
 public interface CompanyDAO {
 
@@ -16,6 +16,9 @@ public interface CompanyDAO {
 	public List<CompanyListDTO> companySearch(String keyword);
 	//업체등록 
 	public int company_add(CompanyListDTO vo,String menu,String filename);
+	//업체등록2
+	public void company_add2(CompanyListDTO vo,String menu);
+
 	//업체 상세정보보기
 	public CompanyListDTO companydetail(int co_idx);
 	//업체 이미지 수정
@@ -37,5 +40,22 @@ public interface CompanyDAO {
 	//업체 컨텐츠 수정하기
 	public void content_list_update(int content_idx,int content_coin,String content1,String content2,
 			String content3,String content4,String content5,String content6);
-	
+	//업체 이미지파일만등록
+	public void updatenewfile(int co_idx,String co_view);
+	//바로등록한 업체 co_idx갑 가져오기 
+	public int sonnco_idx(String co_phone);
+	//content 삭제
+	public void content_delete(int co_idx);
+	//usetime 삭제
+	public void usetime_delete(int co_idx);
+	//max함수 적용 co_idx값 구하는 메소드
+	public int max_co_idx();
+	//이용시간등록 메소드작성
+	public void usetime_insert(CompanyUseTimeDTO vo);
+	//컨탠츠 등록 메소드작성
+	public void content_insert(CompanyContentDTO vo);
+	//전화번호로 기존업체 조회 
+	public int oldCompany(String co_phone);
+	//기존업체 컨탠츠등록
+	public void oldCompanyin(CompanyContentDTO vo);
 }

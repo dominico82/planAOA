@@ -62,17 +62,38 @@ $(document).ready(function(){
 			success : function(result){
 				if(result == 'success'){
 					alert('수정완료입니다.');	
+					content_list();                       
 				}
 			}
 		});
 	});
+	//삭제 버튼 누르면 실행 되는 ajax
+	$('#btncontentdelete').click(function(){
+		var content_co_idx = $('#content_co_idx').val();
+		var param = 'content_co_idx='+content_co_idx;
+		$.ajax({
+			type :'post',
+			data : param,
+			url : 'content_delete.do',
+			success : function(result){
+				if(result =='success'){
+						alert('삭제가 되었습니다.');
+						content_list();
+					}
+				}
+			});
+		});
+	
 });
 </script>
 </head>
 <body>
 <c:set var="cnt" value="${count}"/>
+<!-- 컨트롤러에서 보낸 idx  -->
+<c:set var="idx" value="${co_idx}"/>
 <!-- co_idx의총갯수  스크립트에서 for문에 넣을 조건식-->
 <input type="hidden" value="${cnt}" id="co_idx_count">
+<input type="hidden" value="${idx}" id="content_co_idx">
 <c:set var="list" value="${list}"/>
 <table border="1">
 	<tr>
@@ -86,7 +107,7 @@ $(document).ready(function(){
 	</tr>
 	<c:if test="${empty list}">
 		<tr>
-			<td>등록된 컨텐츠가 없습니다.</td>
+			<td colspan="7">등록된 컨텐츠가 없습니다.</td>
 		</tr>
 	</c:if>
 	<c:forEach var="vo" items="${list}" varStatus="status">
@@ -117,6 +138,9 @@ $(document).ready(function(){
 	</tr>
 	</c:forEach>
 </table>
-<button type="button" id="btncontentupdate">컨텐츠정보수정</button>
+<div>
+	<button type="button" id="btncontentupdate">컨텐츠정보수정</button>
+	<button type="button" id="btncontentdelete">컨텐츠정보삭제</button>
+</div>
 </body>
 </html>

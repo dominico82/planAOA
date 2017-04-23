@@ -35,13 +35,136 @@
 	}
 	/* PieChart 도가능  */
 </script>
-<style>
-iframe{
- width: 0px;
- height: 0px;
- border: 0px;
-}
-</style>
+<script>
+$(document).ready(function(){
+		$('.filedropDown').on('dragenter dragover' , function(event){
+			event.preventDefault();//기본 효과를 막음
+		});
+		//이벤트 효과 1개 넣기
+		$('.filedropDown').on('drop',function(event){
+			console.log('두번째이벤트 효과 출발');
+			//기본 효과막음
+			event.preventDefault();
+			//드래그된 파일정보
+			var files= event.originalEvent.dataTransfer.files;
+			//체크박스 검사
+			
+			//체크박스값 가져오기
+			var checkbox=0;
+			$('input[name=co_class2]:checked').each(function() {
+				 checkbox = $(this).val();
+				console.log(checkbox);
+			});
+			var co_name =document.getElementById('co_name').value;
+			var co_address =document.getElementById('co_address').value;
+		 	var co_avail = document.getElementById('co_avail').value;
+		 	var co_extra = document.getElementById('co_extra').value;
+		 	var co_regul = document.getElementById('co_regul').value;
+		 	var co_phone = document.getElementById('co_phone').value;
+			//ajax로 전달할  폼 객체 
+			var formData=new FormData();
+			//폼 객체에 파일 추가 , append ('변수명',값)
+			console.log(files[0]);
+			
+			var arr=[];
+			for(var i =0;i<files.length;i++){
+				var file=files[i];
+				console.log('파일 for문 돌림 : :  :: : '+file)
+				
+			formData.append('files' ,file);//파일 배열 담는곳
+			}
+			
+			console.log('첫번째파일::'+files[0]);
+			console.log('두번째파일::'+files[1]);
+			console.log('콘솔에서찍은 주소 ::'+co_address);
+			
+			formData.append('checkbox' ,checkbox);
+			formData.append('co_name' ,co_name);
+			formData.append('co_address' ,co_address);
+			formData.append('co_avail',co_avail);
+			formData.append('co_regul',co_regul);
+			formData.append('co_extra',co_extra);
+			formData.append('co_phone',co_phone);
+			//processData : false => post 방식
+			//contentType : false => multipart/form-data
+			$.ajaxSettings.traditional = true;
+			$.ajax({
+				type : 'post',
+				url : 'uploadAjax.do',
+				data : formData,
+				dataType:'text',
+				processData : false,
+				contentType: false,
+				success : function(result){
+					if(result =='success'){
+						alert('등록업로드 완료입니다.');
+					}
+				}
+		});
+	});
+	//이용시간 등록 
+	$('#btnUsetime_insert').click(function(){
+		var usetime_day=  $('#usetime_day').val();
+		var usetime_time= $('#usetime_time').val();
+		var param='usetime_day='+usetime_day+'&usetime_time='+usetime_time;
+		$.ajax({
+			type : 'post',
+			data : param,
+			url  : 'usetime_insert.do',
+			success : function(result){
+					if(result='success'){
+						alert('이용시간 등록 성공!');
+					}
+			}
+		});
+	});
+	//컨탠츠 등록
+	$('#btnContent_insert').click(function(){
+		var content_coin = $('#content_coin').val();
+		var content1= $('#content1').val();
+		var content2= $('#content2').val();
+		var content3= $('#content3').val();
+		var content4= $('#content4').val();
+		var content5= $('#content5').val();
+		var content6= $('#content6').val();
+		var param ='content_coin='+content_coin+'&content1='+content1+'&content2='+content2+'&content3='+content3+'&content4='+content4+'&content5='+content5+'&content6='+content6;
+		$.ajax({
+			type :'post',
+			url : 'content_insert.do',
+			data : param,
+			success : function(result){
+				 if(result ='success'){
+					 alert('컨탠츠등록 성공!');
+				 }
+			}
+		});
+	});
+	//기존 업체 컨탠츠 등록
+	$('#btnOldCompany').click(function(){
+		//기존 업체 전화번호
+		var oldcompany_phone =$('#oldcompany_co_idx').val();
+		var con_coin = $('#con_coin').val();
+		var con_con1 = $('#con_con1').val();
+		var con_con2 = $('#con_con2').val();
+		var con_con3 = $('#con_con3').val();
+		var con_con4 = $('#con_con4').val(); 
+		var con_con5 = $('#con_con5').val();
+		var con_con6 = $('#con_con6').val();
+		var param=
+			'co_phone='+oldcompany_phone+'&content_coin='+con_coin+'&content1='+con_con1+'&content2='+con_con2+'&content3='+con_con3+'&content4='+con_con4+'&content5='+con_con5+'&content6='+con_con6;
+		$.ajax({
+			type : 'post',
+			url : 'oldCompanycon.do',
+			data : param,
+			success : function(result){
+				if(result='success'){
+					alert('등록완료입니다.');
+				}
+			}
+		});
+	});
+});
+</script>
 </head>
 <body>
 <c:set var="list" value="${list}"/>
@@ -59,7 +182,7 @@ iframe{
 	</c:if>
 </div>
 <!-- -------- -->
-<!-- 부트스트랩 모달 -->
+<!-- 업체등록 모달 -->
 <div class="container" style="width: 100px;display:inline-block;">
   <!-- Trigger the modal with a button -->
   <button type="button" class="btn btn-info btn-xs-5" data-toggle="modal" data-target="#myModal">업체등록</button>
@@ -78,13 +201,13 @@ iframe{
 					  <div class="form-group">
 					  	<label for="inputText3" class="col-sm-2 control-label">업체명</label>
 					  		<div class="col-sm-5">
-								<input type="text" class="form-control" name="co_name">  			
+								<input type="text" class="form-control" name="co_name" id="co_name">  			
 					  		</div>
 					  </div> 
 					  <div class="form-group">
 					  	<label for="inputText3" class="col-sm-2 control-label">주소</label>
 					  		<div class="col-sm-5">
-								<input type="text" class="form-control" name="co_address">  			
+								<input type="text" class="form-control" name="co_address" id="co_address">  			
 					  		</div>
 					  </div> 
 						<div class="form-group">
@@ -107,50 +230,35 @@ iframe{
 						<div class="form-group">
 						  	<label for="inputText3" class="col-sm-2 control-label">업체전화번호</label>
 						  		<div class="col-sm-5">
-									<input type="text" class="form-control"placeholder="text" name="co_phone">  			
+									<input type="text" class="form-control"placeholder="text" name="co_phone" id="co_phone">  			
 						  		</div>
 					  	</div>  
 						<div class="form-group">
 					  		<label for="inputText3" class="col-sm-2 control-label">이용규정및 준비물</label>
 					  			<div class="col-sm-5">
-									<textarea rows="5" cols="20"class="form-control" name="co_regul" placeholder="문단구분 '|'를 넣어주세요"></textarea>
+									<textarea rows="5" cols="20"class="form-control" name="co_regul" placeholder="문단구분 '|'를 넣어주세요" id="co_regul"></textarea>
 					  			</div>
 					  	</div>
 					  	<div class="form-group">
 					  		<label for="inputText3" class="col-sm-2 control-label">부가서비스</label>
 					  			<div class="col-sm-5">
-									<textarea rows="5" cols="20"class="form-control" name="co_extra" placeholder="문단구분 '|'를 넣어주세요"></textarea>
+									<textarea rows="5" cols="20"class="form-control" name="co_extra" placeholder="문단구분 '|'를 넣어주세요" id="co_extra"></textarea>
 					  			</div>
 					  	</div> 
 					  	<div class="form-group">
 					  		<label for="inputText3" class="col-sm-2 control-label">이용가능</label>
 					  			<div class="col-sm-5">
-									<textarea rows="5" cols="20"class="form-control" name="co_avail" placeholder="문단구분 '|'를 넣어주세요"></textarea>
+									<textarea rows="5" cols="20"class="form-control" name="co_avail" placeholder="문단구분 '|'를 넣어주세요" id="co_avail"></textarea>
 					  			</div>
 					  	</div> 
 					  	<div class="form-group">
 					  		<label for="inputText3" class="col-sm-2 control-label">업체사진업로드</label>
 					  			<div class="col-sm-5">
-									<input type="file" class="form-control" name="co_view2">
+									<div class="filedropDown" style="width: 300px;height: 300px; border: 2px solid black;"></div>
 					  			</div>
 					  	</div> 
-					   	<div class="form-group"> 
-					   		<div class="col-sm-offset-2 col-sm-5" align="right">
-					    		<button type="submit" class="btn btn-default">Sign in</button>
-					    		<button type="reset" class="btn btn-default">Reset</button> 
-					    	</div> 
-					   	</div>
 					</form>
         		</div>
-        		<!-- 모달 footer -->
-        			<!-- hidden frame -->
-					<iframe name="iframe1"></iframe>
-					<script>
-						function addFilePath(msg){
-							alert(msg);
-							document.getElementById('form1').reset();
-						}
-					</script>
       		</div>
     	</div>
   	</div>
@@ -160,26 +268,164 @@ iframe{
   <!-- Trigger the modal with a button -->
   <button type="button" class="btn btn-info btn-xs-5" data-toggle="modal" data-target="#myModal2">이용누적차트</button>
   <!-- Modal -->
-<div class="modal fade" id="myModal2" role="dialog">
-	<div class="modal-dialog" style="width:1000px;height: 900px;">
-	<!-- Modal content-->
-		<div class="modal-content">
-		  <div class="modal-header">
-		    <button type="button" class="close" data-dismiss="modal">&times;</button>
-		    <h4 class="modal-title">누적차트표</h4>
-		  </div>
-		  <div class="modal-body">
-		    <div id="chart_div">
-				<!-- 차트새로고침버튼 -->
-				<button type="button" onclick="drawChart()" id="btn" class="btn btn-default">refresh</button>
+	<div class="modal fade" id="myModal2" role="dialog">
+		<div class="modal-dialog" style="width:1000px;height: 900px;">
+		<!-- Modal content-->
+			<div class="modal-content">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal">&times;</button>
+			    <h4 class="modal-title">누적차트표</h4>
+			  </div>
+			  <div class="modal-body">
+			    <div id="chart_div">
+					<!-- 차트새로고침버튼 -->
+					<button type="button" onclick="drawChart()" id="btn" class="btn btn-default">refresh</button>
+				</div>
+			 </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			 	 </div>
 			</div>
-		 </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		 	 </div>
 		</div>
 	</div>
 </div>
+<!-- 이용시간및 컨탠츠 등록  -->
+<div class="container" style="width: 100px; display:inline ;">
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-info btn-xs-5" data-toggle="modal" data-target="#myModal3">이용시간및 컨탠츠 등록</button>
+  <!-- Modal -->
+	<div class="modal fade" id="myModal3" role="dialog">
+		<div class="modal-dialog" style="width:1000px;height: 900px;">
+		<!-- Modal content-->
+			<div class="modal-content">
+			  <div class="modal-header">
+			    <button type="button" class="close" data-dismiss="modal">&times;</button>
+			    <h4 class="modal-title">이용시간 및 컨텐츠 등록 </h4>
+			  </div>
+			  <div class="modal-body">
+			    	<table>
+			    		<tr>
+			 				<th>요일 을적어주세요|ex.)평일,토요일,일요일,휴무일 </th>
+			    			<td>
+		    					<input type="text" id="usetime_day" placeholder="작성해주세요~">
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<th>시간을적어주세요 ex)00:00~00:00</th>
+			    			<td>
+			    				<input type="text" id="usetime_time" placeholder="작성해주세요~">
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<td colspan="2" align="right">
+			    				<button type="button" id="btnUsetime_insert">이용시간 등록!</button>
+		    				</td>
+			    		</tr>
+			    	</table>
+			    	<table>
+			    		<tr>
+			    			<th>적용코인갯수</th>
+			    			<td>
+			    			<input type="text" id="content_coin" placeholder="작성해주세요">
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<th>컨탠츠1번</th>
+							<td>
+								<input type="text" id="content1">
+							</td>	    		
+			    		</tr>
+			    		<tr>
+			    			<th>컨탠츠2번</th>
+			    			<td>
+			    				<input type="text" id="content2">
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<th>컨탠츠3번</th>
+			    			<td>
+			    				<input type="text" id="content3">
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<th>컨탠츠4번</th>
+			    			<td>
+			    				<input type="text" id="content4">
+			    			</td>
+			    		</tr>	
+			    		<tr>
+			    			<th>컨탠츠5번</th>
+			    			<td>
+			    				<input type="text" id="content5">
+			    			</td>
+			    		</tr>
+			    		<tr>
+			    			<th>컨탠츠6번</th>
+			    			<td>
+			    				<input type="text" id="content6">
+			    			</td>
+			    		</tr>
+			    		
+			    		<tr>
+			    			<td colspan="7">
+			    				<button type="button" id="btnContent_insert">컨텐츠 등록!</button>
+		    				</td>
+			    		</tr>
+			    	</table>
+			    	<hr>
+		    		<!-- 기존업체 컨텐츠 등록 --> 
+			    	 <p>기존 업체 컨탠츠 등록 폼</p>
+			    	 <input type="text" id="oldcompany_co_idx"placeholder="전화번호입력해주세요">
+			    	 <table>
+			    	 	<tr>
+			    	 	 	<td>코인</td>
+			    	 	 	<td>
+			    	 	 		<input type="text" id="con_coin">
+			    	 	 	</td>
+			    	 	</tr>
+			    	 	<tr>
+			    	 	 	<td>컨텐츠1번</td>
+			    	 	 	<td>
+			    	 	 		<input type="text" id="con_con1">
+			    	 	 	</td>
+			    	 	</tr>
+			    	 	<tr>
+			    	 	 	<td>컨텐츠2번</td>
+			    	 	 	<td>
+				    	 	 	<input type="text" id="con_con2">
+			    	 	 	</td>
+			    	 	</tr>
+						<tr>
+			    	 	 	<td>컨텐츠3번</td>
+			    	 	 	<td>
+			    	 	 		<input type="text" id="con_con3">
+			    	 	 	</td>
+			    	 	</tr>
+						<tr>
+			    	 	 	<td>컨텐츠4번</td>
+			    	 	 	<td>
+				    	 	 	<input type="text" id="con_con4">
+			    	 	 	</td>
+			    	 	</tr>
+						<tr>
+			    	 	 	<td>컨텐츠5번</td>
+			    	 	 	<td>
+				    	 	 	<input type="text" id="con_con5">
+			    	 	 	</td>
+			    	 	</tr>
+			    	 	<tr>
+			    	 	 	<td>컨텐츠6번</td>
+			    	 	 	<td>
+				    	 	 	<input type="text" id="con_con6">
+			    	 	 	</td>
+			    	 	</tr>
+			    	 </table>
+			    	 <button type="button" id="btnOldCompany">등록하기</button>
+			 	</div>
+			 	<div class="modal-footer"></div>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- 업체리스트 나열 테이블  -->	 
 <table border="1" class="table table-striped table-bordered table-hover"> <!-- class="table table-bordered"  -->

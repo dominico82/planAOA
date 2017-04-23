@@ -37,9 +37,25 @@ $(document).ready(function(){
 			success : function(result){
 				if(result =='success'){
 					alert('수정성공입니다.');
+					usetime_table_list();
 				}
 			}
 		});
+	});
+	$('#usetimeBtndelete').click(function(){
+			var usetime_co_idx = $('#usetime_co_idx').val();
+			var param= 'usetime_co_idx='+usetime_co_idx;
+			$.ajax({
+				type : 'post',
+				url : 'usetime_delete.do',
+				data :param,
+				success : function(result){
+					if(result =='success'){
+						alert('삭제성공');
+						usetime_table_list();
+					}
+				}
+			});
 	});
 });
 </script>
@@ -50,6 +66,8 @@ width: 300px;
 </style>
 </head>
 <body>
+<c:set var="usetime_co_idx1" value="${usetime_co_idx}"/>
+<input type="hidden" value="${usetime_co_idx1}" id="usetime_co_idx">
 <c:set var="list" value="${list}"/>
 	<table border="1">
 		<tr>
@@ -73,6 +91,9 @@ width: 300px;
 			</tr>
 		</c:forEach>
 	</table>
-	<button type="button" id="usetimeBtn">수정버튼</button>
+	<div>
+		<button type="button" id="usetimeBtn">수정버튼</button>
+		<button type="button" id="usetimeBtndelete">삭제버튼</button>
+	</div>
 </body>
 </html>

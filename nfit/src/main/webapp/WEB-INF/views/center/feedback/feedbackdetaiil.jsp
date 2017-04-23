@@ -14,32 +14,31 @@ $(document).ready(function(){
 	$('#btnFeedbackUpdate').click(function(){
 		/* 다시입력한 별의값 */
 		var feedback_score = $('#feedback_score2').val();
-		
+		// index 
+		var feedback_index= $('#feedback_index').val();
 		/* 다시입력한 content의값 */
 		var feedback_content = $('#detail_feedback_content').val();
-		//별점 체크 유효성확인 and 택스트 유무확인
-		if(feedback_score=='' || feedback_score ==null){
+			feedback_content = feedback_content.replace('\r\n','<br>');
+		console.log('feedback_content::::'+feedback_content);
+		//별점 체크 유효성확인 
+		 if(feedback_score=='' || feedback_score ==null){
 			alert('별점선택해주세요');
-			return;
-		}else if(feedback_content =''||feedback_content ==null){
-			alert('내용을 기입해주세요');
-			return;
 		}
-		
+		//var param='feedback_score='+feedback_score+'&feedback_content='+feedback_content+'&feedback_index='+feedback_index;
 		$.ajax({
 			type:'put',	
 			url:'feedbackupdate.do?feedback_index=${vo.feedback_index}',
 			headers :{
 				'Content-Type':'application/json'
-			},
-			data : JSON.stringify({
+			}, 
+			 data : JSON.stringify({
 				feedback_score : feedback_score,
 				feedback_content : feedback_content 
 			}),
-			dataType : 'text',
 			success : function(result){
 				if(result == 'success'){
 					$('#modifyFeedback').hide();
+					alert('수정이되었습니다.');
 					feedbacklist();
 				}
 			}
@@ -47,27 +46,27 @@ $(document).ready(function(){
 	});//end 수정 이벤트
 	//삭제이벤트
 	$('#btnFeedbackDelete').click(function(){
-		$.ajax({
-			type:'delete',
-			url:'feedbackdetail.do?feedback_index=${vo.feedback_index}',
-			success : function(result){
-				if(result=='success'){
-					if(confirm('정말삭제하시겠습니까?') == true){
-						alert('삭제되었습니다.');
-						$('#modifyFeedback').css('visibility','hidden');
-						feedbacklist();
-					}else{
-						alert('취소되었습니다.');
-						return;
+		if(confirm('정말삭제하시겠습니까?')==true){
+			$.ajax({
+				type:'delete',
+				url:'feedbackdetail.do?feedback_index=${vo.feedback_index}',
+				success : function(result){
+					if(result=='success'){
+							alert('삭제되었습니다.');
+							$('#modifyFeedback').css('visibility','hidden');
+							feedbacklist();
+						}
 					}
-				}
-			}
-		});
+				});
+		}else{
+			alert('취소되었습니다.');
+			return;
+		}
 	});
-	
 	//닫기 버튼
 	$('#btnFeedbackClose').click(function(){
 		$('#modifyFeedback').css('visibility','hidden');
+		feedbacklist();
 	});
 });
 </script>
@@ -119,16 +118,16 @@ function mark1(star){
 <c:set var="vo" value="${vo}"/>
 <div id="detail_feedback_index">${vo.feedback_index}<br> <!-- 댓글번호 -->
 	<span>
-		<img id="images1" src="resources/images/img2/star0.png" width="20" onmouseover="show1(1)"onclick="mark1(1)" onmouseout="noshow1(1)"/>
-		<img id="images2" src="resources/images/img2/star0.png" width="20" onmouseover="show1(2)"onclick="mark1(2)" onmouseout="noshow1(2)"/>
-		<img id="images3" src="resources/images/img2/star0.png" width="20" onmouseover="show1(3)"onclick="mark1(3)" onmouseout="noshow1(3)"/>
-		<img id="images4" src="resources/images/img2/star0.png" width="20" onmouseover="show1(4)"onclick="mark1(4)" onmouseout="noshow1(4)"/>
-		<img id="images5" src="resources/images/img2/star0.png" width="20" onmouseover="show1(5)"onclick="mark1(5)" onmouseout="noshow1(5)"/>
+		<img id="images1" src="resources/images/img/star0.png" width="20" onmouseover="show1(1)"onclick="mark1(1)" onmouseout="noshow1(1)"/>
+		<img id="images2" src="resources/images/img/star0.png" width="20" onmouseover="show1(2)"onclick="mark1(2)" onmouseout="noshow1(2)"/>
+		<img id="images3" src="resources/images/img/star0.png" width="20" onmouseover="show1(3)"onclick="mark1(3)" onmouseout="noshow1(3)"/>
+		<img id="images4" src="resources/images/img/star0.png" width="20" onmouseover="show1(4)"onclick="mark1(4)" onmouseout="noshow1(4)"/>
+		<img id="images5" src="resources/images/img/star0.png" width="20" onmouseover="show1(5)"onclick="mark1(5)" onmouseout="noshow1(5)"/>
 	</span>
 	<br>
 		<input type="hidden" id="feedback_score2">
 	<br>
-	<textarea rows="5" cols="55" id="detail_feedback_content">${vo.feedback_content}</textarea>
+	<textarea rows="5" cols="55" id="detail_feedback_content" placeholder="내용을 기입해주세요" required="required">${vo.feedback_content}</textarea>
 	<br>
 	<div style="text-align: center;">
 		<button type="button" id="btnFeedbackUpdate">수정</button>

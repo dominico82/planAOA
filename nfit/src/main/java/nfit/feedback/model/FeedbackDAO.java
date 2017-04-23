@@ -3,7 +3,6 @@ package nfit.feedback.model;
 import java.util.List;
 
 
-
 public interface FeedbackDAO {
 
 	//댓글 추가
