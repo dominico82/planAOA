@@ -141,7 +141,7 @@
 	  #{content5},#{content6})
 	 </insert>
 	 <!-- 업체 검색하기 -->
-	  <select id="companySearch" parameterType="hashmap" resultType="nfit.center.model.CompanyListDTO">
+	  <select id="companySearch" parameterType="hashmap" resultType="nfit.center2.model.CompanyListDTO">
 		 select * from
 		 (select rownum as rnum,a.* from(select * from company_list 
 			<if test="keyfield != null">
