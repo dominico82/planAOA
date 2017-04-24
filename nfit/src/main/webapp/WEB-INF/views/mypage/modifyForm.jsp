@@ -100,16 +100,18 @@ function removeChar(event) {
 </script>
 <script type="text/javascript">
 function checkValue() {
-	var form=document.modify_form
+	var form = document.modify_form;
 	var pw1 = document.getElementById('password').value;
 	var pw2 = document.getElementById('password2').value;
 	
-	if(form.member_pwd.size < 6){
-		alert("6글자 이상 입력해주세요.");
+	if(pw1.length <= 5){
+		alert("비밀번호는 6글자 이상 입력해주세요.");
 		return false;
 	}
-	if(pw1 != pw2){
-		alert("비밀번호를 동일하게 입력해주세요.")	
+	
+	if(pw2 != pw1){
+		alert("비밀번호를 동일하게 입력해주세요.");
+		return false;
 	}
 }
 </script>
@@ -141,7 +143,7 @@ function checkValue() {
 				<div class="col-lg-10 col-md-9 col-sm-8" id="inner_top">
 					<div class="editMyInfo">
 						<h3>회원정보 수정</h3>
-						<form class="memberForm" name="modify_form" onsubmit="return checkValue()" action="modifyGo.do" method="post">
+						<form class="memberForm" name="modify_form" action="modifyGo.do" method="post">
 							<div class="row">
 								<div class="col-md-6">
 									<div class="form-group">
@@ -153,7 +155,8 @@ function checkValue() {
 									</div>
 									<div class="form-group">
 										<label for="password">비밀번호</label>
-										<input type="password" class="form-control" id="password" value="${dto.member_pwd}" placeholder="비밀번호" name="member_pwd">
+										<input type="password" class="form-control" id="password" value="${dto.member_pwd}" placeholder="비밀번호"
+										name="member_pwd">
 									</div>
 									<div class="form-group">
 										<label for="password2">비밀번호 다시 입력</label>
@@ -251,7 +254,7 @@ function checkValue() {
 								</div>
 							</div>
 							<div class="form-group submitLine forMbileAppFloat">
-								<button type="submit" class="btn btn-lg btn-primary btn_mobileAppFloat">
+								<button type="button" class="btn btn-lg btn-primary btn_mobileAppFloat" onclick="checkValue()">
 									<i class="fa fa-check"></i>저장하기
 								</button>
 								<a class="btn btn-lg btn-primary btn_mobileAppFloat" href="memberLeave.do">

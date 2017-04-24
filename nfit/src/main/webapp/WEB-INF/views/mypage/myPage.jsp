@@ -44,6 +44,7 @@ $(document).ready(function(){ //DOM이 준비되고
 							<input type="hidden" value="${dto.member_id}" name="id">
 							<input type="hidden" value="${dto.member_idx}" name="idx">
 						</form>
+						<br>
 						<h6>
 							${dto.member_name}<small>님</small>
 							<br>
@@ -255,6 +256,28 @@ $(document).ready(function(){ //DOM이 준비되고
 											여성의 경우 85cm 이상이면 "복부비만" 입니다.
 										</P>
 										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
+										<a class="membershipApply" data-target="#layerpop" data-toggle="modal">나에게 맞는 추천식단보기</a><br/>
+										<div class="modal fade" id="layerpop">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <!-- header -->
+										      <div class="modal-header">
+										        <!-- 닫기(x) 버튼 -->
+										        <button type="button" class="close" data-dismiss="modal">×</button>
+										        <!-- header title -->
+										        <h4 class="modal-title">Header</h4>
+										      </div>
+										      <!-- body -->
+										      <div class="modal-body">
+										      </div>
+										      <!-- Footer -->
+										      <div class="modal-footer">
+										        Footer
+										        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
 									</c:when>
 									<c:otherwise>
 										<h2>

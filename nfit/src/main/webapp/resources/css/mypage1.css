@@ -8810,8 +8810,9 @@ em.tagCanTPassOver {
 }
 */
 .notYetMembership {
-  max-width: 600px;
-  margin: 30px auto 10px;
+	text-align: center;
+	margin-top: 100px;
+    margin-left: 35px;
 }
 .notYetMembership h4 {
   font-size: 24px;
@@ -10998,6 +10999,7 @@ padding-left: 30px;
 }
 .panel {
   box-shadow: none;
+  margin-top: 60px;
 }
 .panel-group .panel {
   border-radius: 2px;
