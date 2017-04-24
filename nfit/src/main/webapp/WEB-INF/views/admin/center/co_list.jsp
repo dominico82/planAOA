@@ -228,80 +228,68 @@ $(document).ready(function(){
 					</div>
 					<!-- -------- -->
 					<!-- 업체등록 모달 -->
-					<div class="container" style="width: 10%;display: -web">
+					<div class="container" style="width: 10%;display: -webkit-inline-box">
 					  <!-- Trigger the modal with a button -->
-					  <button type="button" class="btn btn-info btn-xs-5" data-toggle="modal" data-target="#myModal">업체등록</button>
+					  <button type="button" class="btn btn-info btn-xs-5" data-toggle="modal" data-target="#myModal" style="margin-right: 10px;">업체등록</button>
 					  <!-- Modal -->
 					  	<div class="modal fade" id="myModal" role="dialog">
 					   	 	<div class="modal-dialog" style="width:1500px;height: 700px;">
 					      	<!-- Modal content-->
-					      		<div class="modal-content">
+					      		<div class="modal-content" style="width: 900px;">
 					        		<div class="modal-header">
 					          			<button type="button" class="close" data-dismiss="modal">&times;</button>
 					          			<h4 class="modal-title">업체등록</h4>
 					        		</div>
 					        		<!-- 모달 body  -->
-					        		<div class="modal-body">
+					        		<div class="modal-body" style="margin:10px;">
 					          			<form action="chart.do" name="company_add" method="post" enctype="multipart/form-data"id="form1" target="iframe1" class="form-horizontal" role="form" >
-										  <div class="form-group">
 										  	<label for="inputText3" class="col-sm-2 control-label">업체명</label>
 										  		<div class="col-sm-5">
 													<input type="text" class="form-control" name="co_name" id="co_name">  			
 										  		</div>
-										  </div> 
-										  <div class="form-group">
 										  	<label for="inputText3" class="col-sm-2 control-label">주소</label>
 										  		<div class="col-sm-5">
 													<input type="text" class="form-control" name="co_address" id="co_address">  			
 										  		</div>
-										  </div> 
-											<div class="form-group">
-												 <div class="col-sm-offset-2 col-sm-5"> 
-											   		<div class="checkbox"> 
-												   		<label> <input type="checkbox" name="co_class2" value="1"> 헬스 </label> 
-												   		<label> <input type="checkbox" name="co_class2" value="2"> 뷰티</label> 
-												   		<label> <input type="checkbox" name="co_class2" value="3"> 필라테스</label> 
-												   		<label> <input type="checkbox" name="co_class2" value="4"> 탁구</label> 
-												   		<label> <input type="checkbox" name="co_class2" value="5"> 복싱</label> 
-												   		<br>
-												   		<label> <input type="checkbox" name="co_class2" value="6"> 검도</label> 
-												   		<label> <input type="checkbox" name="co_class2" value="7"> 격투기</label> 
-												   		<label> <input type="checkbox" name="co_class2" value="8"> 크로스핏</label> 
-												   		<label> <input type="checkbox" name="co_class2" value="9"> 골프</label> 
-												   		<label> <input type="checkbox" name="co_class2" value="10"> 기타</label> 
+													 <div class="col-sm-offset-2 col-sm-5"> 
+												   		<div class="checkbox"> 
+													   		<label> <input type="checkbox" name="co_class2" value="1"> 헬스 </label> 
+													   		<label> <input type="checkbox" name="co_class2" value="2"> 뷰티</label> 
+													   		<label> <input type="checkbox" name="co_class2" value="3"> 필라테스</label> 
+													   		<label> <input type="checkbox" name="co_class2" value="4"> 탁구</label> 
+													   		<label> <input type="checkbox" name="co_class2" value="5"> 복싱</label> 
+													   		<br>
+													   		<label> <input type="checkbox" name="co_class2" value="6"> 검도</label> 
+													   		<label> <input type="checkbox" name="co_class2" value="7"> 격투기</label> 
+													   		<label> <input type="checkbox" name="co_class2" value="8"> 크로스핏</label> 
+													   		<label> <input type="checkbox" name="co_class2" value="9"> 골프</label> 
+													   		<label> <input type="checkbox" name="co_class2" value="10"> 기타</label> 
+												   		</div> 
 											   		</div> 
-										   		</div> 
-										   	</div>
-											<div class="form-group">
 											  	<label for="inputText3" class="col-sm-2 control-label">업체전화번호</label>
 											  		<div class="col-sm-5">
 														<input type="text" class="form-control"placeholder="text" name="co_phone" id="co_phone">  			
 											  		</div>
-										  	</div>  
-											<div class="form-group">
 										  		<label for="inputText3" class="col-sm-2 control-label">이용규정및 준비물</label>
 										  			<div class="col-sm-5">
 														<textarea rows="5" cols="20"class="form-control" name="co_regul" placeholder="문단구분 '|'를 넣어주세요" id="co_regul"></textarea>
 										  			</div>
-										  	</div>
-										  	<div class="form-group">
 										  		<label for="inputText3" class="col-sm-2 control-label">부가서비스</label>
 										  			<div class="col-sm-5">
 														<textarea rows="5" cols="20"class="form-control" name="co_extra" placeholder="문단구분 '|'를 넣어주세요" id="co_extra"></textarea>
 										  			</div>
-										  	</div> 
-										  	<div class="form-group">
+										  	
 										  		<label for="inputText3" class="col-sm-2 control-label">이용가능</label>
 										  			<div class="col-sm-5">
 														<textarea rows="5" cols="20"class="form-control" name="co_avail" placeholder="문단구분 '|'를 넣어주세요" id="co_avail"></textarea>
 										  			</div>
-										  	</div> 
-										  	<div class="form-group">
+										  	 
+										  
 										  		<label for="inputText3" class="col-sm-2 control-label">업체사진업로드</label>
 										  			<div class="col-sm-5">
 														<div class="filedropDown" style="width: 300px;height: 300px; border: 2px solid black;"></div>
 										  			</div>
-										  	</div> 
+										  	
 										</form>
 					        		</div>
 					      		</div>
@@ -335,7 +323,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 					<!-- 이용시간및 컨탠츠 등록  -->
-					<div class="container" style="width: 100px; display:inline ;">
+					<div class="container" style="width: 10%; display:inline ;">
 					  <!-- Trigger the modal with a button -->
 					  <button type="button" class="btn btn-info btn-xs-5" data-toggle="modal" data-target="#myModal3">이용시간및 컨탠츠 등록</button>
 					  <!-- Modal -->
@@ -504,7 +492,7 @@ $(document).ready(function(){
 						<!-- 모달 생성되는곳 -->
 						<div id="modal-testNew" class="modal fade" tabindex="1" role="dialog" aria-labelledby="테스트" aria-describedby="테스트모달">
 							<div class="modal-dialog" style="width:1200px;height: 700px;">
-								<div class="modal-content">
+								<div class="modal-content" style="width:1200px;">
 									<!-- remote ajax call -->
 								</div>
 							</div>

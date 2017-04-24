@@ -140,7 +140,7 @@ public class ChartController {
 			for(int i =0;i<mfile.size();i++){
 				//String fileName=mfile.get(i).getOriginalFilename();
 				//파일 이름 j
-				String fileName=co_idx+"_"+vo.getCo_phone()+"_"+i+".jpg";
+				String fileName=co_idx+"_"+vo.getCo_phone()+"_"+i+1+".jpg";
 				System.out.println("파일이름:"+fileName); // for문 안탐 
 				File target = new File(maxPath,fileName);
 				FileCopyUtils.copy(mfile.get(i).getBytes(),target);

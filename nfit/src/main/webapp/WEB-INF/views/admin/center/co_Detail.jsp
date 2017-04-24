@@ -9,6 +9,9 @@
 <!-- jquery -->
 <script src="http://code.jquery.com/jquery-3.1.0.js"></script>
 <!-- bs -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <script>
 $(document).ready(function(){
 	//이용시간 테이블 리스트
@@ -184,24 +187,17 @@ function content_list(){
 }
 </script>
 <style>
-span{
-	font-weight: bold;
-}
 table{
 float: left;
-
 }
 .fileDrop{
-border: 1px dotted blue;
-float: left;
+float: left; 
 width: 30%;
 height: 150px;
-
 }
 .modal-footer{
 clear: both;
 padding-right: 800px;
-
 }
 </style>
 </head>
@@ -219,110 +215,84 @@ padding-right: 800px;
 <form>
 
 <div class="modal-body">
-	<div class="row">
-		<div class="col-sm-4">
-				<table>
-					<tr>
-						<td>
-							<span>업체번호</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="text" readonly="readonly" value="${co_list.co_idx}" id="co_idx">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span>업체이름</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="text" value="${co_list.co_name}"size="50" id="co_name_1">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span>업체주소</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="text" value="${co_list.co_address}" size="50" id="co_address_1">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span>업체전화번호</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="text" value="${co_list.co_phone}" size="50" id="co_phone_1">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span>업체종목</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type="text" value="${co_list.co_class}" size="50" id="co_class_1">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span style="font-weight: bold;">이용 가능 서비스</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea rows="5" cols="50" placeholder="avail" id="co_avail_1">${co_list.co_avail}</textarea>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span style="font-weight: bold;">부가서비스</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea rows="5" cols="50" placeholder="extra" id="co_extra_1">${co_list.co_extra}</textarea> 		   
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<span style="font-weight: bold;">이용규정 및 준비물</span>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea rows="5" cols="50" placeholder="regul" id="co_regul_1">${co_list.co_regul}</textarea> 		   
-						</td>
-					</tr>
-				</table>
-		</div>
+<div id="content_list"></div>
+		<table class="type1">
+			<tr>
+				<th>업체번호</th>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" readonly="readonly" value="${co_list.co_idx}" id="co_idx">
+				</td>
+			</tr>
+			<tr>
+				<th>업체이름</th>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" value="${co_list.co_name}"size="50" id="co_name_1">
+				</td>
+			</tr>
+			<tr>
+				<th>업체주소</th>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" value="${co_list.co_address}" size="50" id="co_address_1">
+				</td>
+			</tr>
+			<tr>
+				<th>연락처</th>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" value="${co_list.co_phone}" size="50" id="co_phone_1">
+				</td>
+			</tr>
+			<tr>
+				<th>종목</th>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" value="${co_list.co_class}" size="50" id="co_class_1">
+				</td>
+			</tr>
+			<tr>
+				<th>이용가능서비스</th>
+			</tr>
+			<tr>
+				<td>
+					<textarea rows="5" cols="50" placeholder="avail" id="co_avail_1">${co_list.co_avail}</textarea>
+				</td>
+			</tr>
+			<tr>
+				<th>부가서비스</th>
+			</tr>
+			<tr>
+				<td>
+					<textarea rows="5" cols="50" placeholder="extra" id="co_extra_1">${co_list.co_extra}</textarea> 		   
+				</td>
+			</tr>
+			<tr>
+				<th>이용 규정및 준비물</th>
+			</tr>
+			<tr>
+				<td>
+					<textarea rows="5" cols="50" placeholder="regul" id="co_regul_1">${co_list.co_regul}</textarea> 		   
+				</td>
+			</tr>
+		</table>
+		<hr>
 		<!-- 파일 업로드할 영역  -->
-		<!-- <div class="col-sm-4"> -->
-			<span>파일 수정 칸</span><br>
-			<div class="fileDrop">파일을 드래그 해서 넣어주세요~</div>
-			<!-- 파일 업로드한 리스트출력란 -->
-			<div style="float: left;"class="uploadedList"></div>
-		<!-- </div> -->
+		<span>파일 수정 칸</span><br>
+		<div class="fileDrop" style="border : 1px solid black;">파일을 드래그 해서 넣어주세요~</div>
+		<!-- 파일 업로드한 리스트출력란 -->
+		<div style="float: left;"class="uploadedList"></div>
 		<!-- 업체별이용시간 목록 표출 -->
-		<div class="col-sm-4">
-			<div id="usetime_table"> 
-			</div>
-		</div>
-		<!-- 업체별 컨텐츠 목록 표출   -->
-		<div class="col-sm-4">
-			<div id="content_list">
-			</div>
-		</div>
+			<div id="usetime_table"> </div>
+		<!-- <!-- 업체별 컨텐츠 목록 표출   -->
+			<div id="content_list"></div>
 	</div>	
-</div>
 <!-- Footer -->
 <div class="modal-footer">
 	<button type="button" class="btn btn" id="btnUpdate">UpDate</button>
