@@ -406,29 +406,40 @@ padding-right: 20px;
 				 <!-- 후기 댓글 공간 -->
 				 <div>
 					 <table id="feedback_table">
-						<tr>
-							<td>
-								<span>
-									<img id="images1" src="resources/images/img/star0.png" width="20" onmouseover="show(1)"onclick="mark(1)" onmouseout="noshow(1)"/>
-									<img id="images2" src="resources/images/img/star0.png" width="20" onmouseover="show(2)"onclick="mark(2)" onmouseout="noshow(2)"/>
-									<img id="images3" src="resources/images/img/star0.png" width="20" onmouseover="show(3)"onclick="mark(3)" onmouseout="noshow(3)"/>
-									<img id="images4" src="resources/images/img/star0.png" width="20" onmouseover="show(4)"onclick="mark(4)" onmouseout="noshow(4)"/>
-									<img id="images5" src="resources/images/img/star0.png" width="20" onmouseover="show(5)"onclick="mark(5)" onmouseout="noshow(5)"/>
-								</span>
-								<br><span id="startext">댓글 남기기~</span>
-								<input type="hidden" id="feedback_score">
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<textarea rows="7" cols="55" id="feedback_content"></textarea>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<button id="btninsert" type="button" class="button">Click!</button>
-							</td>
-						</tr>
+					 	<c:choose>
+					 		<c:when test="${empty userid}">
+					 			<tr>
+					 				<td rowspan="3" colspan="3">
+					 					<textarea rows="7" cols="60" readonly="readonly">업체를 이용하시고 댓글을 남겨보세요~</textarea>
+					 				</td>
+					 			</tr>
+					 		</c:when>
+					 		<c:otherwise>
+								<tr>
+									<td>
+										<span>
+											<img id="images1" src="resources/images/img/star0.png" width="20" onmouseover="show(1)"onclick="mark(1)" onmouseout="noshow(1)"/>
+											<img id="images2" src="resources/images/img/star0.png" width="20" onmouseover="show(2)"onclick="mark(2)" onmouseout="noshow(2)"/>
+											<img id="images3" src="resources/images/img/star0.png" width="20" onmouseover="show(3)"onclick="mark(3)" onmouseout="noshow(3)"/>
+											<img id="images4" src="resources/images/img/star0.png" width="20" onmouseover="show(4)"onclick="mark(4)" onmouseout="noshow(4)"/>
+											<img id="images5" src="resources/images/img/star0.png" width="20" onmouseover="show(5)"onclick="mark(5)" onmouseout="noshow(5)"/>
+										</span>
+										<br><span id="startext">댓글 남기기~</span>
+										<input type="hidden" id="feedback_score">
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<textarea rows="7" cols="55" id="feedback_content"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<button id="btninsert" type="button" class="button">Click!</button>
+									</td>
+								</tr>
+					 		</c:otherwise>
+					 	</c:choose>
 					</table>
 				</div>
 			<!-- 댓글목록나올란 -->
