@@ -36,6 +36,7 @@ font-size:12px;
   border-radius: 3px;
 }
 #container{
+height:100%;
 margin-top:100px;
 }
 #centerInfo_list_img{
@@ -144,7 +145,18 @@ width:34px;
 #centerInfo #centerInfo_panel #centerInfo_head #centerInfo_coname{
 text-align:center;
 }
-
+#wait{
+	display:none;
+	position:absolute;
+	top: 50%;
+	left: 50%;
+	padding: 2px;
+	z-index:500;
+}
+#wait img{
+	width:64px;
+	height:64px;
+}
 </style>
 </head>
 <body>
@@ -153,11 +165,12 @@ text-align:center;
 <!-- 업체 리스트 부분 -->
 		<div class="row">
 		<div class="col-sm-6" id="centerListResult">
+		<div id="wait""><img src='resources/images/pageloader.gif'/><br>Loading..</div>
 		<!-- 검색하기 -->
 		<div class="col-sm-12">
    <form action="javascript:keywordSearch()" id="search_form">
     <div class="input-group" id="search-div">
-      <input type="text" class="form-control" id="search_input" placeholder="Search">
+      <input type="text" class="form-control" id="search_input" placeholder="지역/이름/종목을 검색하세요(예: 강남 헬스)">
       <div class="input-group-btn">
         <button class="btn btn-primary" type="submit" id="search-btn"><i class="glyphicon glyphicon-search"></i></button>
       </div>
@@ -354,8 +367,18 @@ edd938c4fc341b07f90ed69064de3f92<br>
 </div>
 </div>
 <hr>
-<%@include file="../footer.jsp" %>
 <script type="text/javascript">
+/*ajax loading*/
+
+$(document).ready(function(){
+	$(document).ajaxStart(function(){
+		$("#wait").css("display","block");
+	});
+	$(document).ajaxComplete(function() {
+		$("#wait").css("display", "none");
+	});
+});
+
 /*content 내용 불러오기*/
 //var content_list 세팅
  var contents=[];
@@ -519,7 +542,7 @@ function searchMark(){
 			selectoHtml+=centerListUrl[i];
 			selectoHtml+="'";
 			selectoHtml+=')">';
-			selectoHtml+='<img src="resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_1.jpg" id="list_img" alt="center"  class="img-responsive">';
+			selectoHtml+='<img src="resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
 			selectoHtml+='</a>';
 			selectoHtml+='</div>';
 			selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
@@ -558,7 +581,7 @@ function searchMark(){
 			selectoHtml+=centerListUrl[i];
 			selectoHtml+="'";
 			selectoHtml+=')">';
-			selectoHtml+='<img src="resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_1.jpg" id="list_img" alt="center"  class="img-responsive">';
+			selectoHtml+='<img src="resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
 			selectoHtml+='</a>';
 			selectoHtml+='</div>';
 			selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
@@ -657,12 +680,13 @@ function getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i){
         coImgs[i]=cImg;
         markers[i]=marker;
         contentLists[i]=contents[cIdx];
-        cLatArr[cIdx]=cLat;
-        cLngArr[cIdx]=cLng;
+        console.log("contentLists[i="+i+"]"+", cIdx="+cIdx+": "+contentLists[i]);
+        cLatArr[i]=cLat;
+        cLngArr[i]=cLng;
         infowindow = new daum.maps.InfoWindow({
         content: '<div id="infowindow">'+cIdx+"/"+cName+'</div>'
         });
-        infoWindows.push(infowindow);
+        infoWindows[i]=(infowindow);
 //makingMarkers ends
 daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infowindow, cIdx, cUrl));
 	}else{
@@ -683,14 +707,15 @@ daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infow
 	        coImgs[i]=cImg;
 	        markers[i]=marker;
 	        contentLists[i]=contents[cIdx];
+	        console.log("contentLists[i="+i+"]"+", cIdx="+cIdx+": "+contentLists[i]);
 	        cLat = result.addr[0].lat;
 	        cLng = result.addr[0].lng;
-	        cLatArr[cIdx]=cLat;
-	        cLngArr[cIdx]=cLng;
+	        cLatArr[i]=cLat;
+	        cLngArr[i]=cLng;
 	        infowindow = new daum.maps.InfoWindow({
 	        content: '<div id="infowindow">'+cIdx+"/"+cName+'</div>'
 	        });
-	        infoWindows.push(infowindow);
+	        infoWindows[i]=(infowindow);
 			latlngData = cIdx+"/"+ cLat+"/"+cLng;
 			$.ajax({
 				url:"centerLatLng.do",
@@ -702,13 +727,13 @@ daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infow
 						alert("ajax fail");
 						return false;
 					}else{
-					}
-				},
+					}//ajax !data
+				},//ajax success function
 				error: function(data){
 					alert("ajax fail=");
 					return false;
-				}
-			});
+				}// ajax error function
+			}); //ajax ends
 	//makingMarkers ends
     daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infowindow, cIdx, cUrl));
 	     }//if status ok ends
@@ -728,7 +753,10 @@ daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infow
 
 	/*업체 상세 aside 떠오르기*/
 function show(co_idx, centerListUrl, setMapGo){
-	mapOn=true;	
+	if(infoWindows.length>0){
+		closeAllMarkInfo();
+	}
+	mapOn=true;
 	$("#centerInfo_panel").animate({
 			opacity:1,
 			height:'389px'
@@ -773,7 +801,7 @@ function show(co_idx, centerListUrl, setMapGo){
 				
 				/*co_view*/
 				var coView_html='';
-				coView_html='<img alt="center" src="resources/centerImage/'+dataObj.co_view+'/'+dataObj.co_view+'_1.jpg" class="img-rounded img-responsive" id="centerInfo_img">';
+				coView_html='<img alt="center" src="resources/centerImage/'+dataObj.co_view+'/'+dataObj.co_view+'_0.jpg" class="img-rounded img-responsive" id="centerInfo_img">';
 				$("#centerInfo_img").replaceWith(coView_html);
 				
 				/*co_avail*/
@@ -830,23 +858,28 @@ function show(co_idx, centerListUrl, setMapGo){
 				$("#centerInfo_extra").replaceWith(coExtra_html);
 				
 				/*클릭 후 이동*/
-				if(setMapGo==false){
-					
-				}else{
+				if(setMapGo==false){//마커를 클릭할 경우
+				co_idx-=1;
+					infoWindows[co_idx].open(map, markers[co_idx])
+				}else{//리스트를 클릭할 경우
+				co_idx-=1;
 				var movePosition
-				if(cLatArr[co_idx] != 0 && cLngArr[co_idx] != 0){
+				if(cLatArr[co_idx] != 0 && cLngArr[co_idx] != 0){//db값에 lat lng가 입력된 경우
 				movePosition = new daum.maps.LatLng(cLatArr[co_idx], cLngArr[co_idx]);
+				infoWindows[co_idx].open(map, markers[co_idx]);
 				map.setCenter(movePosition);
 				map.setLevel(4);
-				}else{
+				}else{ //db값에 lat lng가 입력되지 않은 경우
 				var geocoder = new daum.maps.services.Geocoder();
 				geocoder.addr2coord(dataObj.co_address,function(status,result){
 					movePosition = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+					infoWindows[co_idx].open(map, markers[co_idx]);
 					map.setCenter(movePosition);
 					map.setLevel(4);
 				});
 				}//lat lng 데이터 배이스 여부 확인 후 geo 호출 결정 if 문
 				}//setMapGo if ends 지도 움직이기
+				co_idx+=1;
 				}//ajax의 data !=null 경우의 if문 
 			} //ajax success function
 		});//패널 센터정보 떠오르기 ajax ends
@@ -866,7 +899,7 @@ function show(co_idx, centerListUrl, setMapGo){
 					var useTime_html="<tbody id='centerInfo_time'>";
 					for(var i=0; i<usetime.length; i++){
 						var usetimeSet = usetime[i];
-							if(usetimeSet.usetime_time==0||usetimeSet.usetime_time=='0'){
+							if(usetimeSet.usetime_time==0||usetimeSet.usetime_time=='0' || usetimeSet.usetime_time=="null"){
 								useTime_html += "<tr><td>"+usetimeSet.usetime_day+"</td><td></td></tr>";
 							}else{
 								useTime_html += "<tr><td>"+usetimeSet.usetime_day+"</td><td>"+usetimeSet.usetime_time+"</td></tr>";
@@ -959,20 +992,128 @@ function removeMarker(){
 }
 /*검색하기*/
 function keywordSearch(){
+	$("#centerInfo_list").empty();
 	var keyword = $("#search_input").val();
 	$.ajax({
 		url:"centerSearch.do",
 		type:"GET",
 		data: {"keyword":keyword},
 		success:function(data){
-			if(!data){
-				window.alert("success");
-				$("#search_input").val('');
-			}else{
-				window.alert("fail");
+			$("#ajax").remove();
+			var strData = data;
+			var objData = eval('('+strData+')');
+			var company = objData.company_list;
+			console.log(company);
+			var numDiv1=0;
+			var n1=0;
+			var points=[];
+			for(var i=0; i<company.length; i++){
+				var companySet = company[i];
+				var company_html='';
+				var point;
+				if(n1>3){
+					console.log("n1="+n1+"(hidden)")
+					company_html+='<div class="col-sm-6 panel panel-default hiddenCnt" id="centerInfo_list_div">';
+					company_html+='<div class="panel-body col-sm-12" id="centerInfo_list_img">';
+					company_html+='<a href="javascript:show('+companySet.co_idx+',';
+					company_html+="'";
+					company_html+="centerDetail.do?co_idx="+companySet.co_idx;
+					company_html+="'";
+					company_html+=')">';
+					company_html+='<img src="resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+					company_html+='</a>';
+					company_html+='</div>';
+					company_html+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
+					company_html+='<div class="panel-group" id="list-table">';
+					company_html+='<div class="panel panel-default">';
+					company_html+='<div class="panel-heading">';
+					company_html+='<h6 class="panel-title" id="centerInfo_list_coName">'+companySet.co_name+'<span id="center_list_coName_class">('+companySet.co_class+')</span></h6>';
+					company_html+='</div>'; //panel-heading
+					company_html+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
+					company_html+='<ul class="list-group">';
+					company_html+='<li class="list-group-item">'+companySet.co_address+'</li>';
+					company_html+='</ul>';
+					company_html+='</div>'; //colapse panel1
+					company_html+='<div class="panel-body">';
+					company_html+='<a class="btn-xs" id="center-addr-btn" data-toggle="collapse" href="#centerInfo_list_coAddr_'+i+'">주소보기</a>';
+					company_html+='</div>'; //colapse panel open1
+					company_html+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
+					company_html+='<ul class="list-group">';
+					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contentLists[i]+'</li>';
+					company_html+='</ul>';
+					company_html+='</div>'; //collapse panel2
+					company_html+='<div class="panel-body">';
+					company_html+='<a class="btn-xs" id="centerInfo_list_coClass" data-toggle="collapse" href="#centerInfo_list_content_'+i+'">제공서비스보기</a>';
+					company_html+='</div>'; //collapse panel open 2
+					company_html+='</div>';//panel default
+					company_html+='</div>'; //panel group
+					company_html+='</div>'; //panel final
+					company_html+='</div>'; //panel final
+					$("#centerInfo_list").append(company_html);	
+				}else{
+					console.log("n1="+n1+"(no hidden)")
+					company_html+='<div class="col-sm-6 panel panel-default" id="centerInfo_list_div">';
+					company_html+='<div class="panel-body col-sm-12" id="centerInfo_list_img">';
+					company_html+='<a href="javascript:show('+companySet.co_idx+',';
+					company_html+="'";
+					company_html+="centerDetail.do?co_idx="+companySet.co_idx;
+					company_html+="'";
+					company_html+=')">';
+					company_html+='<img src="resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+					company_html+='</a>';
+					company_html+='</div>';
+					company_html+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
+					company_html+='<div class="panel-group" id="list-table">';
+					company_html+='<div class="panel panel-default">';
+					company_html+='<div class="panel-heading">';
+					company_html+='<h6 class="panel-title" id="centerInfo_list_coName">'+companySet.co_name+'<span id="center_list_coName_class">('+companySet.co_class+')</span></h6>';
+					company_html+='</div>'; //panel-heading
+					company_html+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
+					company_html+='<ul class="list-group">';
+					company_html+='<li class="list-group-item">'+companySet.co_address+'</li>';
+					company_html+='</ul>';
+					company_html+='</div>'; //colapse panel1
+					company_html+='<div class="panel-body">';
+					company_html+='<a class="btn-xs" id="center-addr-btn" data-toggle="collapse" href="#centerInfo_list_coAddr_'+i+'">주소보기</a>';
+					company_html+='</div>'; //colapse panel open1
+					company_html+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
+					company_html+='<ul class="list-group">';
+					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contentLists[i]+'</li>';
+					company_html+='</ul>';
+					company_html+='</div>'; //collapse panel2
+					company_html+='<div class="panel-body">';
+					company_html+='<a class="btn-xs" id="centerInfo_list_coClass" data-toggle="collapse" href="#centerInfo_list_content_'+i+'">제공서비스보기</a>';
+					company_html+='</div>'; //collapse panel open 2
+					company_html+='</div>';//panel default
+					company_html+='</div>'; //panel group
+					company_html+='</div>'; //panel final
+					company_html+='</div>'; //panel final
+					$("#centerInfo_list").append(company_html);
+				}//i>4 if 문
+				n1++;
+				if(numDiv1%1==0&&numDiv1%2!=0){
+					console.log("numDiv1="+numDiv1);
+					company_html='<div class="col-sm-12" id="line"></div>';
+					$("#centerInfo_list").append(company_html);
+				}//div line 붙이기 if 문
+				numDiv1++;
+				point= new daum.maps.LatLng(companySet.co_lat, companySet.co_lng);
+				points[i]=point;
+				console.log("point="+point+", points="+points);
+			}//for문 센터 리스트 end
+			var bounds = new daum.maps.LatLngBounds();
+			console.log("bounds="+bounds);
+			var marker;
+			for(var i=0; i<points.length; i++){
+				marker = new daum.maps.Marker({position:points[i]})
+				marker.setMap(map);
+				bounds.extend(points[i]);
+				console.log("marker="+marker);
+				console.log("bounds for = "+bounds);
 			}
-		}
-	})
+		}//ajax success function
+	})//ajax end
+	
 }
 </script>
 </body>

@@ -2,8 +2,10 @@ package nfit.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.StringTokenizer;
+import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,13 +47,13 @@ public class CenterController {
 		model.addAttribute("clist", clist);
 		return "/center/centerMap";
 	}
-	//자세히 보기 페이지
+	
 	@RequestMapping("/centerDetail.do")
 	public String centerDetail(ModelMap model, @RequestParam(value="co_idx",required=false, defaultValue="0") int co_idx){
 		CenterDTO dto=centerDao.centerOneDB(co_idx);
 		List<UsetimeDTO> list = usetimeDao.usetimeDB(co_idx);
 		List<ContentDTO> contentList=contentDao.contentListDB(co_idx);
-		model.addAttribute("co_idx",co_idx);
+		
 		model.addAttribute("dto", dto);
 		model.addAttribute("timelist", list);
 		model.addAttribute("contentlist", contentList);
@@ -246,28 +248,75 @@ public class CenterController {
 	}
 	
 	@RequestMapping(value="/centerSearch.do", method=RequestMethod.GET)
-	public void centerSearch(@RequestParam("keyword")String keyword, HttpServletResponse response){
-		response.setContentType("text/html;charset=UTF-8");
-		System.out.println("keyword in controller="+keyword);
+	public void centerSearch(@RequestParam("keyword")String keyword, HttpServletResponse resp){
+		resp.setContentType("text/html;charset=UTF-8");
+		/*검색어 tokenizer*/
 		StringTokenizer st = new StringTokenizer(keyword);
 		String strArr[]=new String[st.countTokens()];
 		int n=0;
 		while(st.hasMoreTokens()){
 			strArr[n]=st.nextToken();
-			System.out.println("strArr[n="+n+"]"+strArr[n]);
 			n++;
 		}
+		/*end*/
+		/*검색어에 따른 배열 구성*/
+		
+		List<CenterDTO> companyList=new ArrayList<CenterDTO>();
+		TreeSet ts = new TreeSet();
 		for(int i=0; i<n; i++){
-			List<CenterDTO> centerList = centerDao.centerSearchDB(strArr[i]);
+			companyList = centerDao.centerSearchDB(strArr[i]);
+			for(int j=0; j<companyList.size(); j++){
+				ts.add(companyList.get(j).getCo_idx());
 			}
-		
 		}
-}
+		Iterator it = ts.iterator();
 		
-//		List<CenterDTO> co=centerDao.centerSearch(keyword);
-//심각: Servlet.service() for servlet [dispatcher] in context with path [/nfitBU] threw exception 
-//[Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.type.TypeException: Could not set parameters for mapping: 
-//ParameterMapping{property='keyword', mode=IN, javaType=class java.lang.String, jdbcType=null, numericScale=null, resultMapId='null', jdbcTypeName='null', expression='null'}. Cause: org.apache.ibatis.type.TypeException: Error setting non null for parameter #1 with JdbcType null . Try setting a different JdbcType for this parameter or a different configuration property. Cause: java.sql.SQLException: 부적합한 열 인덱스] with root cause
-//java.sql.SQLException: 부적합한 열 인덱스
+		/*중복된 리스트 항목 제거*/
+		int idxNum[] = new int[ts.size()];
+		int cnt=0;
+		while(it.hasNext()){
+			idxNum[cnt]= (Integer) it.next();
+			cnt++;
+		}
+		
+		/*최종 리스트를 토대로 DTO 호출*/
+		List<CenterDTO> wholeList = new ArrayList<CenterDTO>(); //전체 list
+		CenterDTO finalList = new CenterDTO();
+		for(int i=0; i<idxNum.length; i++){
+			finalList=centerDao.centerOneDB(idxNum[i]);
+			wholeList.add(finalList);
+		}
+		
+		/*JSON형성*/
+		String searchJson="{company_list:[";
+		for(int i=0; i<wholeList.size(); i++){
+	           searchJson += "{\"co_idx\":\""+wholeList.get(i).getCo_idx()
+	               	+"\",\"co_name\":\""+wholeList.get(i).getCo_name()
+	       			+"\",\"co_address\":\""+wholeList.get(i).getCo_address()
+	       			+"\",\"co_class\":\""+wholeList.get(i).getCo_class()
+	       			+"\",\"co_phone\":\""+wholeList.get(i).getCo_phone()
+	       			+"\",\"co_regul\":\""+wholeList.get(i).getCo_regul()
+	       			+"\",\"co_extra\":\""+wholeList.get(i).getCo_extra()
+	       			+"\",\"co_view\":\""+wholeList.get(i).getCo_view()
+	       			+"\",\"co_usecount\":\""+wholeList.get(i).getCo_usecount()
+	       			+"\",\"co_lat\":\""+wholeList.get(i).getCo_lat()
+	       			+"\",\"co_lng\":\""+wholeList.get(i).getCo_lng();
+	                  if(i<wholeList.size()-1){
+	               	   searchJson+="\",\"co_avail\":\""+wholeList.get(i).getCo_avail()+"\"},";
+	                  }else if(i==wholeList.size()-1){
+	               	   searchJson+="\",\"co_avail\":\""+wholeList.get(i).getCo_avail()+"\"}";
+	                  }
+	       		}
+	       		searchJson+="]}";
+	       		System.out.println("searchJson="+searchJson);
+	       		try{
+	       			resp.getWriter().print(searchJson);
+	       		}catch(IOException e){
+	       			e.printStackTrace();
+	       		}
+		}
+	}
+
+
 
 

@@ -1,6 +1,7 @@
 package nfit.center.model;
 
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -26,9 +27,7 @@ public class CenterDAOImple implements CenterDAO {
 		sqlMap.update("centerLatLngSQL", latlngdto);
 	}
 	public List<CenterDTO> centerSearchDB(String keyword) {
-		System.out.println("keyword in daoimple="+keyword);
 		List<CenterDTO> list=sqlMap.selectList("centerSearchSQL", keyword);
-		
 		return list;
 	}
 }
