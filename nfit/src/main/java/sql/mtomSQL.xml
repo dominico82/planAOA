@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="nfit.mtom">
 	<select id="getHelpMtom" parameterType="String" resultType="nfit.mtom.model.MtomDTO">
-		select * from mtom_bbs where member_id=#{member_id} order by qa_idx asc
+		select * from mtom_bbs where member_id=#{member_id} order by qa_idx desc
 	</select>
 	<insert id="setHelpMtom" parameterType="nfit.mtom.model.MtomDTO">
 		insert into 
@@ -36,6 +36,14 @@
 			qa_answer=#{qa_answer},
 			qa_checked='y',
 			qa_adate=sysdate
+		where
+			qa_idx=#{qa_idx}
+	</update>
+	<update id="setHelpMtomUpdate" parameterType="nfit.mtom.model.MtomDTO">
+		update mtom_bbs
+		set
+			qa_subject=#{qa_subject},
+			qa_content=#{qa_content}	
 		where
 			qa_idx=#{qa_idx}
 	</update>

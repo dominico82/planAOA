@@ -134,9 +134,6 @@ public class HelpController {
 			mav.setViewName("member/memberLoginForm");
 		}else{
 			List<MtomDTO> dtos=mtomDao.getHelpMtom(userid);
-			for(int i=0;i<dtos.size();i++){
-				System.out.println("1:1문의 게시판 글 번호:"+dtos.get(i).getQa_idx());
-			}
 			mav.addObject("member_id", userid);
 			mav.addObject("list", dtos);
 			mav.setViewName("help/helpMtom");
@@ -196,6 +193,15 @@ public class HelpController {
 		String msg=result>0?"삭제성공!":"삭제실패!";
 		mav.addObject("msg", msg);
 		mav.setViewName("help/helpMtomDel");
+		return mav;
+	}
+	
+	@RequestMapping(value="helpMtomUpdate.do")
+	public ModelAndView helpMtomUpdate(MtomDTO dto){		
+		ModelAndView mav=new ModelAndView();
+		int result=mtomDao.setHelpMtomUpdate(dto);
+		mav.addObject("result", result);
+		mav.setViewName("help/helpMtomUpdate");
 		return mav;
 	}
 }

@@ -12,4 +12,5 @@ public interface MtomDAO {
 	public MtomDTO getHelpMtomContents(int idx);
 	public int setHelpMtomReply(MtomDTO dto);
 	public int helpMtomDel(int idx);
+	public int setHelpMtomUpdate(MtomDTO dto);
 }
