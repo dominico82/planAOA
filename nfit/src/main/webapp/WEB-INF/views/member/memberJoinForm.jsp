@@ -137,6 +137,13 @@
 		else
 			event.target.value = event.target.value.replace(/[^0-9]/g, "");
 	}
+	function emailCheck(){
+		var a=document.join.email1.value;
+		var b=document.join.email2.value;
+		finemail=a+"@"+b;
+		url="emailAuth.do?email="+finemail;
+			window.open(url);
+		}
 </script>
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
 <script>
@@ -199,6 +206,7 @@
 			element.style.display = 'none';
 		}
 	}
+	
 </script>
 </head>
 <body>
@@ -301,6 +309,8 @@
 												<option value="hotmail.com">핫메일</option>
 												<option value="yahoo.co.kr">야후</option>
 											</select>
+											
+											<input type="button" value="이메일 인증" onclick='emailCheck();'>
 										</div>
 										<div class="form-group">
 											<label>신장</label> <input type="text" name="member_tall"

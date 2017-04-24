@@ -206,6 +206,10 @@ strong {
 .btn-primary {
   background-color: #00bff0;
   border-color: #0eaad1;
+  border-radius: 50px;
+}
+#bmiResult {
+	
 }
 .form-control,
 .form-group-sm .form-control,
@@ -8146,14 +8150,12 @@ p.anc {
 .mypageMenuAside .userInfo .userCircleImgWrap {
   border-radius: 50%;
   overflow: hidden;
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 200px;
   display: inline-block;
 }
 .mypageMenuAside .userInfo .userCircleImg {
   display: inline-block;
-  width: 140px;
-  height: 140px;
 }
 .mypageMenuAside .userInfo h6 {
   font-size: 16px;
@@ -8237,7 +8239,6 @@ p.anc {
   padding-left: 20px;
   padding-bottom: 40px;
   min-height: 700px;
-  text-align: center;
 }
 .mypagePanel h3 {
   font-size: 12px;
@@ -16842,11 +16843,14 @@ iframe[name=google_conversion_frame] {
 }
 .imgsize {
 	width: 160px;
-	height: 200px;
+	height: 180px;
 }
 .mP_coin{font-size:25px;}
 .mP_ctxt{font-size:18px;}
-
+.myheadPC_myCoin {
+	margin-top: 40px;
+	text-align: -webkit-right;
+}
 
 
 
