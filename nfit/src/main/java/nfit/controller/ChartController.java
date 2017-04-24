@@ -532,4 +532,16 @@ public class ChartController {
 		}
 		return entity;
 	}
+	//자동완성기능 보류
+	@RequestMapping("search.do")
+	public String search(
+			@RequestParam(value="keyword",required=false)String keyword,
+			@RequestParam(value="keyfield",required=false)String keyfield,Map map){
+		List<CompanyListDTO> list =companyDao.searchAuto(keyword, keyfield);
+		System.out.println("여기는타냐 ?");
+		map.put("keyword", keyword);
+		map.put("list", list);
+		return "admin/center/search";
+	}
+	
 }

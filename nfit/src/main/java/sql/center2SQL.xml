@@ -150,4 +150,13 @@
 		  order by co_idx asc)a) 
 		 where rnum between #{start} and #{end} 
 	  </select>
+	  
+	   <select id="searchAuto" resultType="nfit.center2.model.CompanyListDTO" parameterType="hashmap">
+	  	select * from 
+		company_list 
+		<if test="keyfield != null">
+		where ${keyword} like '%'||#{keyfield}||'%'
+		</if>
+		order by co_idx asc
+	  </select> 
 </mapper>

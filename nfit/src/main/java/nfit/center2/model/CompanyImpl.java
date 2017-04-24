@@ -166,4 +166,13 @@ public class CompanyImpl implements CompanyDAO {
 		map.put("end", end);
 		return sqlMap.selectList("companySearch",map);
 	}
+	
+	//업체 자동완성 보류
+	public List<CompanyListDTO> searchAuto(String keyword, String keyfield) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("keyfield", keyfield);
+		return sqlMap.selectList("searchAuto", map);
+	}
 }

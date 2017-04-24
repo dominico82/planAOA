@@ -60,4 +60,6 @@ public interface CompanyDAO {
 	public void oldCompanyin(CompanyContentDTO vo);
 	//업체 검색
 	public List<CompanyListDTO> companySearch(String keyword,String keyfield,int start,int end);
+	//업체 자동완성 보류
+	public List<CompanyListDTO> searchAuto(String keyword,String keyfield);
 }

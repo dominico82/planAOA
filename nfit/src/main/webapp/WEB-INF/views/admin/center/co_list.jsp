@@ -176,6 +176,28 @@ $(document).ready(function(){
 			}
 		});
 	});
+	 //자동완성기능 구현 보류
+	$('#keyField').keyup(function(){// 키입력후 자동호출
+		
+		var keyfield = $('#keyField').val();
+		var keyword = $('#keyWord').val();
+		console.log('keyfield='+keyfield+'keyword='+keyword);
+		if(keyfield.length == 0){//글자수가 0 이면
+			$('#div1').css('visibility','hidden');//숨김
+		}else{
+			$('#div1').css('visibility','visible');//보임
+			var param='keyfield='+keyfield+'&keyword='+keyword;
+			$.ajax({
+				type :'post',
+				url : 'search.do',
+				data : param,
+				success : function(data){
+					console.log('data'+data);
+					$('#div1').html(data);
+				}
+			});
+		}
+	}); 
 });
 </script>
 </head>
@@ -461,13 +483,15 @@ $(document).ready(function(){
 						</div>
 					</div>
 				<form name="form1" method="post" action="co_list.do">
-						 <select name="keyword">
+						 <select name="keyword" id="keyWord">
 							 	<option value="co_name">업체명</option>
 							 	<option value="co_class">종목</option>
 							 	<option value="co_phone">연락처</option>
 						 </select>
-							 <input type="text" name="keyfield">
+							 <input type="text" name="keyfield" id="keyField">
 					    	 <input type="submit" value="조회">
+					    	 <!-- 키워드목록표출 -->
+					    	 <div id="div1"></div>
 				</form>
 					<!-- 업체리스트 나열 테이블  -->	 
 					<span>등록된 업체 나열 </span>
