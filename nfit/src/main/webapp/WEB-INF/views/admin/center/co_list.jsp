@@ -338,15 +338,15 @@ $(document).ready(function(){
 								  <div class="modal-body">
 								    	<table>
 								    		<tr>
-								 				<th>요일 을적어주세요|ex.)평일,토요일,일요일,휴무일 </th>
+								 				<th>요일 을적어주세요 </th>
 								    			<td>
-							    					<input type="text" id="usetime_day" placeholder="작성해주세요~">
+							    					<input type="text" id="usetime_day" placeholder=" ex.)평일,토요일,일요일,휴무일 " required="required">
 								    			</td>
 								    		</tr>
 								    		<tr>
-								    			<th>시간을적어주세요 ex)00:00~00:00</th>
+								    			<th>시간을적어주세요</th>
 								    			<td>
-								    				<input type="text" id="usetime_time" placeholder="작성해주세요~">
+								    				<input type="text" id="usetime_time" placeholder=" ex)00:00~00:00" required="required">
 								    			</td>
 								    		</tr>
 								    		<tr>
@@ -359,7 +359,7 @@ $(document).ready(function(){
 								    		<tr>
 								    			<th>적용코인갯수</th>
 								    			<td>
-								    			<input type="text" id="content_coin" placeholder="작성해주세요">
+								    			<input type="text" id="content_coin" placeholder="작성해주세요" required="required">
 								    			</td>
 								    		</tr>
 								    		<tr>
