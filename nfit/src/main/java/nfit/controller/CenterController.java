@@ -262,7 +262,9 @@ public class CenterController {
 			System.out.println("list("+i+")="+list.get(i).substring(0));
 		}
 		List<CenterDTO> searchResult = centerDao.centerSearchDB(keyword);
-		
+		for(int i=0; i<searchResult.size(); i++){
+			System.out.println("idx result: "+searchResult.get(i).getCo_idx());
+		}
 		
 //		List<CenterDTO> co=centerDao.centerSearch(keyword);
 		
