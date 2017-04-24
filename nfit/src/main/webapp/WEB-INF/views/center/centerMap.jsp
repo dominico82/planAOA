@@ -13,6 +13,17 @@
 <link rel="shortcut icon" href="resources/images/n-1x-170x128.jpg" type="image/x-icon">
 <title>Insert title here</title>
 <style>
+#centerListResult{
+height:800px;
+overflow-y:auto;
+}
+#map_part #map{
+width: 100%; 
+height:800px
+}
+#map_part{
+z-index:100;
+}
 #center_list_coName_class{
 font-size:12px;
 }
@@ -64,16 +75,12 @@ padding:0 0 0 0;
 margin:0 0 0 0;
 font-size:12px;
 } 
-
 #infowindow{
 z-index:500;
 }
-#map_part{
-z-index:100;
-}
 /*업체 백업 테이블*/
 #center_list{
-display:none; 
+ display:none; 
 }
 /*업체 서비스 백업 테이블*/
 #content_list{
@@ -145,7 +152,7 @@ text-align:center;
 <div class="container-fluid" id="container">
 <!-- 업체 리스트 부분 -->
 		<div class="row">
-		<div class="col-sm-6">
+		<div class="col-sm-6" id="centerListResult">
 		<!-- 검색하기 -->
 		<div class="col-sm-12">
    <form action="javascript:keywordSearch()" id="search_form">
@@ -165,15 +172,16 @@ text-align:center;
 
 			<!--  -->
 			</div>
-			<div id="moreBtn">
-			</div>
+
 		</div>
+					<div class="col-sm-12" id="moreBtn">
+			</div>
 	</div>
 		
 <!-- 맵 부분 -->
 			<div class="col-sm-6"></div>
 			<div class="col-sm-6" id="map_part">
-				<div id="map" style="width: 100%; height:450px;"></div>
+				<div id="map"></div>
 			</div>
 		</div>
 		

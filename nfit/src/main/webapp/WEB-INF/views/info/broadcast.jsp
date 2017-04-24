@@ -9,14 +9,14 @@ String svrIP = inet.getHostAddress();
 <html>
 <head>
 	<meta charset="UTF-8">
-    <title>Testing websockets</title>
+    <title>1:1 문의하기 </title>
 </head>
 <body>
     <fieldset>
         <textarea id="messageWindow" rows="10" cols="50" readonly="true"></textarea>
         <br/>
         <input id="inputMessage" type="text"/>
-        <input type="submit" value="send" onclick="send()" />
+        <input type="submit" value="보내기" onclick="send()" />
     </fieldset>
 </body>
     <script type="text/javascript">

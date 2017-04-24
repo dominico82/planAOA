@@ -248,23 +248,26 @@ public class CenterController {
 	@RequestMapping(value="/centerSearch.do", method=RequestMethod.GET)
 	public void centerSearch(@RequestParam("keyword")String keyword, HttpServletResponse response){
 		response.setContentType("text/html;charset=UTF-8");
-		System.out.println("keyword="+keyword);
+		System.out.println("keyword in controller="+keyword);
 		StringTokenizer st = new StringTokenizer(keyword);
 		String strArr[]=new String[st.countTokens()];
 		int n=0;
 		while(st.hasMoreTokens()){
 			strArr[n]=st.nextToken();
+			System.out.println("strArr[n="+n+"]"+strArr[n]);
 			n++;
 		}
-		List<String> list = new ArrayList<String>();
-		for(int i=0; i<strArr.length; i++){
-			list.add(i, strArr[i]);
-			System.out.println("list("+i+")="+list.get(i).substring(0));
-		}
-		List<CenterDTO> searchResult = centerDao.centerSearchDB(keyword);
+		for(int i=0; i<n; i++){
+			List<CenterDTO> centerList = centerDao.centerSearchDB(strArr[i]);
+			}
 		
+		}
+}
 		
 //		List<CenterDTO> co=centerDao.centerSearch(keyword);
-		
-	}
-}
+//심각: Servlet.service() for servlet [dispatcher] in context with path [/nfitBU] threw exception 
+//[Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.type.TypeException: Could not set parameters for mapping: 
+//ParameterMapping{property='keyword', mode=IN, javaType=class java.lang.String, jdbcType=null, numericScale=null, resultMapId='null', jdbcTypeName='null', expression='null'}. Cause: org.apache.ibatis.type.TypeException: Error setting non null for parameter #1 with JdbcType null . Try setting a different JdbcType for this parameter or a different configuration property. Cause: java.sql.SQLException: 부적합한 열 인덱스] with root cause
+//java.sql.SQLException: 부적합한 열 인덱스
+
+

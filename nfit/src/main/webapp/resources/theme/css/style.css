@@ -692,7 +692,8 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
 .mbr-section-hero::before {
   display: none !important; }
 .mbr-section-hero .mbr-section-title {
-  color: #fff;
+  color: #4ab3c5;
+  text-shadow: #22535f 4px -1px 8px;
   margin-bottom: 1.6875rem; }
 .mbr-section-hero .mbr-section-lead {
   color: #fff;
@@ -701,7 +702,7 @@ input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:foc
   font-style: italic;
   margin-top: -1em; }
 .mbr-section-hero .mbr-section-text {
-  color: #fff; }
+  color: #d25c7c; }
 
 @media (max-width: 767px) {
   .mbr-section {
