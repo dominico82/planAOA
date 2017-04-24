@@ -137,10 +137,19 @@ public class ChartController {
 			//파일생성 해야함 -------
 			List<MultipartFile> mfile = mreq.getFiles("files"); 
 			System.out.println("컨트롤러로넘어온 사이즈 ::::"+mfile.size());
+			//확장자 검사
 			for(int i =0;i<mfile.size();i++){
-				//String fileName=mfile.get(i).getOriginalFilename();
+				String fileName=mfile.get(i).getOriginalFilename();
+				String formatName=fileName.substring(
+						fileName.lastIndexOf(".")+1);
+				if(formatName.equals("jpg")){
+					 fileName=co_idx+"_"+vo.getCo_phone()+"_"+i+".jpg";
+				}else if(formatName.equals("gif")){
+					 fileName=co_idx+"_"+vo.getCo_phone()+"_"+i+".gif";
+				}else if(formatName.equals("png")){
+					 fileName=co_idx+"_"+vo.getCo_phone()+"_"+i+".png";
+				}
 				//파일 이름 j
-				String fileName=co_idx+"_"+vo.getCo_phone()+"_"+i+1+".jpg";
 				System.out.println("파일이름:"+fileName); // for문 안탐 
 				File target = new File(maxPath,fileName);
 				FileCopyUtils.copy(mfile.get(i).getBytes(),target);
@@ -215,6 +224,7 @@ public class ChartController {
 			//확장자 검사
 			String formatName=fileName.substring(
 					fileName.lastIndexOf(".")+1);
+			System.out.println("formatname::"+formatName);
 			MediaType mType=MediaUtils.getMediaType(formatName);
 			//헤더 구성 객체
 			HttpHeaders headers=new HttpHeaders();
@@ -398,12 +408,18 @@ public class ChartController {
 			List<MultipartFile> mlist=mreq.getFiles("files");
 			String data[]=new String[mlist.size()];
 			for(int i=0;i<mlist.size();i++){
-				//String fileName=mlist.get(i).getOriginalFilename();
-				//파일 이름
-				String fileName=co_idx+"_"+dto.getCo_phone()+"_"+i+".jpg";
-				System.out.println("아작스 수정::"+fileName);
+				String fileName=mlist.get(i).getOriginalFilename();
 				/*확장자 검사 마지막 맞침표 찾기 */
 				String formatName=fileName.substring(fileName.lastIndexOf(".")+1);
+				//파일 이름
+				if(formatName.equals("gif")){
+					fileName=co_idx+"_"+dto.getCo_phone()+"_"+i+".gif";
+				}else if(formatName.equals("jpg")){
+					fileName=co_idx+"_"+dto.getCo_phone()+"_"+i+".jpg";
+				}else if(formatName.equals("png")){
+					fileName=co_idx+"_"+dto.getCo_phone()+"_"+i+".png";
+				}
+				System.out.println("아작스 수정::"+fileName);
 				//이미지 파일은 썸네일을 사용한다.
 				File target =new File(maxPath,fileName);
 				FileCopyUtils.copy(mlist.get(i).getBytes(), target);
