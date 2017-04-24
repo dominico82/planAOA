@@ -50,6 +50,34 @@ var userAddr="${dto.member_addr}";
 	
 			<div class="content">
 				<div class="wrap">
+				<!---start-mid-grids--->
+					<div class="mid-grids">
+						<div class="wrap">
+						<div class="mid-grids-left">
+							<img src="resources/images/app-divices.jpg" title="divices" />
+							<span> </span>
+						</div>
+						<div class="mid-grids-right">
+							<h3> <span>Nfit</span> 모바일앱 을 설치하세요!! </h3>
+							<p>지금<big>앱스토어</big> 에서 <big>설치하세요.</big></p>
+							<ul class="fea">
+								<li><a href="#" style="decoration:none;">제휴시설 이용을 더욱 편리하게!</a></li>
+								<li><a href="#" style="decoration:none;">한번에 가입부터 결제까지 </a></li>
+								<li><a href="#" style="decoration:none;">나와 가까운 제휴시설 확인하기</a></li>
+								<li><a href="#" style="decoration:none;">제휴시설 상세검색하기</a></li>
+								<li><a href="#" style="decoration:none;">제휴시설 입장하기</a></li>
+							</ul>
+							<div class="big-btns">
+								<ul>
+									<li><a class="and" href="#"> </a></li>
+									<li><a class="iphone" href="#"> </a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="clear"> </div>
+					</div>
+				</div>		
+				
 					<!--- start-top-grids---->
 					<div class="top-grids">
 						<div class="top-grid">
@@ -79,57 +107,32 @@ var userAddr="${dto.member_addr}";
 					</div>
 					</div>
 					<!--- start-top-grids---->
-					<!---start-mid-grids--->
-					<div class="mid-grids">
-						<div class="wrap">
-						<div class="mid-grids-left">
-							<img src="resources/images/app-divices.jpg" title="divices" />
-							<span> </span>
-						</div>
-						<div class="mid-grids-right">
-							<h3> <span>Nfit</span> 모바일앱 을 설치하세요!! </h3>
-							<p>지금<big>앱스토어</big> 에서 <big>설치하세요.</big></p>
-							<ul class="fea">
-								<li><a href="#" style="decoration:none;">제휴시설 이용을 더욱 편리하게!</a></li>
-								<li><a href="#" style="decoration:none;">한번에 가입부터 결제까지 </a></li>
-								<li><a href="#" style="decoration:none;">나와 가까운 제휴시설 확인하기</a></li>
-								<li><a href="#" style="decoration:none;">제휴시설 상세검색하기</a></li>
-								<li><a href="#" style="decoration:none;">제휴시걸 입장하기</a></li>
-							</ul>
-							<div class="big-btns">
-								<ul>
-									<li><a class="and" href="#"> </a></li>
-									<li><a class="iphone" href="#"> </a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="clear"> </div>
+				
 					</div>
-				</div>		
-			</div>
+			
 		
 		
 	<!---start-testimonials---->
 						<div class="testimonials">
 							<div class="wrap">
 							<div class="testimonial-head">
-								<h1><span>Runkeeper</span> Testimonials</h1>
+								<h1><span>Nfit</span> 을 칭찬합시다.</h1>
 								<p>Kind words from our valuable customers</p>
 							</div>
 							<div class="testimonial-grids">
 								<div class="testimonial-grid">
 									<a href="#"><img src="resources/images/test-people1.png" alt=""></a>
-									<p>Flathost servers are having high physical security and power redundancy Your data will be secure with us.</p>
+									<p>보통의 스포츠센터가 가지고 있는 핸디캡은 바로 위치에요. 근처 큰 건물에 위치해있으면 자연스럽게 홍보가 될 텐데 보통은 지하나 동네에 위치해있거든요. Nfit를 통해 저희 센터를 알게 된 회원들이 많아져서 굉장히 만족하고 있어요.</p>
 									<a href="#">james,Envato</a>
 								</div>
 								<div class="testimonial-grid">
 									<a href="#"><img src="resources/images/test-people2.png" alt=""></a>
-									<p>With our ultra mordern servers and optical cables, your data will be transfered to end user in milliseconds.</p>
+									<p>저처럼 바쁜 사람들도 운동에 투자하는 비용을 합리적으로 느낄 수 있게 해준다는 점이에요. 헬스장은 연회권을 구매해도 가는 날보단 못 가는 날이 더 많잖아요. ...</p>
 									<a href="#">Mariya, Activeden</a>
 								</div>
 								<div class="testimonial-grid">
 									<a href="#"><img src="resources/images/test-people3.png" alt=""></a>
-									<p>We have a dedicated team of support for sales and support to help you in anytime. You can also chat with us.</p>
+									<p>요가는 나랑 맞지 않아’ 라고 얘기하는 분들도 다른 센터로 옮기시면 잘 맞을 수도 있어요. ... Nfit 덕분에 여기 저기 다녀보고 저와 잘 맞는 요가 센터를 찾아서 지금은 굉장히 만족하고 ...</p>
 									<a href="#">Steven, Microlancer</a>
 								</div>
 								<div class="clear"> </div>
@@ -138,11 +141,11 @@ var userAddr="${dto.member_addr}";
 				  		<!---//End-testimonials---->
 				  		<!----start-clients-slider--->
 				  		<div class="clients-slider">
-						<div class="nbs-flexisel-container"><div class="nbs-flexisel-inner"><ul class="flexiselDemo3 nbs-flexisel-ul" style="left: -175.2px; display: block;">
-						<li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c3.png"></li><li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c4.png"></li><li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c1.png"></li><li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c2.png"></li><li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c3.png"></li><li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c4.png"></li><li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c1.png"></li><li onclick="location.href='#';" class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c2.png"></li></ul><div class="nbs-flexisel-nav-left" style="top: 13px;"></div><div class="nbs-flexisel-nav-right" style="top: 13px;"></div></div></div> 
+						<div"><div class="nbs-flexisel-inner"><ul class="flexiselDemo3 nbs-flexisel-ul" style="left: -175.2px; display: block;">
+						<li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c3.png"></li><li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c4.png"></li><li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c1.png"></li><li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c2.png"></li><li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c3.png"></li><li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c4.png"></li><li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c1.png"></li><li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c2.png"></li></ul><div class="nbs-flexisel-nav-left" style="top: 13px;"></div><div class="nbs-flexisel-nav-right" style="top: 13px;"></div></div></div> 
 						<div class="clear"> </div>      
 							
-							
+
 						</div>
 						<!----start-clients-slider--->
 					</div>
@@ -159,8 +162,8 @@ var userAddr="${dto.member_addr}";
 							<span> </span>
 						</div>
 						<div class="feature-grid-right">
-							<h2>All-new design</h2>
-							<p>iOS 7 started with a desire to take an experience people love and make it better. To make it even simpler, more useful, and more enjoyable </p>
+							<h2>쾌적한 시설의 추구</h2>
+							<p>제휴업체 계약시 시설의 환경을 최우선적으로 생각하겠습니다. </p>
 						</div>
 						<div class="clear"> </div>
 					</div>
@@ -169,8 +172,8 @@ var userAddr="${dto.member_addr}";
 							<span> </span>
 						</div>
 						<div class="feature-grid-right">
-							<h2>All-new features</h2>
-							<p>Control Center, AirDrop for iOS, and smarter multitasking are just a few of the great new features in iOS 7. And all your favorite apps have been enhanced</p>
+							<h2>센터이용의 메뉴얼화</h2>
+							<p>회원님의 센터이용시 센터마다의 서비스 및 시설 매뉴얼을 공개해 서비스에 모자람이 없도록 준비하도록 하겠습니다.</p>
 						</div>
 						<div class="clear"> </div>
 					</div>
@@ -179,7 +182,7 @@ var userAddr="${dto.member_addr}";
 							<span> </span>
 						</div>
 						<div class="feature-grid-right">
-							<h2>매일 업데이트 되는 제휴업체정보</h2>
+							<h2>매일 업데이트 되는 업체정보</h2>
 							<p>저희와 제휴되는 업체들은 지금도 계속 늘어나고 있습니다. ^^</p>
 						</div>
 						<div class="clear"> </div>
@@ -199,8 +202,8 @@ var userAddr="${dto.member_addr}";
 							<span> </span>
 						</div>
 						<div class="feature-grid-right">
-							<h2>Digital timer</h2>
-							<p>iOS 7 started with a desire to take an experience people love and make it better. To make it even simpler, more useful, enjoyable </p>
+							<h2>자동 알림</h2>
+							<p>결제된 코인의 유효기간이 만료되기 이전에 이용하실 수 있도록 안내를 드리며, 다만 유효기간이 지나면 50%의 환불만 가능합니다.</p>
 						</div>
 						<div class="clear"> </div>
 					</div>
@@ -209,8 +212,8 @@ var userAddr="${dto.member_addr}";
 							<span> </span>
 						</div>
 						<div class="feature-grid-right">
-							<h2>Statistics</h2>
-							<p>Control Center, AirDrop for iOS, and smarter multitasking are just a few of the great new features in iOS 7. And all your favorite apps</p>
+							<h2>통계자료제공</h2>
+							<p>해당센터에서 데이터 측정 서비스가 가능한 경우 해당데이터를 앱으로 확인 하실 수 있게 해드립니다.</p>
 						</div>
 						<div class="clear"> </div>
 					</div>

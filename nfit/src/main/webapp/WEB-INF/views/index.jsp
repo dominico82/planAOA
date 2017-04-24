@@ -33,7 +33,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic&amp;subset=latin">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
-  <link rel="stylesheet" href="bootstrap-material-design-font/css/material.css">
   <link rel="stylesheet" href="resources/tether/tether.min.css">
   <link rel="stylesheet" href="resources/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="resources/dropdown/css/style.css">
@@ -121,11 +120,11 @@
 
                         </div>
                         
-                        <!-- 동영상 트래픽으로 추후오픈예정 
+                        
                         <div class="mbr-table-cell mbr-valign-top mbr-left-padding-md-up col-md-7 image-size" style="width: 50%;">
                             <div class="mbr-figure"><iframe class="mbr-embedded-video" src="https://www.youtube.com/embed/ltXsiiDWxEU?rel=0&amp;amp;showinfo=0&amp;autoplay=1&amp;loop=1&amp;playlist=Tq7p44IA-1U" width="600" height="350" frameborder="0" allowfullscreen></iframe></div>
                         </div>
-                        -->
+                        
                         
                     </div>
                 </div>
@@ -136,15 +135,15 @@
 
 <jsp:include page="footer.jsp"/>
 
-  <script src="resources/web/jquery/jquery.min.js"></script>
+  
   <script src="resources/tether/tether.min.js"></script>
-  <script src="resources/bootstrap/js/bootstrap.min.js"></script>
+  
   <script src="resources/smooth-scroll/smooth-scroll.js"></script>
-  <script src="resources/dropdown/js/script.min.js"></script>
-  <script src="resources/touch-swipe/jquery.touch-swipe.min.js"></script>
-  <script src="resources/viewport-checker/jquery.viewportchecker.js"></script>
+  
+  
+  
   <script src="resources/jarallax/jarallax.js"></script>
-  <script src="resources/theme/js/script.js"></script>
+  
   
   <input name="animation" type="hidden">
 			

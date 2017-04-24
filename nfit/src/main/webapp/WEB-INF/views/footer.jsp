@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-	<link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+	
 	
 <style>
 	.footer-distributed{
@@ -189,7 +189,7 @@
 
 			<div class="footer-left">
 
-				<h3>N f i t <span>company</span></h3>
+				<h3>Nfit <span>company</span></h3>
 
 				<p class="footer-links">
 					<a href="index.do">Home</a>
@@ -205,7 +205,7 @@
 					<a href="coin.do">코인결제</a>
 				</p>
 
-				<p class="footer-company-name">Nfit Company &copy; 2017</p>
+				<p class="footer-company-name">Team Ace Of Ajae &copy; 2017</p>
 					
 			</div>
 
@@ -233,7 +233,7 @@
 
 				<p class="footer-company-about">
 					<span>회사안내</span>
-				Team A.O.A // 감사합니다. 보다 노력하여 발전하는 팀이 되도록 하겠습니다. 많이 부족하지만 고생많이했습니다. 	
+				감사합니다. 보다 노력하여 발전하는 팀이 되도록 하겠습니다. 많이 부족하지만 고생많이했습니다. 	
 				</p>
 
 				<div class="footer-icons">
