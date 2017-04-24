@@ -62,12 +62,8 @@
 <script type="text/javascript">
 	function checkValue() {
 
-		if (document.join.member_pwd.size < 6) {
+		if (document.join.member_pwd.value.size < 6) {
 			alert("6글자 이상 입력해주세요.");
-			return false;
-		}
-		if (!document.join.member_pwd.value) {
-			alert("비밀번호를 입력하세요.");
 			return false;
 		}
 		if (document.join.member_pwd.value != document.join.member_pwd2.value) {
@@ -80,6 +76,10 @@
 		}
 		if (!isNaN(form.member_name.value)) {
 			alert("이름은 문자만 입력가능합니다.");
+			return false;
+		}
+		if (!document.join.mailCheck.value){
+			alert("이메일 인증완료 바랍니다.");
 			return false;
 		}
 	}
@@ -142,7 +142,7 @@
 		var b=document.join.email2.value;
 		finemail=a+"@"+b;
 		url="emailAuth.do?email="+finemail;
-			window.open(url);
+			window.open(url,"","width=300,height=200,scrollbars=1");
 		}
 </script>
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
@@ -211,7 +211,7 @@
 </head>
 <body>
 	<header>
-		<jsp:include page="../header.jsp"/>
+		<jsp:include page="../header.jsp" />
 	</header>
 	<div class="wrap">
 		<div class="container" style="margin: 0px auto; width: 600px;">
@@ -239,12 +239,12 @@
 										<div class="form-group">
 											<label for="password">*비밀번호</label> <input id="input"
 												name="member_pwd" type="password" maxlength="12"
-												class="form-control">
+												class="form-control" required="required">
 										</div>
 										<div class="form-group">
 											<label for="password2">*비밀번호확인</label> <input id="input"
 												name="member_pwd2" type="password" maxlength="12"
-												class="form-control">
+												class="form-control" required="required">
 										</div>
 										<div class="form-group">
 											<label for="name">*이름</label><input type="text"
@@ -308,8 +308,8 @@
 												<option value="hanmail.net">다음</option>
 												<option value="hotmail.com">핫메일</option>
 												<option value="yahoo.co.kr">야후</option>
-											</select>
-											
+											</select> <br> 
+											<input type="text" name="mailCheck" value="" style="border: 0px;" readonly="readonly">
 											<input type="button" value="이메일 인증" onclick='emailCheck();'>
 										</div>
 										<div class="form-group">
@@ -351,7 +351,7 @@
 
 
 	<footer>
-		<jsp:include page="../footer.jsp"/>
+		<jsp:include page="../footer.jsp" />
 	</footer>
 	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 	<script>
