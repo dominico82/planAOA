@@ -58,4 +58,6 @@ public interface CompanyDAO {
 	public int oldCompany(String co_phone);
 	//기존업체 컨탠츠등록
 	public void oldCompanyin(CompanyContentDTO vo);
+	//업체 검색
+	public List<CompanyListDTO> companySearch(String keyword,String keyfield,int start,int end);
 }

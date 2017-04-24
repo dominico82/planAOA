@@ -140,4 +140,14 @@
 	  #{content3},#{content4},
 	  #{content5},#{content6})
 	 </insert>
+	 <!-- 업체 검색하기 -->
+	  <select id="companySearch" parameterType="hashmap" resultType="nfit.center.model.CompanyListDTO">
+		 select * from
+		 (select rownum as rnum,a.* from(select * from company_list 
+			<if test="keyfield != null">
+				where ${keyword} like '%'||#{keyfield}||'%'
+			</if>
+		  order by co_idx asc)a) 
+		 where rnum between #{start} and #{end} 
+	  </select>
 </mapper>

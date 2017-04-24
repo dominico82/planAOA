@@ -8,10 +8,6 @@
 <title>Insert title here</title>
 <!-- jquery -->
 <script src="http://code.jquery.com/jquery-3.1.0.js"></script>
-<!-- bs -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <script>
 $(document).ready(function(){
 	//이용시간 테이블 리스트
@@ -219,66 +215,57 @@ padding-right: 800px;
 		<table class="type1">
 			<tr>
 				<th>업체번호</th>
-			</tr>
-			<tr>
 				<td>
 					<input type="text" readonly="readonly" value="${co_list.co_idx}" id="co_idx">
 				</td>
 			</tr>
 			<tr>
 				<th>업체이름</th>
-			</tr>
-			<tr>
 				<td>
 					<input type="text" value="${co_list.co_name}"size="50" id="co_name_1">
 				</td>
 			</tr>
 			<tr>
 				<th>업체주소</th>
-			</tr>
-			<tr>
 				<td>
 					<input type="text" value="${co_list.co_address}" size="50" id="co_address_1">
 				</td>
 			</tr>
 			<tr>
 				<th>연락처</th>
-			</tr>
-			<tr>
 				<td>
 					<input type="text" value="${co_list.co_phone}" size="50" id="co_phone_1">
 				</td>
 			</tr>
 			<tr>
 				<th>종목</th>
-			</tr>
-			<tr>
 				<td>
 					<input type="text" value="${co_list.co_class}" size="50" id="co_class_1">
 				</td>
 			</tr>
 			<tr>
 				<th>이용가능서비스</th>
-			</tr>
-			<tr>
 				<td>
 					<textarea rows="5" cols="50" placeholder="avail" id="co_avail_1">${co_list.co_avail}</textarea>
 				</td>
 			</tr>
 			<tr>
 				<th>부가서비스</th>
-			</tr>
-			<tr>
 				<td>
 					<textarea rows="5" cols="50" placeholder="extra" id="co_extra_1">${co_list.co_extra}</textarea> 		   
 				</td>
 			</tr>
 			<tr>
 				<th>이용 규정및 준비물</th>
-			</tr>
-			<tr>
 				<td>
 					<textarea rows="5" cols="50" placeholder="regul" id="co_regul_1">${co_list.co_regul}</textarea> 		   
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+					<button type="button" class="btn btn" id="btnUpdate">UpDate</button>
+					<button type="button" class="btn btn" id="btnDelete">Delete</button>
+				 	<button type="button" class="btn btn" data-dismiss="modal">Close</button>
 				</td>
 			</tr>
 		</table>
@@ -294,12 +281,7 @@ padding-right: 800px;
 			<div id="content_list"></div>
 	</div>	
 <!-- Footer -->
-<div class="modal-footer">
-	<button type="button" class="btn btn" id="btnUpdate">UpDate</button>
-	<button type="button" class="btn btn" id="btnDelete">Delete</button>
-  <button type="button" class="btn btn" data-dismiss="modal">Close</button>
-</div>
-
+<div class="modal-footer"></div>
 </form>
 </body>
 </html>

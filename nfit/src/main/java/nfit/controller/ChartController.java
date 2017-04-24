@@ -41,7 +41,7 @@ import nfit.center2.model.CompanyDAO;
 import nfit.center2.model.CompanyListDTO;
 import nfit.center2.model.CompanyUseTimeDTO;
 import util.MediaUtils;
-
+//nfit
 
 @Controller
 public class ChartController {
@@ -154,7 +154,9 @@ public class ChartController {
 	}
 	/*관리자 페이지에넣을 업체 리스트 페이지이동폼*/
 	@RequestMapping("co_list.do")
-	public String co_list(Map map,@RequestParam(value="pagenum",defaultValue="1")String pagenum_o){
+	public String co_list(Map map,@RequestParam(value="pagenum",defaultValue="1")String pagenum_o,
+			@RequestParam(value="keyword",required=false)String keyword ,
+			@RequestParam(value="keyfield",required=false)String keyfield){
 		//페이징 로직
 		int pagenum=Integer.parseInt(pagenum_o);
 		//시작,끝 게시글번호
@@ -183,7 +185,9 @@ public class ChartController {
 		if(totalpage<endpage){
 			endpage=totalpage;
 		}
-		List<CompanyListDTO> list = companyDao.companyListborad(start, end);
+		//List<CompanyListDTO> list = companyDao.companyListborad(start, end);
+		//업체검색 메소드호출
+		List<CompanyListDTO> list=companyDao.companySearch(keyword, keyfield, start, end);
 		map.put("startpage", startpage);
 		map.put("endpage", endpage);
 		map.put("totalpage", totalpage);

@@ -90,10 +90,12 @@ width: 300px;
 				</td>
 			</tr>
 		</c:forEach>
+		<tr>
+			<td colspan="2">
+				<button type="button" id="usetimeBtn">수정버튼</button>
+				<button type="button" id="usetimeBtndelete">삭제버튼</button>
+			</td>
+		</tr>
 	</table>
-	<div>
-		<button type="button" id="usetimeBtn">수정버튼</button>
-		<button type="button" id="usetimeBtndelete">삭제버튼</button>
-	</div>
 </body>
 </html>

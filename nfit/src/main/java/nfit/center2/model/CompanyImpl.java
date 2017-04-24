@@ -155,4 +155,15 @@ public class CompanyImpl implements CompanyDAO {
 	public void oldCompanyin(CompanyContentDTO vo) {
 		sqlMap.insert("oldCompanyin", vo);
 	}
+	@Override
+	//업체검색
+	public List<CompanyListDTO> companySearch(String keyword, String keyfield, int start, int end) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("keyword", keyword);
+		map.put("keyfield", keyfield);
+		map.put("start", start);
+		map.put("end", end);
+		return sqlMap.selectList("companySearch",map);
+	}
 }

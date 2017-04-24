@@ -137,10 +137,12 @@ $(document).ready(function(){
 		</td>
 	</tr>
 	</c:forEach>
+	<tr>
+		<td colspan="7">
+			<button type="button" id="btncontentupdate">컨텐츠정보수정</button>
+			<button type="button" id="btncontentdelete">컨텐츠정보삭제</button>
+		</td>
+	</tr>
 </table>
-<div>
-	<button type="button" id="btncontentupdate">컨텐츠정보수정</button>
-	<button type="button" id="btncontentdelete">컨텐츠정보삭제</button>
-</div>
 </body>
 </html>

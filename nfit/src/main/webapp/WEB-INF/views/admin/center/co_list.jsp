@@ -460,9 +460,18 @@ $(document).ready(function(){
 							</div>
 						</div>
 					</div>
+				<form name="form1" method="post" action="co_list.do">
+						 <select name="keyword">
+							 	<option value="co_name">업체명</option>
+							 	<option value="co_class">종목</option>
+							 	<option value="co_phone">연락처</option>
+						 </select>
+							 <input type="text" name="keyfield">
+					    	 <input type="submit" value="조회">
+				</form>
 					<!-- 업체리스트 나열 테이블  -->	 
 					<span>등록된 업체 나열 </span>
-						<table border="1" class="table table-striped table-bordered table-hover"> <!-- class="table table-bordered"  -->
+						<table class="table table-striped table-bordered table-hover"> <!-- class="table table-bordered"  -->
 								<thead>
 										<tr>
 											<td>업체 번호(수정)</td>
@@ -505,12 +514,5 @@ $(document).ready(function(){
 <footer class="app-footer">
    <jsp:include page="../../footer.jsp"/>
 </footer>
-<!-- Bootstrap and necessary plugins -->
-<!-- <script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/tether/dist/js/tether.min.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="bower_components/pace/pace.min.js"></script>
-GenesisUI main scripts
-<script src="resources/js/app.js"></script> -->
 </body>
 </html>
