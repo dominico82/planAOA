@@ -46,7 +46,7 @@
 		<br>
 		${row.feedback_content}
 			<!-- 댓글 수정버튼 --> <!-- 세션아이디와 디비아이디비교후 버튼 활성화제한 예정-->
-			<input type="button" value="Modify" onclick="showModify(${row.feedback_index})">
+			<input type="button" value="Modify" onclick="showModify(${row.feedback_index})" class="button">
 		</td>
 	</tr>
 	</c:forEach>

@@ -20,7 +20,10 @@
 $(document).ready(function(){
 	feedbacklist();
 		$('#btninsert').click(function(){
+			//업체 idx
 			var co_idx=$('#co_idx').val();
+			//세션에 저장된 id값
+			var userid=$('#userid').val();
 			//내용
 			var feedback_content = $('#feedback_content').val();	
 			feedback_content  = feedback_content.replace('\r\n','<br>');
@@ -30,7 +33,7 @@ $(document).ready(function(){
 				alert('댓글을입력해주세요');
 				return;
 			}
-			var param='feedback_content='+feedback_content+'&feedback_score='+feedback_score+'&co_idx='+co_idx;
+			var param='feedback_content='+feedback_content+'&feedback_score='+feedback_score+'&co_idx='+co_idx+'&member_id='+userid;
 			$.ajax({
 				type:'post',
 				url:'feedbackinsert.do',
@@ -67,7 +70,7 @@ function show(star){
 	var e = document.getElementById('startext');
 	var stateMsg;
 	for( i=1;i<=star;i++){
-		image = 'image'+i;
+		image = 'images'+i;
 		el = document.getElementById(image);
 		el.src='resources/images/img/star1.png';
 	}
@@ -79,7 +82,7 @@ function noshow(star){
 	var image;
 	var el;
 	for(i=1;i<=star;i++){
-		image='image'+i;
+		image='images'+i;
 		el= document.getElementById(image);
 		el.src='resources/images/img/star0.png';
 	}
@@ -133,18 +136,67 @@ padding-right: 20px;
 	width: 400px;
 	height: 100px;
 	position: absolute;  /*  절대좌표지정없으면 바닥에 깔리게됨  */
-	top:30%; /* 위아래 50 */
-	left: 70%;
-	margin-top: -50px;
-	margin-left: -150px;
-	padding: 10px;
+	top:70%; /* 위아래 50 */
+	left:75%;
+	margin-left: -220px;
 	z-index: 10; /* 레이어   */
 	visibility: hidden; /* 버튼클릭시 보이기하기위함 */
 }
+.button {
+   border: 2px solid #48b3e8;
+   background: #cddfeb;
+   background: -webkit-gradient(linear, left top, left bottom, from(#edf0f2), to(#cddfeb));
+   background: -webkit-linear-gradient(top, #edf0f2, #cddfeb);
+   background: -moz-linear-gradient(top, #edf0f2, #cddfeb);
+   background: -ms-linear-gradient(top, #edf0f2, #cddfeb);
+   background: -o-linear-gradient(top, #edf0f2, #cddfeb);
+   background-image: -ms-linear-gradient(top, #edf0f2 0%, #cddfeb 100%);
+   padding: 8px 16px;
+   -webkit-border-radius: 16px;
+   -moz-border-radius: 16px;
+   border-radius: 16px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
+   text-shadow: #b7d7eb 0 1px 0;
+   color: #5e7c8f;
+   font-size: 10px;
+   font-family: helvetica, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.button:hover {
+   border: 2px solid #31a4e6;
+   text-shadow: #b0d4eb 0 1px 0;
+   background: #ccdde8;
+   background: -webkit-gradient(linear, left top, left bottom, from(#cce0ed), to(#ccdde8));
+   background: -webkit-linear-gradient(top, #cce0ed, #ccdde8);
+   background: -moz-linear-gradient(top, #cce0ed, #ccdde8);
+   background: -ms-linear-gradient(top, #cce0ed, #ccdde8);
+   background: -o-linear-gradient(top, #cce0ed, #ccdde8);
+   background-image: -ms-linear-gradient(top, #cce0ed 0%, #ccdde8 100%);
+   color: #212324;
+   }
+.button:active {
+   text-shadow: #b1cee0 0 1px 0;
+   border: 2px solid #1fa3f0;
+   background: #c1daeb;
+   background: -webkit-gradient(linear, left top, left bottom, from(#c5dceb), to(#ccdde8));
+   background: -webkit-linear-gradient(top, #c5dceb, #c1daeb);
+   background: -moz-linear-gradient(top, #c5dceb, #c1daeb);
+   background: -ms-linear-gradient(top, #c5dceb, #c1daeb);
+   background: -o-linear-gradient(top, #c5dceb, #c1daeb);
+   background-image: -ms-linear-gradient(top, #c5dceb 0%, #c1daeb 100%);
+   color: #0a080a;
+   }
 </style>
 <body>
+<!-- 업체idx 값 -->
 <c:set var="co_idx" value="${co_idx}"/>
 <input type="hidden" value="${co_idx}" id="co_idx">
+<!-- 세션에저장된 id -->
+<c:set var="userid" value="${sessionScope.saveid}"/>
+<input type="hidden" value="${userid}" id="userid">
 <%@include file="../header.jsp" %>
 	<div class="container-fluid">
 	<div class="row" id="menu_bar">
@@ -352,31 +404,33 @@ padding-right: 20px;
 							<div id="map" style="width: 100%; height: 600px;"></div>
 				</div>
 				 <!-- 후기 댓글 공간 -->
-				 <table>
-					<tr>
-						<td>
-							<span>
-								<img id="image1" src="resources/images/img/star0.png" width="20" onmouseover="show(1)"onclick="mark(1)" onmouseout="noshow(1)"/>
-								<img id="image2" src="resources/images/img/star0.png" width="20" onmouseover="show(2)"onclick="mark(2)" onmouseout="noshow(2)"/>
-								<img id="image3" src="resources/images/img/star0.png" width="20" onmouseover="show(3)"onclick="mark(3)" onmouseout="noshow(3)"/>
-								<img id="image4" src="resources/images/img/star0.png" width="20" onmouseover="show(4)"onclick="mark(4)" onmouseout="noshow(4)"/>
-								<img id="image5" src="resources/images/img/star0.png" width="20" onmouseover="show(5)"onclick="mark(5)" onmouseout="noshow(5)"/>
-							</span>
-							<br><span id="startext">평가하기</span>
-							<input type="hidden" id="feedback_score">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea rows="7" cols="55" id="feedback_content"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<button id="btninsert" type="button">댓글작성</button>
-						</td>
-					</tr>
-				</table>
+				 <div>
+					 <table id="feedback_table">
+						<tr>
+							<td>
+								<span>
+									<img id="images1" src="resources/images/img/star0.png" width="20" onmouseover="show(1)"onclick="mark(1)" onmouseout="noshow(1)"/>
+									<img id="images2" src="resources/images/img/star0.png" width="20" onmouseover="show(2)"onclick="mark(2)" onmouseout="noshow(2)"/>
+									<img id="images3" src="resources/images/img/star0.png" width="20" onmouseover="show(3)"onclick="mark(3)" onmouseout="noshow(3)"/>
+									<img id="images4" src="resources/images/img/star0.png" width="20" onmouseover="show(4)"onclick="mark(4)" onmouseout="noshow(4)"/>
+									<img id="images5" src="resources/images/img/star0.png" width="20" onmouseover="show(5)"onclick="mark(5)" onmouseout="noshow(5)"/>
+								</span>
+								<br><span id="startext">댓글 남기기~</span>
+								<input type="hidden" id="feedback_score">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<textarea rows="7" cols="55" id="feedback_content"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button id="btninsert" type="button" class="button">Click!</button>
+							</td>
+						</tr>
+					</table>
+				</div>
 			<!-- 댓글목록나올란 -->
 			<div id="ListFeedback"></div>
 			<div id="modifyFeedback"></div>

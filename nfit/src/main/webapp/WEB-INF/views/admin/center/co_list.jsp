@@ -211,9 +211,9 @@ $(document).ready(function(){
         </div>
         <!-- Main content -->
        <main class="main">
-            <div class="container-fluid">
+            <div><!-- class="container-fluid" -->
 				<!-- 내용들어갈곳 -->
-				<div id="ui-view">
+				<div><!-- id="ui-view" -->
 					<!--페이징부분  -->
 					<div style="display: block;">
 						<c:if test="${startpage>1}">
@@ -228,7 +228,7 @@ $(document).ready(function(){
 					</div>
 					<!-- -------- -->
 					<!-- 업체등록 모달 -->
-					<div class="container" style="width: 100px;display:inline-block;">
+					<div class="container" style="width: 10%;display: -web">
 					  <!-- Trigger the modal with a button -->
 					  <button type="button" class="btn btn-info btn-xs-5" data-toggle="modal" data-target="#myModal">업체등록</button>
 					  <!-- Modal -->
@@ -309,7 +309,7 @@ $(document).ready(function(){
 					  	</div>
 					</div>
 					<!-- 차트를 넣을 모달 적용 -->
-					<div class="container" style="width: 100px; display:inline-block;">
+					<div class="container" style="width: 10%; display:inline-table;">
 					  <!-- Trigger the modal with a button -->
 					  <button type="button" class="btn btn-info btn-xs-5" data-toggle="modal" data-target="#myModal2">이용누적차트</button>
 					  <!-- Modal -->

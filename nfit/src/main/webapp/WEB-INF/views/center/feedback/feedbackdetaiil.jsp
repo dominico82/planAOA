@@ -81,7 +81,7 @@ function show1(star){
 	var e2 = document.getElementById('startext');
 	var stateMsg;
 	for( j=1;j<=star;j++){
-		image2 = 'images'+j;
+		image2 = 'imagess'+j;
 		el2 = document.getElementById(image2);
 		el2.src='resources/images/img/star1.png';
 	}
@@ -93,7 +93,7 @@ function noshow1(star){
 	var image2;
 	var el2;
 	for(j=1;j<=star;j++){
-		image2='images'+j;
+		image2='imagess'+j;
 		el2= document.getElementById(image2);
 		el2.src='resources/images/img/star0.png';
 	}
@@ -118,21 +118,21 @@ function mark1(star){
 <c:set var="vo" value="${vo}"/>
 <div id="detail_feedback_index">${vo.feedback_index}<br> <!-- 댓글번호 -->
 	<span>
-		<img id="images1" src="resources/images/img/star0.png" width="20" onmouseover="show1(1)"onclick="mark1(1)" onmouseout="noshow1(1)"/>
-		<img id="images2" src="resources/images/img/star0.png" width="20" onmouseover="show1(2)"onclick="mark1(2)" onmouseout="noshow1(2)"/>
-		<img id="images3" src="resources/images/img/star0.png" width="20" onmouseover="show1(3)"onclick="mark1(3)" onmouseout="noshow1(3)"/>
-		<img id="images4" src="resources/images/img/star0.png" width="20" onmouseover="show1(4)"onclick="mark1(4)" onmouseout="noshow1(4)"/>
-		<img id="images5" src="resources/images/img/star0.png" width="20" onmouseover="show1(5)"onclick="mark1(5)" onmouseout="noshow1(5)"/>
+		<img id="imagess1" src="resources/images/img/star0.png" width="20" onmouseover="show1(1)"onclick="mark1(1)" onmouseout="noshow1(1)"/>
+		<img id="imagess2" src="resources/images/img/star0.png" width="20" onmouseover="show1(2)"onclick="mark1(2)" onmouseout="noshow1(2)"/>
+		<img id="imagess3" src="resources/images/img/star0.png" width="20" onmouseover="show1(3)"onclick="mark1(3)" onmouseout="noshow1(3)"/>
+		<img id="imagess4" src="resources/images/img/star0.png" width="20" onmouseover="show1(4)"onclick="mark1(4)" onmouseout="noshow1(4)"/>
+		<img id="imagess5" src="resources/images/img/star0.png" width="20" onmouseover="show1(5)"onclick="mark1(5)" onmouseout="noshow1(5)"/>
 	</span>
 	<br>
 		<input type="hidden" id="feedback_score2">
 	<br>
-	<textarea rows="5" cols="55" id="detail_feedback_content" placeholder="내용을 기입해주세요" required="required">${vo.feedback_content}</textarea>
+	<textarea rows="5" cols="47" id="detail_feedback_content" placeholder="내용을 기입해주세요" required="required">${vo.feedback_content}</textarea>
 	<br>
 	<div style="text-align: center;">
-		<button type="button" id="btnFeedbackUpdate">수정</button>
-		<button type="button" id="btnFeedbackDelete">삭제</button>
-		<button type="button" id="btnFeedbackClose">닫기</button>
+		<button type="button" id="btnFeedbackUpdate" class="button">수정</button>
+		<button type="button" id="btnFeedbackDelete" class="button">삭제</button>
+		<button type="button" id="btnFeedbackClose" class="button">닫기</button>
 	</div>
 </div>
 </body>

@@ -8,7 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 댓글추가 -->
 	<insert id="FeedBackinsert" parameterType="nfit.feedback.model.FeedbackDTO">
 	insert into feedback_table 
-	values(feedback_idx.nextval,#{co_idx},'kimjae55',sysdate, #{feedback_score} , #{feedback_content} )
+	values(feedback_idx.nextval,#{co_idx},#{member_id},sysdate, #{feedback_score} , #{feedback_content} )
 	</insert>
 	<!-- 댓글삭제 -->
 	<delete id="FeedBackdelete" parameterType="int">
