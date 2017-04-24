@@ -9,9 +9,6 @@
 <!-- jquery -->
 <script src="http://code.jquery.com/jquery-3.1.0.js"></script>
 <!-- bs -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 <script>
 $(document).ready(function(){
 	//이용시간 테이블 리스트

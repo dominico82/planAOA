@@ -45,13 +45,13 @@ public class CenterController {
 		model.addAttribute("clist", clist);
 		return "/center/centerMap";
 	}
-	
+	//자세히 보기 페이지
 	@RequestMapping("/centerDetail.do")
 	public String centerDetail(ModelMap model, @RequestParam(value="co_idx",required=false, defaultValue="0") int co_idx){
 		CenterDTO dto=centerDao.centerOneDB(co_idx);
 		List<UsetimeDTO> list = usetimeDao.usetimeDB(co_idx);
 		List<ContentDTO> contentList=contentDao.contentListDB(co_idx);
-		
+		model.addAttribute("co_idx",co_idx);
 		model.addAttribute("dto", dto);
 		model.addAttribute("timelist", list);
 		model.addAttribute("contentlist", contentList);

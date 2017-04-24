@@ -10,15 +10,15 @@
 <script src="http://code.jquery.com/jquery-3.1.0.js"></script>
 </head>
 <body>
-<c:set var="list" value="${list}"/>
+<c:set var="flist" value="${flist}"/>
 <span>${co_idx}번째게시물:총${count}개 댓글이 달려있습니다.</span> 
 <table style="width:700px;">
-	<c:if test="${empty list}">
+	<c:if test="${empty flist}">
 		<tr>
 			<td>표시될 내용이없습니다.</td>
 		</tr>
 	</c:if>
-	<c:forEach var="row" items="${list}">
+	<c:forEach var="row" items="${flist}">
 	<tr>
 		<td>${row.member_id}(
 		<fmt:formatDate value="${row.feedback_date}" pattern="yyyy-MM-dd HH:mm:ss"/>)

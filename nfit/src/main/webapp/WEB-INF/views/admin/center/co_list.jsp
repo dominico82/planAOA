@@ -11,8 +11,8 @@
 <script src="http://code.jquery.com/jquery-3.1.0.js"></script>
 <!-- 부트스트랩 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> --> 
 <!-- Icons -->
 <!-- Main styles for this application -->
 <link href="resources/css/adminstyle.css" rel="stylesheet">
@@ -192,19 +192,19 @@ $(document).ready(function(){
                         <a class="nav-link" href="#"><i class="icon-speedometer"></i>Test<span class="badge badge-info">NEW</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="icon-people"></i> 회원관리</a>
+                        <a class="nav-link" href="memberAdmin.do"><i class="icon-people"></i> 회원관리</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="co_list.do"><i class="icon-briefcase"></i>제휴업체 등록/삭제</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="icon-credit-card"></i>코인 관리</a>
+                        <a class="nav-link" href="coinAdmin.do"><i class="icon-credit-card"></i>코인 관리</a>
                     </li>
                     <li class="nav-item">
-                    	<a class="nav-link" href="#"><i class="icon-check"></i>문의 관리</a>
+                    	<a class="nav-link" href="questionAdmin.do"><i class="icon-check"></i>문의 관리</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="icon-list"></i>공지사항 관리</a>
+                    <a class="nav-link" href="noticeAdmin.do"><i class="icon-list"></i>공지사항 관리</a>
                     </li>
                 </ul>
             </nav>
@@ -233,7 +233,7 @@ $(document).ready(function(){
 					  <button type="button" class="btn btn-info btn-xs-5" data-toggle="modal" data-target="#myModal">업체등록</button>
 					  <!-- Modal -->
 					  	<div class="modal fade" id="myModal" role="dialog">
-					   	 	<div class="modal-dialog" style="width:900px;height: 700px;">
+					   	 	<div class="modal-dialog" style="width:1500px;height: 700px;">
 					      	<!-- Modal content-->
 					      		<div class="modal-content">
 					        		<div class="modal-header">
@@ -473,34 +473,34 @@ $(document).ready(function(){
 						</div>
 					</div>
 					<!-- 업체리스트 나열 테이블  -->	 
-					<table border="1" class="table table-striped table-bordered table-hover"> <!-- class="table table-bordered"  -->
-						<caption>등록된 업체 나열 </caption>
-							<thead>
-									<tr>
-										<td>업체 번호(수정)</td>
-										<td>업체 이름</td>
-										<td>업체 주소</td>
-										<td>업체 종목</td>
-										<td>업체 연락쳐</td>
-									</tr>
-							</thead>
-							<tbody id="container">
-								<c:if test="${empty list}">
-									<tr>
-										<td colspan="6">등록된게시물이없음</td>
-									</tr>
-								</c:if>
-								<c:forEach var="vo" items="${list}">
+					<span>등록된 업체 나열 </span>
+						<table border="1" class="table table-striped table-bordered table-hover"> <!-- class="table table-bordered"  -->
+								<thead>
 										<tr>
-											<td><a data-toggle="modal"href="co_update.do?co_idx=${vo.co_idx}" data-target="#modal-testNew" role="button" data-backdrop="static"><span class="btn btn-info">${vo.co_idx}</span></a></td>
-											<td>${vo.co_name}</td>
-											<td>${vo.co_address}</td>
-											<td>${vo.co_class}</td>
-											<td>${vo.co_phone}</td>
+											<td>업체 번호(수정)</td>
+											<td>업체 이름</td>
+											<td>업체 주소</td>
+											<td>업체 종목</td>
+											<td>업체 연락쳐</td>
 										</tr>
-								</c:forEach>
-							</tbody>
-					</table>
+								</thead>
+								<tbody id="container">
+									<c:if test="${empty list}">
+										<tr>
+											<td colspan="6">등록된게시물이없음</td>
+										</tr>
+									</c:if>
+									<c:forEach var="vo" items="${list}">
+											<tr>
+												<td><a data-toggle="modal"href="co_update.do?co_idx=${vo.co_idx}" data-target="#modal-testNew" role="button" data-backdrop="static"><span class="btn btn-info">${vo.co_idx}</span></a></td>
+												<td>${vo.co_name}</td>
+												<td>${vo.co_address}</td>
+												<td>${vo.co_class}</td>
+												<td>${vo.co_phone}</td>
+											</tr>
+									</c:forEach>
+								</tbody>
+						</table>
 						<!-- 모달 생성되는곳 -->
 						<div id="modal-testNew" class="modal fade" tabindex="1" role="dialog" aria-labelledby="테스트" aria-describedby="테스트모달">
 							<div class="modal-dialog" style="width:1200px;height: 700px;">
@@ -514,16 +514,15 @@ $(document).ready(function(){
             <!-- /.conainer-fluid -->
         </main>
     </div>
-
 <footer class="app-footer">
    <jsp:include page="../../footer.jsp"/>
 </footer>
 <!-- Bootstrap and necessary plugins -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<!-- <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/tether/dist/js/tether.min.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/pace/pace.min.js"></script>
-<!-- GenesisUI main scripts -->
-<script src="resources/js/app.js"></script>
+GenesisUI main scripts
+<script src="resources/js/app.js"></script> -->
 </body>
 </html>
