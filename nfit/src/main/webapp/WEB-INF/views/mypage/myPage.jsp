@@ -37,11 +37,12 @@ $(document).ready(function(){ //DOM이 준비되고
 							<c:forEach var="pics" items="${pic}"><img class="imgsize" src="resources/upload_images/${pics}"></c:forEach>
 							</span>
 						</span>
-						<form name="upload" action="fileUpload.do" method="post" enctype="multipart/form-data"> <!-- 파일 업로드를 구현하는 폼 -->
-							사진선택:<input type="file" name="files" id="files" accept="image/*" modelAttribute="uploadForm"><!-- input type="file" 업로드할 파일을 선택하는 속성 -->
+						<form name="upload" action="fileUpload.do" method="post" enctype="multipart/form-data">
+							프로필 사진 등록하기
+							<input type="file" name="files" id="files" class="filestyle" accept="image/*">
+							<input type="submit" value="파일올리기">
 							<input type="hidden" value="${dto.member_id}" name="id">
 							<input type="hidden" value="${dto.member_idx}" name="idx">
-							<input type="submit" value="파일올리기">
 						</form>
 						<h6>
 							${dto.member_name}<small>님</small>
@@ -73,17 +74,54 @@ $(document).ready(function(){ //DOM이 준비되고
 				<div class="col-lg-10 col-md-9 col-sm-8 mypagePanel" id="inner_top">
 					<section class="myMembership">
 						<div id="bmi">
-							<a onclick="info();" class="membershipApply" id="bmiCheck">"비만도 체크하기"</a><br>
+							<a class="membershipApply" id="bmiCheck">비만도 체크하기</a><br>
 							<div id="bmiResult">
 								<c:set var="bmi" value="${bmi}"/>
 								<c:choose>
 									<c:when test="${bmi < '18'}">
 									<div class="progress">
-										<div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2}%">
+										<div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2}%">
 									    ${bmi}
 										</div>
 									</div>
-										<span>'체중미달' 너무 마르셨어요~ 규칙적인 식사와 꾸준한 운동을 합시다~</span>
+										<h2>
+											<span><b>아이고! 이런 말씀 드리기 죄송하지만..</b></span>
+											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
+										</h2>
+										<h6>
+											<span>
+												<strong>체질량(BMI)지수</strong>
+												는<em class="aq">${bmi}</em> 입니다.
+											</span>
+											<span class="thin">
+												현재
+												<em>저체중</em> 으로 보입니다.
+											</span>
+										</h6>
+										<div class="reference">
+											<ul>
+												<li>저체중:18미만</li>
+												<li>정상:18~22</li>
+												<li>과체중:23~25</li>
+												<li>경도비만26~29</li>
+												<li>중등도30이상</li>
+											</ul>
+										</div>
+										<p>
+											<b>BMI 지수만을 맹신하지 마세요!</b>
+										</p>
+										<p>
+											남성의 경우 체지방률이 25% 이상일때 보통 "마른비만"일 수 있습니다. 
+											여성의 경우 체지방률이 30% 이상일때 보통 "마른비만" 일 수 있습니다.
+										</p>
+										<P>
+											<b>허리둘레도 재 보세요!</b>
+										</p>
+										<p>
+											남성의 경우 90cm 이상이면 "복부비만" 입니다.
+											여성의 경우 85cm 이상이면 "복부비만" 입니다.
+										</P>
+										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
 									</c:when>
 									<c:when test="${bmi >= '18' && bmi < '23'}">
 									<div class="progress">
@@ -91,7 +129,44 @@ $(document).ready(function(){ //DOM이 준비되고
 									    ${bmi}
 										</div>
 									</div>
-										<span>체질량 지수는 '보통'! 그럼 근육량을 늘리러 운동할까요?</span>
+										<h2>
+											<span><b>측정결과 정상이시네요~</b></span>
+											<span>꾸준한 운동으로 몸매관리 하실 필요가 있습니다.</span>
+										</h2>
+										<h6>
+											<span>
+												<strong>체질량(BMI)지수</strong>
+												는<em class="aq">${bmi}</em> 입니다.
+											</span>
+											<span class="normal">
+												현재
+												<em>정상</em> 으로 보입니다.
+											</span>
+										</h6>
+										<div class="reference">
+											<ul>
+												<li>저체중:18미만</li>
+												<li>정상:18~22</li>
+												<li>과체중:23~25</li>
+												<li>경도비만26~29</li>
+												<li>중등도30이상</li>
+											</ul>
+										</div>
+										<p>
+											<b>BMI 지수만을 맹신하지 마세요!</b>
+										</p>
+										<p>
+											남성의 경우 체지방률이 25% 이상일때 보통 "마른비만"일 수 있습니다. 
+											여성의 경우 체지방률이 30% 이상일때 보통 "마른비만" 일 수 있습니다.
+										</p>
+										<P>
+											<b>허리둘레도 재 보세요!</b>
+										</p>
+										<p>
+											남성의 경우 90cm 이상이면 "복부비만" 입니다.
+											여성의 경우 85cm 이상이면 "복부비만" 입니다.
+										</P>
+										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
 									</c:when>
 									<c:when test="${bmi >= '23' && bmi < '25'}">
 									<div class="progress">
@@ -99,24 +174,142 @@ $(document).ready(function(){ //DOM이 준비되고
 									    ${bmi}
 										</div>
 									</div>
-										<span>조금 높은 '과체중' 이시네요 이제부터 운동하면 좋아지실거에요~</span>
+										<h2>
+											<span><b>아이고! 이런 말씀 드리기 죄송하지만..</b></span>
+											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
+										</h2>
+										<h6>
+											<span>
+												<strong>체질량(BMI)지수</strong>
+												는<em class="aq">${bmi}</em> 입니다.
+											</span>
+											<span class="fat">
+												현재
+												<em>과체중</em> 으로 보입니다.
+											</span>
+										</h6>
+										<div class="reference">
+											<ul>
+												<li>저체중:18미만</li>
+												<li>정상:18~22</li>
+												<li>과체중:23~25</li>
+												<li>경도비만26~29</li>
+												<li>중등도30이상</li>
+											</ul>
+										</div>
+										<p>
+											<b>BMI 지수만을 맹신하지 마세요!</b>
+										</p>
+										<p>
+											남성의 경우 체지방률이 25% 이상일때 보통 "마른비만"일 수 있습니다. 
+											여성의 경우 체지방률이 30% 이상일때 보통 "마른비만" 일 수 있습니다.
+										</p>
+										<P>
+											<b>허리둘레도 재 보세요!</b>
+										</p>
+										<p>
+											남성의 경우 90cm 이상이면 "복부비만" 입니다.
+											여성의 경우 85cm 이상이면 "복부비만" 입니다.
+										</P>
+										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
 									</c:when>
-									<c:otherwise>
+									<c:when test="${bmi >= '26' && bmi < '29'}">
 									<div class="progress">
 										<div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.7}%">
 									    ${bmi}
 										</div>
 									</div>
-										<span>헉!! '비만' 이시네요 함께 열심히 운동해볼까요?</span>
+										<h2>
+											<span><b>아이고! 이런 말씀 드리기 죄송하지만..</b></span>
+											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
+										</h2>
+										<h6>
+											<span>
+												<strong>체질량(BMI)지수</strong>
+												는 <em class="aq">${bmi}</em> 입니다.
+											</span>
+											<span class="fat">
+												현재
+												<em>경도 비만</em> 으로 보입니다.
+											</span>
+										</h6>
+										<div class="reference">
+											<ul>
+												<li>저체중:18미만</li>
+												<li>정상:18~22</li>
+												<li>과체중:23~25</li>
+												<li>경도비만26~29</li>
+												<li>중등도30이상</li>
+											</ul>
+										</div>
+										<p>
+											<b>BMI 지수만을 맹신하지 마세요!</b>
+										</p>
+										<p>
+											남성의 경우 체지방률이 25% 이상일때 보통 "마른비만"일 수 있습니다. 
+											여성의 경우 체지방률이 30% 이상일때 보통 "마른비만" 일 수 있습니다.
+										</p>
+										<P>
+											<b>허리둘레도 재 보세요!</b>
+										</p>
+										<p>
+											남성의 경우 90cm 이상이면 "복부비만" 입니다.
+											여성의 경우 85cm 이상이면 "복부비만" 입니다.
+										</P>
+										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
+									</c:when>
+									<c:otherwise>
+										<div class="progress">
+										<div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.7}%">
+									    ${bmi}
+										</div>
+									</div>
+										<h2>
+											<span><b>아이고! 이런 말씀 드리기 죄송하지만..</b></span>
+											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
+										</h2>
+										<h6>
+											<span>
+												<strong>체질량(BMI)지수</strong>
+												는<em class="aq">${bmi}</em> 입니다.
+											</span>
+											<span class="fat">
+												현재
+												<em>중등도 비만</em> 으로 보입니다.
+											</span>
+										</h6>
+										<div class="reference">
+											<ul>
+												<li>저체중:18미만</li>
+												<li>정상:18~22</li>
+												<li>과체중:23~25</li>
+												<li>경도비만26~29</li>
+												<li>중등도30이상</li>
+											</ul>
+										</div>
+										<p>
+											<b>BMI 지수만을 맹신하지 마세요!</b>
+										</p>
+										<p>
+											남성의 경우 체지방률이 25% 이상일때 보통 "마른비만"일 수 있습니다. 
+											여성의 경우 체지방률이 30% 이상일때 보통 "마른비만" 일 수 있습니다.
+										</p>
+										<P>
+											<b>허리둘레도 재 보세요!</b>
+										</p>
+										<p>
+											남성의 경우 90cm 이상이면 "복부비만" 입니다.
+											여성의 경우 85cm 이상이면 "복부비만" 입니다.
+										</P>
+										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
 									</c:otherwise>
 								</c:choose>
 							</div>
 						</div>
 						<div class="myheadPC_myCoin">
-				            <ul>
-				                <li class="mP_coin" id="mP_coin">${dto.member_coin}</li>
-				                <li class="mP_ctxt">COIN</li>
-				            </ul>
+							<span class="mP_ctxt">현재 사용가능한 코인:</span>
+			            	<span class="mP_coin" id="mP_coin">${dto.member_coin}</span>
+			                <span class="mP_ctxt">COIN</span>
 				        </div>
 						<c:choose>
 							<c:when test="${empty dto.member_coin}">
@@ -133,7 +326,7 @@ $(document).ready(function(){ //DOM이 준비되고
 							<c:when test="${!empty dto.member_coin}">
 				                <div class="notYetMembership">
 				                	<div class="mypayInfo" id="mypayInfom">
-					                    <table>
+					                    <table class="table table-striped table-hover">
 					                    	<thead>
 						                    	<tr>
 						                    		<td>결제일</td>
@@ -143,25 +336,17 @@ $(document).ready(function(){ //DOM이 준비되고
 						                    	</tr>
 					                    	</thead>
 					                    	<tbody>
-					                    	
-					                    	<c:forEach var="dta" items="${dta}">
-					                    		<tr class="info">
-					                    			<td>${dta.pay_date}</td>
-					                    			<td>${dta.pay_method}</td>
-					                    			<td>${dta.pay_price}</td>
-					                    			<td>${dta.pay_coin}</td>
-					                    		</tr>
-					                    	</c:forEach>
-					                    	
+						                    	<c:forEach var="dta" items="${dta}">
+						                    		<tr class="info">
+						                    			<td>${dta.pay_date}</td>
+						                    			<td>${dta.pay_method}</td>
+						                    			<td>${dta.pay_price}</td>
+						                    			<td>${dta.pay_coin}</td>
+						                    		</tr>
+						                    	</c:forEach>
 					                    	</tbody>
 					                    </table>
 									</div>
-			                    	<h4>필요한 만큼 결제하세요!</h4>
-									<p>
-										<a href="coin.do" class="membershipApply">
-											<i class="fa fa-clone"></i>"멤버십 신청하기"
-										</a>
-									</p>
 								</div>
 							</c:when>
 	                    </c:choose>

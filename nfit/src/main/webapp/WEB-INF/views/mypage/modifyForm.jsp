@@ -254,22 +254,10 @@ function checkValue() {
 								<button type="submit" class="btn btn-lg btn-primary btn_mobileAppFloat">
 									<i class="fa fa-check"></i>저장하기
 								</button>
-								<a class="btn btn-sm btn-link" onclick='leaveCheck()' id="popbutton">
-									<i class="fa fa-check"></i>탈퇴신청</a>
+								<a class="btn btn-lg btn-primary btn_mobileAppFloat" href="memberLeave.do">
+									<i class="fa fa-check"></i>탈퇴하기</a>
 							</div>
 						</form>
-						
-							
-
-<script type="text/javascript">
-$(function(){
-	$("#popbutton").click(function(){
-		$('div.modal').modal({
-			remote : 'layer.html'
-		});
-	})
-})
-</script>
 					</div>
 				</div>
 			</div>
