@@ -6,12 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>만족스러운 피트니스 Nfit 회원정보 보기</title>
-<jsp:include page="../header.jsp"/>
-<link rel="stylesheet" type="text/css" href="resources/css/mypage1.css"/>
 <link rel="stylesheet" type="text/css" href="resources/css/progressBar.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
+<link rel="stylesheet" type="text/css" href="resources/css/mypage1.css"/>
+<jsp:include page="../header.jsp"/>
 <script>
 $(document).ready(function(){ //DOM이 준비되고
     $('#bmiCheck').click(function(){ // ID가 toggleButton인 요소를 클릭하면
@@ -74,26 +74,27 @@ $(document).ready(function(){ //DOM이 준비되고
 				<div class="col-lg-10 col-md-9 col-sm-8 mypagePanel" id="inner_top">
 					<section class="myMembership">
 						<div id="bmi">
+							<div class="bmiCheck">
 							<a class="membershipApply" id="bmiCheck">비만도 체크하기</a><br>
+							</div>
 							<div id="bmiResult">
 								<c:set var="bmi" value="${bmi}"/>
 								<c:choose>
 									<c:when test="${bmi < '18'}">
-									<div class="progress">
-										<div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2}%">
-									    ${bmi}
-										</div>
-									</div>
 										<h2>
-											<span><b>아이고! 이런 말씀 드리기 죄송하지만..</b></span>
 											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
 										</h2>
+											<div class="progress">
+												<div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2}%">
+											    ${bmi}
+												</div>
+											</div>
 										<h6>
 											<span>
 												<strong>체질량(BMI)지수</strong>
 												는<em class="aq">${bmi}</em> 입니다.
 											</span>
-											<span class="thin">
+											<span class="fat">
 												현재
 												<em>저체중</em> 으로 보입니다.
 											</span>
@@ -124,21 +125,20 @@ $(document).ready(function(){ //DOM이 준비되고
 										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
 									</c:when>
 									<c:when test="${bmi >= '18' && bmi < '23'}">
-									<div class="progress">
-										<div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2}%">
-									    ${bmi}
-										</div>
-									</div>
 										<h2>
-											<span><b>측정결과 정상이시네요~</b></span>
-											<span>꾸준한 운동으로 몸매관리 하실 필요가 있습니다.</span>
+											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
 										</h2>
+											<div class="progress">
+												<div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2}%">
+											    ${bmi}
+												</div>
+											</div>
 										<h6>
 											<span>
 												<strong>체질량(BMI)지수</strong>
 												는<em class="aq">${bmi}</em> 입니다.
 											</span>
-											<span class="normal">
+											<span class="fat">
 												현재
 												<em>정상</em> 으로 보입니다.
 											</span>
@@ -169,15 +169,14 @@ $(document).ready(function(){ //DOM이 준비되고
 										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
 									</c:when>
 									<c:when test="${bmi >= '23' && bmi < '25'}">
-									<div class="progress">
-										<div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.3}%">
-									    ${bmi}
-										</div>
-									</div>
 										<h2>
-											<span><b>아이고! 이런 말씀 드리기 죄송하지만..</b></span>
 											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
 										</h2>
+											<div class="progress">
+												<div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.3}%">
+											    ${bmi}
+												</div>
+											</div>
 										<h6>
 											<span>
 												<strong>체질량(BMI)지수</strong>
@@ -214,15 +213,14 @@ $(document).ready(function(){ //DOM이 준비되고
 										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
 									</c:when>
 									<c:when test="${bmi >= '26' && bmi < '29'}">
-									<div class="progress">
-										<div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.7}%">
-									    ${bmi}
-										</div>
-									</div>
 										<h2>
-											<span><b>아이고! 이런 말씀 드리기 죄송하지만..</b></span>
 											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
 										</h2>
+											<div class="progress">
+												<div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.7}%">
+											    ${bmi}
+												</div>
+											</div>
 										<h6>
 											<span>
 												<strong>체질량(BMI)지수</strong>
@@ -259,18 +257,17 @@ $(document).ready(function(){ //DOM이 준비되고
 										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
 									</c:when>
 									<c:otherwise>
-										<div class="progress">
-										<div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.7}%">
-									    ${bmi}
-										</div>
-									</div>
 										<h2>
-											<span><b>아이고! 이런 말씀 드리기 죄송하지만..</b></span>
 											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
 										</h2>
+											<div class="progress">
+												<div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.7}%">
+											    ${bmi}
+												</div>
+											</div>
 										<h6>
 											<span>
-												<strong>체질량(BMI)지수</strong>
+												<b>체질량(BMI)지수</b>
 												는<em class="aq">${bmi}</em> 입니다.
 											</span>
 											<span class="fat">
@@ -312,7 +309,7 @@ $(document).ready(function(){ //DOM이 준비되고
 			                <span class="mP_ctxt">COIN</span>
 				        </div>
 						<c:choose>
-							<c:when test="${empty dto.member_coin}">
+							<c:when test="${dto.member_coin == '0'}">
 			                    <h3><i class="fa fa-clone"></i>"내 멤버십"</h3>
 								<div class="notYetMembership">
 									<h4>필요한 만큼 결제하세요!</h4>
@@ -323,7 +320,7 @@ $(document).ready(function(){ //DOM이 준비되고
 									</p>
 								</div>
 		                    </c:when>
-							<c:when test="${!empty dto.member_coin}">
+							<c:when test="${empty dto.member_coin >= '1'}">
 				                <div class="notYetMembership">
 				                	<div class="mypayInfo" id="mypayInfom">
 					                    <table class="table table-striped table-hover">
