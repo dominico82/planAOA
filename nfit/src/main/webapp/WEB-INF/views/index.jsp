@@ -49,18 +49,20 @@
         <div class="container">
             <div class="mbr-table">
                 <div class="mbr-table-cell">
-
                     <div class="navbar-brand">
                         <a href="index.do" class="navbar-logo"><img src="resources/images/n-1x-170x128.jpg" alt="Nfit"></a>
                         <a class="navbar-caption" href="index.do">Nfit</a>
                     </div>
-
                 </div>
+                
                 <div class="mbr-table-cell">
 
                     <button class="navbar-toggler pull-xs-right hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
-                        <div class="hamburger-icon"></div>
+                        <div class="hamburger-icon">
+                        </div>
                     </button>
+				<a class="navbar-brand" href="#">WebSiteName</a>
+				</div>
 
                     <ul class="nav-dropdown collapse pull-xs-right nav navbar-nav navbar-toggleable-sm" id="exCollapsingNavbar">
                     <li class="nav-item"><a class="nav-link link" href="about.do">이용안내</a></li>
@@ -137,14 +139,8 @@
 
   
   <script src="resources/tether/tether.min.js"></script>
-  
   <script src="resources/smooth-scroll/smooth-scroll.js"></script>
-  
-  
-  
   <script src="resources/jarallax/jarallax.js"></script>
-  
-  
   <input name="animation" type="hidden">
 			
 			<!----//End-content--->
