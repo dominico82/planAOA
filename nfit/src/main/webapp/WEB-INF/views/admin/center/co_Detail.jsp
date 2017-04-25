@@ -7,7 +7,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- jquery -->
-<script src="http://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<style>
+.thumbnail{
+	background-color:gray;
+	margin:10px;
+	 width: 150px;
+	 height: 150px;
+	 background-size: cover;
+	background-repeat:no-repeat;
+	background-position: center center;
+	border: 5px solid black;
+}
+.thumbnail.circle{
+border-radius: 100%;
+}
+</style>
 <script>
 $(document).ready(function(){
 	//이용시간 테이블 리스트
@@ -72,8 +87,8 @@ $(document).ready(function(){
 				var str='';
 				for(var i=0;i<data.length;i++){
 					if(checkImageType(data[i])){//이미지파일인경우
-							str ='<div style="border:1px solid red;float:left;"><a href="displayFile.do?fileName='+getImageLink(data[i])+'">';		
-							str+='<img src="displayFile.do?fileName='+data[i]+'"></a>';
+							str ='<div style="border:1px solid white;float:left;"><a href="displayFile.do?fileName='+getImageLink(data[i])+'">';		
+							str+='<img class="thumbnail circle"src="displayFile.do?fileName='+data[i]+'"></a>';
 							str+='<span data-src='+data[i]+'>[삭제]</span></div>';
 							$('.uploadedList').append(str);
 					}
@@ -269,7 +284,6 @@ padding-right: 800px;
 				</td>
 			</tr>
 		</table>
-		<hr>
 		<!-- 파일 업로드할 영역  -->
 		<span>파일 수정 칸</span><br>
 		<div class="fileDrop" style="border : 1px solid black;">파일을 드래그 해서 넣어주세요~</div>
@@ -279,7 +293,7 @@ padding-right: 800px;
 			<div id="usetime_table"> </div>
 		<!-- <!-- 업체별 컨텐츠 목록 표출   -->
 			<div id="content_list"></div>
-	</div>	
+</div>
 <!-- Footer -->
 <div class="modal-footer"></div>
 </form>

@@ -8,7 +8,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- 제이쿼리 -->
-<script src="http://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 <!-- 부트스트랩 -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -22,7 +23,6 @@
 <script src="resources/js/login.js"></script>
 <!---//End-login-script--->
 <!-----768px-menu----->
-<link type="text/css" rel="stylesheet"href="resources/css/jquery.mmenu.all.css" />
 <link href="resources/css/font-awesome.min.css" rel="stylesheet">
 <link href="resources/css/simple-line-icons.css" rel="stylesheet">
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -37,7 +37,6 @@
 			dataType : 'json',
 			async : false
 		}).responseText;
-		console.log(jsonData);
 		var data = new google.visualization.DataTable(jsonData);
 		var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
 		chart.draw(data, {
@@ -177,7 +176,7 @@ $(document).ready(function(){
 		});
 	});
 	 //자동완성기능 구현 보류
-	$('#keyField').keyup(function(){// 키입력후 자동호출
+	/* $('#keyField').keyup(function(){// 키입력후 자동호출
 		
 		var keyfield = $('#keyField').val();
 		var keyword = $('#keyWord').val();
@@ -197,7 +196,29 @@ $(document).ready(function(){
 				}
 			});
 		}
-	}); 
+	});  */
+	 $('#keyField').autocomplete({
+		 source :function(request ,response){
+			 var keyword =$('#keyWord').val();
+			 $.ajax({
+				type : 'post',
+				url : 'autocomplete.do',
+				dataType : 'json',
+				data :{ value : request.term,//사용자가 입력한값
+						keyword:keyword//option value
+				},
+				success : function(data){
+						response($.map(data.data,function(result){
+							return {
+								label :result.co_list,
+								value :result.co_list
+							}
+					}));
+				}
+			});
+ 		},
+ 		selectFirst:true
+ 	});
 });
 </script>
 </head>

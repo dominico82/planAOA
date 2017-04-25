@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script>
 $(document).ready(function(){
 	$('#btncontentupdate').click(function(){

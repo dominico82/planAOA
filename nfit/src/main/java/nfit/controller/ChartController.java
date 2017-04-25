@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.imgscalr.Scalr;
@@ -35,6 +37,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
+
+import com.sun.mail.iap.Response;
 
 import nfit.center2.model.CompanyContentDTO;
 import nfit.center2.model.CompanyDAO;
@@ -538,10 +542,29 @@ public class ChartController {
 			@RequestParam(value="keyword",required=false)String keyword,
 			@RequestParam(value="keyfield",required=false)String keyfield,Map map){
 		List<CompanyListDTO> list =companyDao.searchAuto(keyword, keyfield);
-		System.out.println("여기는타냐 ?");
 		map.put("keyword", keyword);
 		map.put("list", list);
 		return "admin/center/search";
 	}
 	
+	@RequestMapping("autocomplete.do")
+	public @ResponseBody JSONObject autocomplete(@RequestParam("value")String value,
+			@RequestParam("keyword")String keyword){
+		JSONObject head = new JSONObject();
+		JSONArray body= new JSONArray();
+		List<CompanyListDTO> list = companyDao.searchAuto(keyword, value);
+		
+		for(int i=0;i<list.size();i++){
+			//데이터삽입
+			String max=list.get(i).getCo_name()+","+list.get(i).getCo_class();
+			JSONObject head2 = new JSONObject();
+			head2.put("co_list", max);
+			body.add(head2);
+		}
+		head.put("data", body);
+		return head;
+	}
 }
+	
+	
+	
