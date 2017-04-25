@@ -85,7 +85,7 @@ public class MemberDAOImple implements MemberDAO {
 			if(member_email.equals(dto.getMember_email())){
 				String find = sqlMap.selectOne("memberIdfind2", member_email);
 				if(find!=null){
-					String result="찾으시는 아이디는 "+find+"입니다.";
+					String result=find;
 					return result;
 				}else{
 					String result="잘못된 이메일 입니다.";
@@ -107,7 +107,7 @@ public class MemberDAOImple implements MemberDAO {
 			if(member_name.equals(dto.getMember_name())){
 				if(member_email.equals(dto.getMember_email())){
 					String id=sqlMap.selectOne("memberPw2",member_id);
-					String result="찾으시는 ID의 비밀번호는 "+id+"입니다. 비밀번호를 변경해주세요";
+					String result=id;
 					return result;
 				}else{
 					String result="이메일이 일치하지 않습니다.";

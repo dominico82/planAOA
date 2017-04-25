@@ -130,6 +130,48 @@ public class MemberController {
 	public String memberFind(){
 	return "member/memberFind";
 	}
+	
+	private void sendIdFind(String member_email,String result){
+		String host="smtp.gmail.com";
+		String subject="인증번호 전달";
+		String fromName="Nfit";
+		String from="keokyo@gmail.com";
+		String to1=member_email;
+		String content="찾으신 아이디는 ["+result+"] 입니다.";
+		System.out.println(to1);
+		System.out.println(result);
+		
+		try{
+			Properties props=new Properties();
+			props.put("mail.smtp.starttls.enable", "true");
+			props.put("mail.transport.protocol", "smtp");
+			props.put("mail.smtp.host", host);
+			props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			props.put("mail.smtp.port", "465");
+			props.put("mail.smtp.user", from);
+			props.put("mail.smtp.auth", "true");
+			
+			Session mailSession=Session.getInstance(props,
+					new javax.mail.Authenticator(){
+				protected PasswordAuthentication getPasswordAuthentication(){
+					return new PasswordAuthentication("keokyo@gmail.com", "finalproject");
+				}
+			});
+			Message msg=new MimeMessage(mailSession);
+			msg.setFrom(new InternetAddress(from,MimeUtility.encodeText(fromName,"UTF-8","B")));
+			InternetAddress[] address1={new InternetAddress(to1)};
+			msg.setRecipients(Message.RecipientType.TO, address1);
+			msg.setSubject(subject);
+			msg.setSentDate(new java.util.Date());
+			msg.setContent(content,"text/html;charset=UTF-8");
+			Transport.send(msg);
+		}catch(MessagingException e){
+			e.printStackTrace();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 	@RequestMapping("memberFindId.do")
 	public ModelAndView memberIdFind(MemberDTO dto,
 			@RequestParam(value="member_name",required=false)String name,
@@ -139,11 +181,13 @@ public class MemberController {
 		String member_name=name;
 		ModelAndView mav=new ModelAndView();
 		String result=memberDao.memberIdFind(member_name,member_email);
-		String msg=result;
-		mav.addObject("msg", msg);
-		mav.setViewName("/member/memberFindMsg");
+		String msg="이메일에 전송을 완료하였습니다.";
+		sendIdFind(member_email.toString(),result);
+		mav.setViewName("member/memberFindMsg");
+		mav.addObject("msg",msg);
 		return mav;
 	}
+	
 	
 	@RequestMapping("memberPwdFind.do")
 	public ModelAndView memberPwdFind(MemberDTO dto,
@@ -156,9 +200,10 @@ public class MemberController {
 		String member_name=name;
 		ModelAndView mav=new ModelAndView();
 		String result=memberDao.membmerPwdFind(member_id,member_name,member_email);
-		String msg=result;
+		String msg="이메일에 전송을 완료하였습니다.";
+		sendIdFind(member_email.toString(),result);
 		mav.addObject("msg",msg);
-		mav.setViewName("/member/memberFindMsg");
+		mav.setViewName("member/memberFindMsg");
 		return mav;
 	}
 }
