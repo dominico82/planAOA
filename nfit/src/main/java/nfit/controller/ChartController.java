@@ -4,12 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-import java.util.logging.Logger;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -38,7 +35,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
-import com.sun.mail.iap.Response;
 
 import nfit.center2.model.CompanyContentDTO;
 import nfit.center2.model.CompanyDAO;
