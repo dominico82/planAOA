@@ -35,20 +35,20 @@ $(document).ready(function(){
 			<c:if test="${status.index==0}">
 			<script>
 				$(document).ready(function(){
-					var $div=$("<div class='panel-group' id='accordion' role='tablist' aria-multiselectable='true'>"
-					   	+"<div class='panel panel-default'>"
-						+"<div class='panel-heading' role='tab' id='qaHeading1'>"
-						+"<h4 class='panel-title'><i class='fa fa-question-circle'></i>${qlist.qa_subject}"
-		                +"<span class='date'><fmt:formatDate value='${qlist.qa_date}' pattern='yyyy-MM-dd HH:mm'/></span></h4>"
-		                +"<a role='button' data-toggle='collapse' data-parent='#accordion' href='#${qlist.qa_idx}' aria-expanded='false' aria-controls='qa1' class='btn btn-sm btn-default btnAnswer'>답변대기</a>"
-		                +"</div><div id='${qlist.qa_idx}' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOne'>"
-		                +"<div class='panel-body'><div class='question'>"
-						+"<h5><i class='fa fa-question-circle'></i> ${qlist.qa_subject} <small><fmt:formatDate value='${qlist.qa_date}' pattern='yyyy-MM-dd HH:mm'/></small></h5>"
-						+"<p>${qlist.qa_content}</p></div><!-- /.question --><div>"
-		                +"<button type='button' class='btn btn-sm btn-default' onclick='update_form(${qlist.qa_subject}, ${qlist.qa_content}, ${qlist.qa_idx});'><i class='fa fa-edit'></i> 수정</button>"
-		                +"<button type='button' class='btn btn-sm btn-danger' onclick='mtomDel(${qlist.qa_idx});'><i class='fa fa-trash-o'></i> 삭제</button>"
-		                +"</div></div><!-- /.panel-body --></div><!-- /.panel-collapse  --></div><!-- /.panel--></div><!-- /.panel-group -->"
-		                );
+					var $div=$('<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">'
+						   	+'<div class="panel panel-default">'
+							+'<div class="panel-heading" role="tab" id="qaHeading1">'
+							+'<h4 class="panel-title"><i class="fa fa-question-circle"></i>${qlist.qa_subject}'
+			                +'<span class="date"><fmt:formatDate value="${qlist.qa_date}" pattern="yyyy-MM-dd HH:mm"/></span></h4>'
+			                +'<a role="button" data-toggle="collapse" data-parent="#accordion" href="#${qlist.qa_idx}" aria-expanded="false" aria-controls="qa1" class="btn btn-sm btn-default btnAnswer">답변대기</a>'
+			                +'</div><div id="${qlist.qa_idx}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">'
+			                +'<div class="panel-body"><div class="question">'
+							+'<h5><i class="fa fa-question-circle"></i> <div id="qa_sub${qlist.qa_idx}">${qlist.qa_subject}</div> <small><fmt:formatDate value="${qlist.qa_date}" pattern="yyyy-MM-dd HH:mm"/></small></h5>'
+							+'<div id="qa_con${qlist.qa_idx}"><p>${qlist.qa_content}</p></div><!-- /.question --><div>'
+			                +'<button type="button" class="btn btn-sm btn-default" onclick="update_form(${qlist.qa_idx});"><i class="fa fa-edit"></i> 수정</button>'
+			                +'<button type="button" class="btn btn-sm btn-danger" onclick="mtomDel(${qlist.qa_idx});"><i class="fa fa-trash-o"></i> 삭제</button>'
+			                +'</div></div><!-- /.panel-body --></div><!-- /.panel-collapse  --></div><!-- /.panel--></div><!-- /.panel-group -->'
+			                );
 
 					$("div.accordionList").append($div);
 				});					
@@ -57,20 +57,20 @@ $(document).ready(function(){
 			<c:if test="${status.index!=0}">
 			<script>
 				$(document).ready(function(){
-					var $div=$("<div class='panel-group' id='accordion' role='tablist' aria-multiselectable='true'>"
-					   	+"<div class='panel panel-default'>"
-						+"<div class='panel-heading' role='tab' id='qaHeading1'>"
-						+"<h4 class='panel-title'><i class='fa fa-question-circle'></i>${qlist.qa_subject}"
-		                +"<span class='date'><fmt:formatDate value='${qlist.qa_date}' pattern='yyyy-MM-dd HH:mm'/></span></h4>"
-		                +"<a role='button' data-toggle='collapse' data-parent='#accordion' href='#${qlist.qa_idx}' aria-expanded='false' aria-controls='qa1' class='btn btn-sm btn-default btnAnswer'>답변대기</a>"
-		                +"</div><div id='${qlist.qa_idx}' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOne'>"
-		                +"<div class='panel-body'><div class='question'>"
-						+"<h5><i class='fa fa-question-circle'></i> ${qlist.qa_subject} <small><fmt:formatDate value='${qlist.qa_date}' pattern='yyyy-MM-dd HH:mm'/></small></h5>"
-						+"<p>${qlist.qa_content}</p></div><!-- /.question --><div>"
-		                +"<button type='button' class='btn btn-sm btn-default' onclick='update_form(${qlist.qa_subject}, ${qlist.qa_content}, ${qlist.qa_idx});'><i class='fa fa-edit'></i> 수정</button>"
-		                +"<button type='button' class='btn btn-sm btn-danger' onclick='mtomDel(${qlist.qa_idx});'><i class='fa fa-trash-o'></i> 삭제</button>"
-		                +"</div></div><!-- /.panel-body --></div><!-- /.panel-collapse  --></div><!-- /.panel--></div><!-- /.panel-group -->"
-		                );
+					var $div=$('<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">'
+						   	+'<div class="panel panel-default">'
+							+'<div class="panel-heading" role="tab" id="qaHeading1">'
+							+'<h4 class="panel-title"><i class="fa fa-question-circle"></i>${qlist.qa_subject}'
+			                +'<span class="date"><fmt:formatDate value="${qlist.qa_date}" pattern="yyyy-MM-dd HH:mm"/></span></h4>'
+			                +'<a role="button" data-toggle="collapse" data-parent="#accordion" href="#${qlist.qa_idx}" aria-expanded="false" aria-controls="qa1" class="btn btn-sm btn-default btnAnswer">답변대기</a>'
+			                +'</div><div id="${qlist.qa_idx}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">'
+			                +'<div class="panel-body"><div class="question">'
+							+'<h5><i class="fa fa-question-circle"></i><div id="qa_sub${qlist.qa_idx}"> ${qlist.qa_subject}</div> <small><fmt:formatDate value="${qlist.qa_date}" pattern="yyyy-MM-dd HH:mm"/></small></h5>'
+							+'<div id="qa_con${qlist.qa_idx}"><p>${qlist.qa_content}</p></div><!-- /.question --><div>'
+			                +'<button type="button" class="btn btn-sm btn-default" onclick="update_form(${qlist.qa_idx});"><i class="fa fa-edit"></i> 수정</button>'
+			                +'<button type="button" class="btn btn-sm btn-danger" onclick="mtomDel(${qlist.qa_idx});"><i class="fa fa-trash-o"></i> 삭제</button>'
+			                +'</div></div><!-- /.panel-body --></div><!-- /.panel-collapse  --></div><!-- /.panel--></div><!-- /.panel-group -->'
+			                );
 
 					$("div.accordionList").find(".panel-group:last").append($div);
 				});					
@@ -248,11 +248,15 @@ function open_form(){
 	});
 };
 
-function update_form(subject, content, idx){
-	console.log(subject+", "+content+", "+idx);
+function update_form(idx){
+	
 	$(document).ready(function(){
+		var subject=$('#qa_sub'+idx).text();
+		var content=$('#qa_con'+idx).text();
+		console.log(subject+', '+content+', '+idx);
 		$('#qa_subject_update').attr("value", subject);
 		$('#qa_idx').attr("value", idx);
+		$('#qa_content_update').empty();
 		$('#qa_content_update').append(content);
 		$('#qa11Update').modal();
 	});
@@ -269,14 +273,14 @@ $(function(){
 				data: formData,
 				success: function(data){
 					alert("성공!!");
+					$('#qa11').modal('hide');
+					mtomReload();
 				},
 				error: function(data){
 					alert("실패!!");
+					$('#qa11').modal('hide');
 				}
 			});
-			
-			$('#qa11').modal('hide');
-			location.reload();
 	});
 });
 
@@ -290,16 +294,36 @@ $(function(){
 				data: formData,
 				success: function(data){
 					alert("성공!!");
+					$('#qa11Update').modal('hide');
+					mtomReload();
 				},
 				error: function(data){
 					alert("실패!!");
+					$('#qa11Update').modal('hide');
 				}
 			});
 			
-			$('#qa11Update').modal('hide');
-			location.reload();
 	});
 });
+
+function mtomReload(){
+	$(document).ready(function(){
+		console.log("mtomReload()함수 동작!!");
+		$.ajax({
+			type:"POST",
+			url:"helpMtomRefresh.do",
+			dataType:"JSON",
+			success:function(data){
+				
+			},
+			error:function(xhr, status, error){
+				alert("에러발생!");
+			}
+		});
+	});
+};
+
+
 
 function mtomDel(idx){
 		console.log(idx);

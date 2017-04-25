@@ -7,11 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.ibatis.SqlMapClientCallback;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -165,7 +167,7 @@ public class HelpController {
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("list", dtos);
 		mav.addObject("pageStr", pageStr);
-		mav.setViewName("help/helpMtomReply");
+		mav.setViewName("admin/question");
 		return mav;
 	}
 	
@@ -203,6 +205,14 @@ public class HelpController {
 		mav.addObject("result", result);
 		mav.setViewName("help/helpMtomUpdate");
 		return mav;
+	}
+	
+	@RequestMapping(value="helpMtomRefresh.do")
+	@ResponseBody
+	public List<MtomDTO> jsonList(HttpSession session){
+		String userid=(String)session.getAttribute("saveid");
+		List<MtomDTO> list=mtomDao.getHelpMtom(userid);
+		return list;
 	}
 }
 
