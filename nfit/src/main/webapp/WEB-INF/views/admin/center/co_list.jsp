@@ -42,7 +42,7 @@
 		chart.draw(data, {
 			title : '업체 누적 이용수',		
 			width : 900,
-			height : 1100
+			height : 900
 		});
 	}
 	/* PieChart 도가능  */
@@ -214,6 +214,7 @@ $(document).ready(function(){
 								value :result.co_list
 							}
 					}));
+						$('.ui-helper-hidden-accessible').css('display','none');
 				}
 			});
  		},
@@ -221,6 +222,11 @@ $(document).ready(function(){
  	});
 });
 </script>
+<!-- <style>
+.ui-helper-hidden-accessible{
+display: none;
+}	
+</style> -->
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
 <c:set var="list" value="${list}"/>
@@ -326,13 +332,13 @@ $(document).ready(function(){
 										  			<div class="col-sm-5">
 														<textarea rows="5" cols="20"class="form-control" name="co_avail" placeholder="문단구분 '|'를 넣어주세요" id="co_avail"></textarea>
 										  			</div>
-										  	 
-										  
+										  	 	<div class="col-sm-5">
+										  	 	<b>사진은 마지막에 넣어주세요 ~</b>
+										  		</div>
 										  		<label for="inputText3" class="col-sm-2 control-label">업체사진업로드</label>
 										  			<div class="col-sm-5">
 														<div class="filedropDown" style="width: 300px;height: 300px; border: 2px solid black;"></div>
 										  			</div>
-										  	
 										</form>
 					        		</div>
 					      		</div>
@@ -345,9 +351,9 @@ $(document).ready(function(){
 					  <button type="button" class="btn btn-info btn-xs-5" data-toggle="modal" data-target="#myModal2">이용누적차트</button>
 					  <!-- Modal -->
 						<div class="modal fade" id="myModal2" role="dialog">
-							<div class="modal-dialog" style="width:1000px;height: 900px;">
+							<div class="modal-dialog">
 							<!-- Modal content-->
-								<div class="modal-content">
+								<div class="modal-content" style="width:1000px;height: 1300px;">
 								  <div class="modal-header">
 								    <button type="button" class="close" data-dismiss="modal">&times;</button>
 								    <h4 class="modal-title">누적차트표</h4>
@@ -516,7 +522,7 @@ $(document).ready(function(){
 					    	 <div id="div1"></div>
 				</form>
 					<!-- 업체리스트 나열 테이블  -->	 
-					<span>등록된 업체 나열 </span>
+					<span style="margin-left: 600px;">등록된 업체 나열 </span>
 						<table class="table table-striped table-bordered table-hover"> <!-- class="table table-bordered"  -->
 								<thead>
 										<tr>
