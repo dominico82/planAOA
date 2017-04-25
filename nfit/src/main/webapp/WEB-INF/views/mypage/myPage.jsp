@@ -10,9 +10,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
+<script type="text/javascript" src="resources/js/bootstrap-filestyle.min.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/css/mypage1.css"/>
 <jsp:include page="../header.jsp"/>
 <script>
+
 $(document).ready(function(){ //DOM이 준비되고
     $('#bmiCheck').click(function(){ // ID가 toggleButton인 요소를 클릭하면
         var state = $('#bmiResult').css('display'); // state 변수에 ID가 moreMenu인 요소의 display의 속성을 '대입'
@@ -38,9 +40,8 @@ $(document).ready(function(){ //DOM이 준비되고
 							</span>
 						</span>
 						<form name="upload" action="fileUpload.do" method="post" enctype="multipart/form-data">
-							프로필 사진 등록하기
-							<input type="file" name="files" id="files" class="filestyle" accept="image/*">
-							<input type="submit" value="파일올리기">
+							<input type="file" name="files" accept="image/*">
+							<input type="submit" value="사진 전송">
 							<input type="hidden" value="${dto.member_id}" name="id">
 							<input type="hidden" value="${dto.member_idx}" name="idx">
 						</form>
@@ -48,24 +49,25 @@ $(document).ready(function(){ //DOM이 준비되고
 						<h6>
 							${dto.member_name}<small>님</small>
 							<br>
-							${dto.member_id}(${dto.member_email})
+							${dto.member_email}
 						</h6>
 						<div class="userPicComment upcOK">
 							<p class="text-anc">와~ 멋진 사진이네요!</p>
-							<p><a class="btn btn-default btn-xs btn-editProfile" href="memberInfo.do">회원정보 수정</a></p>
+							
 						</div>
 					</div>
 					<div class="mypageMenuWrap">
 						<div class="mypageMenu">
 							<ul>
 								<li>
-									<a href="" id="a_index" class="current">
-										<i class="fa fa-clone"></i>"내 멤버십"
-									</a>
+									<a class="current" href="memberInfo.do">회원정보 수정</a>
+								</li>
+								<li>
+									<a href="coin.do" id="a_index" class="current">멤버십 신청하기</a>
 								</li>
 								<li>
 									<a href="" id="a_favorite_center" class="current">
-										<i class="fa fa-heart-o"></i>"가보고 싶은 센터"
+										<i class="fa fa-heart-o"></i>가보고 싶은 센터
 									</a>
 								</li>
 							</ul>
@@ -86,7 +88,7 @@ $(document).ready(function(){ //DOM이 준비되고
 											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
 										</h2>
 											<div class="progress">
-												<div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2}%">
+												<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2}%">
 											    ${bmi}
 												</div>
 											</div>
@@ -124,185 +126,7 @@ $(document).ready(function(){ //DOM이 준비되고
 											여성의 경우 85cm 이상이면 "복부비만" 입니다.
 										</P>
 										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
-									</c:when>
-									<c:when test="${bmi >= '18' && bmi < '23'}">
-										<h2>
-											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
-										</h2>
-											<div class="progress">
-												<div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2}%">
-											    ${bmi}
-												</div>
-											</div>
-										<h6>
-											<span>
-												<strong>체질량(BMI)지수</strong>
-												는<em class="aq">${bmi}</em> 입니다.
-											</span>
-											<span class="fat">
-												현재
-												<em>정상</em> 으로 보입니다.
-											</span>
-										</h6>
-										<div class="reference">
-											<ul>
-												<li>저체중:18미만</li>
-												<li>정상:18~22</li>
-												<li>과체중:23~25</li>
-												<li>경도비만26~29</li>
-												<li>중등도30이상</li>
-											</ul>
-										</div>
-										<p>
-											<b>BMI 지수만을 맹신하지 마세요!</b>
-										</p>
-										<p>
-											남성의 경우 체지방률이 25% 이상일때 보통 "마른비만"일 수 있습니다. 
-											여성의 경우 체지방률이 30% 이상일때 보통 "마른비만" 일 수 있습니다.
-										</p>
-										<P>
-											<b>허리둘레도 재 보세요!</b>
-										</p>
-										<p>
-											남성의 경우 90cm 이상이면 "복부비만" 입니다.
-											여성의 경우 85cm 이상이면 "복부비만" 입니다.
-										</P>
-										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
-									</c:when>
-									<c:when test="${bmi >= '23' && bmi < '25'}">
-										<h2>
-											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
-										</h2>
-											<div class="progress">
-												<div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.3}%">
-											    ${bmi}
-												</div>
-											</div>
-										<h6>
-											<span>
-												<strong>체질량(BMI)지수</strong>
-												는<em class="aq">${bmi}</em> 입니다.
-											</span>
-											<span class="fat">
-												현재
-												<em>과체중</em> 으로 보입니다.
-											</span>
-										</h6>
-										<div class="reference">
-											<ul>
-												<li>저체중:18미만</li>
-												<li>정상:18~22</li>
-												<li>과체중:23~25</li>
-												<li>경도비만26~29</li>
-												<li>중등도30이상</li>
-											</ul>
-										</div>
-										<p>
-											<b>BMI 지수만을 맹신하지 마세요!</b>
-										</p>
-										<p>
-											남성의 경우 체지방률이 25% 이상일때 보통 "마른비만"일 수 있습니다. 
-											여성의 경우 체지방률이 30% 이상일때 보통 "마른비만" 일 수 있습니다.
-										</p>
-										<P>
-											<b>허리둘레도 재 보세요!</b>
-										</p>
-										<p>
-											남성의 경우 90cm 이상이면 "복부비만" 입니다.
-											여성의 경우 85cm 이상이면 "복부비만" 입니다.
-										</P>
-										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
-									</c:when>
-									<c:when test="${bmi >= '26' && bmi < '29'}">
-										<h2>
-											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
-										</h2>
-											<div class="progress">
-												<div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.7}%">
-											    ${bmi}
-												</div>
-											</div>
-										<h6>
-											<span>
-												<strong>체질량(BMI)지수</strong>
-												는 <em class="aq">${bmi}</em> 입니다.
-											</span>
-											<span class="fat">
-												현재
-												<em>경도 비만</em> 으로 보입니다.
-											</span>
-										</h6>
-										<div class="reference">
-											<ul>
-												<li>저체중:18미만</li>
-												<li>정상:18~22</li>
-												<li>과체중:23~25</li>
-												<li>경도비만26~29</li>
-												<li>중등도30이상</li>
-											</ul>
-										</div>
-										<p>
-											<b>BMI 지수만을 맹신하지 마세요!</b>
-										</p>
-										<p>
-											남성의 경우 체지방률이 25% 이상일때 보통 "마른비만"일 수 있습니다. 
-											여성의 경우 체지방률이 30% 이상일때 보통 "마른비만" 일 수 있습니다.
-										</p>
-										<P>
-											<b>허리둘레도 재 보세요!</b>
-										</p>
-										<p>
-											남성의 경우 90cm 이상이면 "복부비만" 입니다.
-											여성의 경우 85cm 이상이면 "복부비만" 입니다.
-										</P>
-										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
-									</c:when>
-									<c:otherwise>
-										<h2>
-											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
-										</h2>
-											<div class="progress">
-												<div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.7}%">
-											    ${bmi}
-												</div>
-											</div>
-										<h6>
-											<span>
-												<b>체질량(BMI)지수</b>
-												는<em class="aq">${bmi}</em> 입니다.
-											</span>
-											<span class="fat">
-												현재
-												<em>중등도 비만</em> 으로 보입니다.
-											</span>
-										</h6>
-										<div class="reference">
-											<ul>
-												<li>저체중:18미만</li>
-												<li>정상:18~22</li>
-												<li>과체중:23~25</li>
-												<li>경도비만26~29</li>
-												<li>중등도30이상</li>
-											</ul>
-										</div>
-										<p>
-											<b>BMI 지수만을 맹신하지 마세요!</b>
-										</p>
-										<p>
-											남성의 경우 체지방률이 25% 이상일때 보통 "마른비만"일 수 있습니다. 
-											여성의 경우 체지방률이 30% 이상일때 보통 "마른비만" 일 수 있습니다.
-										</p>
-										<P>
-											<b>허리둘레도 재 보세요!</b>
-										</p>
-										<p>
-											남성의 경우 90cm 이상이면 "복부비만" 입니다.
-											여성의 경우 85cm 이상이면 "복부비만" 입니다.
-										</P>
-										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
-									</c:otherwise>
-								</c:choose>
-								<a class="membershipApply" data-target="#layerpop" data-toggle="modal">나에게 맞는 추천식단보기</a><br/>
+										<a class="membershipApply" data-target="#layerpop" data-toggle="modal">나에게 맞는 추천식단보기</a><br/>
 										<div class="modal fade" id="layerpop">
 										  <div class="modal-dialog">
 										    <div class="modal-content">
@@ -311,21 +135,21 @@ $(document).ready(function(){ //DOM이 준비되고
 										        <!-- 닫기(x) 버튼 -->
 										        <button type="button" class="close" data-dismiss="modal">×</button>
 										        	
-										        <h4 class="modal-title">균형잡힌 식단</h4>
+										        <h4 class="modal-title">추천 식단</h4>
 										      </div>
 										      <!-- body -->
 										      <div class="modal-body">
 												<table class="table table-striped table-hover">
 													<thead>
-														<tr>
-															<td></td>
-															<td>월</td>
-															<td>화</td>
-															<td>수</td>
-															<td>목</td>
-															<td>금</td>
-															<td>토</td>
-															<td>일</td>
+														<tr style="background-color: #00bff0; color: white;">
+															<th></th>
+															<th>월</th>
+															<th>화</th>
+															<th>수</th>
+															<th>목</th>
+															<th>금</th>
+															<th>토</th>
+															<th>일</th>
 														</tr>
 													</thead>
 													<tbody>
@@ -370,6 +194,456 @@ $(document).ready(function(){ //DOM이 준비되고
 										    </div>
 										  </div>
 										</div>
+									</c:when>
+									<c:when test="${bmi >= '18' && bmi < '23'}">
+										<h2>
+											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
+										</h2>
+											<div class="progress">
+												<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2}%">
+											    ${bmi}
+												</div>
+											</div>
+										<h6>
+											<span>
+												<strong>체질량(BMI)지수</strong>
+												는<em class="aq">${bmi}</em> 입니다.
+											</span>
+											<span class="fat">
+												현재
+												<em>정상</em> 으로 보입니다.
+											</span>
+										</h6>
+										<div class="reference">
+											<ul>
+												<li>저체중:18미만</li>
+												<li>정상:18~22</li>
+												<li>과체중:23~25</li>
+												<li>경도비만26~29</li>
+												<li>중등도30이상</li>
+											</ul>
+										</div>
+										<p>
+											<b>BMI 지수만을 맹신하지 마세요!</b>
+										</p>
+										<p>
+											남성의 경우 체지방률이 25% 이상일때 보통 "마른비만"일 수 있습니다. 
+											여성의 경우 체지방률이 30% 이상일때 보통 "마른비만" 일 수 있습니다.
+										</p>
+										<P>
+											<b>허리둘레도 재 보세요!</b>
+										</p>
+										<p>
+											남성의 경우 90cm 이상이면 "복부비만" 입니다.
+											여성의 경우 85cm 이상이면 "복부비만" 입니다.
+										</P>
+										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
+										<a class="membershipApply" data-target="#layerpop" data-toggle="modal">나에게 맞는 추천식단보기</a><br/>
+										<div class="modal fade" id="layerpop">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <!-- header -->
+										      <div class="modal-header">
+										        <!-- 닫기(x) 버튼 -->
+										        <button type="button" class="close" data-dismiss="modal">×</button>
+										        	
+										        <h4 class="modal-title">추천 식단</h4>
+										      </div>
+										      <!-- body -->
+										      <div class="modal-body">
+												<table class="table table-striped table-hover">
+													<thead>
+														<tr style="background-color: #00bff0; color: white;">
+															<th></th>
+															<th>월</th>
+															<th>화</th>
+															<th>수</th>
+															<th>목</th>
+															<th>금</th>
+															<th>토</th>
+															<th>일</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>아침</td>
+															<td>현미밥, 된장국, 닭가슴살조림, 배추김치, 귤 1개</td>
+															<td>보리식빵 2장, 닭가슴살샐러드, 저지방우유 1컵</td>
+															<td>고구마 1개, 방울토마토 20개, 저지방우유 1컵</td>
+															<td>고구마 1/2개, 미숫가루 1잔, 사과 1/3개</td>
+															<td>보리식빵 2장, 양배추샐러드, 사과주스 1잔</td>
+															<td>고구마 1개, 귤 1개, 닭가슴살양파샐러드</td>
+															<td>미숫가루 1잔, 귤 1개, 닭가슴살조림</td>
+														</tr>
+														<tr>
+															<td>점심</td>
+															<td>고구마 1개, 방울토마토 20개, 두유 1컵</td>
+															<td>고구마 1개, 방울토마토 20개, 두유 1컵,귤 1개</td>
+															<td>현미밥, 닭가슴살조림, 배추김치, 귤 1개</td>
+															<td>현미밥, 달걀탕, 닭가슴살오븐구이, 배추김치</td>
+															<td>현미보리밥, 무 된장국, 오이무침, 닭가슴살샐러드, 배추김치</td>
+															<td>현미밥, 매콤한중국식닭볶음, 느타리버섯볶음, 배추김치</td>
+															<td>현미식빵 1장, 닭날개오븐구이, 오이스틱, 방울토마토 5개</td>
+														</tr>
+														<tr>
+															<td>저녁</td>
+															<td>현미콩밥, 된장배추국, 닭살무침, 배추김치</td>
+															<td>현미식빵 1장, 닭가슴살샐러드</td>
+															<td>고구마 1개, 닭가슴살 샐러드</td>
+															<td>현미밥, 미역된장국, 닭가슴살샐러드, 배추김치</td>
+															<td>현미식빵 1개, 토마토 1/4개, 양배추 간장샐러드</td>
+															<td>현미식빵 1개, 브로콜리 오이샐러드, 우유 1잔</td>
+															<td>고구마 1개, 매콤한 중국식 닭볶음</td>
+														</tr>
+													</tbody>
+												</table>
+										      </div>
+										      <!-- Footer -->
+										      <div class="modal-footer">
+										        Footer
+										        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+									</c:when>
+									<c:when test="${bmi >= '23' && bmi < '25'}">
+										<h2>
+											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
+										</h2>
+											<div class="progress">
+												<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.3}%">
+											    ${bmi}
+												</div>
+											</div>
+										<h6>
+											<span>
+												<strong>체질량(BMI)지수</strong>
+												는<em class="aq">${bmi}</em> 입니다.
+											</span>
+											<span class="fat">
+												현재
+												<em>과체중</em> 으로 보입니다.
+											</span>
+										</h6>
+										<div class="reference">
+											<ul>
+												<li>저체중:18미만</li>
+												<li>정상:18~22</li>
+												<li>과체중:23~25</li>
+												<li>경도비만26~29</li>
+												<li>중등도30이상</li>
+											</ul>
+										</div>
+										<p>
+											<b>BMI 지수만을 맹신하지 마세요!</b>
+										</p>
+										<p>
+											남성의 경우 체지방률이 25% 이상일때 보통 "마른비만"일 수 있습니다. 
+											여성의 경우 체지방률이 30% 이상일때 보통 "마른비만" 일 수 있습니다.
+										</p>
+										<P>
+											<b>허리둘레도 재 보세요!</b>
+										</p>
+										<p>
+											남성의 경우 90cm 이상이면 "복부비만" 입니다.
+											여성의 경우 85cm 이상이면 "복부비만" 입니다.
+										</P>
+										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
+										<a class="membershipApply" data-target="#layerpop" data-toggle="modal">나에게 맞는 추천식단보기</a><br/>
+										<div class="modal fade" id="layerpop">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <!-- header -->
+										      <div class="modal-header">
+										        <!-- 닫기(x) 버튼 -->
+										        <button type="button" class="close" data-dismiss="modal">×</button>
+										        	
+										        <h4 class="modal-title">추천 식단</h4>
+										      </div>
+										      <!-- body -->
+										      <div class="modal-body">
+												<table class="table table-striped table-hover">
+													<thead>
+														<tr style="background-color: #00bff0; color: white;">
+															<th></th>
+															<th>월</th>
+															<th>화</th>
+															<th>수</th>
+															<th>목</th>
+															<th>금</th>
+															<th>토</th>
+															<th>일</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>아침</td>
+															<td>현미밥, 된장국, 닭가슴살조림, 배추김치, 귤 1개</td>
+															<td>보리식빵 2장, 닭가슴살샐러드, 저지방우유 1컵</td>
+															<td>고구마 1개, 방울토마토 20개, 저지방우유 1컵</td>
+															<td>고구마 1/2개, 미숫가루 1잔, 사과 1/3개</td>
+															<td>보리식빵 2장, 양배추샐러드, 사과주스 1잔</td>
+															<td>고구마 1개, 귤 1개, 닭가슴살양파샐러드</td>
+															<td>미숫가루 1잔, 귤 1개, 닭가슴살조림</td>
+														</tr>
+														<tr>
+															<td>점심</td>
+															<td>고구마 1개, 방울토마토 20개, 두유 1컵</td>
+															<td>고구마 1개, 방울토마토 20개, 두유 1컵,귤 1개</td>
+															<td>현미밥, 닭가슴살조림, 배추김치, 귤 1개</td>
+															<td>현미밥, 달걀탕, 닭가슴살오븐구이, 배추김치</td>
+															<td>현미보리밥, 무 된장국, 오이무침, 닭가슴살샐러드, 배추김치</td>
+															<td>현미밥, 매콤한중국식닭볶음, 느타리버섯볶음, 배추김치</td>
+															<td>현미식빵 1장, 닭날개오븐구이, 오이스틱, 방울토마토 5개</td>
+														</tr>
+														<tr>
+															<td>저녁</td>
+															<td>현미콩밥, 된장배추국, 닭살무침, 배추김치</td>
+															<td>현미식빵 1장, 닭가슴살샐러드</td>
+															<td>고구마 1개, 닭가슴살 샐러드</td>
+															<td>현미밥, 미역된장국, 닭가슴살샐러드, 배추김치</td>
+															<td>현미식빵 1개, 토마토 1/4개, 양배추 간장샐러드</td>
+															<td>현미식빵 1개, 브로콜리 오이샐러드, 우유 1잔</td>
+															<td>고구마 1개, 매콤한 중국식 닭볶음</td>
+														</tr>
+													</tbody>
+												</table>
+										      </div>
+										      <!-- Footer -->
+										      <div class="modal-footer">
+										        Footer
+										        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+									</c:when>
+									<c:when test="${bmi >= '26' && bmi < '29'}">
+										<h2>
+											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
+										</h2>
+											<div class="progress">
+												<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.7}%">
+											    ${bmi}
+												</div>
+											</div>
+										<h6>
+											<span>
+												<strong>체질량(BMI)지수</strong>
+												는 <em class="aq">${bmi}</em> 입니다.
+											</span>
+											<span class="fat">
+												현재
+												<em>경도 비만</em> 으로 보입니다.
+											</span>
+										</h6>
+										<div class="reference">
+											<ul>
+												<li>저체중:18미만</li>
+												<li>정상:18~22</li>
+												<li>과체중:23~25</li>
+												<li>경도비만26~29</li>
+												<li>중등도30이상</li>
+											</ul>
+										</div>
+										<p>
+											<b>BMI 지수만을 맹신하지 마세요!</b>
+										</p>
+										<p>
+											남성의 경우 체지방률이 25% 이상일때 보통 "마른비만"일 수 있습니다. 
+											여성의 경우 체지방률이 30% 이상일때 보통 "마른비만" 일 수 있습니다.
+										</p>
+										<P>
+											<b>허리둘레도 재 보세요!</b>
+										</p>
+										<p>
+											남성의 경우 90cm 이상이면 "복부비만" 입니다.
+											여성의 경우 85cm 이상이면 "복부비만" 입니다.
+										</P>
+										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
+										<a class="membershipApply" data-target="#layerpop" data-toggle="modal">나에게 맞는 추천식단보기</a><br/>
+										<div class="modal fade" id="layerpop">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <!-- header -->
+										      <div class="modal-header">
+										        <!-- 닫기(x) 버튼 -->
+										        <button type="button" class="close" data-dismiss="modal">×</button>
+										        	
+										        <h4 class="modal-title">추천 식단</h4>
+										      </div>
+										      <!-- body -->
+										      <div class="modal-body">
+												<table class="table table-striped table-hover">
+													<thead>
+														<tr style="background-color: #00bff0; color: white;">
+															<th></th>
+															<th>월</th>
+															<th>화</th>
+															<th>수</th>
+															<th>목</th>
+															<th>금</th>
+															<th>토</th>
+															<th>일</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>아침</td>
+															<td>현미밥, 된장국, 닭가슴살조림, 배추김치, 귤 1개</td>
+															<td>보리식빵 2장, 닭가슴살샐러드, 저지방우유 1컵</td>
+															<td>고구마 1개, 방울토마토 20개, 저지방우유 1컵</td>
+															<td>고구마 1/2개, 미숫가루 1잔, 사과 1/3개</td>
+															<td>보리식빵 2장, 양배추샐러드, 사과주스 1잔</td>
+															<td>고구마 1개, 귤 1개, 닭가슴살양파샐러드</td>
+															<td>미숫가루 1잔, 귤 1개, 닭가슴살조림</td>
+														</tr>
+														<tr>
+															<td>점심</td>
+															<td>고구마 1개, 방울토마토 20개, 두유 1컵</td>
+															<td>고구마 1개, 방울토마토 20개, 두유 1컵,귤 1개</td>
+															<td>현미밥, 닭가슴살조림, 배추김치, 귤 1개</td>
+															<td>현미밥, 달걀탕, 닭가슴살오븐구이, 배추김치</td>
+															<td>현미보리밥, 무 된장국, 오이무침, 닭가슴살샐러드, 배추김치</td>
+															<td>현미밥, 매콤한중국식닭볶음, 느타리버섯볶음, 배추김치</td>
+															<td>현미식빵 1장, 닭날개오븐구이, 오이스틱, 방울토마토 5개</td>
+														</tr>
+														<tr>
+															<td>저녁</td>
+															<td>현미콩밥, 된장배추국, 닭살무침, 배추김치</td>
+															<td>현미식빵 1장, 닭가슴살샐러드</td>
+															<td>고구마 1개, 닭가슴살 샐러드</td>
+															<td>현미밥, 미역된장국, 닭가슴살샐러드, 배추김치</td>
+															<td>현미식빵 1개, 토마토 1/4개, 양배추 간장샐러드</td>
+															<td>현미식빵 1개, 브로콜리 오이샐러드, 우유 1잔</td>
+															<td>고구마 1개, 매콤한 중국식 닭볶음</td>
+														</tr>
+													</tbody>
+												</table>
+										      </div>
+										      <!-- Footer -->
+										      <div class="modal-footer">
+										        Footer
+										        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<h2>
+											<span>꾸준한 운동으로 건강관리 하실 필요가 있습니다.</span>
+										</h2>
+											<div class="progress">
+												<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="35" style="width:${bmi*2.7}%">
+											    ${bmi}
+												</div>
+											</div>
+										<h6>
+											<span>
+												<b>체질량(BMI)지수</b>
+												는<em class="aq">${bmi}</em> 입니다.
+											</span>
+											<span class="fat">
+												현재
+												<em>중등도 비만</em> 으로 보입니다.
+											</span>
+										</h6>
+										<div class="reference">
+											<ul>
+												<li>저체중:18미만</li>
+												<li>정상:18~22</li>
+												<li>과체중:23~25</li>
+												<li>경도비만26~29</li>
+												<li>중등도30이상</li>
+											</ul>
+										</div>
+										<p>
+											<b>BMI 지수만을 맹신하지 마세요!</b>
+										</p>
+										<p>
+											남성의 경우 체지방률이 25% 이상일때 보통 "마른비만"일 수 있습니다. 
+											여성의 경우 체지방률이 30% 이상일때 보통 "마른비만" 일 수 있습니다.
+										</p>
+										<P>
+											<b>허리둘레도 재 보세요!</b>
+										</p>
+										<p>
+											남성의 경우 90cm 이상이면 "복부비만" 입니다.
+											여성의 경우 85cm 이상이면 "복부비만" 입니다.
+										</P>
+										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
+										<a class="membershipApply" data-target="#layerpop" data-toggle="modal">나에게 맞는 추천식단보기</a><br/>
+										<div class="modal fade" id="layerpop">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <!-- header -->
+										      <div class="modal-header">
+										        <!-- 닫기(x) 버튼 -->
+										        <button type="button" class="close" data-dismiss="modal">×</button>
+										        	
+										        <h4 class="modal-title">추천 식단</h4>
+										      </div>
+										      <!-- body -->
+										      <div class="modal-body">
+												<table class="table table-striped table-hover">
+													<thead>
+														<tr style="background-color: #00bff0; color: white;">
+															<th></th>
+															<th>월</th>
+															<th>화</th>
+															<th>수</th>
+															<th>목</th>
+															<th>금</th>
+															<th>토</th>
+															<th>일</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>아침</td>
+															<td>현미밥, 된장국, 닭가슴살조림, 배추김치, 귤 1개</td>
+															<td>보리식빵 2장, 닭가슴살샐러드, 저지방우유 1컵</td>
+															<td>고구마 1개, 방울토마토 20개, 저지방우유 1컵</td>
+															<td>고구마 1/2개, 미숫가루 1잔, 사과 1/3개</td>
+															<td>보리식빵 2장, 양배추샐러드, 사과주스 1잔</td>
+															<td>고구마 1개, 귤 1개, 닭가슴살양파샐러드</td>
+															<td>미숫가루 1잔, 귤 1개, 닭가슴살조림</td>
+														</tr>
+														<tr>
+															<td>점심</td>
+															<td>고구마 1개, 방울토마토 20개, 두유 1컵</td>
+															<td>고구마 1개, 방울토마토 20개, 두유 1컵,귤 1개</td>
+															<td>현미밥, 닭가슴살조림, 배추김치, 귤 1개</td>
+															<td>현미밥, 달걀탕, 닭가슴살오븐구이, 배추김치</td>
+															<td>현미보리밥, 무 된장국, 오이무침, 닭가슴살샐러드, 배추김치</td>
+															<td>현미밥, 매콤한중국식닭볶음, 느타리버섯볶음, 배추김치</td>
+															<td>현미식빵 1장, 닭날개오븐구이, 오이스틱, 방울토마토 5개</td>
+														</tr>
+														<tr>
+															<td>저녁</td>
+															<td>현미콩밥, 된장배추국, 닭살무침, 배추김치</td>
+															<td>현미식빵 1장, 닭가슴살샐러드</td>
+															<td>고구마 1개, 닭가슴살 샐러드</td>
+															<td>현미밥, 미역된장국, 닭가슴살샐러드, 배추김치</td>
+															<td>현미식빵 1개, 토마토 1/4개, 양배추 간장샐러드</td>
+															<td>현미식빵 1개, 브로콜리 오이샐러드, 우유 1잔</td>
+															<td>고구마 1개, 매콤한 중국식 닭볶음</td>
+														</tr>
+													</tbody>
+												</table>
+										      </div>
+										      <!-- Footer -->
+										      <div class="modal-footer">
+										        Footer
+										        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 						<div class="myheadPC_myCoin">
@@ -392,13 +666,13 @@ $(document).ready(function(){ //DOM이 준비되고
 							<c:when test="${empty dto.member_coin >= '1'}">
 				                <div class="notYetMembership">
 				                	<div class="mypayInfo" id="mypayInfom">
-					                    <table class="table table-striped table-hover">
+					                    <table class="tavle tavle-striped tavle-hover">
 					                    	<thead>
 						                    	<tr>
-						                    		<td>결제일</td>
-						                    		<td>결제방법</td>
-						                    		<td>구매가격</td>
-						                    		<td>구매코인</td>
+						                    		<th>결제일</th>
+						                    		<th>결제방법</th>
+						                    		<th>구매가격</th>
+						                    		<th>구매코인</th>
 						                    	</tr>
 					                    	</thead>
 					                    	<tbody>
@@ -406,8 +680,8 @@ $(document).ready(function(){ //DOM이 준비되고
 						                    		<tr class="info">
 						                    			<td>${dta.pay_date}</td>
 						                    			<td>${dta.pay_method}</td>
-						                    			<td>${dta.pay_price}</td>
-						                    			<td>${dta.pay_coin}</td>
+						                    			<td>${dta.pay_price}원</td>
+						                    			<td>${dta.pay_coin}coin</td>
 						                    		</tr>
 						                    	</c:forEach>
 					                    	</tbody>
