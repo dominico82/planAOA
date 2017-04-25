@@ -88,15 +88,15 @@ public class MemberDAOImple implements MemberDAO {
 					String result=find;
 					return result;
 				}else{
-					String result="잘못된 이메일 입니다.";
+					String result="email";
 					return result;
 				}
 			}else{
-				String result="이름과 이메일이 일치하지 않습니다.";
+				String result="namemail";
 				return result;
 			}
 		}else{
-			String result = "잘못 된 이름입니다.";
+			String result = "name";
 			return result;
 		}
 		
@@ -110,15 +110,15 @@ public class MemberDAOImple implements MemberDAO {
 					String result=id;
 					return result;
 				}else{
-					String result="이메일이 일치하지 않습니다.";
+					String result="email";
 					return result;
 				}
 			}else{
-				String result="이름이 일치하지 않습니다.";
+				String result="emailname";
 				return result;
 			}
 		}else{
-			String result="존재하지 않는 ID입니다.";
+			String result="null";
 			return result;
 		}
 		
