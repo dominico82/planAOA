@@ -8,7 +8,7 @@
 <title>만족스러운 피트니스 Nfit 회원정보 보기</title>
 <link rel="stylesheet" type="text/css" href="resources/css/progressBar.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
 <link rel="stylesheet" type="text/css" href="resources/css/mypage1.css"/>
 <jsp:include page="../header.jsp"/>
@@ -256,28 +256,6 @@ $(document).ready(function(){ //DOM이 준비되고
 											여성의 경우 85cm 이상이면 "복부비만" 입니다.
 										</P>
 										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
-										<a class="membershipApply" data-target="#layerpop" data-toggle="modal">나에게 맞는 추천식단보기</a><br/>
-										<div class="modal fade" id="layerpop">
-										  <div class="modal-dialog">
-										    <div class="modal-content">
-										      <!-- header -->
-										      <div class="modal-header">
-										        <!-- 닫기(x) 버튼 -->
-										        <button type="button" class="close" data-dismiss="modal">×</button>
-										        <!-- header title -->
-										        <h4 class="modal-title">Header</h4>
-										      </div>
-										      <!-- body -->
-										      <div class="modal-body">
-										      </div>
-										      <!-- Footer -->
-										      <div class="modal-footer">
-										        Footer
-										        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-										      </div>
-										    </div>
-										  </div>
-										</div>
 									</c:when>
 									<c:otherwise>
 										<h2>
@@ -324,6 +302,74 @@ $(document).ready(function(){ //DOM이 준비되고
 										<p><b>꾸준한 운동으로 건강하고 탄탄한 몸매를 만들어보세요!</b></p>
 									</c:otherwise>
 								</c:choose>
+								<a class="membershipApply" data-target="#layerpop" data-toggle="modal">나에게 맞는 추천식단보기</a><br/>
+										<div class="modal fade" id="layerpop">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <!-- header -->
+										      <div class="modal-header">
+										        <!-- 닫기(x) 버튼 -->
+										        <button type="button" class="close" data-dismiss="modal">×</button>
+										        	
+										        <h4 class="modal-title">균형잡힌 식단</h4>
+										      </div>
+										      <!-- body -->
+										      <div class="modal-body">
+												<table class="table table-striped table-hover">
+													<thead>
+														<tr>
+															<td></td>
+															<td>월</td>
+															<td>화</td>
+															<td>수</td>
+															<td>목</td>
+															<td>금</td>
+															<td>토</td>
+															<td>일</td>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>아침</td>
+															<td>현미밥, 된장국, 닭가슴살조림, 배추김치, 귤 1개</td>
+															<td>보리식빵 2장, 닭가슴살샐러드, 저지방우유 1컵</td>
+															<td>고구마 1개, 방울토마토 20개, 저지방우유 1컵</td>
+															<td>고구마 1/2개, 미숫가루 1잔, 사과 1/3개</td>
+															<td>보리식빵 2장, 양배추샐러드, 사과주스 1잔</td>
+															<td>고구마 1개, 귤 1개, 닭가슴살양파샐러드</td>
+															<td>미숫가루 1잔, 귤 1개, 닭가슴살조림</td>
+														</tr>
+														<tr>
+															<td>점심</td>
+															<td>고구마 1개, 방울토마토 20개, 두유 1컵</td>
+															<td>고구마 1개, 방울토마토 20개, 두유 1컵,귤 1개</td>
+															<td>현미밥, 닭가슴살조림, 배추김치, 귤 1개</td>
+															<td>현미밥, 달걀탕, 닭가슴살오븐구이, 배추김치</td>
+															<td>현미보리밥, 무 된장국, 오이무침, 닭가슴살샐러드, 배추김치</td>
+															<td>현미밥, 매콤한중국식닭볶음, 느타리버섯볶음, 배추김치</td>
+															<td>현미식빵 1장, 닭날개오븐구이, 오이스틱, 방울토마토 5개</td>
+														</tr>
+														<tr>
+															<td>저녁</td>
+															<td>현미콩밥, 된장배추국, 닭살무침, 배추김치</td>
+															<td>현미식빵 1장, 닭가슴살샐러드</td>
+															<td>고구마 1개, 닭가슴살 샐러드</td>
+															<td>현미밥, 미역된장국, 닭가슴살샐러드, 배추김치</td>
+															<td>현미식빵 1개, 토마토 1/4개, 양배추 간장샐러드</td>
+															<td>현미식빵 1개, 브로콜리 오이샐러드, 우유 1잔</td>
+															<td>고구마 1개, 매콤한 중국식 닭볶음</td>
+														</tr>
+													</tbody>
+												</table>
+										      </div>
+										      <!-- Footer -->
+										      <div class="modal-footer">
+										        Footer
+										        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+										      </div>
+										    </div>
+										  </div>
+										</div>
 							</div>
 						</div>
 						<div class="myheadPC_myCoin">
