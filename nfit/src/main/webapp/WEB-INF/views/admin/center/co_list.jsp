@@ -175,28 +175,6 @@ $(document).ready(function(){
 			}
 		});
 	});
-	 //자동완성기능 구현 보류
-	/* $('#keyField').keyup(function(){// 키입력후 자동호출
-		
-		var keyfield = $('#keyField').val();
-		var keyword = $('#keyWord').val();
-		console.log('keyfield='+keyfield+'keyword='+keyword);
-		if(keyfield.length == 0){//글자수가 0 이면
-			$('#div1').css('visibility','hidden');//숨김
-		}else{
-			$('#div1').css('visibility','visible');//보임
-			var param='keyfield='+keyfield+'&keyword='+keyword;
-			$.ajax({
-				type :'post',
-				url : 'search.do',
-				data : param,
-				success : function(data){
-					console.log('data'+data);
-					$('#div1').html(data);
-				}
-			});
-		}
-	});  */
 	 $('#keyField').autocomplete({
 		 source :function(request ,response){
 			 var keyword =$('#keyWord').val();
@@ -222,11 +200,12 @@ $(document).ready(function(){
  	});
 });
 </script>
-<!-- <style>
-.ui-helper-hidden-accessible{
-display: none;
-}	
-</style> -->
+<style>
+.ui-menu-item{
+color: black;
+font-weight: bold;
+}
+</style>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
 <c:set var="list" value="${list}"/>
