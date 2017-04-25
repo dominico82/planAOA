@@ -139,7 +139,7 @@ public class AdminController {
 	private void sendEmail(String email,String authNum){
 		String host="smtp.gmail.com";
 		String subject="인증번호 전달";
-		String fromName="관리자";
+		String fromName="Nfit";
 		String from="keokyo@gmail.com";
 		String to1=email;
 		String content="인증번호 ["+authNum+"]";

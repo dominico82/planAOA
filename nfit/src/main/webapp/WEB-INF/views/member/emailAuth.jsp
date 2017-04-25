@@ -26,10 +26,10 @@ function check(){
 </script>
 </head>
 <body>
-	<h3>인증번호 7자리를 입력하세요</h3>
-	<div>
+	<h3 style="font-size: 20px;text-align: center;">인증번호 7자리를 입력하세요.</h3>
+	<div style="text-align: center">
 		<form method="post" name="authenform" onsubmit="return check();">
-			<input type="text" name="authnum"><br/>
+			<input type="text" name="authnum" placeholder="인증번호를 입력해주세요.">&nbsp;&nbsp;
 			<input type="submit" value="인증">
 		</form>
 	</div>

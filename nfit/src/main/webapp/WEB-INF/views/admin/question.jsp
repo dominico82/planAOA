@@ -85,7 +85,7 @@
                         <a class="nav-link" href="coinAdmin.do"><i class="icon-credit-card"></i>코인 관리</a>
                     </li>
                     <li class="nav-item">
-                    	<a class="nav-link" href="questionAdmin.do"><i class="icon-check"></i>문의 관리</a>
+                    	<a class="nav-link" href="helpMtomReply.do"><i class="icon-check"></i>문의 관리</a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="noticeAdmin.do"><i class="icon-list"></i>공지사항 관리</a>
@@ -97,7 +97,20 @@
         <!-- Main content -->
        <main class="main">
             <div class="container-fluid">
-                 <div id="ui-view">문의 페이지</div>
+                 <div id="ui-view">
+                 	<table class="blueone">
+                 		<thead>
+                 			<tr>
+                 				<th>문의 내용</th>
+                 				<th>문의 시간</th>
+                 				<th>답변처리 유/무</th>
+                 			</tr>
+                 		</thead>
+                 		<tbody>
+                 		
+                 		</tbody>
+                 	</table>
+                 </div>
             </div>
             <!-- /.conainer-fluid -->
         </main>

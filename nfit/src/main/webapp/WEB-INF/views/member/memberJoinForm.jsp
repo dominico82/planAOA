@@ -78,10 +78,6 @@
 			alert("이름은 문자만 입력가능합니다.");
 			return false;
 		}
-		if (!document.join.mailCheck.value){
-			alert("이메일 인증완료 바랍니다.");
-			return false;
-		}
 	}
 	function checkNumber() {
 		var objEv = event.srcElement;
@@ -142,7 +138,7 @@
 		var b=document.join.email2.value;
 		finemail=a+"@"+b;
 		url="emailAuth.do?email="+finemail;
-			window.open(url,"","width=300,height=200,scrollbars=1");
+			window.open(url,"","width=350,height=150,scrollbars=1");
 		}
 </script>
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
@@ -297,9 +293,9 @@
 										</div>
 										<div class="form-group">
 											<label>이메일</label><br> <input id="customerEmailLocal"
-												name="email1" type="text" onkeyup="checkNumber1();">
+												name="email1" type="text" onkeyup="checkNumber1();" required="required">
 											@ <input title="이메일 도메인 입력" name="email2" type="text"
-												onkeyup="checkNumber1();"> <select
+												onkeyup="checkNumber1();" required="required"> <select
 												title="이메일 도메인 선택" name="emailprovidor"
 												onchange="this.form.email2.value=this[this.selectedIndex].value;">
 												<option value="" selected="selected">직접입력</option>
@@ -309,8 +305,10 @@
 												<option value="hotmail.com">핫메일</option>
 												<option value="yahoo.co.kr">야후</option>
 											</select> <br> 
-											<input type="text" name="mailCheck" value="" style="border: 0px;" readonly="readonly">
+											<input type="text" name="mailCheck" style="border: 0px;" readonly="readonly" required="required">
+											<div align="right">
 											<input type="button" value="이메일 인증" onclick='emailCheck();'>
+											</div>
 										</div>
 										<div class="form-group">
 											<label>신장</label> <input type="text" name="member_tall"

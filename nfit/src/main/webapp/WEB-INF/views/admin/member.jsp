@@ -89,7 +89,7 @@
 					<li class="nav-item"><a class="nav-link" href="coinAdmin.do"><i
 							class="icon-credit-card"></i>코인 관리</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="questionAdmin.do"><i class="icon-check"></i>문의 관리</a></li>
+						href="helpMtomReply.do"><i class="icon-check"></i>문의 관리</a></li>
 					<li class="nav-item"><a class="nav-link" href="noticeAdmin.do"><i
 							class="icon-list"></i>공지사항 관리</a></li>
 				</ul>
