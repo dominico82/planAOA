@@ -212,6 +212,10 @@ public class HelpController {
 	public List<MtomDTO> jsonList(HttpSession session){
 		String userid=(String)session.getAttribute("saveid");
 		List<MtomDTO> list=mtomDao.getHelpMtom(userid);
+//		ModelAndView mav=new ModelAndView();
+//		mav.addObject("list", list);
+//		mav.setViewName();
+		
 		return list;
 	}
 }

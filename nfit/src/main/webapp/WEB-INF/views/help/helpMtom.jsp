@@ -314,7 +314,7 @@ function mtomReload(){
 			url:"helpMtomRefresh.do",
 			dataType:"JSON",
 			success:function(data){
-				
+				location.reload();
 			},
 			error:function(xhr, status, error){
 				alert("에러발생!");
