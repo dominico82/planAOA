@@ -83,7 +83,7 @@
 					<li class="nav-item"><a class="nav-link" href="memberAdmin.do"><i
 							class="icon-people"></i> 회원관리</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="cooperateAdmin.do"><i class="icon-briefcase"></i>제휴업체
+						href="co_list.do"><i class="icon-briefcase"></i>제휴업체
 							등록/삭제</a></li>
 					<li class="nav-item"><a class="nav-link" href="coinAdmin.do"><i
 							class="icon-credit-card"></i>코인 관리</a></li>
