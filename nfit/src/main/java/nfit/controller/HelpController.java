@@ -214,8 +214,7 @@ public class HelpController {
 		List<MtomDTO> list=mtomDao.getHelpMtom(userid);
 //		ModelAndView mav=new ModelAndView();
 //		mav.addObject("list", list);
-//		mav.setViewName();
-		
+//		mav.setViewName();		
 		return list;
 	}
 }
