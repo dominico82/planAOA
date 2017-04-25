@@ -103,9 +103,7 @@ public class ChartController {
 	@ResponseBody//view 가아니라 data 리턴
 	public ResponseEntity<String> uploadAjax(@RequestParam("checkbox")int checkbox,
 			@ModelAttribute CompanyListDTO vo,MultipartHttpServletRequest mreq){
-			System.out.println("컨트롤러에서찍은 checkbox : : : : : "+ checkbox);
 			String menu="";
-		System.out.println("uploadAjax.do:::::"+"를 타는지좀봅시다.");
 		ResponseEntity<String> entity= null;
 		try{
 			switch(checkbox){
@@ -120,7 +118,6 @@ public class ChartController {
 			case 9: menu="골프"; break;
 			case 10: menu="기타"; break;
 			}
-			System.out.println("컨트롤러에서찍은 메뉴 : ::"+ menu);
 			//서비스등록 
 			companyDao.company_add2(vo, menu);
 			//경로 구현 [절대경로]
@@ -140,7 +137,6 @@ public class ChartController {
 			//폴더 생성끝
 			//파일생성 해야함 -------
 			List<MultipartFile> mfile = mreq.getFiles("files"); 
-			System.out.println("컨트롤러로넘어온 사이즈 ::::"+mfile.size());
 			//확장자 검사
 			for(int i =0;i<mfile.size();i++){
 				String fileName=mfile.get(i).getOriginalFilename();
@@ -154,7 +150,6 @@ public class ChartController {
 					 fileName=co_idx+"_"+vo.getCo_phone()+"_"+i+".png";
 				}
 				//파일 이름 j
-				System.out.println("파일이름:"+fileName); // for문 안탐 
 				File target = new File(maxPath,fileName);
 				FileCopyUtils.copy(mfile.get(i).getBytes(),target);
 			}
@@ -228,7 +223,6 @@ public class ChartController {
 			//확장자 검사
 			String formatName=fileName.substring(
 					fileName.lastIndexOf(".")+1);
-			System.out.println("formatname::"+formatName);
 			MediaType mType=MediaUtils.getMediaType(formatName);
 			//헤더 구성 객체
 			HttpHeaders headers=new HttpHeaders();
@@ -321,7 +315,6 @@ public class ChartController {
 	public String content_list(@RequestParam("co_idx")int co_idx,Map map){
 		List<CompanyContentDTO> list = companyDao.content_list(co_idx);
 		int count = companyDao.content_list_count(co_idx);
-		System.out.println("컨트롤러에서찍은 count::::"+count);
 		map.put("count", count);
 		map.put("list",list);
 		map.put("co_idx", co_idx);
@@ -339,7 +332,6 @@ public class ChartController {
 			//배열조작
 		try{
 			for(int i =0;i<arr1.length;i++){
-				System.out.println("arr1 : : : : :"+arr1[i]);
 				usetime_idx=Integer.parseInt(arr1[i]);
 				usetime_time = arr3[i];
 				companyDao.usetime_table_update(usetime_idx, usetime_time);
@@ -423,14 +415,12 @@ public class ChartController {
 				}else if(formatName.equals("png")){
 					fileName=co_idx+"_"+dto.getCo_phone()+"_"+i+".png";
 				}
-				System.out.println("아작스 수정::"+fileName);
 				//이미지 파일은 썸네일을 사용한다.
 				File target =new File(maxPath,fileName);
 				FileCopyUtils.copy(mlist.get(i).getBytes(), target);
 				if(MediaUtils.getMediaType(formatName)!=null){
 					uploadFileName= makeThumbnail(uploadPath, originalPath, fileName);
 					data[i]=uploadFileName;
-					System.out.println("썸네일 이름 : : : :: "+uploadFileName);
 				}
 				entity =new ResponseEntity<String[]>(data,HttpStatus.OK);
 			}
@@ -558,7 +548,11 @@ public class ChartController {
 			//데이터삽입
 			String max=list.get(i).getCo_name()+","+list.get(i).getCo_class();
 			JSONObject head2 = new JSONObject();
-			head2.put("co_list", max);
+			if(keyword.equals("co_name")){
+				head2.put("co_list",list.get(i).getCo_name());
+			}else if(keyword.equals("co_address")){
+				head2.put("co_list", list.get(i).getCo_address());
+			}
 			body.add(head2);
 		}
 		head.put("data", body);

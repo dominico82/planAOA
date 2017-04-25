@@ -508,6 +508,7 @@ $(document).ready(function(){
 							 	<option value="co_name">업체명</option>
 							 	<option value="co_class">종목</option>
 							 	<option value="co_phone">연락처</option>
+							 	<option value="co_address">주소</option>
 						 </select>
 							 <input type="text" name="keyfield" id="keyField">
 					    	 <input type="submit" value="조회">
