@@ -13,8 +13,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("saveid") == null){
-			System.out.println("페이지:"+request.getContextPath());
+		if((String)session.getAttribute("adminid") == null){
 			//세션값이 없으면 로그인 페이지로 이동
 			response.sendRedirect(request.getContextPath()+"/memberLogin.do");
 			//컨트롤러 실행하지않음

@@ -53,7 +53,7 @@ public class CenterController {
 		CenterDTO dto=centerDao.centerOneDB(co_idx);
 		List<UsetimeDTO> list = usetimeDao.usetimeDB(co_idx);
 		List<ContentDTO> contentList=contentDao.contentListDB(co_idx);
-		
+		model.addAttribute("co_idx",co_idx);
 		model.addAttribute("dto", dto);
 		model.addAttribute("timelist", list);
 		model.addAttribute("contentlist", contentList);

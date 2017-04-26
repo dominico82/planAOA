@@ -38,7 +38,6 @@ public class FeedBackController {
 	@RequestMapping("feedbacklist.do")
 	public String feedbacklist(@RequestParam("co_idx")int co_idx,Map map){
 		
-		System.out.println("컨트롤러에서찍은 ="+co_idx);
 		List<FeedbackDTO> flist=feedbackDao.feedbackList(co_idx);
 		int count = feedbackDao.feedbackcount(co_idx);
 		map.put("flist", flist);

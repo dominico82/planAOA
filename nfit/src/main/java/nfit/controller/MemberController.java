@@ -90,7 +90,11 @@ public class MemberController {
 		String goPage = "";
 		if (result == MemberDAOImple.LOGIN_OK) {
 			String username = memberDao.getUserInfo(member_id);
-			session.setAttribute("saveid", member_id);
+			if(member_id.equals("admin")){
+				session.setAttribute("adminid", member_id);
+			}else{
+				session.setAttribute("saveid", member_id);
+			}
 			session.setAttribute("member_name", username);
 			msg = username + "님 환영합니다";
 			goPage = "member/memberMsg";

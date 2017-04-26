@@ -99,13 +99,16 @@
         <property name="suffix" value=".jsp" />
         <property name="order" value="1"/>
     </bean>
-    	<!-- 인터셉터 설정 -->
+      <!-- 인터셉터 설정 -->
 			<mvc:interceptors>
  	   			<mvc:interceptor>
  	   				<mvc:mapping path="/co_list.do"/>
+ 	   				<mvc:mapping path="/adminPage.do"/>
+ 	   				<mvc:mapping path="/helpMtomReply.do"/>
+ 	   				<mvc:mapping path="/noticeAdmin.do"/>
  	   				<bean class="interceptor.LoginInterceptor"/>
  	   			</mvc:interceptor>
-			</mvc:interceptors>	    
+			</mvc:interceptors>	
     <!-- 파일 다운로드 -->
     <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"
         p:order="0"/>

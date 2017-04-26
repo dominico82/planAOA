@@ -62,11 +62,11 @@
                     <li class="nav-item"><a class="nav-link link" href="coin.do" aria-expanded="false">코인결제</a></li>
                     
                     <c:choose>
-					<c:when test="${empty sessionScope.saveid }">
+				<%-- 	<c:when test="${empty sessionScope.saveid }">
                     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="rule.do">회원가입</a></li>
                     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="memberLogin.do">로그인</a></li>
-                    </c:when>
-					<c:when test="${sessionScope.saveid=='admin'}">
+                    </c:when> --%>
+					<c:when test="${sessionScope.adminid=='admin'}">
                     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="adminPage.do">관리자페이지</a></li>
                     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="logout.do">로그아웃</a></li>
                     </c:when>
@@ -74,6 +74,10 @@
                     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="myPage.do">마이페이지</a></li>
                     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="logout.do">로그아웃</a></li>
                     </c:when>
+                    <c:otherwise>
+                    	 <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="rule.do">회원가입</a></li>
+                  	 	 <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="memberLogin.do">로그인</a></li>
+                    </c:otherwise>
                     </c:choose>
                     
                     </ul>

@@ -531,7 +531,7 @@ font-weight: bold;
 						<!-- 모달 생성되는곳 -->
 						<div id="modal-testNew" class="modal fade" tabindex="1" role="dialog" aria-labelledby="테스트" aria-describedby="테스트모달">
 							<div class="modal-dialog" style="width:1200px;height: 700px;">
-								<div class="modal-content" style="width:1200px;">
+								<div class="modal-content" style="width:1300px;">
 									<!-- remote ajax call -->
 								</div>
 							</div>

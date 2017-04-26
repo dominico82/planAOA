@@ -1,3 +1,4 @@
+<%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -22,6 +23,8 @@ $(document).ready(function(){
 		$('#btninsert').click(function(){
 			//업체 idx
 			var co_idx=$('#co_idx').val();
+			console.log('실행co_idx::'+co_idx);
+			
 			//세션에 저장된 id값
 			var userid=$('#userid').val();
 			//내용
@@ -29,11 +32,12 @@ $(document).ready(function(){
 			feedback_content  = feedback_content.replace('\r\n','<br>');
 			//별점
 			var feedback_score =$('#feedback_score').val();
-			if(feedback_content=='' || feedback_content==null){
+			 if(feedback_content=='' || feedback_content==null){
 				alert('댓글을입력해주세요');
 				return;
 			}
 			var param='feedback_content='+feedback_content+'&feedback_score='+feedback_score+'&co_idx='+co_idx+'&member_id='+userid;
+			console.log('param:::'+param);
 			$.ajax({
 				type:'post',
 				url:'feedbackinsert.do',
@@ -196,7 +200,10 @@ padding-right: 20px;
 <input type="hidden" value="${co_idx}" id="co_idx">
 <!-- 세션에저장된 id -->
 <c:set var="userid" value="${sessionScope.saveid}"/>
+<c:set var="adminid" value="${sessionScope.adminid}"/>
+<!-- 세션에 저장되 유저아이디값 히든에 담기 -->
 <input type="hidden" value="${userid}" id="userid">
+<input type="hidden" value="${adminid}" id="adminid">
 <%@include file="../header.jsp" %>
 	<div class="container-fluid">
 	<div class="row" id="menu_bar">
@@ -401,7 +408,7 @@ padding-right: 20px;
 				<span>photos</span>
 				</div>
 				<div id="mapping">
-							<div id="map" style="width: 100%; height: 600px;"></div>
+							<div id="map" style=" width: 100%; height: 600px;"></div>
 				</div>
 				 <!-- 후기 댓글 공간 -->
 				 <div>
@@ -410,7 +417,13 @@ padding-right: 20px;
 					 		<c:when test="${empty userid}">
 					 			<tr>
 					 				<td rowspan="3" colspan="3">
-					 					<textarea rows="7" cols="60" readonly="readonly">업체를 이용하시고 댓글을 남겨보세요~</textarea>
+											<% 
+												if(session.getAttribute("adminid").equals("admin")){
+													out.print("<div style='display:none;'></div>");
+												}else{
+													out.print("<textarea rows='7' cols='60' readonly='readonly'>업체를 이용하시고 댓글을 남겨보세요~</textarea>");
+												}
+											%>		
 					 				</td>
 					 			</tr>
 					 		</c:when>

@@ -11,7 +11,8 @@
 </head>
 <body>
 <c:set var="flist" value="${flist}"/>
-<span>${co_idx}번째게시물:총${count}개 댓글이 달려있습니다.</span> 
+<c:set var="saveid" value="${sessionScope.saveid}"/>
+<span>${co_idx}번째게시물:총${count}개 댓글이 달려있습니다.</span><br>
 <table style="width:700px;">
 	<c:if test="${empty flist}">
 		<tr>
@@ -46,7 +47,9 @@
 		<br>
 		${row.feedback_content}
 			<!-- 댓글 수정버튼 --> <!-- 세션아이디와 디비아이디비교후 버튼 활성화제한 예정-->
-			<input type="button" value="Modify" onclick="showModify(${row.feedback_index})" class="button">
+			<c:if test="${saveid eq row.member_id}">
+				<input type="button" value="Modify" onclick="showModify(${row.feedback_index})" class="button">
+			</c:if>
 		</td>
 	</tr>
 	</c:forEach>
