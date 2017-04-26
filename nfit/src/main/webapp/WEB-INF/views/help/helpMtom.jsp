@@ -315,8 +315,9 @@ function mtomReload(){
 			dataType:"JSON",
 			success:function(data){
 				$(".accordionList").empty();
+				$.parseJSON(data, true);
 				$.each(data, function(index, list){
-					
+					console.log("날짜: "+list.qa_date);
 					if(list.qa_checked=='n'){
 						if(index=='0'){						
 							$(document).ready(function(){

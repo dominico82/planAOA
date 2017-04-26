@@ -197,14 +197,48 @@ $(function(){
 					    			//[3] 아직 제대로 결제가 되지 않았습니다.
 					    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
 					    		}
+					    		$(function(){
+						    		var formData=$("#getCoin").serialize();
+							    	
+							    	$.ajax({
+							    		type:"POST",
+							    		url: "getCoin.do",
+							    		data: formData,
+							    		success: function(data){
+							    			console.log(data.member_id);
+							    			$(".mP_coin").empty();
+							    			$(".mP_coin").append(data.member_coin);
+							    		},
+							    		error: function(data){
+							    			alert("실패!!");
+							    		}
+							    	});	
+						    	});
 					    	});
 
-					        $('#getCoin').submit();
 					    } else {
-					        var msg = '결제에 실패하였습니다.';
-					        msg += '에러내용 : ' + rsp.error_msg;
-					        
-					        $('#getCoin').submit();
+//					        var msg = '결제에 실패하였습니다.';
+//					        msg += '에러내용 : ' + rsp.error_msg;
+//					        
+//					        $('#getCoin').submit();
+					    	//ajax 페이지갱신
+					    	$(function(){
+					    		var formData=$("#getCoin").serialize();
+						    	
+						    	$.ajax({
+						    		type:"POST",
+						    		url: "getCoin.do",
+						    		data: formData,
+						    		success: function(data){
+						    			console.log(data.member_id);
+						    			$(".mP_coin").empty();
+						    			$(".mP_coin").append(data.member_coin);
+						    		},
+						    		error: function(data){
+						    			alert("실패!!");
+						    		}
+						    	});	
+					    	});
 					    }
 					});
 				}else if(price=="0"){
@@ -212,6 +246,23 @@ $(function(){
 				}
 			});
 });
+
+function coinRefresh(){
+	var formData=$("#getCoin").serialize();
+	
+	$.ajax({
+		type:"POST",
+		url: "getCoin.do",
+		data: formData,
+		success: function(data){
+			console.log(data.member_id);
+			$(".mP_coin").empty();
+		},
+		error: function(data){
+			alert("실패!!");
+		}
+	});	
+}
 //정기 결제 모듈
 
 $(function(){
@@ -245,7 +296,23 @@ $(function(){
 							        msg += '에러내용 : ' + rsp.error_msg;
 							    }
 			
-						        $('#getCoin').submit();
+							    $(function(){
+						    		var formData=$("#getCoin").serialize();
+							    	
+							    	$.ajax({
+							    		type:"POST",
+							    		url: "getCoin.do",
+							    		data: formData,
+							    		success: function(data){
+							    			console.log(data.member_id);
+							    			$(".mP_coin").empty();
+							    			$(".mP_coin").append(data.member_coin);
+							    		},
+							    		error: function(data){
+							    			alert("실패!!");
+							    		}
+							    	});	
+						    	});
 							});
 						}else if(price=="0"){
 							window.alert('상품을 선택해 주세요!');

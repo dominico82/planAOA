@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import nfit.coin.model.CoinDAO;
@@ -34,22 +35,42 @@ public class CoinController {
 		return mav;
 	}
 	
-	@RequestMapping(value="getCoin.do")
-	public ModelAndView getCoin(@RequestParam(value="coin")int coin,
-								@RequestParam(value="userId")String userid,
-								@RequestParam(value="userCoin", defaultValue="0")int usercoin,
-								@RequestParam(value="member_idx")int idx,
-								@RequestParam(value="pay_method")String pmethod,
-								@RequestParam(value="pay_coin")int mcoin,
-								@RequestParam(value="pay_price")int price,
-								@RequestParam(value="pay_class")String pclass
-								){
+//	@RequestMapping(value="getCoin.do")
+//	public ModelAndView getCoin(@RequestParam(value="coin")int coin,
+//								@RequestParam(value="userId")String userid,
+//								@RequestParam(value="userCoin", defaultValue="0")int usercoin,
+//								@RequestParam(value="member_idx")int idx,
+//								@RequestParam(value="pay_method")String pmethod,
+//								@RequestParam(value="pay_coin")int mcoin,
+//								@RequestParam(value="pay_price")int price,
+//								@RequestParam(value="pay_class")String pclass
+//								){
+//		int totalCoin=coin+usercoin;
+//		ModelAndView mav=new ModelAndView();
+//		int count=coinDAO.setCoinInfo(userid, totalCoin);
+//		int result=coinDAO.setPayInfo(idx, pmethod, mcoin, price, pclass);
+//		mav.setViewName("coin/getCoin");
+//		return mav;
+//	}
+	
+	//ajax 코인결제
+	@RequestMapping(value="getCoin.do", method=RequestMethod.POST)
+	@ResponseBody
+	public MemberDTO getCoinAjax(@RequestParam(value="coin")int coin,
+			@RequestParam(value="userId")String userid,
+			@RequestParam(value="userCoin", defaultValue="0")int usercoin,
+			@RequestParam(value="member_idx")int idx,
+			@RequestParam(value="pay_method")String pmethod,
+			@RequestParam(value="pay_coin")int mcoin,
+			@RequestParam(value="pay_price")int price,
+			@RequestParam(value="pay_class")String pclass
+			){
 		int totalCoin=coin+usercoin;
 		ModelAndView mav=new ModelAndView();
 		int count=coinDAO.setCoinInfo(userid, totalCoin);
 		int result=coinDAO.setPayInfo(idx, pmethod, mcoin, price, pclass);
-		mav.setViewName("coin/getCoin");
-		return mav;
+		MemberDTO dto=coinDAO.getCoinInfo(userid);
+		return dto;
 	}
 	
 
