@@ -13,19 +13,18 @@
 <link rel="shortcut icon" href="resources/images/n-1x-170x128.jpg" type="image/x-icon">
 <title>Insert title here</title>
 <style>
-#search_initialization{
-
+*{
+margin: 0px;
+padding : 0px;
+}
+html, body{
+height:100%;
+}
+#margining{
+margin-top:100px;
 }
 #centerListResult{
-height:800px;
 overflow-y:auto;
-}
-#map_part #map{
-width: 100%; 
-height:800px
-}
-#map_part{
-z-index:100;
 }
 #center_list_coName_class{
 font-size:12px;
@@ -38,21 +37,25 @@ font-size:12px;
   padding: 0 2px;
   border-radius: 3px;
 }
+#map_part{
+z-index:100;
+height:100%;
+}
+#map{
+width: 100%; 
+height:100%;
+}
 #container{
 height:100%;
-margin-top:100px;
 }
-#centerInfo_list_img{
-
+#container_row{
+height:100%;
 }
-#list_img{
-
-}
-
-/* div{
+/* 
+div{
 border:1px solid black;
-}  */
- 
+} 
+ */
  #search-div{
 padding: 0 0 0 0;
 height:28px;
@@ -71,7 +74,6 @@ height:28px;
 #centerInfo_list_div{
 font-size:12px;
 }
-
 #centerInfo_list_table{
 padding:0 0 0 0;
 }
@@ -164,47 +166,7 @@ text-align:center;
 </head>
 <body>
 <%@include file="../header.jsp" %>
-<div class="container-fluid" id="container">
-<!-- 업체 리스트 부분 -->
-		<div class="row">
-		<div class="col-sm-6" id="centerListResult">
-		<div id="wait""><img src='resources/images/pageloader.gif'/><br>Loading..</div>
-		<!-- 검색하기 -->
-		<div class="col-sm-12">
-   <form action="javascript:keywordSearch()" id="search_form">
-    <div class="input-group" id="search-div">
-      <input type="text" class="form-control" id="search_input" placeholder="지역/이름/종목을 검색하세요(예: 강남 헬스)">
-      <div class="input-group-btn">
-        <button class="btn btn-primary" type="submit" id="search-btn"><i class="glyphicon glyphicon-search"></i></button>
-      </div>
-    </div>
-  </form>
-  <div class="col-sm-12" id="search_initialization">
-  </div>
-		<hr>
-		</div>
-		<!-- 리스트 -->
-		<div class="col-sm-12">
-			<div id="centerInfo_list">
-			<!--  -->
-
-			<!--  -->
-			</div>
-
-		</div>
-					<div class="col-sm-12" id="moreBtn">
-			</div>
-	</div>
-		
-<!-- 맵 부분 -->
-			<div class="col-sm-6"></div>
-			<div class="col-sm-6" id="map_part">
-				<div id="map"></div>
-			</div>
-		</div>
-		
 <!--  업체 백업 부분 -->
-		<div class="row">
 		<div class="col-sm-12" id="center_list">
 			<h3>업체 백업</h3>
 			<c:set var="centerList" value="${list}"/>
@@ -247,10 +209,8 @@ text-align:center;
 			</table>
 			<input type="hidden" value="<%=cnt%>" id="count">
 			</div>
-		</div>
 		
 <!-- 서비스 백업 부분 -->
-		<div class="row">
 		<div class="col-sm-12" id="content_list">
 		<h3>서비스 백업</h3>
 		<c:set var="content_list" value="${clist}"/>
@@ -290,18 +250,55 @@ text-align:center;
 		</tbody>
 		</table>
 		</div>
-		</div>
-		<p style="display:none;">
+<p style="display:none;">
 33.450701, 126.570667<br>
 edd938c4fc341b07f90ed69064de3f92<br>
 95b97b04d035d60f73995902d8ae2cd0<br>
 3564ccb62994635b131231fb19ae3e7d<br>
 55702a1d09804903d4550080da539868<br>
 </p>
+
+<!-- 업체 리스트 부분 -->
+<div class="container-fluid" id="container">
+<div class="row" id="container_row">
+		<div class="col-sm-6" id="centerListResult">
+		<div class="col-sm-12" id="margining"></div>
+
+		<div id="wait""><img src='resources/images/pageloader.gif'/><br>Loading..</div>
+		<!-- 검색하기 -->
+		<div class="col-sm-12">
+   <form action="javascript:keywordSearch()" id="search_form">
+    <div class="input-group" id="search-div">
+      <input type="text" class="form-control" id="search_input" placeholder="지역/이름/종목을 검색하세요(예: 강남 헬스)">
+      <div class="input-group-btn">
+        <button class="btn btn-primary" type="submit" id="search-btn"><i class="glyphicon glyphicon-search"></i></button>
+      </div>
+    </div>
+  </form>
+  <div class="col-sm-12" id="search_initialization">
+  </div>
+		<hr>
+		</div>
+		<!-- 리스트 -->
+		<div class="col-sm-12">
+			<div id="centerInfo_list">
+			<!--  -->
+
+			<!--  -->
+			</div>
+
+		</div>
+					<div class="col-sm-12" id="moreBtn">
+			</div>
+			</div>	
+<!-- 맵 부분 -->
+			<div class="col-sm-6" id="map_part">
+				<div id="map"></div>
+			</div>
+			</div>
 	</div>
-	
 <!-- 제휴업체 패널 부분 -->
-<div class="container" id="centerInfo">
+<div class="col-sm-12" id="centerInfo">
 <div class="panel panel-default" id="centerInfo_panel">
 <a class="btn" id="close" role="button">
 <span class="glyphicon glyphicon-remove" id="close_icon"></span>
@@ -310,10 +307,10 @@ edd938c4fc341b07f90ed69064de3f92<br>
 <h3 id="centerInfo_coname">Company Name</h3>
 </div>
 <div class="panel-body" id="centerInfo_body">
-<div class="row" id="coImg">
+<div class="col-sm-12" id="coImg">
 <img alt="center" src="resources/images/center_default.jpg" class="img-rounded img-responsive" id="centerInfo_img">
 </div>
-<div class="row" id="coAddr">
+<div class="col-sm-12" id="coAddr">
 <div class="col-sm-12">
 <p class="glyphicon glyphicon-flag" id="centerInfo_address"></p>
 </div>
@@ -345,7 +342,7 @@ edd938c4fc341b07f90ed69064de3f92<br>
 <tbody id="centerInfo_time">
 <tr>
 <td><span id=""></span></td>
-<td><span id="">시</span></td>
+<td><span id=""></span></td>
 </tr>
 </tbody>
 </table>
@@ -371,9 +368,18 @@ edd938c4fc341b07f90ed69064de3f92<br>
 </div>
 </div>
 </div>
-<hr>
 <script type="text/javascript">
 /*ajax loading*/
+
+$(document).ready(function(){
+	var $listHeight;
+	$listHeight = $("#map_part").height();
+	$("#centerListResult").css({"height":$listHeight});
+	$(window).resize(function(){
+		$listHeight = $("#map_part").height();
+		$("#centerListResult").css({"height":$listHeight});
+	});
+})
 
 $(document).ready(function(){
 	$(document).ajaxStart(function(){
