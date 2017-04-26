@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="resources/js/jquery.paging.js"></script>
 <jsp:include page="../header.jsp"/>
 <c:if test="${empty list}">
 <script>
@@ -175,6 +176,7 @@ $(document).ready(function(){
           
 
       </div> <!-- /.content -->
+      	<div id="paging"></div>
     </div><!-- /.row -->
   </div><!-- /container -->
 
@@ -272,7 +274,6 @@ $(function(){
 				url: "helpMtom.do",
 				data: formData,
 				success: function(data){
-					alert("성공!!");
 					$('#qa11').modal('hide');
 					mtomReload();
 				},
@@ -293,7 +294,6 @@ $(function(){
 				url: "helpMtomUpdate.do",
 				data: formData,
 				success: function(data){
-					alert("성공!!");
 					$('#qa11Update').modal('hide');
 					mtomReload();
 				},
@@ -314,7 +314,103 @@ function mtomReload(){
 			url:"helpMtomRefresh.do",
 			dataType:"JSON",
 			success:function(data){
-				location.reload();
+				$(".accordionList").empty();
+				$.each(data, function(index, list){
+					
+					if(list.qa_checked=='n'){
+						if(index=='0'){						
+							$(document).ready(function(){
+								var $div=$('<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">'
+									   	+'<div class="panel panel-default">'
+										+'<div class="panel-heading" role="tab" id="qaHeading1">'
+										+'<h4 class="panel-title"><i class="fa fa-question-circle"></i>'+list.qa_subject+''
+						                +'<span class="date"><fmt:formatDate value="${qlist.qa_date}" pattern="yyyy-MM-dd HH:mm"/></span></h4>'
+						                +'<a role="button" data-toggle="collapse" data-parent="#accordion" href="#'+list.qa_idx+'" aria-expanded="false" aria-controls="qa1" class="btn btn-sm btn-default btnAnswer">답변대기</a>'
+						                +'</div><div id="'+list.qa_idx+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">'
+						                +'<div class="panel-body"><div class="question">'
+										+'<h5><i class="fa fa-question-circle"></i> <div id="qa_sub'+list.qa_idx+'">'+list.qa_subject+'</div> <small><fmt:formatDate value="${qlist.qa_date}" pattern="yyyy-MM-dd HH:mm"/></small></h5>'
+										+'<div id="qa_con'+list.qa_idx+'"><p>'+list.qa_content+'</p></div><!-- /.question --><div>'
+						                +'<button type="button" class="btn btn-sm btn-default" onclick="update_form('+list.qa_idx+');"><i class="fa fa-edit"></i> 수정</button>'
+						                +'<button type="button" class="btn btn-sm btn-danger" onclick="mtomDel('+list.qa_idx+');"><i class="fa fa-trash-o"></i> 삭제</button>'
+						                +'</div></div><!-- /.panel-body --></div><!-- /.panel-collapse  --></div><!-- /.panel--></div><!-- /.panel-group -->'
+						                );
+	
+								$("div.accordionList").append($div);
+							});					
+						}
+						if(index!='0'){						
+							$(document).ready(function(){
+								var $div=$('<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">'
+									   	+'<div class="panel panel-default">'
+										+'<div class="panel-heading" role="tab" id="qaHeading1">'
+										+'<h4 class="panel-title"><i class="fa fa-question-circle"></i>'+list.qa_subject+''
+						                +'<span class="date"><fmt:formatDate value="${qlist.qa_date}" pattern="yyyy-MM-dd HH:mm"/></span></h4>'
+						                +'<a role="button" data-toggle="collapse" data-parent="#accordion" href="#'+list.qa_idx+'" aria-expanded="false" aria-controls="qa1" class="btn btn-sm btn-default btnAnswer">답변대기</a>'
+						                +'</div><div id="'+list.qa_idx+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">'
+						                +'<div class="panel-body"><div class="question">'
+										+'<h5><i class="fa fa-question-circle"></i><div id="qa_sub'+list.qa_idx+'">'+list.qa_subject+'</div> <small><fmt:formatDate value="${qlist.qa_date}" pattern="yyyy-MM-dd HH:mm"/></small></h5>'
+										+'<div id="qa_con'+list.qa_idx+'"><p>'+list.qa_content+'</p></div><!-- /.question --><div>'
+						                +'<button type="button" class="btn btn-sm btn-default" onclick="update_form('+list.qa_idx+');"><i class="fa fa-edit"></i> 수정</button>'
+						                +'<button type="button" class="btn btn-sm btn-danger" onclick="mtomDel('+list.qa_idx+');"><i class="fa fa-trash-o"></i> 삭제</button>'
+						                +'</div></div><!-- /.panel-body --></div><!-- /.panel-collapse  --></div><!-- /.panel--></div><!-- /.panel-group -->'
+						                );
+	
+								$("div.accordionList").find(".panel-group:last").append($div);
+							});					
+					
+						}
+					}	
+					
+					if(list.qa_checked=='y'){
+						if(index=='0'){			
+							$(document).ready(function(){
+								var $div=$("<div class='panel-group' id='accordion' role='tablist' aria-multiselectable='true'>"
+										+"<div class='panel panel-default'>"
+										+"<div class='panel-heading' role='tab' id='qaHeading1'>"
+										+"<h4 class='panel-title'><strong class='faqType faqType_18'>단순이용문의</strong>"
+										+"<i class='fa fa-question-circle'></i>"+list.qa_idx+""
+							            +"<span class='date'>&nbsp;<fmt:formatDate value='${qlist.qa_date}' pattern='yyyy-MM-dd HH:mm'/></span></h4>"
+							            +"<a role='button' data-toggle='collapse' data-parent='#accordion' href='#"+list.qa_idx+"' aria-expanded='false' aria-controls='qa2' class='btn btn-sm btn-success btnAnswer collapsed'>"
+							            +"답변보기</a></div>"
+							            +"<div id='"+list.qa_idx+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOne' aria-expanded='false'>"
+							            +"<div class='panel-body'>"    
+							    		+"<div class='question'>"
+								    	+"<h5><i class='fa fa-question-circle'></i>"+list.qa_subject+"<small><fmt:formatDate value='${qlist.qa_date}' pattern='yyyy-MM-dd HH:mm'/></small></h5>"
+										+"<p>${qlist.qa_content}</p>"
+							    		+"</div><!-- /.question -->"
+							    		+"<div class='answer'>"
+							      		+"<p></p><h5><i class='fa fa-check-circle'></i> 답변 <small><fmt:formatDate value='${qlist.qa_adate}' pattern='yyyy-MM-dd HH:mm'/></small></h5><p></p>"
+							      		+"<p>안녕하세요 <b>"+list.member_id+"</b> 회원님<br>저희 티엘엑스를 이용해주셔서 대단히 감사합니다.<br></p><p></p></div><!-- /.answer -->)"
+							      		);
+								$("div.accordionList").append($div);
+							});
+						}
+						if(index!='0'){		
+							$(document).ready(function(){
+								var $div=$("<div class='panel-group' id='accordion' role='tablist' aria-multiselectable='true'>"
+										+"<div class='panel panel-default'>"
+										+"<div class='panel-heading' role='tab' id='qaHeading1'>"
+										+"<h4 class='panel-title'><strong class='faqType faqType_18'>단순이용문의</strong>"
+										+"<i class='fa fa-question-circle'></i>"+list.qa_subject+""
+							            +"<span class='date'>&nbsp;<fmt:formatDate value='${qlist.qa_date}' pattern='yyyy-MM-dd HH:mm'/></span></h4>"
+							            +"<a role='button' data-toggle='collapse' data-parent='#accordion' href='#"+list.qa_idx+"' aria-expanded='false' aria-controls='qa2' class='btn btn-sm btn-success btnAnswer collapsed'>"
+							            +"답변보기</a></div>"
+							            +"<div id='"+list.qa_idx+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOne' aria-expanded='false'>"
+							            +"<div class='panel-body'>"    
+							    		+"<div class='question'>"
+								    	+"<h5><i class='fa fa-question-circle'></i>"+list.qa_subject+"<small><fmt:formatDate value='${qlist.qa_date}' pattern='yyyy-MM-dd HH:mm'/></small></h5>"
+										+"<p>"+list.qa_content+"</p>"
+							    		+"</div><!-- /.question -->"
+							    		+"<div class='answer'>"
+							      		+"<p></p><h5><i class='fa fa-check-circle'></i> 답변 <small><fmt:formatDate value='${qlist.qa_adate}' pattern='yyyy-MM-dd HH:mm'/></small></h5><p></p>"
+							      		+"<p>안녕하세요 <b>"+list.member_id+"</b> 회원님<br>저희 티엘엑스를 이용해주셔서 대단히 감사합니다.<br></p><p></p></div><!-- /.answer -->)"
+							      		);
+								$("div.accordionList").find(".panel-group:last").append($div);
+							});
+						}
+					}
+					
+				});
 			},
 			error:function(xhr, status, error){
 				alert("에러발생!");
@@ -333,12 +429,13 @@ function mtomDel(idx){
 		data: "idx="+idx,
 		success: function(data){
 			alert("성공!!");
+			mtomReload();
 		},
 		error: function(data){
 			alert("실패!!");
 		}
 	});
-		location.reload();
+		
 };
 </script>
 

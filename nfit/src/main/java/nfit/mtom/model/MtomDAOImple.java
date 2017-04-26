@@ -52,7 +52,6 @@ private SqlSessionTemplate sqlMap;
 	}
 	
 	public int helpMtomDel(int idx) {
-		System.out.println("삭제할 1:1문의게시판 idx:"+idx);
 		int result=sqlMap.delete("helpMtomDel", idx);
 		return result;
 	}
