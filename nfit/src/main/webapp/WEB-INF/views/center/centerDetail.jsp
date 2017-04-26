@@ -146,52 +146,53 @@ padding-right: 20px;
 	z-index: 10; /* 레이어   */
 	visibility: hidden; /* 버튼클릭시 보이기하기위함 */
 }
-.button {
-   border: 2px solid #48b3e8;
-   background: #cddfeb;
-   background: -webkit-gradient(linear, left top, left bottom, from(#edf0f2), to(#cddfeb));
-   background: -webkit-linear-gradient(top, #edf0f2, #cddfeb);
-   background: -moz-linear-gradient(top, #edf0f2, #cddfeb);
-   background: -ms-linear-gradient(top, #edf0f2, #cddfeb);
-   background: -o-linear-gradient(top, #edf0f2, #cddfeb);
-   background-image: -ms-linear-gradient(top, #edf0f2 0%, #cddfeb 100%);
-   padding: 8px 16px;
-   -webkit-border-radius: 16px;
-   -moz-border-radius: 16px;
-   border-radius: 16px;
-   -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 1px 0;
-   text-shadow: #b7d7eb 0 1px 0;
-   color: #5e7c8f;
-   font-size: 10px;
+
+   .button {
+   border: 0px solid #0a3c59;
+   background: #a5c1d4;
+   background: -webkit-gradient(linear, left top, left bottom, from(#a8b8c4), to(#a5c1d4));
+   background: -webkit-linear-gradient(top, #a8b8c4, #a5c1d4);
+   background: -moz-linear-gradient(top, #a8b8c4, #a5c1d4);
+   background: -ms-linear-gradient(top, #a8b8c4, #a5c1d4);
+   background: -o-linear-gradient(top, #a8b8c4, #a5c1d4);
+   background-image: -ms-linear-gradient(top, #a8b8c4 0%, #a5c1d4 100%);
+   padding: 4.5px 9px;
+   -webkit-border-radius: 29px;
+   -moz-border-radius: 29px;
+   border-radius: 29px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+   text-shadow: #422542 0 1px 0;
+   color: #10171c;
+   font-size: 11px;
    font-family: helvetica, serif;
    text-decoration: none;
    vertical-align: middle;
    }
 .button:hover {
-   border: 2px solid #31a4e6;
-   text-shadow: #b0d4eb 0 1px 0;
-   background: #ccdde8;
-   background: -webkit-gradient(linear, left top, left bottom, from(#cce0ed), to(#ccdde8));
-   background: -webkit-linear-gradient(top, #cce0ed, #ccdde8);
-   background: -moz-linear-gradient(top, #cce0ed, #ccdde8);
-   background: -ms-linear-gradient(top, #cce0ed, #ccdde8);
-   background: -o-linear-gradient(top, #cce0ed, #ccdde8);
-   background-image: -ms-linear-gradient(top, #cce0ed 0%, #ccdde8 100%);
-   color: #212324;
+   border: 0px solid #0a3c59;
+   text-shadow: #93ccf0 0 1px 0;
+   background: #bacedb;
+   background: -webkit-gradient(linear, left top, left bottom, from(#aecee3), to(#bacedb));
+   background: -webkit-linear-gradient(top, #aecee3, #bacedb);
+   background: -moz-linear-gradient(top, #aecee3, #bacedb);
+   background: -ms-linear-gradient(top, #aecee3, #bacedb);
+   background: -o-linear-gradient(top, #aecee3, #bacedb);
+   background-image: -ms-linear-gradient(top, #aecee3 0%, #bacedb 100%);
+   color: #080508;
    }
 .button:active {
-   text-shadow: #b1cee0 0 1px 0;
-   border: 2px solid #1fa3f0;
-   background: #c1daeb;
-   background: -webkit-gradient(linear, left top, left bottom, from(#c5dceb), to(#ccdde8));
-   background: -webkit-linear-gradient(top, #c5dceb, #c1daeb);
-   background: -moz-linear-gradient(top, #c5dceb, #c1daeb);
-   background: -ms-linear-gradient(top, #c5dceb, #c1daeb);
-   background: -o-linear-gradient(top, #c5dceb, #c1daeb);
-   background-image: -ms-linear-gradient(top, #c5dceb 0%, #c1daeb 100%);
-   color: #0a080a;
+   text-shadow: #1e4158 0 1px 0;
+   border: 0px solid #0a3c59;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#bacedb));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
+   color: #fff;
    }
 </style>
 <body>
@@ -417,13 +418,7 @@ padding-right: 20px;
 					 		<c:when test="${empty userid}">
 					 			<tr>
 					 				<td rowspan="3" colspan="3">
-											<% 
-												if(session.getAttribute("adminid").equals("admin")){
-													out.print("<div style='display:none;'></div>");
-												}else{
-													out.print("<textarea rows='7' cols='60' readonly='readonly'>업체를 이용하시고 댓글을 남겨보세요~</textarea>");
-												}
-											%>		
+					 					<textarea rows="4" cols="35" readonly="readonly">업체를 이용하시고 댓글을 남겨보세요~</textarea>
 					 				</td>
 					 			</tr>
 					 		</c:when>
@@ -437,7 +432,6 @@ padding-right: 20px;
 											<img id="images4" src="resources/images/img/star0.png" width="20" onmouseover="show(4)"onclick="mark(4)" onmouseout="noshow(4)"/>
 											<img id="images5" src="resources/images/img/star0.png" width="20" onmouseover="show(5)"onclick="mark(5)" onmouseout="noshow(5)"/>
 										</span>
-										<br><span id="startext">댓글 남기기~</span>
 										<input type="hidden" id="feedback_score">
 									</td>
 								</tr>
@@ -457,6 +451,7 @@ padding-right: 20px;
 				</div>
 			<!-- 댓글목록나올란 -->
 			<div id="ListFeedback"></div>
+			 <!-- 댓글 수점 div박스 나올공간 -->
 			<div id="modifyFeedback"></div>
 			</div>
 		</div>

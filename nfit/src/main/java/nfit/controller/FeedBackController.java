@@ -40,6 +40,13 @@ public class FeedBackController {
 		
 		List<FeedbackDTO> flist=feedbackDao.feedbackList(co_idx);
 		int count = feedbackDao.feedbackcount(co_idx);
+		String userid="";
+		String userid2="";
+		for(int i=0;i<flist.size();i++){
+			 userid=flist.get(i).getMember_id();
+			 userid2 = userid.substring(0, 3);
+			 System.out.println("userid2:::"+userid2);
+		}
 		map.put("flist", flist);
 		map.put("count",count );
 		map.put("co_idx", co_idx);

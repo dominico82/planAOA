@@ -130,9 +130,9 @@ function mark1(star){
 	<textarea rows="5" cols="47" id="detail_feedback_content" placeholder="내용을 기입해주세요" required="required">${vo.feedback_content}</textarea>
 	<br>
 	<div style="text-align: center;">
-		<button type="button" id="btnFeedbackUpdate" class="button">수정</button>
-		<button type="button" id="btnFeedbackDelete" class="button">삭제</button>
-		<button type="button" id="btnFeedbackClose" class="button">닫기</button>
+		<button type="button" id="btnFeedbackUpdate" class="button">Update</button>
+		<button type="button" id="btnFeedbackDelete" class="button">Del</button>
+		<button type="button" id="btnFeedbackClose" class="button">Close</button>
 	</div>
 </div>
 </body>

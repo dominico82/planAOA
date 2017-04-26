@@ -12,7 +12,7 @@
 <body>
 <c:set var="flist" value="${flist}"/>
 <c:set var="saveid" value="${sessionScope.saveid}"/>
-<span>${co_idx}번째게시물:총${count}개 댓글이 달려있습니다.</span><br>
+<span>${co_idx}번째게시물:댓글${count}건</span><br>
 <table style="width:700px;">
 	<c:if test="${empty flist}">
 		<tr>
@@ -20,10 +20,9 @@
 		</tr>
 	</c:if>
 	<c:forEach var="row" items="${flist}">
-	<tr>
+	<0tr>
 		<td>${row.member_id}(
 		<fmt:formatDate value="${row.feedback_date}" pattern="yyyy-MM-dd HH:mm:ss"/>)
-		<br>
 		<c:choose>
 			<c:when test="${row.feedback_score eq 1}">
 				<img src="resources/images/img/star1.png" alt="star" width="20">

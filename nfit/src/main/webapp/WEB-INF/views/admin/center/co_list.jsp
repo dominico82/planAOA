@@ -205,6 +205,56 @@ $(document).ready(function(){
 color: black;
 font-weight: bold;
 }
+table.type09 {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+
+}
+table.type09 thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #369;
+    border-bottom: 3px solid #036;
+}
+table.type09 tbody th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #f3f6f7;
+}
+table.type09 td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+table.type05 {
+    border-collapse: separate;
+    border-spacing: 1px;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    margin: 20px 10px;
+}
+table.type05 th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #efefef;
+}
+table.type05 td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+}
+
 </style>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
@@ -296,7 +346,7 @@ font-weight: bold;
 											   		</div> 
 											  	<label for="inputText3" class="col-sm-2 control-label">업체전화번호</label>
 											  		<div class="col-sm-5">
-														<input type="text" class="form-control"placeholder="text" name="co_phone" id="co_phone">  			
+														<input type="text" class="form-control" name="co_phone" id="co_phone">  			
 											  		</div>
 										  		<label for="inputText3" class="col-sm-2 control-label">이용규정및  &nbsp;&nbsp;&nbsp;준비물</label>
 										  			<div class="col-sm-5">
@@ -364,7 +414,7 @@ font-weight: bold;
 								    <h4 class="modal-title">이용시간 및 컨텐츠 등록 </h4>
 								  </div>
 								  <div class="modal-body">
-								    	<table>
+								    	<table class="type09">
 								    		<tr>
 								 				<th>요일 을적어주세요 </th>
 								    			<td>
@@ -383,7 +433,7 @@ font-weight: bold;
 							    				</td>
 								    		</tr>
 								    	</table>
-								    	<table>
+								    	<table class="type09">
 								    		<tr>
 								    			<th>적용코인갯수</th>
 								    			<td>
@@ -428,7 +478,7 @@ font-weight: bold;
 								    		</tr>
 								    		
 								    		<tr>
-								    			<td colspan="7">
+								    			<td colspan="7" align="right">
 								    				<button type="button" id="btnContent_insert">컨텐츠 등록!</button>
 							    				</td>
 								    		</tr>
@@ -437,7 +487,7 @@ font-weight: bold;
 							    		<!-- 기존업체 컨텐츠 등록 --> 
 								    	 <p>기존 업체 컨탠츠 등록 폼</p>
 								    	 <input type="text" id="oldcompany_co_idx"placeholder="전화번호입력해주세요">
-								    	 <table>
+								    	 <table class="type05">
 								    	 	<tr>
 								    	 	 	<td>코인</td>
 								    	 	 	<td>
@@ -480,8 +530,12 @@ font-weight: bold;
 									    	 	 	<input type="text" id="con_con6">
 								    	 	 	</td>
 								    	 	</tr>
+								    	 	<tr>
+								    	 		<td colspan="2" align="right">
+											    	 <button type="button" id="btnOldCompany">등록하기</button>
+								    	 		</td>
+								    	 	</tr>
 								    	 </table>
-								    	 <button type="button" id="btnOldCompany">등록하기</button>
 								 	</div>
 								</div>
 							</div>
