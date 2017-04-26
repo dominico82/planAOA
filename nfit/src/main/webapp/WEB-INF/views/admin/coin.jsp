@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!--
  * CoreUI - Open Source Bootstrap Admin Template
  * @version v1.0.0-alpha.4
@@ -97,9 +98,50 @@
         <!-- Main content -->
        <main class="main">
             <div class="container-fluid">
-                 <div id="ui-view">코인 페이지</div>
-            </div>
-            <!-- /.conainer-fluid -->
+			<div id="ui-view">
+				<table class="blueone">
+					<thead>
+						<tr>
+							<th class="num">사용자 ID</th>
+							<th class="sub">이용센터 번호</th>
+							<th class="content">이용센터 이름</th>
+							<th class="not">사용 코인</th>
+							<th class="mak">사용일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:set var="ulist" value="${uselist}" />
+						<c:if test="${empty nlist }">
+							<tr>
+								<td colspan="10" align="center">사용정보가 없습니다.</td>
+							</tr>
+						</c:if>
+						<c:forEach var="list" items="${ulist }">
+							<tr>
+								<td class="center">${list.member_id }</td>
+								<td class="center">${list.co_idx }</td>
+								<td>${list.co_name }</td>
+								<td class="center">${list.usemember_coin }</td>
+								<td class="center">${list.usepay_date }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+
+				</table>
+			</div>
+			<div style="margin-top: 10px;">
+				<ul>
+					<li class="wirte"><input type="button" value="공지작성"
+						onclick="location.href='noticeWrite.do'"></li>
+				</ul>
+			</div>
+			<div>
+				<ul>
+					<li class="bottom">${pageStr }</li>
+				</ul>
+
+			</div>
+		</div>
         </main>
 
 

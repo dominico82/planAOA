@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nfit.use">
+	<select id="useCoinList" resultType="nfit.use.model.UseDTO" parameterType="java.util.HashMap">
+		select * from 
+		(select rownum as rnum, a.* from
+		(select * from pay_user order by usepay_date desc)a)b
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+	</select>
+</mapper>

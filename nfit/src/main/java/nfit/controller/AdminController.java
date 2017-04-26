@@ -29,6 +29,8 @@ import nfit.member.model.MemberDAO;
 import nfit.member.model.MemberDTO;
 import nfit.notice.model.NoticeDAO;
 import nfit.notice.model.NoticeDTO;
+import nfit.use.model.UseDAO;
+import nfit.use.model.UseDTO;
 
 @Controller
 public class AdminController {
@@ -40,6 +42,9 @@ public class AdminController {
 	//제휴업체 Dao
 	@Autowired
 	CompanyDAO companyDao;
+	
+	@Autowired
+	UseDAO useDao;
 
 	@RequestMapping("/adminPage.do")
 	public String AdminForm() {
@@ -191,13 +196,21 @@ public class AdminController {
 	
 	
 	@RequestMapping("/coinAdmin.do")
-	public String coinForm() {
-		return "admin/coin";
+	public ModelAndView coinAdmin(@RequestParam(value = "cp", defaultValue = "1") int cp) {
+		int totalCnt =useDao.getTotalCnt();
+		totalCnt = totalCnt == 0 ? 1 : totalCnt;
+		int listSize = 10;
+		int pageSize = 5;
+		List<UseDTO> list = useDao.useList(cp, listSize);
+		String pageStr = nfit.page.PageModule.makePage("coinAdmin.do", totalCnt, listSize, pageSize, cp);
+
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("uselist", list);
+		mav.addObject("pageStr", pageStr);
+		
+		mav.setViewName("admin/coin");
+		return mav;
 	}
 
-	@RequestMapping("/questionAdmin.do")
-	public String questionAdmin() {
-		return "admin/question";
-	}
 
 }
