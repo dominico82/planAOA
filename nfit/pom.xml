@@ -52,7 +52,6 @@
     <scope>system</scope>
     <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc7.jar</systemPath>
 </dependency>
-
 	<!-- https://mvnrepository.com/artifact/org.imgscalr/imgscalr-lib -->
 	<!-- 썸네일 관련 lib -->
 	<dependency>
