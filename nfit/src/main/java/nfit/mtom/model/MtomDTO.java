@@ -2,13 +2,19 @@ package nfit.mtom.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class MtomDTO {
+	
 	int qa_idx;
 	String member_id;
 	String qa_subject;
 	String qa_content;
 	String qa_answer;
 	String qa_checked;
+	
+	//제이슨으로 date타입을 불러올때 사용
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="GMT+9")
 	java.util.Date qa_date;
 	java.util.Date qa_adate;
 	
