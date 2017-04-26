@@ -16,7 +16,7 @@
 <table style="width:700px;">
 	<c:if test="${empty flist}">
 		<tr>
-			<td>표시될 내용이없습니다.</td>
+			<td>후기가없습니다. ~.</td>
 		</tr>
 	</c:if>
 	<c:forEach var="row" items="${flist}">
