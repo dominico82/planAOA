@@ -456,6 +456,8 @@ function mapStart(){
 	closeAllMarkInfo();
 	removeMarker();
 	removeMore();
+	contents=[];
+	contentLists=[];
 	$("#search_initialization").empty();
 	/*content_list 세팅*/
 	var finalCnt = $(".content_idx_cnt:last").text();
@@ -1050,18 +1052,14 @@ function removeMarker(){
 }
 
 /*검색 초기화 */
-function searchReset(){
+function searchReset(searchNum){
 	$("#search_initialization").empty();
-	$("#search_initialization").html('<a href="javascript:mapStart()" class="btn btn-primary btn-block">검색초기화</a>');
+	$("#search_initialization").html('<a href="javascript:mapStart()" class="btn btn-warning btn-block">검색초기화<span class="badge">'+searchNum+'</span></a>');
 }
 
 /*검색하기*/
 function keywordSearch(){
-	/*초기세팅 및 전부 삭제*/
-	searchOn = true;
-	searchReset();
-	closeAllMarkInfo();
-	removeMarker();
+
 	var keyword = $("#search_input").val();
 	$("#search_input").val('');
 	$.ajax({
@@ -1073,6 +1071,23 @@ function keywordSearch(){
 			var strData = data;
 			var objData = eval('('+strData+')');
 			var company = objData.company_list;
+			if(!data){
+				window.alert("ajax load fail!");
+				return false;
+			}else if(company.length==0){
+				alert("검색 결과가 없습니다.");
+				closeAllMarkInfo();
+				removeMarker();
+				listRemove();
+				searchReset(0);
+				return false;
+			}
+			/*초기세팅 및 전부 삭제*/
+			searchOn = true;
+			closeAllMarkInfo();
+			removeMarker();
+			listRemove();
+			searchReset(company.length);
 			var numDiv1=0;
 			var n1=0;
 			var points=[];
