@@ -49,9 +49,9 @@ margin-top:100px;
 
 }
 
-div{
+/* div{
 border:1px solid black;
-} 
+}  */
  
  #search-div{
 padding: 0 0 0 0;
