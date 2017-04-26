@@ -298,7 +298,7 @@ font-weight: bold;
 											  		<div class="col-sm-5">
 														<input type="text" class="form-control"placeholder="text" name="co_phone" id="co_phone">  			
 											  		</div>
-										  		<label for="inputText3" class="col-sm-2 control-label">이용규정및 준비물</label>
+										  		<label for="inputText3" class="col-sm-2 control-label">이용규정및  &nbsp;&nbsp;&nbsp;준비물</label>
 										  			<div class="col-sm-5">
 														<textarea rows="5" cols="20"class="form-control" name="co_regul" placeholder="문단구분 '|'를 넣어주세요" id="co_regul"></textarea>
 										  			</div>
@@ -314,7 +314,7 @@ font-weight: bold;
 										  	 	<div class="col-sm-5">
 										  	 	<b>사진은 마지막에 넣어주세요 ~</b>
 										  		</div>
-										  		<label for="inputText3" class="col-sm-2 control-label">업체사진업로드</label>
+										  		<label for="inputText3" class="col-sm-5 control-label">업체사진업로드</label>
 										  			<div class="col-sm-5">
 														<div class="filedropDown" style="width: 300px;height: 300px; border: 2px solid black;"></div>
 										  			</div>
@@ -483,7 +483,6 @@ font-weight: bold;
 								    	 </table>
 								    	 <button type="button" id="btnOldCompany">등록하기</button>
 								 	</div>
-								 	<div class="modal-footer"></div>
 								</div>
 							</div>
 						</div>
