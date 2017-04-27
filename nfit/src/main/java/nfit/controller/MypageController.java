@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import nfit.bookmark.model.MarkDTO;
 import nfit.coin.model.CoinDTO;
 import nfit.member.model.MemberDAO;
 import nfit.member.model.MemberDTO;
@@ -135,6 +136,18 @@ public class MypageController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", msg);
 		mav.setViewName("mypage/leaveMsg");
+		return mav;
+	}
+	
+	@RequestMapping(value="markJoin.do")
+	public ModelAndView markJoin(MarkDTO dto){
+		System.out.println(dto+"dto");
+		int result = memberDao.setMark(dto);
+		String msg = result>0?"즐겨찾기가 추가되었습니다.":"즐겨찾기 실패!";
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.setViewName("mypage/markMsg");
 		return mav;
 	}
 	
