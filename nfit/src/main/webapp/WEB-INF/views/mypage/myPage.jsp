@@ -21,7 +21,7 @@ $(document).ready(function(){ //DOM이 준비되고
         if(state == 'none'){ // state가 none 상태일경우
             $('#bmiResult').show();
         }else{ // 그 외에는
-            $('#bmiResult').hide();       
+            $('#bmiResult').hide();
         }
     });
 });
@@ -45,15 +45,13 @@ function picLoad(){
 							<c:forEach var="pics" items="${pic}"><img class="imgsize" src="resources/upload_images/${pics}"></c:forEach>
 							</span>
 						</span>
-						
 						<form name="upload" action="fileUpload.do" method="post" enctype="multipart/form-data">
-						<span class="btn btn-default btn-file">
-						사진 선택
+							<span class="btn btn-default btn-file">사진 선택
 							<input type="file" name="files" accept="image/*">
-						</span>
-						<div class="current">
-							<a href="javascript:picLoad();" class="current">사진 바꾸기</a>
-						</div>
+							</span>
+							<div class="current">
+								<a href="javascript:picLoad();" class="current" style="text-decoration:none">사진 바꾸기</a>
+							</div>
 							<input type="hidden" value="${dto.member_id}" name="id">
 							<input type="hidden" value="${dto.member_idx}" name="idx">
 						</form>
@@ -75,12 +73,14 @@ function picLoad(){
 									<a class="current" href="memberInfo.do">회원정보 수정</a>
 								</li>
 								<li>
-									<a href="coin.do" id="a_index" class="current">멤버십 신청하기</a>
+									<input type="button" class="current" value="mypage">
 								</li>
 								<li>
 									<a href="" id="a_favorite_center" class="current">
-										<i class="fa fa-heart-o"></i>가보고 싶은 센터
-									</a>
+										<i class="fa fa-heart-o"></i>가보고 싶은 센터</a>
+								</li>
+								<li>
+									<a href="coin.do" id="a_index" class="current">멤버십 신청하기</a>
 								</li>
 							</ul>
 						</div>
