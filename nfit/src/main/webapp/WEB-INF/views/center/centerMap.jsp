@@ -26,7 +26,11 @@ margin-top:100px;
 #centerListResult{
 overflow-y:auto;
 }
-
+#center_list_coName_class{
+font-size:12px;
+}
+#centerInfo_list_coClass{
+}
 #matched {
   background: #00bff0;
   color: #fff;
@@ -67,10 +71,12 @@ height:100%;
 margin: 0 0 0 0;
 height:28px;
 }
-
-
-
-
+#centerInfo_list_div{
+font-size:12px;
+}
+#centerInfo_list_table{
+padding:0 0 0 0;
+}
 #list-table{
 margin:0 0 0 0;
 font-size:12px;
@@ -80,32 +86,18 @@ z-index:500;
 }
 /*업체 백업 테이블*/
 #center_list{
- display:none; 
+display:none; 
 }
 /*업체 서비스 백업 테이블*/
 #content_list{
-display:none;
+ display:none;
 }
 #centerInfo_list .hiddenCnt{
 display:none;
 }
-#center_list_coName_class{
-font-size:12px;
-}
-#centerInfo_list_coClass{
-}
-#centerInfo_list_div{
-font-size:12px;
-}
-#centerInfo_list_table{
-padding:0 0 0 0;
-}
-
 #centerInfo{
 display:none; 
-
 }
-
 #centerInfo #centerInfo_panel{
 position:fixed;
 right:15px;
@@ -116,7 +108,7 @@ height:0px;
 border-radius:8px;
 background: #fff;
 box-shadow: 1px 5px 10px rgba(0,0,0,.5);
-border-top: 10px solid #4f5359;
+border-top: 10px solid #16f98f;
 padding: 20px;
 overflow-y: auto;
 max-height: 389px; 
@@ -151,12 +143,6 @@ margin-top:10px;
 overflow-y:auto; 
 height:280px;
 }
-#centerInfo_coname{
-
-}
-#centerInfo_body{
-
-}
 #avail_photo{
 height:34px;
 width:34px;
@@ -180,7 +166,6 @@ text-align:center;
 	width:64px;
 	height:64px;
 }
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 </style>
 </head>
 <body>
@@ -526,7 +511,8 @@ function mapStart(){
 						+content5
 						+content6);
 			}//if null handling ends
-		}// for contents[i] ends
+
+		}// for contents[j] ends
 	}//for content list ends
 for(var i=0; i<count;i++){ //center_list 정보
 	cName=document.getElementById('co_name_'+i).innerHTML;
@@ -714,11 +700,13 @@ function more(){
 
 /*마커 생성 및 클릭 이벤트*/
 function getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i){
+	console.log("cidx="+cIdx);
 	var marker;
 	var infowindow;
 	var coords;
 	var latlngData;
 	if(cLat!=0 && cLng!=0){ // 위도 경도가 DB에 등록된 경우
+		console.log("cidx db 마커 생성 clat cng 등록 됨="+cIdx);
 		coords = new daum.maps.LatLng(cLat, cLng);
 		marker = new daum.maps.Marker({
         	map:map,
@@ -744,7 +732,8 @@ function getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i){
 //makingMarkers ends
 daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infowindow, cIdx, cUrl));
 	}else{ //위도 경도가 DB에 등록되지 않는 경우
-	var geocoder = new daum.maps.services.Geocoder();
+		console.log("cidx db 마커 생성 등록 안됨="+cIdx);
+		var geocoder = new daum.maps.services.Geocoder();
 	geocoder.addr2coord(cAddr, function(status, result) {
 	     if (status === daum.maps.services.Status.OK) {
 		    coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
@@ -828,7 +817,7 @@ function show(co_idx, centerListUrl, setMapGo){
 				}else{
 				/*co_idx and button*/
 				var btn_html = '';
-				btn_html += "<a class='col-sm-12 btn btn-info' href='"+centerListUrl+"' id='coBtn_button'>자세히보기</a>";
+				btn_html += "<a class='col-sm-12 btn btn-default' href='"+centerListUrl+"' id='coBtn_button'>자세히보기</a>";
 				$("#centerInfo_body > #coBtn").css({display:"block"});
 				$("#coBtn_button").replaceWith(btn_html);
 
@@ -1125,55 +1114,65 @@ function keywordSearch(){
 			var bounds = new daum.maps.LatLngBounds(); //맵 바운드
 			var marker;
 			var infowindow;
+			/*****************************************컨텐츠 집어넣기************************************************/
+			console.log("초기 company length===="+company.length);
 			contents=[];
 			contentLists=[];
-			/*****************************************컨텐츠 집어넣기************************************************/
 				console.log("i reached here: "+company);
+				/*검색된 총 길이*/
 				var companyLen = company.length
 				console.log("companyLen="+companyLen)
-				var lastCompany = company[company.length];
-				console.log("lastCompany="+lastCompany);
-				var lastIdx=lastCompany.co_idx;
-				console.log("lastIdx="+lastIdx);
-				for(var i=0; i<company.length; i++){//content_list 정보
-					var companySet = company[i];
-					content1 = $("#content_list_content1_"+i).text();
-					content2 = $("#content_list_content2_"+i).text();
-					content3 = $("#content_list_content3_"+i).text();
-					content4 = $("#content_list_content4_"+i).text();
-					content5 = $("#content_list_content5_"+i).text();
-					content6 = $("#content_list_content6_"+i).text();
-					if(content2!=" " && content2 !=""){
-						content1+=", ";
-					}
-					if(content3!=" " && content3 !=""){
-						content2+=", ";
-					}
-					if(content4!=" " && content4 !=""){
-						content3+=", ";
-					}
-					if(content5!=" " && content5 !=""){
-						content4+=", ";
-					}
-					if(content6!=" " && content6 !=""){
-						content5+=", ";
-					}
-					if(content1!=" "&& content1 !=""){
-						content6+=", ";
-					}
-					for(var j=1; j<=company.length; j++){
-						if(j==lastIdx){
-							if(contents[j]==null){
-							contents[j]="";
+
+				/*idx값 배열 생성*/
+				var contentIdx=[];
+				console.log("초기 company length===="+company.length);
+				for(var i=0; i<company.length; i++){
+					var contentSet = company[i];
+					contentIdx[i]=contentSet.co_idx;
+					var idx = contentIdx[i];
+					for(var j=1; j<=contentCnt; j++){
+						var check=$("#content_list_co_idx_"+i).text();
+						console.log("company.co_idx[i="+i+"]="+idx);
+						console.log("check from content_list[j="+j+"]="+check);
+						if(idx==check){
+							content1 = $("#content_list_content1_"+idx).text();
+							content2 = $("#content_list_content2_"+idx).text();
+							content3 = $("#content_list_content3_"+idx).text();
+							content4 = $("#content_list_content4_"+idx).text();
+							content5 = $("#content_list_content5_"+idx).text();
+							content6 = $("#content_list_content6_"+idx).text();
+							if(content2!=" " && content2 !=""){
+								content1+=", ";
 							}
-							contents[j]+=(content1
-									+content2
-									+content3
-									+content4
-									+content5
-									+content6);
+							if(content3!=" " && content3 !=""){
+								content2+=", ";
+							}
+							if(content4!=" " && content4 !=""){
+								content3+=", ";
+							}
+							if(content5!=" " && content5 !=""){
+								content4+=", ";
+							}
+							if(content6!=" " && content6 !=""){
+								content5+=", ";
+							}
+							if(content1!=" "&& content1 !=""){
+								content6+=", ";
+							}
+							console.log("content1="+content1);
+							console.log("content2="+content2);
+							console.log("content3="+content3);
+							console.log("content4="+content4);
+							console.log("content5="+content5);
+							console.log("content6="+content6);
 						}//if null handling ends
 					}// for contents[i] ends
+					contents[i]+=(content1
+							+content2
+							+content3
+							+content4
+							+content5
+							+content6);
 				}//for content list ends
 			/*****************************************컨텐츠 집어넣기************************************************/
 			/*검색 후 리스트의 주소값 저장 후 맵 바운드 설정*/
@@ -1249,7 +1248,7 @@ function keywordSearch(){
 					company_html+='</div>'; //colapse panel open1
 					company_html+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
 					company_html+='<ul class="list-group">';
-					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contentLists[i]+'</li>';
+					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contents[i]+'</li>';
 					company_html+='</ul>';
 					company_html+='</div>'; //collapse panel2
 					company_html+='<div class="panel-body">';
@@ -1287,7 +1286,7 @@ function keywordSearch(){
 					company_html+='</div>'; //colapse panel open1
 					company_html+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
 					company_html+='<ul class="list-group">';
-					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contentLists[i]+'</li>';
+					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contents[i]+'</li>';
 					company_html+='</ul>';
 					company_html+='</div>'; //collapse panel2
 					company_html+='<div class="panel-body">';
