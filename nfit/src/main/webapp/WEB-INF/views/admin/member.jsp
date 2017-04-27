@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!--
  * CoreUI - Open Source Bootstrap Admin Template
  * @version v1.0.0-alpha.4
@@ -97,10 +98,9 @@
 
 		<!-- Main content -->
 		<main class="main">
-		<div class="title">
-			<a href="index.do" class="navbar-logo"><img
-				src="resources/images/n-1x-170x128.jpg" alt="Nfit"></a> <a
-				class="navbar-caption" href="index.do">Nfit</a>
+		<div class="title" style="margin-top: 15px; margin-left: 35px;">
+			<img src="resources/img/favicon.png" style="height: 65px;"> 
+			<a href="memberAdmin.do" style="font-family:'Nanum Pen Script' serif;">회원관리 페이지</a>
 		</div>
 		<div class="container-fluid">
 			<div id="ui-view">
