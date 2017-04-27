@@ -102,6 +102,7 @@ function mark(star){
 }
 </script>
 <script>
+	/* 수정버튼클릭시 나오는 화면 */
 	function showModify(feedback_index){
 		$.ajax({
 			type:'get',
@@ -137,63 +138,62 @@ padding-right: 20px;
 }
 /* 댓글관련 */
 #modifyFeedback{
-	width: 400px;
-	height: 100px;
-	position: absolute;  /*  절대좌표지정없으면 바닥에 깔리게됨  */
-	top:70%; /* 위아래 50 */
-	left:75%;
-	margin-left: -220px;
-	z-index: 10; /* 레이어   */
-	visibility: hidden; /* 버튼클릭시 보이기하기위함 */
+width: 400px;
+height: 100px;
+position: absolute;  /*  절대좌표지정없으면 바닥에 깔리게됨  */
+top:70%; /* 위아래 50 */
+left:75%;
+margin-left: -220px;
+z-index: 10; /* 레이어   */
+visibility: hidden; /* 버튼클릭시 보이기하기위함 */
 }
-
-   .button {
-   border: 0px solid #0a3c59;
-   background: #a5c1d4;
-   background: -webkit-gradient(linear, left top, left bottom, from(#a8b8c4), to(#a5c1d4));
-   background: -webkit-linear-gradient(top, #a8b8c4, #a5c1d4);
-   background: -moz-linear-gradient(top, #a8b8c4, #a5c1d4);
-   background: -ms-linear-gradient(top, #a8b8c4, #a5c1d4);
-   background: -o-linear-gradient(top, #a8b8c4, #a5c1d4);
-   background-image: -ms-linear-gradient(top, #a8b8c4 0%, #a5c1d4 100%);
-   padding: 4.5px 9px;
-   -webkit-border-radius: 29px;
-   -moz-border-radius: 29px;
-   border-radius: 29px;
-   -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
-   -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
-   box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
-   text-shadow: #422542 0 1px 0;
-   color: #10171c;
-   font-size: 11px;
-   font-family: helvetica, serif;
-   text-decoration: none;
-   vertical-align: middle;
-   }
+.button {
+border: 0px solid #0a3c59;
+background: #a5c1d4;
+background: -webkit-gradient(linear, left top, left bottom, from(#a8b8c4), to(#a5c1d4));
+background: -webkit-linear-gradient(top, #a8b8c4, #a5c1d4);
+background: -moz-linear-gradient(top, #a8b8c4, #a5c1d4);
+background: -ms-linear-gradient(top, #a8b8c4, #a5c1d4);
+background: -o-linear-gradient(top, #a8b8c4, #a5c1d4);
+background-image: -ms-linear-gradient(top, #a8b8c4 0%, #a5c1d4 100%);
+padding: 4.5px 9px;
+-webkit-border-radius: 29px;
+-moz-border-radius: 29px;
+border-radius: 29px;
+-webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+-moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+text-shadow: #422542 0 1px 0;
+color: #10171c;
+font-size: 11px;
+font-family: helvetica, serif;
+text-decoration: none;
+vertical-align: middle;
+}
 .button:hover {
-   border: 0px solid #0a3c59;
-   text-shadow: #93ccf0 0 1px 0;
-   background: #bacedb;
-   background: -webkit-gradient(linear, left top, left bottom, from(#aecee3), to(#bacedb));
-   background: -webkit-linear-gradient(top, #aecee3, #bacedb);
-   background: -moz-linear-gradient(top, #aecee3, #bacedb);
-   background: -ms-linear-gradient(top, #aecee3, #bacedb);
-   background: -o-linear-gradient(top, #aecee3, #bacedb);
-   background-image: -ms-linear-gradient(top, #aecee3 0%, #bacedb 100%);
-   color: #080508;
-   }
+border: 0px solid #0a3c59;
+text-shadow: #93ccf0 0 1px 0;
+background: #bacedb;
+background: -webkit-gradient(linear, left top, left bottom, from(#aecee3), to(#bacedb));
+background: -webkit-linear-gradient(top, #aecee3, #bacedb);
+background: -moz-linear-gradient(top, #aecee3, #bacedb);
+background: -ms-linear-gradient(top, #aecee3, #bacedb);
+background: -o-linear-gradient(top, #aecee3, #bacedb);
+background-image: -ms-linear-gradient(top, #aecee3 0%, #bacedb 100%);
+color: #080508;
+}
 .button:active {
-   text-shadow: #1e4158 0 1px 0;
-   border: 0px solid #0a3c59;
-   background: #65a9d7;
-   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#bacedb));
-   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
-   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-   background: -o-linear-gradient(top, #3e779d, #65a9d7);
-   background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
-   color: #fff;
-   }
+text-shadow: #1e4158 0 1px 0;
+border: 0px solid #0a3c59;
+background: #65a9d7;
+background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#bacedb));
+background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+background: -o-linear-gradient(top, #3e779d, #65a9d7);
+background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
+color: #fff;
+}
 </style>
 <body>
 <!-- 업체idx 값 -->

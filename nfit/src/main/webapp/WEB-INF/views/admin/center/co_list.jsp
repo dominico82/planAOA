@@ -174,6 +174,7 @@ $(document).ready(function(){
 			}
 		});
 	});
+	//input text 에 검색어 입력시 목록 보여주는 함수
 	 $('#keyField').autocomplete({
 		 source :function(request ,response){
 			 var keyword =$('#keyWord').val();
@@ -184,6 +185,7 @@ $(document).ready(function(){
 				data :{ value : request.term,//사용자가 입력한값
 						keyword:keyword//option value
 				},
+				//json타입으로 받아온 객체 안에 json배열 map함수를 이용하여 값으 리턴해준다.
 				success : function(data){
 						response($.map(data.data,function(result){
 							return {
@@ -191,10 +193,12 @@ $(document).ready(function(){
 								value :result.co_list
 							}
 					}));
+						//이상한 안내문구 안보이게하기
 						$('.ui-helper-hidden-accessible').css('display','none');
 				}
 			});
  		},
+ 		//첫번째 검색어가 input text 에 올라가게 해준다.
  		selectFirst:true
  	});
 });
@@ -205,104 +209,104 @@ color: black;
 font-weight: bold;
 }
 table.type09 {
-    border-collapse: collapse;
-    text-align: left;
-    line-height: 1.5;
-
+border-collapse: collapse;
+text-align: left;
+line-height: 1.5;
 }
 table.type09 thead th {
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: top;
-    color: #369;
-    border-bottom: 3px solid #036;
+padding: 10px;
+font-weight: bold;
+vertical-align: top;
+color: #369;
+border-bottom: 3px solid #036;
 }
 table.type09 tbody th {
-    width: 150px;
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: top;
-    border-bottom: 1px solid #ccc;
-    background: #f3f6f7;
+width: 150px;
+padding: 10px;
+font-weight: bold;
+vertical-align: top;
+border-bottom: 1px solid #ccc;
+background: #f3f6f7;
 }
 table.type09 td {
-    width: 350px;
-    padding: 10px;
-    vertical-align: top;
-    border-bottom: 1px solid #ccc;
+width: 350px;
+padding: 10px;
+vertical-align: top;
+border-bottom: 1px solid #ccc;
 }
 table.type05 {
-    border-collapse: separate;
-    border-spacing: 1px;
-    text-align: left;
-    line-height: 1.5;
-    border-top: 1px solid #ccc;
-    margin: 20px 10px;
+border-collapse: separate;
+border-spacing: 1px;
+text-align: left;
+line-height: 1.5;
+border-top: 1px solid #ccc;
+margin: 20px 10px;
 }
 table.type05 th {
-    width: 150px;
-    padding: 10px;
-    font-weight: bold;
-    vertical-align: top;
-    border-bottom: 1px solid #ccc;
-    background: #efefef;
+width: 150px;
+padding: 10px;
+font-weight: bold;
+vertical-align: top;
+border-bottom: 1px solid #ccc;
+background: #efefef;
 }
 table.type05 td {
-    width: 350px;
-    padding: 10px;
-    vertical-align: top;
-    border-bottom: 1px solid #ccc;
+width: 350px;
+padding: 10px;
+vertical-align: top;
+border-bottom: 1px solid #ccc;
 }
-   .button {
-   border: 0px solid #0a3c59;
-   background: #a5c1d4;
-   background: -webkit-gradient(linear, left top, left bottom, from(#a8b8c4), to(#a5c1d4));
-   background: -webkit-linear-gradient(top, #a8b8c4, #a5c1d4);
-   background: -moz-linear-gradient(top, #a8b8c4, #a5c1d4);
-   background: -ms-linear-gradient(top, #a8b8c4, #a5c1d4);
-   background: -o-linear-gradient(top, #a8b8c4, #a5c1d4);
-   background-image: -ms-linear-gradient(top, #a8b8c4 0%, #a5c1d4 100%);
-   padding: 4.5px 9px;
-   -webkit-border-radius: 29px;
-   -moz-border-radius: 29px;
-   border-radius: 29px;
-   -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
-   -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
-   box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
-   text-shadow: #422542 0 1px 0;
-   color: #10171c;
-   font-size: 11px;
-   font-family: helvetica, serif;
-   text-decoration: none;
-   vertical-align: middle;
-   }
+.button {
+border: 0px solid #0a3c59;
+background: #a5c1d4;
+background: -webkit-gradient(linear, left top, left bottom, from(#a8b8c4), to(#a5c1d4));
+background: -webkit-linear-gradient(top, #a8b8c4, #a5c1d4);
+background: -moz-linear-gradient(top, #a8b8c4, #a5c1d4);
+background: -ms-linear-gradient(top, #a8b8c4, #a5c1d4);
+background: -o-linear-gradient(top, #a8b8c4, #a5c1d4);
+background-image: -ms-linear-gradient(top, #a8b8c4 0%, #a5c1d4 100%);
+padding: 4.5px 9px;
+-webkit-border-radius: 29px;
+-moz-border-radius: 29px;
+border-radius: 29px;
+-webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+-moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+text-shadow: #422542 0 1px 0;
+color: #10171c;
+font-size: 11px;
+font-family: helvetica, serif;
+text-decoration: none;
+vertical-align: middle;
+}
 .button:hover {
-   border: 0px solid #0a3c59;
-   text-shadow: #93ccf0 0 1px 0;
-   background: #bacedb;
-   background: -webkit-gradient(linear, left top, left bottom, from(#aecee3), to(#bacedb));
-   background: -webkit-linear-gradient(top, #aecee3, #bacedb);
-   background: -moz-linear-gradient(top, #aecee3, #bacedb);
-   background: -ms-linear-gradient(top, #aecee3, #bacedb);
-   background: -o-linear-gradient(top, #aecee3, #bacedb);
-   background-image: -ms-linear-gradient(top, #aecee3 0%, #bacedb 100%);
-   color: #080508;
-   }
+border: 0px solid #0a3c59;
+text-shadow: #93ccf0 0 1px 0;
+background: #bacedb;
+background: -webkit-gradient(linear, left top, left bottom, from(#aecee3), to(#bacedb));
+background: -webkit-linear-gradient(top, #aecee3, #bacedb);
+background: -moz-linear-gradient(top, #aecee3, #bacedb);
+background: -ms-linear-gradient(top, #aecee3, #bacedb);
+background: -o-linear-gradient(top, #aecee3, #bacedb);
+background-image: -ms-linear-gradient(top, #aecee3 0%, #bacedb 100%);
+color: #080508;
+}
 .button:active {
-   text-shadow: #1e4158 0 1px 0;
-   border: 0px solid #0a3c59;
-   background: #65a9d7;
-   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#bacedb));
-   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
-   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
-   background: -o-linear-gradient(top, #3e779d, #65a9d7);
-   background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
-   color: #fff;
-   }
+text-shadow: #1e4158 0 1px 0;
+border: 0px solid #0a3c59;
+background: #65a9d7;
+background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#bacedb));
+background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+background: -o-linear-gradient(top, #3e779d, #65a9d7);
+background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
+color: #fff;
+}
 </style>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
+<!-- 업체목록 List에담긴것  -->
 <c:set var="list" value="${list}"/>
 <header>
 	<jsp:include page="../../header.jsp"/>
