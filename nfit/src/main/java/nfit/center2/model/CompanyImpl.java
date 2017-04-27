@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.web.multipart.MultipartFile;
+import nfit.center.model.*;
 
 public class CompanyImpl implements CompanyDAO {
 
@@ -17,16 +18,16 @@ public class CompanyImpl implements CompanyDAO {
 		this.sqlMap = sqlMap;
 	}
 	//업체 내열
-	public List<CompanyListDTO> companyList() {
+	public List<CenterDTO> companyList() {
 		return sqlMap.selectList("centerList");
 	}
 	//업체 검색하기
-	public List<CompanyListDTO> companySearch(String keyword) {
+	public List<CenterDTO> companySearch(String keyword) {
 		// TODO Auto-generated method stub
 		return sqlMap.selectList("centerKeyword", keyword);
 	}
 	//업체 등록
-	public int company_add(CompanyListDTO vo, String menu, String filename) {
+	public int company_add(CenterDTO vo, String menu, String filename) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("co_name",vo.getCo_name());
@@ -40,7 +41,7 @@ public class CompanyImpl implements CompanyDAO {
 		return  sqlMap.insert("companyadd", map);
 	}
 	//업체 상세보기
-	public CompanyListDTO companydetail(int co_idx) {
+	public CenterDTO companydetail(int co_idx) {
 		
 		return sqlMap.selectOne("companydetail", co_idx);
 	}
@@ -52,7 +53,7 @@ public class CompanyImpl implements CompanyDAO {
 		sqlMap.update("co_viewupdate", map);
 	}
 	//업체 이미지 제외수정
-	public void co_listupdate(CompanyListDTO vo) {
+	public void co_listupdate(CenterDTO vo) {
 		sqlMap.update("co_listupdate", vo);
 	}
 	//업체 정보삭제
@@ -64,18 +65,18 @@ public class CompanyImpl implements CompanyDAO {
 		return sqlMap.selectOne("companyListcount");
 	}
 	//업체 게시판뽑기
-	public List<CompanyListDTO> companyListborad(int start, int end) {
+	public List<CenterDTO> companyListborad(int start, int end) {
 		HashMap<String, Object> map= new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
 		return sqlMap.selectList("companyListboard", map);
 	}
 	//업체별 이용시간
-	public List<CompanyUseTimeDTO> usetime_table(int co_idx) {
+	public List<UsetimeDTO> usetime_table(int co_idx) {
 		return sqlMap.selectList("usetime_table", co_idx);
 	}
 	//업체별 컨텐츠목록
-	 public List<CompanyContentDTO> content_list(int co_idx) {
+	 public List<ContentDTO> content_list(int co_idx) {
 		 return sqlMap.selectList("content_list", co_idx);
 	 }
 	 //업체별 이용시간 수정하기 
@@ -106,7 +107,7 @@ public class CompanyImpl implements CompanyDAO {
 		 sqlMap.update("content_list_update",map);
 	}
 	 // ajax로구현한 업체등록 
-	 public void company_add2(CompanyListDTO vo, String menu) {
+	 public void company_add2(CenterDTO vo, String menu) {
 		 HashMap<String ,Object> map = new HashMap<String, Object>();
 		map.put("co_name",vo.getCo_name());
 		map.put("co_address", vo.getCo_address());
@@ -141,23 +142,23 @@ public class CompanyImpl implements CompanyDAO {
 		return sqlMap.selectOne("maxco_idx");
 	}
 	//이용시간 등록 메소드
-	public void usetime_insert(CompanyUseTimeDTO vo) {
+	public void usetime_insert(UsetimeDTO vo) {
 		sqlMap.insert("usetime_low_insert", vo);
 	}
 	//컨텐츠 등록메소드
-	public void content_insert(CompanyContentDTO vo) {
+	public void content_insert(ContentDTO vo) {
 		sqlMap.insert("content_low_insert", vo);
 	}
 	//전화번호로 기존업체 조회
 	public int oldCompany(String co_phone) {
 		return sqlMap.selectOne("oldCompanycon", co_phone);
 	}
-	public void oldCompanyin(CompanyContentDTO vo) {
+	public void oldCompanyin(ContentDTO vo) {
 		sqlMap.insert("oldCompanyin", vo);
 	}
 	@Override
 	//업체검색
-	public List<CompanyListDTO> companySearch(String keyword, String keyfield, int start, int end) {
+	public List<CenterDTO> companySearch(String keyword, String keyfield, int start, int end) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("keyword", keyword);
@@ -168,7 +169,7 @@ public class CompanyImpl implements CompanyDAO {
 	}
 	
 	//업체 자동완성 보류
-	public List<CompanyListDTO> searchAuto(String keyword, String keyfield) {
+	public List<CenterDTO> searchAuto(String keyword, String keyfield) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("keyword", keyword);

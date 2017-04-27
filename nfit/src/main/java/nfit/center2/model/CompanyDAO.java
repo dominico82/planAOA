@@ -9,30 +9,30 @@ import nfit.center.model.*;
 public interface CompanyDAO {
 
 	//회사 목록 나열 
-	public List<CompanyListDTO> companyList(); 
+	public List<CenterDTO> companyList(); 
 	//회사 리스트 나열 목록
-	public List<CompanyListDTO> companyListborad(int start,int end); 
+	public List<CenterDTO> companyListborad(int start,int end); 
 	//회서 목록 검색
-	public List<CompanyListDTO> companySearch(String keyword);
+	public List<CenterDTO> companySearch(String keyword);
 	//업체등록 
-	public int company_add(CompanyListDTO vo,String menu,String filename);
+	public int company_add(CenterDTO vo,String menu,String filename);
 	//업체등록2
-	public void company_add2(CompanyListDTO vo,String menu);
+	public void company_add2(CenterDTO vo,String menu);
 
 	//업체 상세정보보기
-	public CompanyListDTO companydetail(int co_idx);
+	public CenterDTO companydetail(int co_idx);
 	//업체 이미지 수정
 	public void companyco_view(int co_idx,String co_view);
 	//업체 이미지제외 수정
-	public void co_listupdate(CompanyListDTO vo);
+	public void co_listupdate(CenterDTO vo);
 	//업체 정보삭제
 	public void co_listdelete(int co_idx);
 	//총 업체 숫자
 	public int companyListcount();
 	//업체별 이용시간 목록
-	public List<CompanyUseTimeDTO> usetime_table(int co_idx);
+	public List<UsetimeDTO> usetime_table(int co_idx);
 	//업체별 이용가능 컨텐츠 목록
-	public List<CompanyContentDTO> content_list(int co_idx);
+	public List<ContentDTO> content_list(int co_idx);
 	//업체별 이용시간 수정
 	public void usetime_table_update(int usetime_idx ,String usetime_time);
 	//수정하기전 co_idx값 총값구하기 
@@ -51,15 +51,15 @@ public interface CompanyDAO {
 	//max함수 적용 co_idx값 구하는 메소드
 	public int max_co_idx();
 	//이용시간등록 메소드작성
-	public void usetime_insert(CompanyUseTimeDTO vo);
+	public void usetime_insert(UsetimeDTO vo);
 	//컨탠츠 등록 메소드작성
-	public void content_insert(CompanyContentDTO vo);
+	public void content_insert(ContentDTO vo);
 	//전화번호로 기존업체 조회 
 	public int oldCompany(String co_phone);
 	//기존업체 컨탠츠등록
-	public void oldCompanyin(CompanyContentDTO vo);
+	public void oldCompanyin(ContentDTO vo);
 	//업체 검색
-	public List<CompanyListDTO> companySearch(String keyword,String keyfield,int start,int end);
+	public List<CenterDTO> companySearch(String keyword,String keyfield,int start,int end);
 	//업체 자동완성 보류
-	public List<CompanyListDTO> searchAuto(String keyword,String keyfield);
+	public List<CenterDTO> searchAuto(String keyword,String keyfield);
 }

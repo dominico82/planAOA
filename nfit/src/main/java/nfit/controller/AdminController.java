@@ -23,8 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import nfit.center.model.CenterDTO;
 import nfit.center2.model.CompanyDAO;
-import nfit.center2.model.CompanyListDTO;
 import nfit.member.model.MemberDAO;
 import nfit.member.model.MemberDTO;
 import nfit.notice.model.NoticeDAO;
@@ -124,7 +124,7 @@ public class AdminController {
 		if(totalpage<endpage){
 			endpage=totalpage;
 		}
-		List<CompanyListDTO> list = companyDao.companyListborad(start, end);
+		List<CenterDTO> list = companyDao.companyListborad(start, end);
 		map.put("startpage", startpage);
 		map.put("endpage", endpage);
 		map.put("totalpage", totalpage);

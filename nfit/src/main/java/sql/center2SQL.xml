@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="center">
-	<select id="centerList" resultType="nfit.center2.model.CompanyListDTO">
+	<select id="centerList" resultType="nfit.center.model.CenterDTO">
 	select * from company_list order by co_idx asc
 	</select>
 	<!-- 업체등록 2번재 성공하면 첫번째꺼지움 -->
@@ -27,7 +27,7 @@
 	where co_phone = #{co_phone}
 	</select>
 	<!-- 업체상세보기 -->
-	<select id="companydetail" parameterType="int" resultType="nfit.center2.model.CompanyListDTO">
+	<select id="companydetail" parameterType="int" resultType="nfit.center.model.CenterDTO">
 	select * from company_list 
 	where co_idx = #{co_idx}
 	</select>
@@ -38,7 +38,7 @@
 		where co_idx = #{co_idx}
 	</update>
 	<!-- 이미지제외 업체정보수정 -->
-	<update id="co_listupdate" parameterType="nfit.center2.model.CompanyListDTO">
+	<update id="co_listupdate" parameterType="nfit.center.model.CenterDTO">
 		update company_list 
 		set co_name = #{co_name},
 		co_address = #{co_address},
@@ -59,16 +59,16 @@
 	select count(*) from company_list
 	</select>
 	<!-- 업체리스트 페이징 -->
-	<select id="companyListboard" resultType="nfit.center2.model.CompanyListDTO" parameterType="hashmap">
+	<select id="companyListboard" resultType="nfit.center.model.CenterDTO" parameterType="hashmap">
 	select * from(select rownum as rnum,a.* from(select * from company_list  order by co_idx asc)a) where rnum between #{start} and #{end}
 	</select>
 	<!-- 업체별 이용시간  -->
-	<select id="usetime_table" parameterType="int" resultType="nfit.center2.model.CompanyUseTimeDTO">
+	<select id="usetime_table" parameterType="int" resultType="nfit.center.model.UsetimeDTO">
 	select * from usetime_table
 	where co_idx =#{co_idx}
 	</select>
 	<!-- 업체별 컨텐츠목록 -->
-	<select id="content_list" parameterType="int" resultType="nfit.center2.model.CompanyContentDTO">
+	<select id="content_list" parameterType="int" resultType="nfit.center.model.ContentDTO">
 	select * from content_list
 	where co_idx = #{co_idx}
 	</select>
@@ -107,7 +107,7 @@
 	where co_idx = #{co_idx}
 	</delete>
 	<!-- content_list low 추가  -->
-	<insert id="content_low_insert" parameterType="nfit.center2.model.CompanyContentDTO">
+	<insert id="content_low_insert" parameterType="nfit.center.model.ContentDTO">
 	insert into content_list
 	values(content_idx.nextval,
 	#{co_idx},#{content_coin}
@@ -117,7 +117,7 @@
 	#{content4},#{content5},#{content6})
 	</insert>
 	<!-- usetime_table low 추가 -->
-	<insert id="usetime_low_insert" parameterType="nfit.center2.model.CompanyUseTimeDTO">
+	<insert id="usetime_low_insert" parameterType="nfit.center.model.UsetimeDTO">
 	insert into usetime_table
 	values(usetime_idx.nextval,#{co_idx},#{usetime_day},#{usetime_time})
 	</insert>
@@ -132,7 +132,7 @@
 		where co_phone = #{co_phone}
 	</select>
 	 <!-- 기존업체 컨텐츠등록 -->
-	 <insert id="oldCompanyin" parameterType="nfit.center2.model.CompanyContentDTO">
+	 <insert id="oldCompanyin" parameterType="nfit.center.model.ContentDTO">
 	 insert into content_list
 	  values(content_idx.nextval,
 	  #{co_idx},#{content_coin},
@@ -141,7 +141,7 @@
 	  #{content5},#{content6})
 	 </insert>
 	 <!-- 업체 검색하기 -->
-	  <select id="companySearch" parameterType="hashmap" resultType="nfit.center2.model.CompanyListDTO">
+	  <select id="companySearch" parameterType="hashmap" resultType="nfit.center.model.CenterDTO">
 		 select * from
 		 (select rownum as rnum,a.* from(select * from company_list 
 			<if test="keyfield != null">
@@ -151,7 +151,7 @@
 		 where rnum between #{start} and #{end} 
 	  </select>
 	  
-	   <select id="searchAuto" resultType="nfit.center2.model.CompanyListDTO" parameterType="hashmap">
+	   <select id="searchAuto" resultType="nfit.center.model.CenterDTO" parameterType="hashmap">
 	  	select * from 
 		company_list 
 		<if test="keyfield != null">

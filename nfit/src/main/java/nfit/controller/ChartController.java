@@ -36,11 +36,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartRequest;
 
 
-import nfit.center2.model.CompanyContentDTO;
 import nfit.center2.model.CompanyDAO;
-import nfit.center2.model.CompanyListDTO;
-import nfit.center2.model.CompanyUseTimeDTO;
 import util.MediaUtils;
+import nfit.center.model.*;
 //nfit
 
 @Controller
@@ -60,7 +58,7 @@ public class ChartController {
 	@RequestMapping("company_list.do")
 	@ResponseBody
 	public JSONObject chartTest3(){
-		List<CompanyListDTO> list =companyDao.companyList();
+		List<CenterDTO> list =companyDao.companyList();
 		//리턴 할 json 객체
 		JSONObject data = new JSONObject(); // {}
 		//json의 컬럼 객체
@@ -79,7 +77,7 @@ public class ChartController {
 		data.put("cols", title);
 		//{"cols":[{"label":"업체명","type","string"},{"lable":"누적이용수","type":"number"}]}
 		JSONArray body = new JSONArray();
-		for(CompanyListDTO vo : list ){
+		for(CenterDTO vo : list ){
 			JSONObject co_name= new JSONObject();
 			co_name.put("v", vo.getCo_name());//업체이름
 			JSONObject co_usecount = new JSONObject();
@@ -98,7 +96,7 @@ public class ChartController {
 	@RequestMapping(value="uploadAjax.do",method=RequestMethod.POST,produces="text/plan;charset=utf-8")
 	@ResponseBody//view 가아니라 data 리턴
 	public ResponseEntity<String> uploadAjax(@RequestParam("checkbox")int checkbox,
-			@ModelAttribute CompanyListDTO vo,MultipartHttpServletRequest mreq){
+			@ModelAttribute CenterDTO vo,MultipartHttpServletRequest mreq){
 			String menu="";
 		ResponseEntity<String> entity= null;
 		try{
@@ -191,7 +189,7 @@ public class ChartController {
 		}
 		//List<CompanyListDTO> list = companyDao.companyListborad(start, end);
 		//업체검색 메소드호출
-		List<CompanyListDTO> list=companyDao.companySearch(keyword, keyfield, start, end);
+		List<CenterDTO> list=companyDao.companySearch(keyword, keyfield, start, end);
 		map.put("startpage", startpage);
 		map.put("endpage", endpage);
 		map.put("totalpage", totalpage);
@@ -202,7 +200,7 @@ public class ChartController {
 	@RequestMapping("co_update.do")
 	public String co_update(@RequestParam("co_idx")int co_idx,Map map){
 		//idx 로 업체 리스트 가져오기 
-		CompanyListDTO dto =companyDao.companydetail(co_idx);
+		CenterDTO dto =companyDao.companydetail(co_idx);
 		map.put("list", dto);
 		return "admin/center/co_Detail";
 	}
@@ -270,7 +268,7 @@ public class ChartController {
 	}
 	//업체정보 수정
 	@RequestMapping(value="centerUpdate.do",method=RequestMethod.POST)
-	public ResponseEntity<String> centerUpdate(@RequestBody CompanyListDTO vo){
+	public ResponseEntity<String> centerUpdate(@RequestBody CenterDTO vo){
 		ResponseEntity<String> entity=null;
 		try{
 			//서비스추가
@@ -301,7 +299,7 @@ public class ChartController {
 	@RequestMapping("usetime_table_list.do")
 	public String usetime_table(@RequestParam("co_idx")int co_idx,Map map){
 		
-		List<CompanyUseTimeDTO> list= companyDao.usetime_table(co_idx);
+		List<UsetimeDTO> list= companyDao.usetime_table(co_idx);
 		map.put("list", list);
 		map.put("usetime_co_idx", co_idx);
 		return "admin/center/usetime_table_list";
@@ -309,7 +307,7 @@ public class ChartController {
 	//업체별 컨텐츠 목록보기 
 	@RequestMapping("content_list.do")
 	public String content_list(@RequestParam("co_idx")int co_idx,Map map){
-		List<CompanyContentDTO> list = companyDao.content_list(co_idx);
+		List<ContentDTO> list = companyDao.content_list(co_idx);
 		int count = companyDao.content_list_count(co_idx);
 		map.put("count", count);
 		map.put("list",list);
@@ -382,7 +380,7 @@ public class ChartController {
 			//폴더 생성하기 [고정폴더]
 			uploadPath="c:/upload/";
 			//co_idx값으로 리스트 훍고 업체 핸드폰 번호 구하기 
-			CompanyListDTO dto = companyDao.companydetail(co_idx);
+			CenterDTO dto = companyDao.companydetail(co_idx);
 			//실제 우리가 파일을 저장할 하위 폴더
 			String originalPath=co_idx+"_"+dto.getCo_phone();
 			//상위폴더와 하위폴더의 결합 
@@ -471,7 +469,7 @@ public class ChartController {
 	}
 	//이용시간 등록 메소드
 	@RequestMapping("usetime_insert.do")
-	public ResponseEntity<String> usetime_insert(@ModelAttribute CompanyUseTimeDTO vo){
+	public ResponseEntity<String> usetime_insert(@ModelAttribute UsetimeDTO vo){
 		ResponseEntity<String> entity =null;
 		try{
 			//최신 idx값가져오는 Dao호출
@@ -489,7 +487,7 @@ public class ChartController {
 	}
 	//컨탠츠 등록 메소드
 	@RequestMapping("content_insert.do")
-	public ResponseEntity<String> content_insert(@ModelAttribute CompanyContentDTO vo){
+	public ResponseEntity<String> content_insert(@ModelAttribute ContentDTO vo){
 		ResponseEntity<String> entity=null;
 		try{
 			//최신 idx값 가져오는 Dao호출
@@ -507,7 +505,7 @@ public class ChartController {
 	@ResponseBody
 	@RequestMapping("oldCompanycon.do")
 	public ResponseEntity<String> oldCompanycon(
-			@ModelAttribute CompanyContentDTO vo,@RequestParam("co_phone")String co_phone){
+			@ModelAttribute ContentDTO vo,@RequestParam("co_phone")String co_phone){
 		ResponseEntity<String> entity=null;
 		try{
 			//기존 업체 idx갑구하기
@@ -527,7 +525,7 @@ public class ChartController {
 	public String search(
 			@RequestParam(value="keyword",required=false)String keyword,
 			@RequestParam(value="keyfield",required=false)String keyfield,Map map){
-		List<CompanyListDTO> list =companyDao.searchAuto(keyword, keyfield);
+		List<CenterDTO> list =companyDao.searchAuto(keyword, keyfield);
 		map.put("keyword", keyword);
 		map.put("list", list);
 		return "admin/center/search";
@@ -538,7 +536,7 @@ public class ChartController {
 			@RequestParam("keyword")String keyword){
 		JSONObject head = new JSONObject();
 		JSONArray body= new JSONArray();
-		List<CompanyListDTO> list = companyDao.searchAuto(keyword, value);
+		List<CenterDTO> list = companyDao.searchAuto(keyword, value);
 		
 		for(int i=0;i<list.size();i++){
 			//데이터삽입
