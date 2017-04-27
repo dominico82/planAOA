@@ -11,8 +11,8 @@
 <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
 <script type="text/javascript" src="resources/js/bootstrap-filestyle.min.js"></script>
-<link rel="stylesheet" type="text/css" href="resources/css/mypage1.css"/>
 <jsp:include page="../header.jsp"/>
+<link rel="stylesheet" type="text/css" href="resources/css/mypage1.css"/>
 <script>
 
 $(document).ready(function(){ //DOM이 준비되고
@@ -25,6 +25,12 @@ $(document).ready(function(){ //DOM이 준비되고
         }
     });
 });
+
+</script>
+<script>
+function picLoad(){
+	document.upload.submit();
+}
 </script>
 </head>
 <body>
@@ -39,9 +45,15 @@ $(document).ready(function(){ //DOM이 준비되고
 							<c:forEach var="pics" items="${pic}"><img class="imgsize" src="resources/upload_images/${pics}"></c:forEach>
 							</span>
 						</span>
+						
 						<form name="upload" action="fileUpload.do" method="post" enctype="multipart/form-data">
+						<span class="btn btn-default btn-file">
+						사진 선택
 							<input type="file" name="files" accept="image/*">
-							<input type="submit" value="사진 전송">
+						</span>
+						<div class="current">
+							<a href="javascript:picLoad();" class="current">사진 바꾸기</a>
+						</div>
 							<input type="hidden" value="${dto.member_id}" name="id">
 							<input type="hidden" value="${dto.member_idx}" name="idx">
 						</form>
@@ -135,7 +147,7 @@ $(document).ready(function(){ //DOM이 준비되고
 										        <!-- 닫기(x) 버튼 -->
 										        <button type="button" class="close" data-dismiss="modal">×</button>
 										        	
-										        <h4 class="modal-title">추천 식단</h4>
+										        <h4 class="modal-title"><b>${dto.member_name}</b> 님을 위한 추천 식단</h4>
 										      </div>
 										      <!-- body -->
 										      <div class="modal-body">
@@ -188,7 +200,6 @@ $(document).ready(function(){ //DOM이 준비되고
 										      </div>
 										      <!-- Footer -->
 										      <div class="modal-footer">
-										        Footer
 										        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 										      </div>
 										    </div>
@@ -247,7 +258,7 @@ $(document).ready(function(){ //DOM이 준비되고
 										        <!-- 닫기(x) 버튼 -->
 										        <button type="button" class="close" data-dismiss="modal">×</button>
 										        	
-										        <h4 class="modal-title">추천 식단</h4>
+										        <h4 class="modal-title"><b>${dto.member_name}</b> 님을 위한 추천 식단</h4>
 										      </div>
 										      <!-- body -->
 										      <div class="modal-body">
@@ -300,7 +311,6 @@ $(document).ready(function(){ //DOM이 준비되고
 										      </div>
 										      <!-- Footer -->
 										      <div class="modal-footer">
-										        Footer
 										        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 										      </div>
 										    </div>
@@ -359,7 +369,7 @@ $(document).ready(function(){ //DOM이 준비되고
 										        <!-- 닫기(x) 버튼 -->
 										        <button type="button" class="close" data-dismiss="modal">×</button>
 										        	
-										        <h4 class="modal-title">추천 식단</h4>
+										        <h4 class="modal-title"><b>${dto.member_name}</b> 님을 위한 추천 식단</h4>
 										      </div>
 										      <!-- body -->
 										      <div class="modal-body">
@@ -412,7 +422,6 @@ $(document).ready(function(){ //DOM이 준비되고
 										      </div>
 										      <!-- Footer -->
 										      <div class="modal-footer">
-										        Footer
 										        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 										      </div>
 										    </div>
@@ -471,7 +480,7 @@ $(document).ready(function(){ //DOM이 준비되고
 										        <!-- 닫기(x) 버튼 -->
 										        <button type="button" class="close" data-dismiss="modal">×</button>
 										        	
-										        <h4 class="modal-title">추천 식단</h4>
+										        <h4 class="modal-title"><b>${dto.member_name}</b> 님을 위한 추천 식단</h4>
 										      </div>
 										      <!-- body -->
 										      <div class="modal-body">
@@ -524,7 +533,6 @@ $(document).ready(function(){ //DOM이 준비되고
 										      </div>
 										      <!-- Footer -->
 										      <div class="modal-footer">
-										        Footer
 										        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 										      </div>
 										    </div>
@@ -583,7 +591,7 @@ $(document).ready(function(){ //DOM이 준비되고
 										        <!-- 닫기(x) 버튼 -->
 										        <button type="button" class="close" data-dismiss="modal">×</button>
 										        	
-										        <h4 class="modal-title">추천 식단</h4>
+										        <h4 class="modal-title"><b>${dto.member_name}</b> 님을 위한 추천 식단</h4>
 										      </div>
 										      <!-- body -->
 										      <div class="modal-body">
@@ -636,7 +644,6 @@ $(document).ready(function(){ //DOM이 준비되고
 										      </div>
 										      <!-- Footer -->
 										      <div class="modal-footer">
-										        Footer
 										        <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
 										      </div>
 										    </div>
