@@ -46,11 +46,6 @@ public class AdminController {
 	@Autowired
 	UseDAO useDao;
 
-	@RequestMapping("/adminPage.do")
-	public String AdminForm() {
-		return "admin/main";
-	}
-
 	@RequestMapping(value = "memberAdmin.do")
 	public ModelAndView memberAdmin(@RequestParam(value = "cp", defaultValue = "1") int cp) {
 		int totalCnt = memberDao.getTotalCnt();

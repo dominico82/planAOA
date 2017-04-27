@@ -51,4 +51,5 @@
 		delete mtom_bbs
 		where qa_idx=#{qa_idx}
 	</delete>
+	
 </mapper>

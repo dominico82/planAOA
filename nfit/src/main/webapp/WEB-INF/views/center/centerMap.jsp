@@ -26,7 +26,11 @@ margin-top:100px;
 #centerListResult{
 overflow-y:auto;
 }
-
+#center_list_coName_class{
+font-size:12px;
+}
+#centerInfo_list_coClass{
+}
 #matched {
   background: #00bff0;
   color: #fff;
@@ -67,10 +71,12 @@ height:100%;
 margin: 0 0 0 0;
 height:28px;
 }
-
-
-
-
+#centerInfo_list_div{
+font-size:12px;
+}
+#centerInfo_list_table{
+padding:0 0 0 0;
+}
 #list-table{
 margin:0 0 0 0;
 font-size:12px;
@@ -80,32 +86,18 @@ z-index:500;
 }
 /*업체 백업 테이블*/
 #center_list{
- display:none; 
+/* display:none;  */
 }
 /*업체 서비스 백업 테이블*/
 #content_list{
-display:none;
+/*  display:none; */
 }
 #centerInfo_list .hiddenCnt{
 display:none;
 }
-#center_list_coName_class{
-font-size:12px;
-}
-#centerInfo_list_coClass{
-}
-#centerInfo_list_div{
-font-size:12px;
-}
-#centerInfo_list_table{
-padding:0 0 0 0;
-}
-
 #centerInfo{
 display:none; 
-
 }
-
 #centerInfo #centerInfo_panel{
 position:fixed;
 right:15px;
@@ -116,7 +108,7 @@ height:0px;
 border-radius:8px;
 background: #fff;
 box-shadow: 1px 5px 10px rgba(0,0,0,.5);
-border-top: 10px solid #4f5359;
+border-top: 10px solid #16f98f;
 padding: 20px;
 overflow-y: auto;
 max-height: 389px; 
@@ -151,12 +143,6 @@ margin-top:10px;
 overflow-y:auto; 
 height:280px;
 }
-#centerInfo_coname{
-
-}
-#centerInfo_body{
-
-}
 #avail_photo{
 height:34px;
 width:34px;
@@ -180,12 +166,53 @@ text-align:center;
 	width:64px;
 	height:64px;
 }
-@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 </style>
 </head>
 <body>
 <%@include file="../header.jsp" %>
-<!--  업체 백업 부분 -->
+
+
+<!-- 업체 리스트 부분 -->
+<div class="container-fluid" id="container">
+<div class="row" id="container_row">
+		<div class="col-sm-6" id="centerListResult">
+		<div class="col-sm-12" id="margining"></div>
+
+		<div id="wait""><img src='resources/images/pageloader.gif'/><br>Loading..</div>
+		<!-- 검색하기 -->
+		<div class="col-sm-12">
+   <form action="javascript:keywordSearch()" id="search_form">
+    <div class="input-group" id="search-div">
+      <input type="text" class="form-control" id="search_input" placeholder="지역/이름/종목을 검색하세요(예: 강남 헬스)">
+      <div class="input-group-btn">
+        <button class="btn btn-primary" type="submit" id="search-btn"><i class="glyphicon glyphicon-search"></i></button>
+      </div>
+    </div>
+  </form>
+  <div class="col-sm-12" id="search_initialization">
+  </div>
+		<hr>
+		</div>
+		<!-- 리스트 -->
+		<div class="col-sm-12">
+			<div id="centerInfo_list">
+			<!--  -->
+
+			<!--  -->
+			</div>
+
+		</div>
+					<div class="col-sm-12" id="moreBtn">
+			</div>
+			</div>	
+<!-- 맵 부분 -->
+			<div class="col-sm-6" id="map_part">
+				<div id="map"></div>
+			</div>
+			</div>
+	</div>
+	
+	<!--  업체 백업 부분 -->
 		<div class="col-sm-12" id="center_list">
 			<h3>업체 백업</h3>
 			<c:set var="centerList" value="${list}"/>
@@ -276,46 +303,7 @@ edd938c4fc341b07f90ed69064de3f92<br>
 3564ccb62994635b131231fb19ae3e7d<br>
 55702a1d09804903d4550080da539868<br>
 </p>
-
-<!-- 업체 리스트 부분 -->
-<div class="container-fluid" id="container">
-<div class="row" id="container_row">
-		<div class="col-sm-6" id="centerListResult">
-		<div class="col-sm-12" id="margining"></div>
-
-		<div id="wait""><img src='resources/images/pageloader.gif'/><br>Loading..</div>
-		<!-- 검색하기 -->
-		<div class="col-sm-12">
-   <form action="javascript:keywordSearch()" id="search_form">
-    <div class="input-group" id="search-div">
-      <input type="text" class="form-control" id="search_input" placeholder="지역/이름/종목을 검색하세요(예: 강남 헬스)">
-      <div class="input-group-btn">
-        <button class="btn btn-primary" type="submit" id="search-btn"><i class="glyphicon glyphicon-search"></i></button>
-      </div>
-    </div>
-  </form>
-  <div class="col-sm-12" id="search_initialization">
-  </div>
-		<hr>
-		</div>
-		<!-- 리스트 -->
-		<div class="col-sm-12">
-			<div id="centerInfo_list">
-			<!--  -->
-
-			<!--  -->
-			</div>
-
-		</div>
-					<div class="col-sm-12" id="moreBtn">
-			</div>
-			</div>	
-<!-- 맵 부분 -->
-			<div class="col-sm-6" id="map_part">
-				<div id="map"></div>
-			</div>
-			</div>
-	</div>
+	
 <!-- 제휴업체 패널 부분 -->
 <div class="col-sm-12" id="centerInfo">
 <div class="panel panel-default" id="centerInfo_panel">
@@ -479,7 +467,7 @@ window.onload=mapStart();
 /*이름과 주소 가져오기*/
 function mapStart(){
 	searchOn = false;
-	console.log("searchOn in start="+searchOn);
+	console.log("1: mapStart()");
 	closeAllMarkInfo();
 	removeMarker();
 	removeMore();
@@ -526,7 +514,7 @@ function mapStart(){
 						+content5
 						+content6);
 			}//if null handling ends
-		}// for contents[i] ends
+		}// for contents[j] ends
 	}//for content list ends
 for(var i=0; i<count;i++){ //center_list 정보
 	cName=document.getElementById('co_name_'+i).innerHTML;
@@ -539,6 +527,7 @@ for(var i=0; i<count;i++){ //center_list 정보
 	cLng=document.getElementById('centerLng_'+i).innerHTML;
 	getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i);
 }//for center list ends
+console.log("3: mapStart go to searchMark()");
 searchMark();
 }//mapStart() ends
 
@@ -554,13 +543,11 @@ daum.maps.event.addListener(map, 'zoom_changed', searchMark);
 daum.maps.event.addListener(map, 'dragend', searchMark);
 }
 function searchMark(){
+	console.log("4: searchMark()");
 	if(searchOn==true){
-		console.log("searchMark reached by search")
 		return false;
-	}//if searchOn true ends
-	console.log("searchOn in searchMark="+searchOn)
-	console.log("searchMark on")
-	if(markers!=null||markers!=''){
+	}//if searchOn true ends 검색했을 경우
+	if(markers!=null||markers!=''){ //마커가 없을 경우
 	if(startCheck==false){//첫 접속일 경우 마크 생성 후 리스트만 제거
 	startCheck=true;
 	listRemove();
@@ -570,6 +557,7 @@ function searchMark(){
  		removeMarker();
 	}//if mapOn ends
 	}
+	console.log("4: search if 문들 유효검사 정료")
 	var bounds=map.getBounds();
 	var n=1; // 현재 맵에 뿌려진 리스트 수
 	var hiddenN=0; //감춰진 list
@@ -595,7 +583,7 @@ function searchMark(){
 			selectoHtml+=centerListUrl[i];
 			selectoHtml+="'";
 			selectoHtml+=')">';
-			selectoHtml+='<img src="resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+			selectoHtml+='<img src="../nfit/src/main/webapp/resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
 			selectoHtml+='</a>';
 			selectoHtml+='</div>';
 			selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
@@ -634,7 +622,7 @@ function searchMark(){
 			selectoHtml+=centerListUrl[i];
 			selectoHtml+="'";
 			selectoHtml+=')">';
-			selectoHtml+='<img src="resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+			selectoHtml+='<img src="../nfit/src/main/webapp/resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
 			selectoHtml+='</a>';
 			selectoHtml+='</div>';
 			selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
@@ -714,11 +702,13 @@ function more(){
 
 /*마커 생성 및 클릭 이벤트*/
 function getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i){
+	console.log("2: getMarker()");
 	var marker;
 	var infowindow;
 	var coords;
 	var latlngData;
 	if(cLat!=0 && cLng!=0){ // 위도 경도가 DB에 등록된 경우
+		console.log("2: cidx db 마커 생성 clat cng 등록 됨="+cIdx);
 		coords = new daum.maps.LatLng(cLat, cLng);
 		marker = new daum.maps.Marker({
         	map:map,
@@ -738,13 +728,12 @@ function getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i){
         infowindow = new daum.maps.InfoWindow({
         content: '<div id="infowindow">'+cIdx+"/"+cName+'</div>'
         }); //infowindow 생성
-        infoWindows[i]=(infowindow);
-
-
+        infoWindows[i]=infowindow;
 //makingMarkers ends
 daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infowindow, cIdx, cUrl));
 	}else{ //위도 경도가 DB에 등록되지 않는 경우
-	var geocoder = new daum.maps.services.Geocoder();
+		console.log("2: cidx db 마커 생성 등록 안됨="+cIdx);
+		var geocoder = new daum.maps.services.Geocoder();
 	geocoder.addr2coord(cAddr, function(status, result) {
 	     if (status === daum.maps.services.Status.OK) {
 		    coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
@@ -828,7 +817,7 @@ function show(co_idx, centerListUrl, setMapGo){
 				}else{
 				/*co_idx and button*/
 				var btn_html = '';
-				btn_html += "<a class='col-sm-12 btn btn-info' href='"+centerListUrl+"' id='coBtn_button'>자세히보기</a>";
+				btn_html += "<a class='col-sm-12 btn btn-primary' href='"+centerListUrl+"' id='coBtn_button'>자세히보기</a>";
 				$("#centerInfo_body > #coBtn").css({display:"block"});
 				$("#coBtn_button").replaceWith(btn_html);
 
@@ -911,29 +900,18 @@ function show(co_idx, centerListUrl, setMapGo){
 				$("#centerInfo_extra").replaceWith(coExtra_html);
 				
 			/*클릭 후 이동*/
-
-			console.log("searchOn in show="+searchOn);
-			console.log("show markers="+markers);
-			console.log("show infoWindows="+infoWindows);
-			console.log("click event in show co_idx= "+co_idx);
-			console.log("click event in show curl= "+centerListUrl);
-			console.log("click event in show cLatArr[]= "+cLatArr[co_idx]);
-			console.log("click event in show cLngArr[]= "+cLngArr[co_idx]);
+	
 			if(searchOn==true){
 				if(setMapGo==false){//마커를 클릭할 경우
-					console.log("search: click marker ")
 					infoWindows[co_idx].open(map, markers[co_idx]);
 					}else{//리스트를 클릭할 경우
-					console.log("search: click list")
 					infoWindows[co_idx].open(map, markers[co_idx]);
 					var movePosition;
 					if(cLatArr[co_idx] != 0 && cLngArr[co_idx] != 0){//db값에 lat lng가 입력된 경우
-						console.log("search: click list, lat lng exist");
 						movePosition = new daum.maps.LatLng(cLatArr[co_idx], cLngArr[co_idx]);
 						map.setCenter(movePosition);
 						map.setLevel(4);
 					}else{ //db값에 lat lng가 입력되지 않은 경우
-						console.log("search: click list, lat lng not exist");
 						var geocoder = new daum.maps.services.Geocoder();
 						geocoder.addr2coord(dataObj.co_address,function(status,result){
 							movePosition = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
@@ -953,6 +931,7 @@ function show(co_idx, centerListUrl, setMapGo){
 				var movePosition
 				if(cLatArr[co_idx] != 0 && cLngArr[co_idx] != 0){//db값에 lat lng가 입력된 경우
 				movePosition = new daum.maps.LatLng(cLatArr[co_idx], cLngArr[co_idx]);
+				console.log("co_idx in infowindow="+co_idx);
 				infoWindows[co_idx].open(map, markers[co_idx]);
 				map.setCenter(movePosition);
 				map.setLevel(4);
@@ -1089,7 +1068,6 @@ function searchReset(searchNum){
 
 /*검색하기*/
 function keywordSearch(){
-
 	var keyword = $("#search_input").val();
 	$("#search_input").val('');
 	$.ajax({
@@ -1125,55 +1103,63 @@ function keywordSearch(){
 			var bounds = new daum.maps.LatLngBounds(); //맵 바운드
 			var marker;
 			var infowindow;
+			/*****************************************컨텐츠 집어넣기************************************************/
 			contents=[];
 			contentLists=[];
-			/*****************************************컨텐츠 집어넣기************************************************/
-				console.log("i reached here: "+company);
+				/*검색된 총 길이*/
 				var companyLen = company.length
-				console.log("companyLen="+companyLen)
-				var lastCompany = company[company.length];
-				console.log("lastCompany="+lastCompany);
-				var lastIdx=lastCompany.co_idx;
-				console.log("lastIdx="+lastIdx);
-				for(var i=0; i<company.length; i++){//content_list 정보
-					var companySet = company[i];
-					content1 = $("#content_list_content1_"+i).text();
-					content2 = $("#content_list_content2_"+i).text();
-					content3 = $("#content_list_content3_"+i).text();
-					content4 = $("#content_list_content4_"+i).text();
-					content5 = $("#content_list_content5_"+i).text();
-					content6 = $("#content_list_content6_"+i).text();
-					if(content2!=" " && content2 !=""){
-						content1+=", ";
-					}
-					if(content3!=" " && content3 !=""){
-						content2+=", ";
-					}
-					if(content4!=" " && content4 !=""){
-						content3+=", ";
-					}
-					if(content5!=" " && content5 !=""){
-						content4+=", ";
-					}
-					if(content6!=" " && content6 !=""){
-						content5+=", ";
-					}
-					if(content1!=" "&& content1 !=""){
-						content6+=", ";
-					}
-					for(var j=1; j<=company.length; j++){
-						if(j==lastIdx){
-							if(contents[j]==null){
-							contents[j]="";
+
+				/*idx값 배열 생성*/
+				var contentIdx=[];
+				for(var i=0; i<company.length; i++){
+					var contentSet = company[i];
+					contentIdx[i]=contentSet.co_idx;
+					var idx = contentIdx[i];
+					console.log("idx="+idx);
+					for(var j=1; j<=contentCnt; j++){
+						var check=$("#content_list_co_idx_"+i).text();
+						console.log("check="+check);
+						console.log("company.co_idx[i="+i+"]="+idx);
+						console.log("check from content_list[j="+j+"]="+check);
+						if(idx==check){
+							content1 = $("#content_list_content1_"+idx).text();
+							content2 = $("#content_list_content2_"+idx).text();
+							content3 = $("#content_list_content3_"+idx).text();
+							content4 = $("#content_list_content4_"+idx).text();
+							content5 = $("#content_list_content5_"+idx).text();
+							content6 = $("#content_list_content6_"+idx).text();
+							if(content2!=" " && content2 !=""){
+								content1+=", ";
 							}
-							contents[j]+=(content1
-									+content2
-									+content3
-									+content4
-									+content5
-									+content6);
+							if(content3!=" " && content3 !=""){
+								content2+=", ";
+							}
+							if(content4!=" " && content4 !=""){
+								content3+=", ";
+							}
+							if(content5!=" " && content5 !=""){
+								content4+=", ";
+							}
+							if(content6!=" " && content6 !=""){
+								content5+=", ";
+							}
+							if(content1!=" "&& content1 !=""){
+								content6+=", ";
+							}
+							console.log("content1="+content1);
+							console.log("content2="+content2);
+							console.log("content3="+content3);
+							console.log("content4="+content4);
+							console.log("content5="+content5);
+							console.log("content6="+content6);
 						}//if null handling ends
 					}// for contents[i] ends
+					contents[i]+=(content1
+							+content2
+							+content3
+							+content4
+							+content5
+							+content6);
 				}//for content list ends
 			/*****************************************컨텐츠 집어넣기************************************************/
 			/*검색 후 리스트의 주소값 저장 후 맵 바운드 설정*/
@@ -1230,7 +1216,7 @@ function keywordSearch(){
 					company_html+="centerDetail.do?co_idx="+companySet.co_idx;
 					company_html+="'";
 					company_html+=')">';
-					company_html+='<img src="resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+					company_html+='<img src="../nfit/src/main/webapp/resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
 					company_html+='</a>';
 					company_html+='</div>';
 					company_html+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
@@ -1249,7 +1235,7 @@ function keywordSearch(){
 					company_html+='</div>'; //colapse panel open1
 					company_html+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
 					company_html+='<ul class="list-group">';
-					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contentLists[i]+'</li>';
+					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contents[i]+'</li>';
 					company_html+='</ul>';
 					company_html+='</div>'; //collapse panel2
 					company_html+='<div class="panel-body">';
@@ -1268,7 +1254,7 @@ function keywordSearch(){
 					company_html+="centerDetail.do?co_idx="+companySet.co_idx;
 					company_html+="'";
 					company_html+=')">';
-					company_html+='<img src="resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+					company_html+='<img src="../nfit/src/main/webapp/resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
 					company_html+='</a>';
 					company_html+='</div>';
 					company_html+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
@@ -1287,7 +1273,7 @@ function keywordSearch(){
 					company_html+='</div>'; //colapse panel open1
 					company_html+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
 					company_html+='<ul class="list-group">';
-					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contentLists[i]+'</li>';
+					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contents[i]+'</li>';
 					company_html+='</ul>';
 					company_html+='</div>'; //collapse panel2
 					company_html+='<div class="panel-body">';

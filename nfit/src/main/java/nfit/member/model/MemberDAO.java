@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import nfit.bookmark.model.MarkDTO;
 import nfit.coin.model.CoinDTO;
 
 public interface MemberDAO {
@@ -23,4 +24,6 @@ public interface MemberDAO {
 	public List<String> getImage(String id);
 	public int getTotalCnt();
 	public int memberDelete(String member_id);
+	public int setMark(MarkDTO dto);
+	public List<MarkDTO> getMark(String member_id);
 }

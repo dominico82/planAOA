@@ -8216,6 +8216,13 @@ p.anc {
   font-weight: 600;
   text-align: center;
 }
+.current {
+  color: #00bff0;
+  background: #f5f5f5;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 50px;
+}
 .mypageMenu a i,
 .mypageMenu span.disabledLink i {
   font-size: 18px;
@@ -8231,8 +8238,25 @@ p.anc {
 .mypageMenu span.disabledLink:hover {
   background: #ddd;
 }
-
-
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
 
 
 
@@ -16856,7 +16880,7 @@ table {
     width: 100%;
 }
 th, td {
-    padding: 20px;
+    padding: 5px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }

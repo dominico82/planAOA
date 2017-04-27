@@ -223,6 +223,12 @@ padding-right: 20px;
 		<div class="row">
 			<div class="col-sm-6">
 				<h2>center detail</h2>
+				<form name="mark" action="markJoin.do">
+					<input type="hidden" value="${dtos.co_idx}" name="co_idx">
+					<input type="hidden" value="${dtos.co_name}" name="co_name">
+					<input type="hidden" value="${userid}" name="member_id">
+					<input type="submit" value="즐겨찾기">
+				</form>
 				<div id="content">
 				<c:set var="contentlist_set" value="${contentlist}"></c:set>
 				<div class="panel panel-default">

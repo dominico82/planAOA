@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!--
  * CoreUI - Open Source Bootstrap list Template
  * @version v1.0.0-alpha.4
@@ -97,6 +98,10 @@
 
 		<!-- Main content -->
 		<main class="main">
+		<div class="title" style="margin-top: 15px; margin-left: 35px;">
+			<img src="resources/img/favicon.png" style="height: 65px;"> 
+			<a href="memberAdmin.do" style="font-family:'Nanum Pen Script' serif;">회원관리 페이지</a>
+		</div>
 		<div class="container-fluid">
 			<div id="ui-view">
 				<table class="blueone">
@@ -126,7 +131,9 @@
 								<td>${list.notice_content }</td>
 								<td class="center">${list.notice_top }</td>
 								<td class="center">${list.notice_event }</td>
-								<td class="center">${list.notice_date }</td>
+								
+								<td class="center">
+								<fmt:formatDate value="${list.notice_date }" pattern="yyy-MM-dd HH:mm"/></td>
 								<td class="center"><input type="button" value="수정" onclick="location.href='noticeUpdate.do?idx=${list.notice_idx}'"></td>
 								<td class="center"><input type="button" value="삭제"
 									onclick="location.href='noticeDel.do?idx=${list.notice_idx}'">

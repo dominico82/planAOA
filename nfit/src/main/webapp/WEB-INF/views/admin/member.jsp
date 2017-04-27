@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!--
  * CoreUI - Open Source Bootstrap Admin Template
  * @version v1.0.0-alpha.4
@@ -83,9 +84,8 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="memberAdmin.do"><i
 							class="icon-people"></i> 회원관리</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="co_list.do"><i class="icon-briefcase"></i>제휴업체
-							등록/삭제</a></li>
+					<li class="nav-item"><a class="nav-link" href="co_list.do"><i
+							class="icon-briefcase"></i>제휴업체 등록/삭제</a></li>
 					<li class="nav-item"><a class="nav-link" href="coinAdmin.do"><i
 							class="icon-credit-card"></i>코인 관리</a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -98,6 +98,10 @@
 
 		<!-- Main content -->
 		<main class="main">
+		<div class="title" style="margin-top: 15px; margin-left: 35px;">
+			<img src="resources/img/favicon.png" style="height: 65px;"> 
+			<a href="memberAdmin.do" style="font-family:'Nanum Pen Script' serif;">회원관리 페이지</a>
+		</div>
 		<div class="container-fluid">
 			<div id="ui-view">
 				<table class="blueone">
@@ -152,7 +156,7 @@
 	</div>
 
 	<footer class="app-footer">
-		<jsp:include page="../footer.jsp"/>
+		<jsp:include page="../footer.jsp" />
 	</footer>
 
 	<!-- Bootstrap and necessary plugins -->

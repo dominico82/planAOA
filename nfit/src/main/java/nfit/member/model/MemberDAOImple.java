@@ -9,6 +9,7 @@ import java.util.Map;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import nfit.bookmark.model.MarkDTO;
 import nfit.coin.model.CoinDTO;
 
 
@@ -165,6 +166,16 @@ public class MemberDAOImple implements MemberDAO {
 	public int memberDelete(String member_id){
 		int count=sqlMap.delete("memberDeleteAdmin",member_id);
 		return count;
+	}
+	
+	public int setMark(MarkDTO dto){
+		int count = sqlMap.insert("markJoin", dto);
+		return count;
+	}
+	
+	public List<MarkDTO> getMark(String member_id){
+		List<MarkDTO> dto = sqlMap.selectList("markInfo", member_id);
+		return dto;
 	}
 }
 

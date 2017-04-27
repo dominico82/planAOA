@@ -97,6 +97,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="memberDeleteAdmin" parameterType="String">
 		delete from member_table where member_id=#{member_id}
 	</delete>
+	
+	<insert id="markJoin" parameterType="nfit.bookmark.model.MarkDTO">
+		insert into bookmark values{
+			#{member_id},
+			#{co_idx},
+			#{co_name}
+		}
+	</insert>
+	
+	<select id="markInfo" parameterType="String" resultType="nfit.bookmark.model.MarkDTO">
+		select * from bookmark where member_id = #{member_id}
+	</select>
 </mapper>
 
 
