@@ -102,16 +102,16 @@
 				<table class="blueone">
 					<thead>
 						<tr>
-							<th class="num">사용자 ID</th>
-							<th class="sub">이용센터 번호</th>
+							<th class="num" style="width:10%;">사용자 ID</th>
+							<th class="sub" style="width:10%;">이용센터 번호</th>
 							<th class="content">이용센터 이름</th>
-							<th class="not">사용 코인</th>
-							<th class="mak">사용일</th>
+							<th class="not" style="width:10%;">사용 코인</th>
+							<th class="mak"style="width:20%;">사용일</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:set var="ulist" value="${uselist}" />
-						<c:if test="${empty nlist }">
+						<c:if test="${empty uselist }">
 							<tr>
 								<td colspan="10" align="center">사용정보가 없습니다.</td>
 							</tr>
@@ -120,7 +120,7 @@
 							<tr>
 								<td class="center">${list.member_id }</td>
 								<td class="center">${list.co_idx }</td>
-								<td>${list.co_name }</td>
+								<td class="center">${list.co_name }</td>
 								<td class="center">${list.usemember_coin }</td>
 								<td class="center">${list.usepay_date }</td>
 							</tr>

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class UseDTO {
 
-	private String memer_id;
+	private String member_id;
 	private int co_idx;
 	private String co_name;
 	private int usemember_coin;
@@ -13,19 +13,19 @@ public class UseDTO {
 	public UseDTO() {
 		super();
 	}
-	public UseDTO(String memer_id, int co_idx, String co_name, int usemember_coin, Date usepay_date) {
+	public UseDTO(String member_id, int co_idx, String co_name, int usemember_coin, Date usepay_date) {
 		super();
-		this.memer_id = memer_id;
+		this.member_id = member_id;
 		this.co_idx = co_idx;
 		this.co_name = co_name;
 		this.usemember_coin = usemember_coin;
 		this.usepay_date = usepay_date;
 	}
-	public String getMemer_id() {
-		return memer_id;
+	public String getmember_id() {
+		return member_id;
 	}
-	public void setMemer_id(String memer_id) {
-		this.memer_id = memer_id;
+	public void setmember_id(String member_id) {
+		this.member_id = member_id;
 	}
 	public int getCo_idx() {
 		return co_idx;

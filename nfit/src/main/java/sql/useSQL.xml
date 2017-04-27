@@ -9,4 +9,7 @@
 		(select * from pay_user order by usepay_date desc)a)b
 		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
 	</select>
+	<select id="usetotalCnt" resultType="Integer">
+		select count(*) from pay_user
+	</select>
 </mapper>
