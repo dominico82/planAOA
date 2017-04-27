@@ -309,7 +309,7 @@ table.type05 td {
 </header>
 <div>
 	<!-- 경로에 이미지업로드 나오는지확인해봄 -->
-	<img alt="" src="resources/centerImage/62_0707-70770-7070/62_0707-70770-7070_2.jpg">
+	<img alt="" src="resources/centerImage/65_07000707-/65_07000707-_1.jpg" style="display: none;">
 </div>
   <div class="app-body">
         <div class="sidebar">
