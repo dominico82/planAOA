@@ -86,11 +86,11 @@ z-index:500;
 }
 /*업체 백업 테이블*/
 #center_list{
-display:none; 
+/* display:none;  */
 }
 /*업체 서비스 백업 테이블*/
 #content_list{
- display:none;
+/*  display:none; */
 }
 #centerInfo_list .hiddenCnt{
 display:none;
@@ -464,7 +464,7 @@ window.onload=mapStart();
 /*이름과 주소 가져오기*/
 function mapStart(){
 	searchOn = false;
-	console.log("searchOn in start="+searchOn);
+	console.log("1: mapStart()");
 	closeAllMarkInfo();
 	removeMarker();
 	removeMore();
@@ -511,7 +511,6 @@ function mapStart(){
 						+content5
 						+content6);
 			}//if null handling ends
-
 		}// for contents[j] ends
 	}//for content list ends
 for(var i=0; i<count;i++){ //center_list 정보
@@ -525,6 +524,7 @@ for(var i=0; i<count;i++){ //center_list 정보
 	cLng=document.getElementById('centerLng_'+i).innerHTML;
 	getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i);
 }//for center list ends
+console.log("3: mapStart go to searchMark()");
 searchMark();
 }//mapStart() ends
 
@@ -540,13 +540,11 @@ daum.maps.event.addListener(map, 'zoom_changed', searchMark);
 daum.maps.event.addListener(map, 'dragend', searchMark);
 }
 function searchMark(){
+	console.log("4: searchMark()");
 	if(searchOn==true){
-		console.log("searchMark reached by search")
 		return false;
-	}//if searchOn true ends
-	console.log("searchOn in searchMark="+searchOn)
-	console.log("searchMark on")
-	if(markers!=null||markers!=''){
+	}//if searchOn true ends 검색했을 경우
+	if(markers!=null||markers!=''){ //마커가 없을 경우
 	if(startCheck==false){//첫 접속일 경우 마크 생성 후 리스트만 제거
 	startCheck=true;
 	listRemove();
@@ -556,6 +554,7 @@ function searchMark(){
  		removeMarker();
 	}//if mapOn ends
 	}
+	console.log("4: search if 문들 유효검사 정료")
 	var bounds=map.getBounds();
 	var n=1; // 현재 맵에 뿌려진 리스트 수
 	var hiddenN=0; //감춰진 list
@@ -700,13 +699,13 @@ function more(){
 
 /*마커 생성 및 클릭 이벤트*/
 function getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i){
-	console.log("cidx="+cIdx);
+	console.log("2: getMarker()");
 	var marker;
 	var infowindow;
 	var coords;
 	var latlngData;
 	if(cLat!=0 && cLng!=0){ // 위도 경도가 DB에 등록된 경우
-		console.log("cidx db 마커 생성 clat cng 등록 됨="+cIdx);
+		console.log("2: cidx db 마커 생성 clat cng 등록 됨="+cIdx);
 		coords = new daum.maps.LatLng(cLat, cLng);
 		marker = new daum.maps.Marker({
         	map:map,
@@ -732,7 +731,7 @@ function getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i){
 //makingMarkers ends
 daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infowindow, cIdx, cUrl));
 	}else{ //위도 경도가 DB에 등록되지 않는 경우
-		console.log("cidx db 마커 생성 등록 안됨="+cIdx);
+		console.log("2: cidx db 마커 생성 등록 안됨="+cIdx);
 		var geocoder = new daum.maps.services.Geocoder();
 	geocoder.addr2coord(cAddr, function(status, result) {
 	     if (status === daum.maps.services.Status.OK) {
@@ -817,7 +816,7 @@ function show(co_idx, centerListUrl, setMapGo){
 				}else{
 				/*co_idx and button*/
 				var btn_html = '';
-				btn_html += "<a class='col-sm-12 btn btn-default' href='"+centerListUrl+"' id='coBtn_button'>자세히보기</a>";
+				btn_html += "<a class='col-sm-12 btn btn-primary' href='"+centerListUrl+"' id='coBtn_button'>자세히보기</a>";
 				$("#centerInfo_body > #coBtn").css({display:"block"});
 				$("#coBtn_button").replaceWith(btn_html);
 
@@ -901,28 +900,17 @@ function show(co_idx, centerListUrl, setMapGo){
 				
 			/*클릭 후 이동*/
 
-			console.log("searchOn in show="+searchOn);
-			console.log("show markers="+markers);
-			console.log("show infoWindows="+infoWindows);
-			console.log("click event in show co_idx= "+co_idx);
-			console.log("click event in show curl= "+centerListUrl);
-			console.log("click event in show cLatArr[]= "+cLatArr[co_idx]);
-			console.log("click event in show cLngArr[]= "+cLngArr[co_idx]);
 			if(searchOn==true){
 				if(setMapGo==false){//마커를 클릭할 경우
-					console.log("search: click marker ")
 					infoWindows[co_idx].open(map, markers[co_idx]);
 					}else{//리스트를 클릭할 경우
-					console.log("search: click list")
 					infoWindows[co_idx].open(map, markers[co_idx]);
 					var movePosition;
 					if(cLatArr[co_idx] != 0 && cLngArr[co_idx] != 0){//db값에 lat lng가 입력된 경우
-						console.log("search: click list, lat lng exist");
 						movePosition = new daum.maps.LatLng(cLatArr[co_idx], cLngArr[co_idx]);
 						map.setCenter(movePosition);
 						map.setLevel(4);
 					}else{ //db값에 lat lng가 입력되지 않은 경우
-						console.log("search: click list, lat lng not exist");
 						var geocoder = new daum.maps.services.Geocoder();
 						geocoder.addr2coord(dataObj.co_address,function(status,result){
 							movePosition = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
@@ -1115,23 +1103,21 @@ function keywordSearch(){
 			var marker;
 			var infowindow;
 			/*****************************************컨텐츠 집어넣기************************************************/
-			console.log("초기 company length===="+company.length);
 			contents=[];
 			contentLists=[];
-				console.log("i reached here: "+company);
 				/*검색된 총 길이*/
 				var companyLen = company.length
-				console.log("companyLen="+companyLen)
 
 				/*idx값 배열 생성*/
 				var contentIdx=[];
-				console.log("초기 company length===="+company.length);
 				for(var i=0; i<company.length; i++){
 					var contentSet = company[i];
 					contentIdx[i]=contentSet.co_idx;
 					var idx = contentIdx[i];
+					console.log("idx="+idx);
 					for(var j=1; j<=contentCnt; j++){
 						var check=$("#content_list_co_idx_"+i).text();
+						console.log("check="+check);
 						console.log("company.co_idx[i="+i+"]="+idx);
 						console.log("check from content_list[j="+j+"]="+check);
 						if(idx==check){
@@ -1229,7 +1215,7 @@ function keywordSearch(){
 					company_html+="centerDetail.do?co_idx="+companySet.co_idx;
 					company_html+="'";
 					company_html+=')">';
-					company_html+='<img src="resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+					company_html+='<img src="../nfit/src/main/webapp/resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
 					company_html+='</a>';
 					company_html+='</div>';
 					company_html+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
@@ -1267,7 +1253,7 @@ function keywordSearch(){
 					company_html+="centerDetail.do?co_idx="+companySet.co_idx;
 					company_html+="'";
 					company_html+=')">';
-					company_html+='<img src="resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+					company_html+='<img src="../nfit/src/main/webapp/resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
 					company_html+='</a>';
 					company_html+='</div>';
 					company_html+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
