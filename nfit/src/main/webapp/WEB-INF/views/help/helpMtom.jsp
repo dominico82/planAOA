@@ -51,7 +51,7 @@ $(document).ready(function(){
                 <!--
                 <button type="button" class="btn btn-default" data-toggle="collapse" data-target="#applyBox" aria-expanded="false" aria-controls="applyBox">문의 접수하기</button>
                 -->
-                <button type="button" class="btn btn-default" onclick="open_form();">문의하기</button>
+                <button type="button" class="btn btn-success" onclick="open_form();">문의하기</button>
                 
               </p>
             </div><!-- /.applyBoxWrap -->
@@ -196,7 +196,7 @@ $(function(){
 			
 	});
 });
-var listNum=2;
+var listNum=4;
 var listSize;
 function mtomReload(){
 	$(document).ready(function(){
@@ -222,13 +222,13 @@ function mtomReload(){
 								var $div=$('<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">'
 									   	+'<div class="panel panel-default">'
 										+'<div class="panel-heading" role="tab" id="qaHeading1">'
-										+'<h4 class="panel-title"><i class="fa fa-question-circle"></i>'+list.qa_subject+''
+										+'<h4 class="panel-title"><i class="fa fa-question-circle"></i>'+list.qa_subject+'&nbsp;&nbsp;'
 						                +'<span class="date">'+qa_date+'</span></h4>'
-						                +'<a role="button" data-toggle="collapse" data-parent="#accordion" href="#'+list.qa_idx+'" aria-expanded="false" aria-controls="qa1" class="btn btn-sm btn-default btnAnswer">답변대기</a>'
+						                +'<div style="text-align: right;"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#'+list.qa_idx+'" aria-expanded="false" aria-controls="qa1" class="btn btn-sm btn-default btnAnswer">답변대기</a></div>'
 						                +'</div><div id="'+list.qa_idx+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">'
 						                +'<div class="panel-body"><div class="question">'
 										+'<h5><i class="fa fa-question-circle"></i> <div id="qa_sub'+list.qa_idx+'">'+list.qa_subject+'</div> <small>'+qa_date+'</small></h5>'
-										+'<div id="qa_con'+list.qa_idx+'"><p>'+list.qa_content+'</p></div><!-- /.question --><div>'
+										+'<div id="qa_con'+list.qa_idx+'"><p>'+list.qa_content+'</p></div><!-- /.question --><div style="text-align: right;">'
 						                +'<button type="button" class="btn btn-sm btn-default" onclick="update_form('+list.qa_idx+');"><i class="fa fa-edit"></i> 수정</button>'
 						                +'<button type="button" class="btn btn-sm btn-danger" onclick="mtomDel('+list.qa_idx+');"><i class="fa fa-trash-o"></i> 삭제</button>'
 						                +'</div></div><!-- /.panel-body --></div><!-- /.panel-collapse  --></div><!-- /.panel--></div><!-- /.panel-group -->'
@@ -247,13 +247,13 @@ function mtomReload(){
 								var $div=$('<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" '+moreList+'>'
 									   	+'<div class="panel panel-default">'
 										+'<div class="panel-heading" role="tab" id="qaHeading1">'
-										+'<h4 class="panel-title"><i class="fa fa-question-circle"></i>'+list.qa_subject+''
+										+'<h4 class="panel-title"><i class="fa fa-question-circle"></i>'+list.qa_subject+'&nbsp;&nbsp;'
 						                +'<span class="date">'+qa_date+'</span></h4>'
-						                +'<a role="button" data-toggle="collapse" data-parent="#accordion" href="#'+list.qa_idx+'" aria-expanded="false" aria-controls="qa1" class="btn btn-sm btn-default btnAnswer">답변대기</a>'
+						                +'<div style="text-align: right;"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#'+list.qa_idx+'" aria-expanded="false" aria-controls="qa1" class="btn btn-sm btn-default btnAnswer">답변대기</a></div>'
 						                +'</div><div id="'+list.qa_idx+'" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">'
 						                +'<div class="panel-body"><div class="question">'
 										+'<h5><i class="fa fa-question-circle"></i><div id="qa_sub'+list.qa_idx+'">'+list.qa_subject+'</div> <small>'+qa_date+'</small></h5>'
-										+'<div id="qa_con'+list.qa_idx+'"><p>'+list.qa_content+'</p></div><!-- /.question --><div>'
+										+'<div id="qa_con'+list.qa_idx+'"><p>'+list.qa_content+'</p></div><!-- /.question --><div style="text-align: right;">'
 						                +'<button type="button" class="btn btn-sm btn-default" onclick="update_form('+list.qa_idx+');"><i class="fa fa-edit"></i> 수정</button>'
 						                +'<button type="button" class="btn btn-sm btn-danger" onclick="mtomDel('+list.qa_idx+');"><i class="fa fa-trash-o"></i> 삭제</button>'
 						                +'</div></div><!-- /.panel-body --></div><!-- /.panel-collapse  --></div><!-- /.panel--></div><!-- /.panel-group -->'
@@ -272,11 +272,11 @@ function mtomReload(){
 								var $div=$("<div class='panel-group' id='accordion' role='tablist' aria-multiselectable='true'>"
 										+"<div class='panel panel-default'>"
 										+"<div class='panel-heading' role='tab' id='qaHeading1'>"
-										+"<h4 class='panel-title'><strong class='faqType faqType_18'>단순이용문의</strong>"
+										+"<h4 class='panel-title'><strong class='faqType faqType_18'></strong>"
 										+"<i class='fa fa-question-circle'></i>"+list.qa_idx+""
 							            +"<span class='date'>&nbsp;"+qa_date+"</span></h4>"
-							            +"<a role='button' data-toggle='collapse' data-parent='#accordion' href='#"+list.qa_idx+"' aria-expanded='false' aria-controls='qa2' class='btn btn-sm btn-success btnAnswer collapsed'>"
-							            +"답변보기</a></div>"
+							            +"<div style='text-align: right;'><a role='button' data-toggle='collapse' data-parent='#accordion' href='#"+list.qa_idx+"' aria-expanded='false' aria-controls='qa2' class='btn btn-sm btn-success btnAnswer collapsed'>"
+							            +"답변보기</a></div></div>"
 							            +"<div id='"+list.qa_idx+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOne' aria-expanded='false'>"
 							            +"<div class='panel-body'>"    
 							    		+"<div class='question'>"
@@ -300,11 +300,11 @@ function mtomReload(){
 								var $div=$("<div class='panel-group' id='accordion' role='tablist' aria-multiselectable='true' "+moreList+">"
 										+"<div class='panel panel-default'>"
 										+"<div class='panel-heading' role='tab' id='qaHeading1'>"
-										+"<h4 class='panel-title'><strong class='faqType faqType_18'>단순이용문의</strong>"
+										+"<h4 class='panel-title'><strong class='faqType faqType_18'></strong>"
 										+"<i class='fa fa-question-circle'></i>"+list.qa_subject+""
 							            +"<span class='date'>&nbsp;"+qa_date+"</span></h4>"
-							            +"<a role='button' data-toggle='collapse' data-parent='#accordion' href='#"+list.qa_idx+"' aria-expanded='false' aria-controls='qa2' class='btn btn-sm btn-success btnAnswer collapsed'>"
-							            +"답변보기</a></div>"
+							            +"<div style='text-align: right;'><a role='button' data-toggle='collapse' data-parent='#accordion' href='#"+list.qa_idx+"' aria-expanded='false' aria-controls='qa2' class='btn btn-sm btn-success btnAnswer collapsed'>"
+							            +"답변보기</a></div></div>"
 							            +"<div id='"+list.qa_idx+"' class='panel-collapse collapse' role='tabpanel' aria-labelledby='headingOne' aria-expanded='false'>"
 							            +"<div class='panel-body'>"    
 							    		+"<div class='question'>"
@@ -331,6 +331,15 @@ function mtomReload(){
 						$("div.accordionList").append($div);
 					});
 		
+				}else{
+					$(document).ready(function(){
+						var $div=$('<div id="moreMtom" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="text-align: center;">'
+							   	
+				                +'<a id="moreList" role="button" data-toggle="collapse" data-parent="#accordion" href="#" onclick="resetMtomList()" aria-expanded="false" aria-controls="qa1" class="btn btn-sm btn-info btnAnswer">닫기</a>'
+				                +'</div><!-- /.panel-group -->'
+				                );
+						$("div.accordionList").append($div);
+					});
 				}
 				
 			},
@@ -345,7 +354,15 @@ function moreMtomList(){
 	if(listNum>=listSize){
 		$("#moreMtom").remove();
 	}
-	listNum+=3;
+	listNum+=5;
+	mtomReload();	
+}
+
+function resetMtomList(){
+	if(listNum>=listSize){
+		$("#resetMtom").remove();
+	}
+	listNum=4;
 	mtomReload();	
 }
 

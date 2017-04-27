@@ -147,7 +147,7 @@
                 <p class="help-block">
                   <span>게시판에 문의사항을 남겨주시면 정확하게 답변해 드립니다.</span>
                 </p>
-                <a href="helpMtom.do" class="btn btn-default">
+                <a href="helpMtom.do" class="btn btn-primary">
                   1:1 문의 남기기
                 </a>
               </div>
