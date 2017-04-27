@@ -170,7 +170,49 @@ text-align:center;
 </head>
 <body>
 <%@include file="../header.jsp" %>
-<!--  업체 백업 부분 -->
+
+
+<!-- 업체 리스트 부분 -->
+<div class="container-fluid" id="container">
+<div class="row" id="container_row">
+		<div class="col-sm-6" id="centerListResult">
+		<div class="col-sm-12" id="margining"></div>
+
+		<div id="wait""><img src='resources/images/pageloader.gif'/><br>Loading..</div>
+		<!-- 검색하기 -->
+		<div class="col-sm-12">
+   <form action="javascript:keywordSearch()" id="search_form">
+    <div class="input-group" id="search-div">
+      <input type="text" class="form-control" id="search_input" placeholder="지역/이름/종목을 검색하세요(예: 강남 헬스)">
+      <div class="input-group-btn">
+        <button class="btn btn-primary" type="submit" id="search-btn"><i class="glyphicon glyphicon-search"></i></button>
+      </div>
+    </div>
+  </form>
+  <div class="col-sm-12" id="search_initialization">
+  </div>
+		<hr>
+		</div>
+		<!-- 리스트 -->
+		<div class="col-sm-12">
+			<div id="centerInfo_list">
+			<!--  -->
+
+			<!--  -->
+			</div>
+
+		</div>
+					<div class="col-sm-12" id="moreBtn">
+			</div>
+			</div>	
+<!-- 맵 부분 -->
+			<div class="col-sm-6" id="map_part">
+				<div id="map"></div>
+			</div>
+			</div>
+	</div>
+	
+	<!--  업체 백업 부분 -->
 		<div class="col-sm-12" id="center_list">
 			<h3>업체 백업</h3>
 			<c:set var="centerList" value="${list}"/>
@@ -261,46 +303,7 @@ edd938c4fc341b07f90ed69064de3f92<br>
 3564ccb62994635b131231fb19ae3e7d<br>
 55702a1d09804903d4550080da539868<br>
 </p>
-
-<!-- 업체 리스트 부분 -->
-<div class="container-fluid" id="container">
-<div class="row" id="container_row">
-		<div class="col-sm-6" id="centerListResult">
-		<div class="col-sm-12" id="margining"></div>
-
-		<div id="wait""><img src='resources/images/pageloader.gif'/><br>Loading..</div>
-		<!-- 검색하기 -->
-		<div class="col-sm-12">
-   <form action="javascript:keywordSearch()" id="search_form">
-    <div class="input-group" id="search-div">
-      <input type="text" class="form-control" id="search_input" placeholder="지역/이름/종목을 검색하세요(예: 강남 헬스)">
-      <div class="input-group-btn">
-        <button class="btn btn-primary" type="submit" id="search-btn"><i class="glyphicon glyphicon-search"></i></button>
-      </div>
-    </div>
-  </form>
-  <div class="col-sm-12" id="search_initialization">
-  </div>
-		<hr>
-		</div>
-		<!-- 리스트 -->
-		<div class="col-sm-12">
-			<div id="centerInfo_list">
-			<!--  -->
-
-			<!--  -->
-			</div>
-
-		</div>
-					<div class="col-sm-12" id="moreBtn">
-			</div>
-			</div>	
-<!-- 맵 부분 -->
-			<div class="col-sm-6" id="map_part">
-				<div id="map"></div>
-			</div>
-			</div>
-	</div>
+	
 <!-- 제휴업체 패널 부분 -->
 <div class="col-sm-12" id="centerInfo">
 <div class="panel panel-default" id="centerInfo_panel">
@@ -725,9 +728,7 @@ function getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i){
         infowindow = new daum.maps.InfoWindow({
         content: '<div id="infowindow">'+cIdx+"/"+cName+'</div>'
         }); //infowindow 생성
-        infoWindows[i]=(infowindow);
-
-
+        infoWindows[i]=infowindow;
 //makingMarkers ends
 daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infowindow, cIdx, cUrl));
 	}else{ //위도 경도가 DB에 등록되지 않는 경우
@@ -899,7 +900,7 @@ function show(co_idx, centerListUrl, setMapGo){
 				$("#centerInfo_extra").replaceWith(coExtra_html);
 				
 			/*클릭 후 이동*/
-
+	
 			if(searchOn==true){
 				if(setMapGo==false){//마커를 클릭할 경우
 					infoWindows[co_idx].open(map, markers[co_idx]);
@@ -930,6 +931,7 @@ function show(co_idx, centerListUrl, setMapGo){
 				var movePosition
 				if(cLatArr[co_idx] != 0 && cLngArr[co_idx] != 0){//db값에 lat lng가 입력된 경우
 				movePosition = new daum.maps.LatLng(cLatArr[co_idx], cLngArr[co_idx]);
+				console.log("co_idx in infowindow="+co_idx);
 				infoWindows[co_idx].open(map, markers[co_idx]);
 				map.setCenter(movePosition);
 				map.setLevel(4);
@@ -1066,7 +1068,6 @@ function searchReset(searchNum){
 
 /*검색하기*/
 function keywordSearch(){
-
 	var keyword = $("#search_input").val();
 	$("#search_input").val('');
 	$.ajax({

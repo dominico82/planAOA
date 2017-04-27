@@ -40,9 +40,11 @@ public class CenterController {
 	private ContentDAO contentDao;
 	
 	@RequestMapping("/centerPage.do")
-	public String centerPage(ModelMap model){
+	public String centerPage(ModelMap model,HttpServletRequest request){
 		List<CenterDTO> list=centerDao.centerListDB();
 		List<ContentDTO> clist = contentDao.contentAllListDB();
+		String root_path = request.getSession().getServletContext().getRealPath("/");
+		System.out.println("프로젝트경로::::"+root_path);
 		model.addAttribute("list", list);
 		model.addAttribute("clist", clist);
 		return "/center/centerMap";
