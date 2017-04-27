@@ -437,7 +437,7 @@ padding-right: 20px;
 								</tr>
 								<tr>
 									<td>
-										<textarea rows="7" cols="55" id="feedback_content"></textarea>
+										<textarea rows="5" cols="70" id="feedback_content"></textarea>
 									</td>
 								</tr>
 								<tr>

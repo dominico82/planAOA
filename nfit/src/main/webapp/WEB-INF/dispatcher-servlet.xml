@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
- 
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:context="http://www.springframework.org/schema/context" 
     xmlns:p="http://www.springframework.org/schema/p"
@@ -121,12 +120,14 @@
         p:order="0"/>
     	<!-- 파일 업로드의 디렉토리 만들기 -->    
     <bean id="uploadPath" class="java.lang.String">
-    	<constructor-arg value="c:/upload"/>
+    	<constructor-arg value="E:/projectFolder/jspstudy/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/nfit/resources/centerImage/"/>
     </bean>
+    
     <!-- 파일 업로드 -->
     <bean id="multipartResolver"
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="52428800"/>
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
+    
 </beans>

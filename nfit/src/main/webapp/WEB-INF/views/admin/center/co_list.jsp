@@ -45,7 +45,7 @@
 			height : 900
 		});
 	}
-	/* PieChart 도가능  */
+	/* PieChatomcat 8 context path 설정rt 도가능  */
 </script>
 <script>
 $(document).ready(function(){
@@ -54,7 +54,6 @@ $(document).ready(function(){
 		});
 		//이벤트 효과 1개 넣기
 		$('.filedropDown').on('drop',function(event){
-			console.log('두번째이벤트 효과 출발');
 			//기본 효과막음
 			event.preventDefault();
 			//드래그된 파일정보
@@ -254,7 +253,53 @@ table.type05 td {
     vertical-align: top;
     border-bottom: 1px solid #ccc;
 }
-
+   .button {
+   border: 0px solid #0a3c59;
+   background: #a5c1d4;
+   background: -webkit-gradient(linear, left top, left bottom, from(#a8b8c4), to(#a5c1d4));
+   background: -webkit-linear-gradient(top, #a8b8c4, #a5c1d4);
+   background: -moz-linear-gradient(top, #a8b8c4, #a5c1d4);
+   background: -ms-linear-gradient(top, #a8b8c4, #a5c1d4);
+   background: -o-linear-gradient(top, #a8b8c4, #a5c1d4);
+   background-image: -ms-linear-gradient(top, #a8b8c4 0%, #a5c1d4 100%);
+   padding: 4.5px 9px;
+   -webkit-border-radius: 29px;
+   -moz-border-radius: 29px;
+   border-radius: 29px;
+   -webkit-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+   -moz-box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+   box-shadow: rgba(255,255,255,0.4) 0 0px 0, inset rgba(255,255,255,0.4) 0 0px 0;
+   text-shadow: #422542 0 1px 0;
+   color: #10171c;
+   font-size: 11px;
+   font-family: helvetica, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+.button:hover {
+   border: 0px solid #0a3c59;
+   text-shadow: #93ccf0 0 1px 0;
+   background: #bacedb;
+   background: -webkit-gradient(linear, left top, left bottom, from(#aecee3), to(#bacedb));
+   background: -webkit-linear-gradient(top, #aecee3, #bacedb);
+   background: -moz-linear-gradient(top, #aecee3, #bacedb);
+   background: -ms-linear-gradient(top, #aecee3, #bacedb);
+   background: -o-linear-gradient(top, #aecee3, #bacedb);
+   background-image: -ms-linear-gradient(top, #aecee3 0%, #bacedb 100%);
+   color: #080508;
+   }
+.button:active {
+   text-shadow: #1e4158 0 1px 0;
+   border: 0px solid #0a3c59;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#bacedb));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
+   color: #fff;
+   }
 </style>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
@@ -279,7 +324,7 @@ table.type05 td {
                         <a class="nav-link" href="coinAdmin.do"><i class="icon-credit-card"></i>코인 관리</a>
                     </li>
                     <li class="nav-item">
-                    	<a class="nav-link" href="questionAdmin.do"><i class="icon-check"></i>문의 관리</a>
+                    	<a class="nav-link" href="helpMtomReply.do"><i class="icon-check"></i>문의 관리</a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="noticeAdmin.do"><i class="icon-list"></i>공지사항 관리</a>
@@ -416,7 +461,7 @@ table.type05 td {
 								  <div class="modal-body">
 								    	<table class="type09">
 								    		<tr>
-								 				<th>요일 을적어주세요 </th>
+								 				<th>요일 <br>을적어주세요 </th>
 								    			<td>
 							    					<input type="text" id="usetime_day" placeholder=" ex.)평일,토요일,일요일,휴무일 " required="required">
 								    			</td>
@@ -429,7 +474,7 @@ table.type05 td {
 								    		</tr>
 								    		<tr>
 								    			<td colspan="2" align="right">
-								    				<button type="button" id="btnUsetime_insert">이용시간 등록!</button>
+								    				<button type="button" id="btnUsetime_insert" class="button">Insert!</button>
 							    				</td>
 								    		</tr>
 								    	</table>
@@ -479,7 +524,7 @@ table.type05 td {
 								    		
 								    		<tr>
 								    			<td colspan="7" align="right">
-								    				<button type="button" id="btnContent_insert">컨텐츠 등록!</button>
+								    				<button type="button" id="btnContent_insert" class="button">Insert!</button>
 							    				</td>
 								    		</tr>
 								    	</table>
@@ -489,50 +534,50 @@ table.type05 td {
 								    	 <input type="text" id="oldcompany_co_idx"placeholder="전화번호입력해주세요">
 								    	 <table class="type05">
 								    	 	<tr>
-								    	 	 	<td>코인</td>
+								    	 	 	<th>코인</th>
 								    	 	 	<td>
 								    	 	 		<input type="text" id="con_coin">
 								    	 	 	</td>
 								    	 	</tr>
 								    	 	<tr>
-								    	 	 	<td>컨텐츠1번</td>
+								    	 	 	<th>컨텐츠1번</th>
 								    	 	 	<td>
 								    	 	 		<input type="text" id="con_con1">
 								    	 	 	</td>
 								    	 	</tr>
 								    	 	<tr>
-								    	 	 	<td>컨텐츠2번</td>
+								    	 	 	<th>컨텐츠2번</th>
 								    	 	 	<td>
 									    	 	 	<input type="text" id="con_con2">
 								    	 	 	</td>
 								    	 	</tr>
 											<tr>
-								    	 	 	<td>컨텐츠3번</td>
+								    	 	 	<th>컨텐츠3번</th>
 								    	 	 	<td>
 								    	 	 		<input type="text" id="con_con3">
 								    	 	 	</td>
 								    	 	</tr>
 											<tr>
-								    	 	 	<td>컨텐츠4번</td>
+								    	 	 	<th>컨텐츠4번</th>
 								    	 	 	<td>
 									    	 	 	<input type="text" id="con_con4">
 								    	 	 	</td>
 								    	 	</tr>
 											<tr>
-								    	 	 	<td>컨텐츠5번</td>
+								    	 	 	<th>컨텐츠5번</th>
 								    	 	 	<td>
 									    	 	 	<input type="text" id="con_con5">
 								    	 	 	</td>
 								    	 	</tr>
 								    	 	<tr>
-								    	 	 	<td>컨텐츠6번</td>
+								    	 	 	<th>컨텐츠6번</th>
 								    	 	 	<td>
 									    	 	 	<input type="text" id="con_con6">
 								    	 	 	</td>
 								    	 	</tr>
 								    	 	<tr>
 								    	 		<td colspan="2" align="right">
-											    	 <button type="button" id="btnOldCompany">등록하기</button>
+											    	 <button type="button" id="btnOldCompany" class="button">Insert!</button>
 								    	 		</td>
 								    	 	</tr>
 								    	 </table>

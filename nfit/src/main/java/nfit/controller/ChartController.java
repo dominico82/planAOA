@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -96,7 +97,8 @@ public class ChartController {
 	@RequestMapping(value="uploadAjax.do",method=RequestMethod.POST,produces="text/plan;charset=utf-8")
 	@ResponseBody//view 가아니라 data 리턴
 	public ResponseEntity<String> uploadAjax(@RequestParam("checkbox")int checkbox,
-			@ModelAttribute CenterDTO vo,MultipartHttpServletRequest mreq){
+			@ModelAttribute CenterDTO vo,MultipartHttpServletRequest mreq,
+			HttpServletRequest request){
 			String menu="";
 		ResponseEntity<String> entity= null;
 		try{
@@ -112,10 +114,11 @@ public class ChartController {
 			case 9: menu="골프"; break;
 			case 10: menu="기타"; break;
 			}
+			String root_path = request.getSession().getServletContext().getRealPath("/");
+			System.out.println("컨트롤러에서본 root_path::"+root_path);
+			String attach_path = "resources/centerImage";
 			//서비스등록 
 			companyDao.company_add2(vo, menu);
-			//경로 구현 [절대경로]
-			uploadPath="c:/upload/";
 			//방금 등록한 업체 idx값 가져오기 
 			int co_idx = companyDao.sonnco_idx(vo.getCo_phone());
 			//실제 우리가 파일을 저장할 하위 폴더
@@ -136,13 +139,16 @@ public class ChartController {
 				String fileName=mfile.get(i).getOriginalFilename();
 				String formatName=fileName.substring(
 						fileName.lastIndexOf(".")+1);
-				if(formatName.equals("jpg")){
-					 fileName=co_idx+"_"+vo.getCo_phone()+"_"+i+".jpg";
+			/*	if(formatName.equals("jpg")){
 				}else if(formatName.equals("gif")){
 					 fileName=co_idx+"_"+vo.getCo_phone()+"_"+i+".gif";
 				}else if(formatName.equals("png")){
 					 fileName=co_idx+"_"+vo.getCo_phone()+"_"+i+".png";
-				}
+				}*/
+				//확장자 강제설정
+				
+				fileName=co_idx+"_"+vo.getCo_phone()+"_"+i+".jpg";
+				System.out.println("파일이름찍어보세요:"+fileName);
 				//파일 이름 j
 				File target = new File(maxPath,fileName);
 				FileCopyUtils.copy(mfile.get(i).getBytes(),target);
@@ -377,8 +383,6 @@ public class ChartController {
 			MultipartHttpServletRequest mreq){
 		ResponseEntity<String[]> entity=null;
 		try{
-			//폴더 생성하기 [고정폴더]
-			uploadPath="c:/upload/";
 			//co_idx값으로 리스트 훍고 업체 핸드폰 번호 구하기 
 			CenterDTO dto = companyDao.companydetail(co_idx);
 			//실제 우리가 파일을 저장할 하위 폴더
@@ -402,13 +406,13 @@ public class ChartController {
 				/*확장자 검사 마지막 맞침표 찾기 */
 				String formatName=fileName.substring(fileName.lastIndexOf(".")+1);
 				//파일 이름
-				if(formatName.equals("gif")){
-					fileName=co_idx+"_"+dto.getCo_phone()+"_"+i+".gif";
-				}else if(formatName.equals("jpg")){
-					fileName=co_idx+"_"+dto.getCo_phone()+"_"+i+".jpg";
-				}else if(formatName.equals("png")){
-					fileName=co_idx+"_"+dto.getCo_phone()+"_"+i+".png";
-				}
+//				if(formatName.equals("gif")){
+//					fileName=co_idx+"_"+dto.getCo_phone()+"_"+i+".gif";
+//				}else if(formatName.equals("jpg")){
+//				}else if(formatName.equals("png")){
+//					fileName=co_idx+"_"+dto.getCo_phone()+"_"+i+".png";
+//				}
+				fileName=co_idx+"_"+dto.getCo_phone()+"_"+i+".jpg";
 				//이미지 파일은 썸네일을 사용한다.
 				File target =new File(maxPath,fileName);
 				FileCopyUtils.copy(mlist.get(i).getBytes(), target);

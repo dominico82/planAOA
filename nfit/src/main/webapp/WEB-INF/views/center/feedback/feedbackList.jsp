@@ -20,7 +20,7 @@
 		</tr>
 	</c:if>
 	<c:forEach var="row" items="${flist}">
-	<0tr>
+	<tr>
 		<td>${row.member_id}(
 		<fmt:formatDate value="${row.feedback_date}" pattern="yyyy-MM-dd HH:mm:ss"/>)
 		<c:choose>
@@ -49,9 +49,12 @@
 			<c:if test="${saveid eq row.member_id}">
 				<input type="button" value="Modify" onclick="showModify(${row.feedback_index})" class="button">
 			</c:if>
+		<hr>
 		</td>
 	</tr>
 	</c:forEach>
 </table>
+<div>
+</div>
 </body>
 </html>
