@@ -7,13 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="http://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="resources/js/jquery.raty.js"></script>
 <script>
 $(document).ready(function(){
 	/* 수정버튼클릭시 */
 	$('#btnFeedbackUpdate').click(function(){
 		/* 다시입력한 별의값 */
-		var feedback_score = $('#feedback_score2').val();
+		var feedback_score = $('#starRating1').val();
 		// index 
 		var feedback_index= $('#feedback_index').val();
 		/* 다시입력한 content의값 */
@@ -24,7 +25,6 @@ $(document).ready(function(){
 		 if(feedback_score=='' || feedback_score ==null){
 			alert('별점선택해주세요');
 		}
-		//var param='feedback_score='+feedback_score+'&feedback_content='+feedback_content+'&feedback_index='+feedback_index;
 		$.ajax({
 			type:'put',	
 			url:'feedbackupdate.do?feedback_index=${vo.feedback_index}',
@@ -68,45 +68,16 @@ $(document).ready(function(){
 		$('#modifyFeedback').css('visibility','hidden');
 		feedbacklist();
 	});
+	  $('div#star1').raty({
+          score: 3
+          ,path : "resources/images/star"
+          ,width : 200
+          ,click: function(score, evt) {
+              $("#starRating1").val(score);
+              $("#displayStarRating1").html(score);
+          }
+      });
 });
-</script>
-<script>
-var locked2=0;
-function show1(star){
-	if(locked2)
-		return;
-	var j;
-	var image2;
-	var el2;
-	var e2 = document.getElementById('startext');
-	var stateMsg;
-	for( j=1;j<=star;j++){
-		image2 = 'imagess'+j;
-		el2 = document.getElementById(image2);
-		el2.src='resources/images/img/star1.png';
-	}
-}
-function noshow1(star){
-	if(locked2)
-		return;
-	var j;
-	var image2;
-	var el2;
-	for(j=1;j<=star;j++){
-		image2='imagess'+j;
-		el2= document.getElementById(image2);
-		el2.src='resources/images/img/star0.png';
-	}
-}
-function lock1(star){
-	show1(star);
-	locked2=1;
-}
-function mark1(star){
-	lock1(star);
-	$('#feedback_score2').val(star);	
-	return;
-}
 </script>
 <style>
 #detail_feedback_index{
@@ -116,17 +87,14 @@ function mark1(star){
 </head>
 <body>
 <c:set var="vo" value="${vo}"/>
-<div id="detail_feedback_index">${vo.feedback_index}<br> <!-- 댓글번호 -->
-	<span>
-		<img id="imagess1" src="resources/images/img/star0.png" width="20" onmouseover="show1(1)"onclick="mark1(1)" onmouseout="noshow1(1)"/>
-		<img id="imagess2" src="resources/images/img/star0.png" width="20" onmouseover="show1(2)"onclick="mark1(2)" onmouseout="noshow1(2)"/>
-		<img id="imagess3" src="resources/images/img/star0.png" width="20" onmouseover="show1(3)"onclick="mark1(3)" onmouseout="noshow1(3)"/>
-		<img id="imagess4" src="resources/images/img/star0.png" width="20" onmouseover="show1(4)"onclick="mark1(4)" onmouseout="noshow1(4)"/>
-		<img id="imagess5" src="resources/images/img/star0.png" width="20" onmouseover="show1(5)"onclick="mark1(5)" onmouseout="noshow1(5)"/>
-	</span>
-	<br>
-		<input type="hidden" id="feedback_score2">
-	<br>
+<div id="detail_feedback_index">댓글번호${vo.feedback_index}<br> <!-- 댓글번호 -->
+	<div id="star1" ></div> <!-- 별점나타나는공간 -->
+      <div style="padding-top:20px;">						<!-- 별이찍히면 score가찍힘 -->
+          <label for="starRating1">Value1 : </label><input type="hidden" id="starRating1" value="3"/>
+      </div>
+      <div style="padding-top:20px; display: none;">
+          <label for="displayStarRating1">Value2 : </label><span id="displayStarRating1" style="padding-left:20px;">3</span>
+      </div>
 	<textarea rows="5" cols="47" id="detail_feedback_content" placeholder="내용을 기입해주세요" required="required">${vo.feedback_content}</textarea>
 	<br>
 	<div style="text-align: center;">

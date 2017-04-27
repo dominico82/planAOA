@@ -16,6 +16,7 @@
 	  <link rel="shortcut icon" href="resources/images/n-1x-170x128.jpg" type="image/x-icon">
 	  <script type="text/javascript" src="https://apis.daum.net/maps/maps3.js?apikey=edd938c4fc341b07f90ed69064de3f92&libraries=services"></script>
 <script src="http://code.jquery.com/jquery-3.1.0.js"></script>
+<script type="text/javascript" src="resources/js/jquery.raty.js"></script>
 <title>Insert title here</title>
 <script>
 $(document).ready(function(){
@@ -31,7 +32,7 @@ $(document).ready(function(){
 			var feedback_content = $('#feedback_content').val();	
 			feedback_content  = feedback_content.replace('\r\n','<br>');
 			//별점
-			var feedback_score =$('#feedback_score').val();
+			var feedback_score =$('#starRating').val();
 			 if(feedback_content=='' || feedback_content==null){
 				alert('댓글을입력해주세요');
 				return;
@@ -431,14 +432,27 @@ color: #fff;
 					 		<c:otherwise>
 								<tr>
 									<td>
-										<span>
-											<img id="images1" src="resources/images/img/star0.png" width="20" onmouseover="show(1)"onclick="mark(1)" onmouseout="noshow(1)"/>
-											<img id="images2" src="resources/images/img/star0.png" width="20" onmouseover="show(2)"onclick="mark(2)" onmouseout="noshow(2)"/>
-											<img id="images3" src="resources/images/img/star0.png" width="20" onmouseover="show(3)"onclick="mark(3)" onmouseout="noshow(3)"/>
-											<img id="images4" src="resources/images/img/star0.png" width="20" onmouseover="show(4)"onclick="mark(4)" onmouseout="noshow(4)"/>
-											<img id="images5" src="resources/images/img/star0.png" width="20" onmouseover="show(5)"onclick="mark(5)" onmouseout="noshow(5)"/>
-										</span>
-										<input type="hidden" id="feedback_score">
+										<div id="star" ></div> <!-- 별점나타나는공간 -->
+											
+									        <div style="padding-top:20px;">						<!-- 별이찍히면 score가찍힘 -->
+									            <label for="starRating">Value : </label><input type="text" id="starRating" value="3"/>
+									        </div>
+									        <div style="padding-top:20px; display: none;">
+									            <label for="displayStarRating">Value : </label><span id="displayStarRating" style="padding-left:20px;">3</span>
+									        </div>
+									        <script type="text/javascript">
+									        $(function() {
+									            $('div#star').raty({
+									                score: 3
+									                ,path : "resources/images/star"
+									                ,width : 200
+									                ,click: function(score, evt) {
+									                    $("#starRating").val(score);
+									                    $("#displayStarRating").html(score);
+									                }
+									            });
+									        });
+									        </script>
 									</td>
 								</tr>
 								<tr>
@@ -454,6 +468,7 @@ color: #fff;
 					 		</c:otherwise>
 					 	</c:choose>
 					</table>
+					 
 				</div>
 			<!-- 댓글목록나올란 -->
 			<div id="ListFeedback"></div>
