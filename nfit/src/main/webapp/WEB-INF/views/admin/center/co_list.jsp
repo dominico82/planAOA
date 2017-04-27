@@ -307,6 +307,10 @@ table.type05 td {
 <header>
 	<jsp:include page="../../header.jsp"/>
 </header>
+<div>
+	<!-- 경로에 이미지업로드 나오는지확인해봄 -->
+	<img alt="" src="resources/centerImage/62_0707-70770-7070/62_0707-70770-7070_2.jpg">
+</div>
   <div class="app-body">
         <div class="sidebar">
             <nav class="sidebar-nav">
