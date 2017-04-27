@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!--
  * CoreUI - Open Source Bootstrap Admin Template
@@ -122,7 +123,9 @@
 								<td class="center">${list.co_idx }</td>
 								<td class="center">${list.co_name }</td>
 								<td class="center">${list.usemember_coin }</td>
-								<td class="center">${list.usepay_date }</td>
+								<td class="center">
+								<fmt:formatDate value="${list.usepay_date }" pattern="yyy-MM-dd HH:mm"/>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

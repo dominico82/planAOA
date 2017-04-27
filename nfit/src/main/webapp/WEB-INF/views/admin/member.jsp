@@ -12,7 +12,7 @@
 <html lang="en">
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8"> 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -98,6 +98,10 @@
 
 		<!-- Main content -->
 		<main class="main">
+		 <div class="navbar-brand">
+                        <a href="index.do" class="navbar-logo"><img src="resources/images/n-1x-170x128.jpg" alt="Nfit"></a>
+                        <a class="navbar-caption" href="index.do">Nfit</a>
+                    </div>
 		<div class="container-fluid">
 			<div id="ui-view">
 				<table class="blueone">
