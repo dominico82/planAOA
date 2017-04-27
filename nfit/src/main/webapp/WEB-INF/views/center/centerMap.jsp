@@ -26,11 +26,7 @@ margin-top:100px;
 #centerListResult{
 overflow-y:auto;
 }
-#center_list_coName_class{
-font-size:12px;
-}
-#centerInfo_list_coClass{
-}
+
 #matched {
   background: #00bff0;
   color: #fff;
@@ -71,12 +67,10 @@ height:100%;
 margin: 0 0 0 0;
 height:28px;
 }
-#centerInfo_list_div{
-font-size:12px;
-}
-#centerInfo_list_table{
-padding:0 0 0 0;
-}
+
+
+
+
 #list-table{
 margin:0 0 0 0;
 font-size:12px;
@@ -95,9 +89,23 @@ display:none;
 #centerInfo_list .hiddenCnt{
 display:none;
 }
+#center_list_coName_class{
+font-size:12px;
+}
+#centerInfo_list_coClass{
+}
+#centerInfo_list_div{
+font-size:12px;
+}
+#centerInfo_list_table{
+padding:0 0 0 0;
+}
+
 #centerInfo{
 display:none; 
+
 }
+
 #centerInfo #centerInfo_panel{
 position:fixed;
 right:15px;
@@ -108,7 +116,7 @@ height:0px;
 border-radius:8px;
 background: #fff;
 box-shadow: 1px 5px 10px rgba(0,0,0,.5);
-border-top: 10px solid #16f98f;
+border-top: 10px solid #4f5359;
 padding: 20px;
 overflow-y: auto;
 max-height: 389px; 
@@ -143,6 +151,12 @@ margin-top:10px;
 overflow-y:auto; 
 height:280px;
 }
+#centerInfo_coname{
+
+}
+#centerInfo_body{
+
+}
 #avail_photo{
 height:34px;
 width:34px;
@@ -151,17 +165,22 @@ width:34px;
 text-align:center;
 }
 #wait{
+	position:absolute;
+	width:100%;
+	height:100%;
+	padding: 2px;
+	z-index:500;
+	border:1px solid black;
 	display:none;
+}
+#wait img{
 	position:absolute;
 	top: 50%;
 	left: 50%;
-	padding: 2px;
-	z-index:500;
-}
-#wait img{
 	width:64px;
 	height:64px;
 }
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
 </style>
 </head>
 <body>
@@ -384,9 +403,11 @@ $(document).ready(function(){
 $(document).ready(function(){
 	$(document).ajaxStart(function(){
 		$("#wait").css("display","block");
+		$("#centerListResult").css({"background-color":"black", "opacity":"0.5"});
 	});
 	$(document).ajaxComplete(function() {
 		$("#wait").css("display", "none");
+		$("#centerListResult").css({"background-color":"", "opacity":"1"});
 	});
 });
 
@@ -518,6 +539,7 @@ for(var i=0; i<count;i++){ //center_list 정보
 	cLng=document.getElementById('centerLng_'+i).innerHTML;
 	getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i);
 }//for center list ends
+searchMark();
 }//mapStart() ends
 
 /*지도 확대 축소 컨트롤러*/
@@ -806,7 +828,7 @@ function show(co_idx, centerListUrl, setMapGo){
 				}else{
 				/*co_idx and button*/
 				var btn_html = '';
-				btn_html += "<a class='col-sm-12 btn btn-default' href='"+centerListUrl+"' id='coBtn_button'>자세히보기</a>";
+				btn_html += "<a class='col-sm-12 btn btn-info' href='"+centerListUrl+"' id='coBtn_button'>자세히보기</a>";
 				$("#centerInfo_body > #coBtn").css({display:"block"});
 				$("#coBtn_button").replaceWith(btn_html);
 
@@ -1063,6 +1085,8 @@ function searchReset(searchNum){
 	$("#search_initialization").html('<a href="javascript:mapStart()" class="btn btn-warning btn-block">검색초기화<span class="badge">'+searchNum+'</span></a>');
 }
 
+
+
 /*검색하기*/
 function keywordSearch(){
 
@@ -1086,6 +1110,7 @@ function keywordSearch(){
 				removeMarker();
 				listRemove();
 				searchReset(0);
+				removeMore()
 				return false;
 			}
 			/*초기세팅 및 전부 삭제*/
@@ -1100,6 +1125,57 @@ function keywordSearch(){
 			var bounds = new daum.maps.LatLngBounds(); //맵 바운드
 			var marker;
 			var infowindow;
+			contents=[];
+			contentLists=[];
+			/*****************************************컨텐츠 집어넣기************************************************/
+				console.log("i reached here: "+company);
+				var companyLen = company.length
+				console.log("companyLen="+companyLen)
+				var lastCompany = company[company.length];
+				console.log("lastCompany="+lastCompany);
+				var lastIdx=lastCompany.co_idx;
+				console.log("lastIdx="+lastIdx);
+				for(var i=0; i<company.length; i++){//content_list 정보
+					var companySet = company[i];
+					content1 = $("#content_list_content1_"+i).text();
+					content2 = $("#content_list_content2_"+i).text();
+					content3 = $("#content_list_content3_"+i).text();
+					content4 = $("#content_list_content4_"+i).text();
+					content5 = $("#content_list_content5_"+i).text();
+					content6 = $("#content_list_content6_"+i).text();
+					if(content2!=" " && content2 !=""){
+						content1+=", ";
+					}
+					if(content3!=" " && content3 !=""){
+						content2+=", ";
+					}
+					if(content4!=" " && content4 !=""){
+						content3+=", ";
+					}
+					if(content5!=" " && content5 !=""){
+						content4+=", ";
+					}
+					if(content6!=" " && content6 !=""){
+						content5+=", ";
+					}
+					if(content1!=" "&& content1 !=""){
+						content6+=", ";
+					}
+					for(var j=1; j<=company.length; j++){
+						if(j==lastIdx){
+							if(contents[j]==null){
+							contents[j]="";
+							}
+							contents[j]+=(content1
+									+content2
+									+content3
+									+content4
+									+content5
+									+content6);
+						}//if null handling ends
+					}// for contents[i] ends
+				}//for content list ends
+			/*****************************************컨텐츠 집어넣기************************************************/
 			/*검색 후 리스트의 주소값 저장 후 맵 바운드 설정*/
 			for(var i=0; i<company.length; i++){
 			var companySet = company[i];
