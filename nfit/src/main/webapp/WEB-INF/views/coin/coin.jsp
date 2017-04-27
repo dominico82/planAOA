@@ -73,7 +73,7 @@ var userAddr="${dto.member_addr}";
                             <ul>
                                 
                                     <li>
-                                        <a data-goods='{"goodsIndex":"1000032","goodsPrice":"99,000"}' id="pay_num1" class>
+                                        <a data-goods='{"goodsIndex":"1000032","goodsPrice":"99,000"}' id="pay_num1" class style="text-decoration: none;">
                                             <dl class="p5Box p-renew">
                                                 <dt class="paypc-dt">다양한 운동을 실용적으로</dt>
                                                 <dd class="paypc-d1"><span>30일</span></dd>
@@ -85,7 +85,7 @@ var userAddr="${dto.member_addr}";
                                         </a>
                                     </li>
                                                                     <li>
-                                        <a data-goods='{"goodsIndex":"1000033","goodsPrice":"199,000"}' id="pay_num2" class>
+                                        <a data-goods='{"goodsIndex":"1000033","goodsPrice":"199,000"}' id="pay_num2" class style="text-decoration: none;">
                                             <dl class="p5Box p-renew">
                                                 <dt class="paypc-dt">운동이 취미인 분들은</dt>
                                                 <dd class="paypc-d1"><span>30일</span></dd>
@@ -97,7 +97,7 @@ var userAddr="${dto.member_addr}";
                                         </a>
                                     </li>
                                                                     <li>
-                                        <a data-goods='{"goodsIndex":"1000034","goodsPrice":"299,000"}' id="pay_num3" class>
+                                        <a data-goods='{"goodsIndex":"1000034","goodsPrice":"299,000"}' id="pay_num3" class style="text-decoration: none;">
                                             <dl class="p5Box p-renew">
                                                 <dt class="paypc-dt">운동 매니아들을 위한</dt>
                                                 <dd class="paypc-d1"><span>30일</span></dd>
@@ -120,7 +120,7 @@ var userAddr="${dto.member_addr}";
                             <ul>
                                 
                                     <li>
-                                        <a data-goods='{"goodsIndex":"1000029","goodsPrice":"30,000"}' id="pay_num4" class>
+                                        <a data-goods='{"goodsIndex":"1000029","goodsPrice":"30,000"}' id="pay_num4" class style="text-decoration: none;">
                                             <dl class="p5Box p-renew">
                                                 <dt class="paypc-dt">운동 체험을 위한 이용권</dt>
                                                 <dd class="paypc-d1"><span>30일</span></dd>
@@ -132,7 +132,7 @@ var userAddr="${dto.member_addr}";
                                         </a>
                                     </li>
                                                                     <li>
-                                        <a data-goods='{"goodsIndex":"1000030","goodsPrice":"99,000"}' id="pay_num5" class>
+                                        <a data-goods='{"goodsIndex":"1000030","goodsPrice":"99,000"}' id="pay_num5" class style="text-decoration: none;">
                                             <dl class="p5Box p-renew">
                                                 <dt class="paypc-dt">다양한 운동을 실용적으로</dt>
                                                 <dd class="paypc-d1"><span>30일</span><span class="pay-hot">HOT</span></dd>
@@ -144,7 +144,7 @@ var userAddr="${dto.member_addr}";
                                         </a>
                                     </li>
                                                                     <li>
-                                        <a data-goods='{"goodsIndex":"1000031","goodsPrice":"299,000"}' id="pay_num6" class>
+                                        <a data-goods='{"goodsIndex":"1000031","goodsPrice":"299,000"}' id="pay_num6" class style="text-decoration: none;">
                                             <dl class="p5Box p-renew">
                                                 <dt class="paypc-dt">운동 매니아들을 위한</dt>
                                                 <dd class="paypc-d1"><span>30일</span></dd>
