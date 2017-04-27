@@ -580,7 +580,7 @@ function searchMark(){
 			selectoHtml+=centerListUrl[i];
 			selectoHtml+="'";
 			selectoHtml+=')">';
-			selectoHtml+='<img src="resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+			selectoHtml+='<img src="../nfit/src/main/webapp/resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
 			selectoHtml+='</a>';
 			selectoHtml+='</div>';
 			selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
@@ -619,7 +619,7 @@ function searchMark(){
 			selectoHtml+=centerListUrl[i];
 			selectoHtml+="'";
 			selectoHtml+=')">';
-			selectoHtml+='<img src="resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+			selectoHtml+='<img src="../nfit/src/main/webapp/resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
 			selectoHtml+='</a>';
 			selectoHtml+='</div>';
 			selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
