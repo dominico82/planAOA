@@ -12,7 +12,7 @@
 <html lang="en">
 <head>
 
-<meta charset="utf-8"> 
+<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -83,9 +83,8 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="memberAdmin.do"><i
 							class="icon-people"></i> 회원관리</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="co_list.do"><i class="icon-briefcase"></i>제휴업체
-							등록/삭제</a></li>
+					<li class="nav-item"><a class="nav-link" href="co_list.do"><i
+							class="icon-briefcase"></i>제휴업체 등록/삭제</a></li>
 					<li class="nav-item"><a class="nav-link" href="coinAdmin.do"><i
 							class="icon-credit-card"></i>코인 관리</a></li>
 					<li class="nav-item"><a class="nav-link"
@@ -98,10 +97,11 @@
 
 		<!-- Main content -->
 		<main class="main">
-		 <div class="navbar-brand">
-                        <a href="index.do" class="navbar-logo"><img src="resources/images/n-1x-170x128.jpg" alt="Nfit"></a>
-                        <a class="navbar-caption" href="index.do">Nfit</a>
-                    </div>
+		<div class="title">
+			<a href="index.do" class="navbar-logo"><img
+				src="resources/images/n-1x-170x128.jpg" alt="Nfit"></a> <a
+				class="navbar-caption" href="index.do">Nfit</a>
+		</div>
 		<div class="container-fluid">
 			<div id="ui-view">
 				<table class="blueone">
@@ -156,7 +156,7 @@
 	</div>
 
 	<footer class="app-footer">
-		<jsp:include page="../footer.jsp"/>
+		<jsp:include page="../footer.jsp" />
 	</footer>
 
 	<!-- Bootstrap and necessary plugins -->
