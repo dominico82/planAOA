@@ -111,6 +111,8 @@
  	   				<mvc:mapping path="/adminPage.do"/>
  	   				<mvc:mapping path="/helpMtomReply.do"/>
  	   				<mvc:mapping path="/noticeAdmin.do"/>
+ 	   				<mvc:mapping path="/memberAdmin.do"/>
+ 	   				<mvc:mapping path="/coinAdmin.do"/>
  	   				<bean class="interceptor.LoginInterceptor"/>
  	   			</mvc:interceptor>
 			</mvc:interceptors>	

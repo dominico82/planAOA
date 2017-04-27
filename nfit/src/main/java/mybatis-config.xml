@@ -15,5 +15,6 @@
 		<mapper resource="sql/center2SQL.xml"/>
 		<mapper resource="sql/feedbackSQL.xml"/>
 		<mapper resource="sql/mtomSQL.xml"/>
+		<mapper resource="sql/useSQL.xml"/>
 	</mappers>
 </configuration>

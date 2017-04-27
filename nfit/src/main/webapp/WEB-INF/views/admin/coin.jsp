@@ -39,7 +39,7 @@
 	href="resources/css/jquery.mmenu.all.css" />
 	   <link href="resources/css/font-awesome.min.css" rel="stylesheet">
     <link href="resources/css/simple-line-icons.css" rel="stylesheet">
-
+<link href="resources/css/table.css" rel="stylesheet">
 </head>
 
 <!-- BODY options, add following classes to body to change options
@@ -128,12 +128,6 @@
 					</tbody>
 
 				</table>
-			</div>
-			<div style="margin-top: 10px;">
-				<ul>
-					<li class="wirte"><input type="button" value="공지작성"
-						onclick="location.href='noticeWrite.do'"></li>
-				</ul>
 			</div>
 			<div>
 				<ul>
