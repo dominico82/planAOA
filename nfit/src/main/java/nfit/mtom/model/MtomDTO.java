@@ -16,6 +16,7 @@ public class MtomDTO {
 	//제이슨으로 date타입을 불러올때 사용
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="GMT+9")
 	java.util.Date qa_date;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm", timezone="GMT+9")
 	java.util.Date qa_adate;
 	
 	public MtomDTO() {

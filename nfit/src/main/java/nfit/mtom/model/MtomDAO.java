@@ -1,6 +1,7 @@
 package nfit.mtom.model;
 
 import java.util.List;
+import java.util.Map;
 
 import nfit.notice.model.NoticeDTO;
 

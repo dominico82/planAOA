@@ -60,4 +60,5 @@ private SqlSessionTemplate sqlMap;
 		int result=sqlMap.update("setHelpMtomUpdate", dto);
 		return result;
 	}
+	
 }
