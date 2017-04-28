@@ -22,12 +22,6 @@ public class FeedBackController {
 
 	@Autowired
 	FeedbackDAO feedbackDao;
-	
-	//페이지이동
-	@RequestMapping("page.do")
-	public String page(){
-		return "center/feedback/companypage";
-	}
 	//댓글추가
 	@RequestMapping("feedbackinsert.do")
 	@ResponseBody
