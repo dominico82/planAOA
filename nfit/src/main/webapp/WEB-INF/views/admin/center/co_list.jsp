@@ -303,6 +303,9 @@ background: -o-linear-gradient(top, #3e779d, #65a9d7);
 background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
 color: #fff;
 }
+.modal-body table>tbody>td{
+width : 150px;
+}
 </style>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
@@ -313,7 +316,7 @@ color: #fff;
 </header>
 <div>
 	<!-- 경로에 이미지업로드 나오는지확인해봄 -->
-	<img alt="" src="resources/centerImage/65_07000707-/65_07000707-_1.jpg" style="display: none;">
+	<img alt="" src="resources/centerImage/65_07000707-/65_07000707-_1.jpg" ><!-- style="display: none;" -->
 </div>
   <div class="app-body">
         <div class="sidebar">
