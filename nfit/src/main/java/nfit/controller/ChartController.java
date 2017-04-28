@@ -524,17 +524,7 @@ public class ChartController {
 		}
 		return entity;
 	}
-	//자동완성기능 보류
-	@RequestMapping("search.do")
-	public String search(
-			@RequestParam(value="keyword",required=false)String keyword,
-			@RequestParam(value="keyfield",required=false)String keyfield,Map map){
-		List<CenterDTO> list =companyDao.searchAuto(keyword, keyfield);
-		map.put("keyword", keyword);
-		map.put("list", list);
-		return "admin/center/search";
-	}
-	
+	//키워드 자동완성 Json 객체 생성후 리턴
 	@RequestMapping("autocomplete.do")
 	public @ResponseBody JSONObject autocomplete(@RequestParam("value")String value,
 			@RequestParam("keyword")String keyword){
