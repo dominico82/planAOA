@@ -3,6 +3,7 @@ package nfit.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -21,9 +22,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import nfit.bookmark.model.MarkDTO;
+import nfit.center.model.CenterDAO;
+import nfit.center.model.CenterDTO;
 import nfit.coin.model.CoinDTO;
 import nfit.member.model.MemberDAO;
 import nfit.member.model.MemberDTO;
+import nfit.notice.model.NoticeDTO;
 import nfit.member.model.MemberDAOImple;
 
 @Controller
@@ -32,30 +36,54 @@ public class MypageController {
 	@Autowired
 	private MemberDAO memberDao;
 	
+	@Autowired
+	private CenterDAO centerDao;
+	
 	//마이페이지 정보
 	@RequestMapping("myPage.do")
-	public ModelAndView myPage(HttpSession session){
+	public ModelAndView myPage(HttpSession session, @RequestParam(value="cp", defaultValue="1") int cp){
 		
 		String userid = (String)session.getAttribute("saveid");
 		MemberDTO dto = memberDao.getMemberInfo(userid);
 		List<String> pic = memberDao.getImage(userid);
 		int useridx = dto.getMember_idx();
 		List<CoinDTO> dta = memberDao.getPayInfo(useridx);
+		
+		int totalCnt = memberDao.getpayTotalCnt();
+		totalCnt=totalCnt==0?1:totalCnt;
+		int listSize=4;
+		int pageSize=5;
+		List<CoinDTO> list = memberDao.payList(cp, listSize);
+		String pageStr = nfit.page.PageModule.makePage("myPage.do", totalCnt, listSize, pageSize, cp);
+		
+		List<MarkDTO> mdt = memberDao.getMark(userid);
+		List<CenterDTO> cdt = new ArrayList<CenterDTO>();
+		for(int i=0; i<mdt.size(); i++){
+			int c=mdt.get(i).getCo_idx();
+			CenterDTO cd = centerDao.centerOneDB(c);
+			cdt.add(cd);
+		}
+		
 		int tall1 = dto.getMember_tall();
 		double tall = (tall1*0.01);
 		int weight = dto.getMember_weight();
 		int bmi = (int)(weight/(tall*tall));
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("dto",dto);
 		mav.addObject("dta",dta);
+		mav.addObject("mdt", mdt);
+		mav.addObject("list", list);
+		mav.addObject("pageStr", pageStr);
 		mav.addObject("bmi",bmi);
 		mav.addObject("pic", pic);
+		mav.addObject("cdt", cdt);
 		mav.setViewName("mypage/myPage");
 		return mav;
 	}
 	
 	//회원정보 수정폼
-	@RequestMapping("memberInfo.do")
+	@RequestMapping("modifyForm.do")
 	public ModelAndView memberInfo(HttpSession session){
 		
 		String userid = (String)session.getAttribute("saveid");
@@ -116,7 +144,7 @@ public class MypageController {
 	public ModelAndView saveImage(@RequestParam("id") String id, @RequestParam("files") MultipartFile files) throws IllegalStateException, IOException {
 		
 		int result = memberDao.setImage(id, files);
-		String msg = result>0?"사진 업로드 완료":"업로드 실패";
+		String msg = result>0?"프로필 사진 변경 완료":"업로드 실패";
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", msg);
@@ -129,7 +157,7 @@ public class MypageController {
 		
 		String userid = (String)session.getAttribute("saveid");
 		int result = memberDao.memberDelete(userid);
-		String msg = result>0?"이용해주셔서 감사합니다":"회원탈퇴 실패";
+		String msg = result>0?"어디가세요~! 꼭 돌아오실거죠? 다음에 만나요~":"회원탈퇴 실패";
 
 		session.invalidate();
 		

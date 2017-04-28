@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import nfit.bookmark.model.MarkDTO;
 import nfit.coin.model.CoinDTO;
+import nfit.notice.model.NoticeDTO;
 
 
 public class MemberDAOImple implements MemberDAO {
@@ -148,6 +149,7 @@ public class MemberDAOImple implements MemberDAO {
 		List<MemberDTO> list=sqlMap.selectList("adminList",param);
 		return list;
 	}
+	
 	public int getTotalCnt() {
 		int count=sqlMap.selectOne("membertotalCnt");
 		return count;
@@ -156,6 +158,22 @@ public class MemberDAOImple implements MemberDAO {
 	public List<CoinDTO> getPayInfo(int member_idx){
 		List<CoinDTO> dto = sqlMap.selectList("payInfo", member_idx);
 		return dto;
+	}
+	
+	public List<CoinDTO> payList(int cp, int ls){
+		int startnum=(cp-1)*ls+1;
+		int endnum=cp*ls;
+		Map param=new HashMap();
+		param.put("startnum", startnum);
+		param.put("endnum", endnum);
+		List<CoinDTO> list = sqlMap.selectList("payList", param);
+		
+		return list;
+	}
+	
+	public int getpayTotalCnt() {
+		int count=sqlMap.selectOne("paytotalCnt");
+		return count;
 	}
 	
 	public List<String> getImage(String member_id){
@@ -177,6 +195,7 @@ public class MemberDAOImple implements MemberDAO {
 		List<MarkDTO> dto = sqlMap.selectList("markInfo", member_id);
 		return dto;
 	}
+	
 }
 
 

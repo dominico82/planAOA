@@ -106,6 +106,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		)
 	</insert>
 	
+	<select id="paytotalCnt" resultType="Integer">
+		select count(*) from pay_table
+		where member_idx = #{member_idx}
+	</select>
+	
+	<select id="payList" resultType="nfit.member.model.MemberDTO" parameterType="Map">
+		select * from 
+		(select rownum as rnum, a.* from
+		(select * from pay_table order by pay_idx desc)a)b
+		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
+	</select>
+	
 	<select id="markInfo" parameterType="String" resultType="nfit.bookmark.model.MarkDTO">
 		select * from bookmark where member_id=#{member_id}
 	</select>
