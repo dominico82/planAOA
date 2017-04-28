@@ -102,7 +102,7 @@
 		<main class="main">
 		<div class="title" style="margin-top: 15px; margin-left: 35px;">
 			<img src="resources/img/favicon.png" style="height: 65px;"> 
-			<a href="memberAdmin.do" style="font-family:'Nanum Pen Script' serif;">회원관리 페이지</a>
+			<a href="memberAdmin.do" style="font-family:'Nanum Pen Script' serif;">1:1문의 답변</a>
 		</div>
 		<div class="container-fluid">
 			<div id="ui-view">
@@ -110,7 +110,7 @@
 					<thead>
 						<tr>
 							<th></th>
-							<th>문의 내용</th>
+							<th>고객문의 내용</th>
 							<th>답변상태</th>
 							<th>문의 일시</th>
 						</tr>
