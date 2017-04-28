@@ -165,7 +165,14 @@ text-align:center;
 	width:64px;
 	height:64px;
 }
-
+#infowindows{
+max-width:250px;font-size:12px;
+}
+#infowindows_close{position: absolute;top: 5px;right: 10px;color: #f9022b;width: 17px;height: 17px;
+cursor: pointer; font-size:12px;}
+#map_zoom{
+position:absolute;top:100px;right:10px;z-index:1
+}
 </style>
 </head>
 <body>
@@ -206,13 +213,14 @@ text-align:center;
 <!-- 맵 부분 -->
 			<div class="col-sm-6" id="map_part">
 				<div id="map"></div>
-				<div style="position:absolute;top:100px;right:10px;z-index:1">
+				<div id="map_zoom">
 					<button onclick="javascript:zoomIn()" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></button>				
 					<button onclick="javascript:zoomOut()" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-minus"></span></button>				
 				</div>
 			</div>
 			</div>
-	</div>
+    </div>
+	
 	
 	<!--  업체 백업 부분 -->
 		<div class="col-sm-12" id="center_list">
@@ -441,6 +449,7 @@ var moreN; //더보기 눌렀을 때 보여질 리스트 수
 var startCheck=false;
 var mapOn=false; //리스트 생성 여부 : 맵 움직을때만 
 var searchOn = false;
+var infoContent;
 //-------------------------------------
 //--------------마카 이미지 생성
 	var imgSrc='resources/images/marker.png';
@@ -744,8 +753,12 @@ function getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i){
         contentLists[i]=contents[cIdx];
         cLatArr[i]=cLat;
         cLngArr[i]=cLng;
+        infoContent='<table id="infowindows" class="table table-condensed">'+
+        '<thead><tr><th>'+cName+'<div id="infowindows_close" onclick="javascript:closeAllMarkInfo()"><span class="glyphicon glyphicon-remove-circle"></span></div></th></tr></thead>'+
+        '<tbody><tr><td>'+cAddr+'</td></tr></tbody>'+
+        '</table>';
         infowindow = new daum.maps.InfoWindow({
-        content: '<div id="infowindow">'+cIdx+"/"+cName+'</div>'
+        content: infoContent
         }); //infowindow 생성
         infoWindows[i]=(infowindow);
 
@@ -777,6 +790,10 @@ daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infow
 	        cLng = result.addr[0].lng;
 	        cLatArr[i]=cLat;
 	        cLngArr[i]=cLng;
+	        infoContent='<table id="infowindows" class="table table-condensed">'+
+	        '<thead><tr><th>'+cName+'<div id="infowindows_close" onclick="javascript:closeAllMarkInfo()"><span class="glyphicon glyphicon-remove-circle"></span></div></th></tr></thead>'+
+	        '<tbody><tr><td>'+cAddr+'</td></tr></tbody>'+
+	        '</table>';
 	        infowindow = new daum.maps.InfoWindow({
 	        content: '<div id="infowindow">'+cIdx+"/"+cName+'</div>'
 	        }); ///infowindow 생성
@@ -1252,8 +1269,12 @@ function keywordSearch(){
 			});//마커 생성
 			markers[companySet.co_idx]=marker;
 			marker.setMap(map);
+			infoContent='<table id="infowindows" class="table table-condensed">'+
+	        '<thead><tr><th>'+companySet.co_name+'<div id="infowindows_close" onclick="javascript:closeAllMarkInfo()"><span class="glyphicon glyphicon-remove-circle"></span></div></th></tr></thead>'+
+	        '<tbody><tr><td>'+companySet.co_address+'</td></tr></tbody>'+
+	        '</table>';
 			infowindow = new daum.maps.InfoWindow({
-				content:'<div id="infowindow">'+companySet.co_idx+"/"+companySet.co_name+'</div>'
+				content:infoContent
 			});//인포 윈도우 생성
 			infoWindows[companySet.co_idx]=infowindow;
 			cLatArr[companySet.co_idx]=companySet.co_lat;
