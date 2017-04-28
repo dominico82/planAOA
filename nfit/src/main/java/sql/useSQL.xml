@@ -6,7 +6,7 @@
 	<select id="useCoinList" resultType="nfit.use.model.UseDTO" parameterType="java.util.HashMap">
 		select * from 
 		(select rownum as rnum, a.* from
-		(select * from pay_user order by usepay_date desc)a)b
+		(select * from pay_user order by paid_idx desc)a)b
 		where rnum<![CDATA[>=]]>#{startnum} and rnum<![CDATA[<=]]>#{endnum}
 	</select>
 	<select id="usetotalCnt" resultType="Integer">

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!--
  * CoreUI - Open Source Bootstrap Admin Template
@@ -107,6 +106,7 @@
 				<table class="blueone">
 					<thead>
 						<tr>
+							<th class="num" style="width:10%;">순번</th>
 							<th class="num" style="width:10%;">사용자 ID</th>
 							<th class="sub" style="width:10%;">이용센터 번호</th>
 							<th class="content">이용센터 이름</th>
@@ -121,15 +121,14 @@
 								<td colspan="10" align="center">사용정보가 없습니다.</td>
 							</tr>
 						</c:if>
-						<c:forEach var="list" items="${ulist }">
+						<c:forEach var="coin" items="${ulist }">
 							<tr>
-								<td class="center">${list.member_id }</td>
-								<td class="center">${list.co_idx }</td>
-								<td class="center">${list.co_name }</td>
-								<td class="center">${list.usemember_coin }</td>
-								<td class="center">
-								<fmt:formatDate value="${list.usepay_date }" pattern="yyy-MM-dd HH:mm"/>
-								</td>
+								<td class="center">${coin.paid_idx }</td>
+								<td class="center">${coin.member_id }</td>
+								<td class="center">${coin.co_idx }</td>
+								<td class="center">${coin.co_name }</td>
+								<td class="center">${coin.usemember_coin }</td>
+								<td class="center">${coin.use_date }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
