@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="https://apis.daum.net/maps/maps3.js?apikey=edd938c4fc341b07f90ed69064de3f92&libraries=services"></script>
+  <script type="text/javascript" src="https://apis.daum.net/maps/maps3.js?apikey=95b97b04d035d60f73995902d8ae2cd0&libraries=services"></script>
 <link rel="shortcut icon" href="resources/images/n-1x-170x128.jpg" type="image/x-icon">
 <title>Insert title here</title>
 <style>
@@ -38,7 +38,6 @@ font-size:12px;
   border-radius: 3px;
 }
 #map_part{
-z-index:100;
 height:100%;
 }
 #map{
@@ -86,11 +85,11 @@ z-index:500;
 }
 /*업체 백업 테이블*/
 #center_list{
-/* display:none;  */
+display:none; 
 }
 /*업체 서비스 백업 테이블*/
 #content_list{
-/*  display:none; */
+ display:none;
 }
 #centerInfo_list .hiddenCnt{
 display:none;
@@ -108,7 +107,7 @@ height:0px;
 border-radius:8px;
 background: #fff;
 box-shadow: 1px 5px 10px rgba(0,0,0,.5);
-border-top: 10px solid #16f98f;
+border-top: 10px solid #505256;
 padding: 20px;
 overflow-y: auto;
 max-height: 389px; 
@@ -166,12 +165,11 @@ text-align:center;
 	width:64px;
 	height:64px;
 }
+
 </style>
 </head>
 <body>
 <%@include file="../header.jsp" %>
-
-
 <!-- 업체 리스트 부분 -->
 <div class="container-fluid" id="container">
 <div class="row" id="container_row">
@@ -208,6 +206,10 @@ text-align:center;
 <!-- 맵 부분 -->
 			<div class="col-sm-6" id="map_part">
 				<div id="map"></div>
+				<div style="position:absolute;top:100px;right:10px;z-index:1">
+					<button onclick="javascript:zoomIn()" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></button>				
+					<button onclick="javascript:zoomOut()" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-minus"></span></button>				
+				</div>
 			</div>
 			</div>
 	</div>
@@ -296,13 +298,16 @@ text-align:center;
 		</tbody>
 		</table>
 		</div>
-<p style="display:none;">
+<p style="display:none;" id="mapapi">
 33.450701, 126.570667<br>
 edd938c4fc341b07f90ed69064de3f92<br>
 95b97b04d035d60f73995902d8ae2cd0<br>
 3564ccb62994635b131231fb19ae3e7d<br>
 55702a1d09804903d4550080da539868<br>
 </p>
+
+  
+	
 	
 <!-- 제휴업체 패널 부분 -->
 <div class="col-sm-12" id="centerInfo">
@@ -324,7 +329,7 @@ edd938c4fc341b07f90ed69064de3f92<br>
 <div class="col-sm-12">
 <p class="glyphicon glyphicon-phone-alt" id="centerInfo_phone"></p>
 </div>
-<div class="col-sm-12">
+<div class="col-sm-12" id="centerInfo_coin_div">
 <p id="centerInfo_coin"></p>
 </div>
 <div class="col-sm-12">
@@ -437,12 +442,18 @@ var startCheck=false;
 var mapOn=false; //리스트 생성 여부 : 맵 움직을때만 
 var searchOn = false;
 //-------------------------------------
+//--------------마카 이미지 생성
+	var imgSrc='resources/images/marker.png';
+	var imgSize=new daum.maps.Size(54,59);
+	var markerImage = new daum.maps.MarkerImage(imgSrc, imgSize);
+//----------ends 마카 이미지 생성
+
 
 /*geolocation 구현*/
 var mapContainer = document.getElementById('map');
 var mapOption = {
 	center : new daum.maps.LatLng(37.566535, 126.97796919999999),
-	level : 10
+	level : 3
 };
 var map = new daum.maps.Map(mapContainer, mapOption);
 
@@ -467,7 +478,6 @@ window.onload=mapStart();
 /*이름과 주소 가져오기*/
 function mapStart(){
 	searchOn = false;
-	console.log("1: mapStart()");
 	closeAllMarkInfo();
 	removeMarker();
 	removeMore();
@@ -514,6 +524,7 @@ function mapStart(){
 						+content5
 						+content6);
 			}//if null handling ends
+
 		}// for contents[j] ends
 	}//for content list ends
 for(var i=0; i<count;i++){ //center_list 정보
@@ -527,7 +538,6 @@ for(var i=0; i<count;i++){ //center_list 정보
 	cLng=document.getElementById('centerLng_'+i).innerHTML;
 	getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i);
 }//for center list ends
-console.log("3: mapStart go to searchMark()");
 searchMark();
 }//mapStart() ends
 
@@ -543,11 +553,10 @@ daum.maps.event.addListener(map, 'zoom_changed', searchMark);
 daum.maps.event.addListener(map, 'dragend', searchMark);
 }
 function searchMark(){
-	console.log("4: searchMark()");
 	if(searchOn==true){
 		return false;
-	}//if searchOn true ends 검색했을 경우
-	if(markers!=null||markers!=''){ //마커가 없을 경우
+	}//if searchOn true ends
+	if(markers!=null||markers!=''){
 	if(startCheck==false){//첫 접속일 경우 마크 생성 후 리스트만 제거
 	startCheck=true;
 	listRemove();
@@ -557,7 +566,6 @@ function searchMark(){
  		removeMarker();
 	}//if mapOn ends
 	}
-	console.log("4: search if 문들 유효검사 정료")
 	var bounds=map.getBounds();
 	var n=1; // 현재 맵에 뿌려진 리스트 수
 	var hiddenN=0; //감춰진 list
@@ -583,7 +591,7 @@ function searchMark(){
 			selectoHtml+=centerListUrl[i];
 			selectoHtml+="'";
 			selectoHtml+=')">';
-			selectoHtml+='<img src="../nfit/src/main/webapp/resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+			selectoHtml+='<img src="resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
 			selectoHtml+='</a>';
 			selectoHtml+='</div>';
 			selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
@@ -622,7 +630,7 @@ function searchMark(){
 			selectoHtml+=centerListUrl[i];
 			selectoHtml+="'";
 			selectoHtml+=')">';
-			selectoHtml+='<img src="../nfit/src/main/webapp/resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+			selectoHtml+='<img src="resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
 			selectoHtml+='</a>';
 			selectoHtml+='</div>';
 			selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
@@ -700,19 +708,30 @@ function more(){
 	}
 }
 
+/*지도 축소*/
+function zoomIn() {
+    map.setLevel(map.getLevel() - 1);
+}
+
+/*지도 확대*/
+function zoomOut() {
+    map.setLevel(map.getLevel() + 1);
+}
+
 /*마커 생성 및 클릭 이벤트*/
 function getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i){
-	console.log("2: getMarker()");
 	var marker;
 	var infowindow;
 	var coords;
 	var latlngData;
 	if(cLat!=0 && cLng!=0){ // 위도 경도가 DB에 등록된 경우
-		console.log("2: cidx db 마커 생성 clat cng 등록 됨="+cIdx);
 		coords = new daum.maps.LatLng(cLat, cLng);
+		
+		/*마커생성*/
 		marker = new daum.maps.Marker({
         	map:map,
         	position: coords,
+        	image: markerImage,
             clickable: true
         }); //마커 생성
         coName[i]=cName;
@@ -728,18 +747,22 @@ function getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i){
         infowindow = new daum.maps.InfoWindow({
         content: '<div id="infowindow">'+cIdx+"/"+cName+'</div>'
         }); //infowindow 생성
-        infoWindows[i]=infowindow;
+        infoWindows[i]=(infowindow);
+
+
 //makingMarkers ends
 daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infowindow, cIdx, cUrl));
 	}else{ //위도 경도가 DB에 등록되지 않는 경우
-		console.log("2: cidx db 마커 생성 등록 안됨="+cIdx);
 		var geocoder = new daum.maps.services.Geocoder();
 	geocoder.addr2coord(cAddr, function(status, result) {
 	     if (status === daum.maps.services.Status.OK) {
 		    coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+		    
+		    /*마커생성*/
 		    marker = new daum.maps.Marker({
 	        	map:map,
 	        	position: coords,
+	        	image: markerImage,
 	            clickable: true
 	        }); //마커생성
 	        coName[i]=cName;
@@ -799,6 +822,7 @@ function show(co_idx, centerListUrl, setMapGo){
 	if(infoWindows.length>0){
 		closeAllMarkInfo();
 	}
+	
 	$("#centerInfo_panel").animate({
 			opacity:1,
 			height:'389px'
@@ -817,7 +841,7 @@ function show(co_idx, centerListUrl, setMapGo){
 				}else{
 				/*co_idx and button*/
 				var btn_html = '';
-				btn_html += "<a class='col-sm-12 btn btn-primary' href='"+centerListUrl+"' id='coBtn_button'>자세히보기</a>";
+				btn_html += "<a class='col-sm-12 btn btn-info' href='"+centerListUrl+"' id='coBtn_button'>자세히보기</a>";
 				$("#centerInfo_body > #coBtn").css({display:"block"});
 				$("#coBtn_button").replaceWith(btn_html);
 
@@ -900,7 +924,7 @@ function show(co_idx, centerListUrl, setMapGo){
 				$("#centerInfo_extra").replaceWith(coExtra_html);
 				
 			/*클릭 후 이동*/
-	
+
 			if(searchOn==true){
 				if(setMapGo==false){//마커를 클릭할 경우
 					infoWindows[co_idx].open(map, markers[co_idx]);
@@ -931,7 +955,6 @@ function show(co_idx, centerListUrl, setMapGo){
 				var movePosition
 				if(cLatArr[co_idx] != 0 && cLngArr[co_idx] != 0){//db값에 lat lng가 입력된 경우
 				movePosition = new daum.maps.LatLng(cLatArr[co_idx], cLngArr[co_idx]);
-				console.log("co_idx in infowindow="+co_idx);
 				infoWindows[co_idx].open(map, markers[co_idx]);
 				map.setCenter(movePosition);
 				map.setLevel(4);
@@ -986,42 +1009,99 @@ function show(co_idx, centerListUrl, setMapGo){
 				var strData = data;
 				var objData = eval('('+strData+')');
 				var content = objData.content;
+				console.log("strData="+strData);
+				console.log("objData="+objData);
+				console.log("content="+content);
 				if(!data){
 					alert("ajax fail");
 					return false;
 				}else{
+					$("#centerInfo_coin_div").empty();
 					var content_html = '';
 					for(var i=0; i<content.length; i++){
 						var contentSet = content[i];
-						content_html = '<p id="centerInfo_coin"><span class="glyphicon glyphicon-play-circle" ></span><span>&nbsp;'+contentSet.content_coin+'&nbsp;'+contentSet.content1+'</span>';
-						if(contentSet.content2==null||contentSet.content2=='null'){
-							content_html+='</p>';
-						}else if(contentSet.content3==null||contentSet.content3=='null'){
-							content_html+='<kbd class="glyphicon glyphicon-plus"></kbd><span>'+contentSet.content2+'</span></p>';
-						}else if(contentSet.content4==null||contentSet.content4=='null'){
-							content_html+='<kbd class="glyphicon glyphicon-plus"></kbd><span>'+contentSet.content2+'</span>';
-							content_html+='<kbd class="glyphicon glyphicon-plus"></kbd><span>'+contentSet.content3+'</span></p>';
-						}else if(contentSet.content5==null||contentSet.content5=='null'){
-							content_html+='<kbd class="glyphicon glyphicon-plus"></kbd><span>'+contentSet.content2+'</span>';
-							content_html+='<kbd class="glyphicon glyphicon-plus"></kbd><span>'+contentSet.content3+'</span>';
-							content_html+='<kbd class="glyphicon glyphicon-plus"></kbd><span>'+contentSet.content4+'</span></p>';
-						}else if(contentSet.content6==null||contentSet.content6=='null'){
-							content_html+='<kbd class="glyphicon glyphicon-plus"></kbd><span>'+contentSet.content2+'</span>';
-							content_html+='<kbd class="glyphicon glyphicon-plus"></kbd><span>'+contentSet.content3+'</span>';
-							content_html+='<kbd class="glyphicon glyphicon-plus"></kbd><span>'+contentSet.content4+'</span>';
-							content_html+='<kbd class="glyphicon glyphicon-plus"></kbd><span>'+contentSet.content5+'</span></p>';
-						}else{
-							content_html+='<kbd class="glyphicon glyphicon-plus"></kbd><span>'+contentSet.content2+'</span>';
-							content_html+='<kbd class="glyphicon glyphicon-plus"></kbd><span>'+contentSet.content3+'</span>';
-							content_html+='<kbd class="glyphicon glyphicon-plus"></kbd><span>'+contentSet.content4+'</span>';
-							content_html+='<kbd class="glyphicon glyphicon-plus"></kbd><span>'+contentSet.content5+'</span>';
-							content_html+='<kbd class="glyphicon glyphicon-plus"></kbd><span>'+contentSet.content6+'</span></p>';
-						}
-						}
-					}
-				$("#centerInfo_coin").replaceWith(content_html);
-				}
-		});
+						var contentCoin = contentSet.content_coin;
+						if(contentCoin<=5 ){
+							content_html += '<p id="centerInfo_coin"><span class="label label-success">'+contentCoin+'</span>&nbsp;<span class="label label-success">'+contentSet.content1+'</span>&nbsp;';
+							if(contentSet.content2==null||contentSet.content2=='null'){
+								content_html+='</p>';
+							}else if(contentSet.content3==null||contentSet.content3=='null'){
+								content_html+='&nbsp;<span class="label label-success">'+contentSet.content2+'</span>';
+							}else if(contentSet.content4==null||contentSet.content4=='null'){
+								content_html+='&nbsp;<span class="label label-success">'+contentSet.content2+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-success">'+contentSet.content3+'</span></p>';
+							}else if(contentSet.content5==null||contentSet.content5=='null'){
+								content_html+='&nbsp;<span class="label label-success">'+contentSet.content2+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-success">'+contentSet.content3+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-success">'+contentSet.content4+'</span></p>';
+							}else if(contentSet.content6==null||contentSet.content6=='null'){
+								content_html+='&nbsp;<span class="label label-success">'+contentSet.content2+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-success">'+contentSet.content3+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-success">'+contentSet.content4+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-success">'+contentSet.content5+'</span></p>';
+							}else{
+								content_html+='&nbsp;<span class="label label-success">'+contentSet.content2+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-success">'+contentSet.content3+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-success">'+contentSet.content4+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-success">'+contentSet.content5+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-success">'+contentSet.content6+'</span></p>';
+							}//if(contentSet.content2==null||contentSet.content2=='null'){						
+						}else if(contentCoin >5 && contentCoin <=10){
+							content_html += '<p id="centerInfo_coin"><span class="label label-primary">'+contentCoin+'</span>&nbsp;<span class="label label-primary">'+contentSet.content1+'</span>&nbsp;';
+							if(contentSet.content2==null||contentSet.content2=='null'){
+								content_html+='</p>';
+							}else if(contentSet.content3==null||contentSet.content3=='null'){
+								content_html+='&nbsp;<span class="label label-primary">'+contentSet.content2+'</span>&nbsp;';
+							}else if(contentSet.content4==null||contentSet.content4=='null'){
+								content_html+='&nbsp;<span class="label label-primary">'+contentSet.content2+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-primary">'+contentSet.content3+'</span></p>';
+							}else if(contentSet.content5==null||contentSet.content5=='null'){
+								content_html+='&nbsp;<span class="label label-primary">'+contentSet.content2+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-primary">'+contentSet.content3+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-primary">'+contentSet.content4+'</span></p>';
+							}else if(contentSet.content6==null||contentSet.content6=='null'){
+								content_html+='&nbsp;<span class="label label-primary">'+contentSet.content2+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-primary">'+contentSet.content3+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-primary">'+contentSet.content4+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-primary">'+contentSet.content5+'</span></p>';
+							}else{
+								content_html+='&nbsp;<span class="label label-primary">'+contentSet.content2+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-primary">'+contentSet.content3+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-primary">'+contentSet.content4+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-primary">'+contentSet.content5+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-primary">'+contentSet.content6+'</span></p>';
+							}//if(contentSet.content2==null||contentSet.content2=='null'){	
+						}else if(contentCoin > 10){
+							content_html += '<p id="centerInfo_coin"><span class="label label-danger">'+contentCoin+'</span>&nbsp;<span class="label label-danger">'+contentSet.content1+'</span>&nbsp;';
+							if(contentSet.content2==null||contentSet.content2=='null'){
+								content_html+='</p>';
+							}else if(contentSet.content3==null||contentSet.content3=='null'){
+								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content2+'</span>&nbsp;';
+							}else if(contentSet.content4==null||contentSet.content4=='null'){
+								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content2+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content3+'</span></p>';
+							}else if(contentSet.content5==null||contentSet.content5=='null'){
+								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content2+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content3+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content4+'</span></p>';
+							}else if(contentSet.content6==null||contentSet.content6=='null'){
+								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content2+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content3+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content4+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content5+'</span></p>';
+							}else{
+								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content2+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content3+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content4+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content5+'</span>&nbsp;';
+								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content6+'</span></p>';
+							}//if(contentSet.content2==null||contentSet.content2=='null'){
+						}//if(contentCoin<=5 ){
+						}//for(var i=0; i<content.length; i++){
+					$("#centerInfo_coin_div").html(content_html);
+						}//if(!data)
+				}//	success:function(data){
+		});//ajax content list ends
 	}//show 끝
 	
 	/*상세 aside 닫기*/
@@ -1061,13 +1141,14 @@ function removeMarker(){
 /*검색 초기화 */
 function searchReset(searchNum){
 	$("#search_initialization").empty();
-	$("#search_initialization").html('<a href="javascript:mapStart()" class="btn btn-warning btn-block">검색초기화<span class="badge">'+searchNum+'</span></a>');
+	$("#search_initialization").html('<a href="javascript:mapStart()" class="btn btn-primary btn-block">검색초기화<span class="badge">'+searchNum+'</span></a>');
 }
 
 
 
 /*검색하기*/
 function keywordSearch(){
+
 	var keyword = $("#search_input").val();
 	$("#search_input").val('');
 	$.ajax({
@@ -1103,65 +1184,59 @@ function keywordSearch(){
 			var bounds = new daum.maps.LatLngBounds(); //맵 바운드
 			var marker;
 			var infowindow;
-			/*****************************************컨텐츠 집어넣기************************************************/
+	
+			/***************************************************idx 체크 후 content 대입**********************************************************************/
 			contents=[];
 			contentLists=[];
-				/*검색된 총 길이*/
-				var companyLen = company.length
-
-				/*idx값 배열 생성*/
-				var contentIdx=[];
-				for(var i=0; i<company.length; i++){
-					var contentSet = company[i];
-					contentIdx[i]=contentSet.co_idx;
-					var idx = contentIdx[i];
-					console.log("idx="+idx);
-					for(var j=1; j<=contentCnt; j++){
-						var check=$("#content_list_co_idx_"+i).text();
-						console.log("check="+check);
-						console.log("company.co_idx[i="+i+"]="+idx);
-						console.log("check from content_list[j="+j+"]="+check);
-						if(idx==check){
-							content1 = $("#content_list_content1_"+idx).text();
-							content2 = $("#content_list_content2_"+idx).text();
-							content3 = $("#content_list_content3_"+idx).text();
-							content4 = $("#content_list_content4_"+idx).text();
-							content5 = $("#content_list_content5_"+idx).text();
-							content6 = $("#content_list_content6_"+idx).text();
-							if(content2!=" " && content2 !=""){
-								content1+=", ";
-							}
-							if(content3!=" " && content3 !=""){
-								content2+=", ";
-							}
-							if(content4!=" " && content4 !=""){
-								content3+=", ";
-							}
-							if(content5!=" " && content5 !=""){
-								content4+=", ";
-							}
-							if(content6!=" " && content6 !=""){
-								content5+=", ";
-							}
-							if(content1!=" "&& content1 !=""){
-								content6+=", ";
-							}
-							console.log("content1="+content1);
-							console.log("content2="+content2);
-							console.log("content3="+content3);
-							console.log("content4="+content4);
-							console.log("content5="+content5);
-							console.log("content6="+content6);
-						}//if null handling ends
-					}// for contents[i] ends
-					contents[i]+=(content1
-							+content2
-							+content3
-							+content4
-							+content5
-							+content6);
-				}//for content list ends
-			/*****************************************컨텐츠 집어넣기************************************************/
+			var contentidx=[];
+			var contentarr=[];
+			for(var i=0; i<company.length; i++){
+				var contentSet=company[i];
+				contentidx[i]=contentSet.co_idx;
+			}
+			var cnt;
+			for(var i=0; i<company.length; i++){
+				contentLists[i]='';
+				for(var j=0; j<contentCnt; j++){
+					contentarr[j]=$("#content_list_co_idx_"+(j+1)).text();
+					if(contentidx[i]==contentarr[j]){
+						content1 = $("#content_list_content1_"+(j+1)).text();
+						content2 = $("#content_list_content2_"+(j+1)).text();
+						content3 = $("#content_list_content3_"+(j+1)).text();
+						content4 = $("#content_list_content4_"+(j+1)).text();
+						content5 = $("#content_list_content5_"+(j+1)).text();
+						content6 = $("#content_list_content6_"+(j+1)).text();
+						var comma=", ";
+						if(content2!=""&&content2!=" "&&content2!="null"){
+							content1+=", ";
+						}
+						if(content3!=""&&content3!=" "&&content3!="null"){
+							content2+=", ";
+						}
+						if(content4!=""&&content4!=" "&&content4!="null"){
+							content3+=", ";
+						}
+						if(content5!=""&&content5!=" "&&content5!="null"){
+							content4+=", ";
+						}
+						if(content6!=""&&content6!=" "&&content6!="null"){
+							content5+=", ";
+						}
+						if(content1!=""&&content1!=" "&&content1!="null"){
+							content6+=", ";
+						}
+						contentLists[i]+=content1
+						+content2
+						+content3
+						+content4
+						+content5
+						+content6;	
+					
+					}//if(contentidx[i]==contentarr[j]
+				}//for(var j=0; j<contentCnt; j++){
+			}//for(var i=0; i<contentidx.length; i++){
+			/***************************************************end: idx 체크 후 content 대입**********************************************************************/
+			
 			/*검색 후 리스트의 주소값 저장 후 맵 바운드 설정*/
 			for(var i=0; i<company.length; i++){
 			var companySet = company[i];
@@ -1172,6 +1247,7 @@ function keywordSearch(){
 			/*주소값으로 마커 및 인포윈도우 생성*/
 			marker=new daum.maps.Marker({
 				position:points[i],
+				image:markerImage,
 			 	clickable:true
 			});//마커 생성
 			markers[companySet.co_idx]=marker;
@@ -1189,9 +1265,6 @@ function keywordSearch(){
 				daum.maps.event.addListener(marker, 'click', searchClick(map, marker, infowindow, co_idx, curl));
 				function searchClick(){
 					return function(){
-						console.log("searchOn in search="+searchOn);
-						console.log("click event in search co_idx= "+co_idx);
-						console.log("click event in search curl= "+curl);
 						var setMapGo=false;
 						infowindow.open(map, marker);
 						show(co_idx, curl, setMapGo);
@@ -1216,7 +1289,7 @@ function keywordSearch(){
 					company_html+="centerDetail.do?co_idx="+companySet.co_idx;
 					company_html+="'";
 					company_html+=')">';
-					company_html+='<img src="../nfit/src/main/webapp/resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+					company_html+='<img src="resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
 					company_html+='</a>';
 					company_html+='</div>';
 					company_html+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
@@ -1235,7 +1308,7 @@ function keywordSearch(){
 					company_html+='</div>'; //colapse panel open1
 					company_html+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
 					company_html+='<ul class="list-group">';
-					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contents[i]+'</li>';
+					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contentLists[i]+'</li>';
 					company_html+='</ul>';
 					company_html+='</div>'; //collapse panel2
 					company_html+='<div class="panel-body">';
@@ -1254,7 +1327,7 @@ function keywordSearch(){
 					company_html+="centerDetail.do?co_idx="+companySet.co_idx;
 					company_html+="'";
 					company_html+=')">';
-					company_html+='<img src="../nfit/src/main/webapp/resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+					company_html+='<img src="resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
 					company_html+='</a>';
 					company_html+='</div>';
 					company_html+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
@@ -1273,7 +1346,7 @@ function keywordSearch(){
 					company_html+='</div>'; //colapse panel open1
 					company_html+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
 					company_html+='<ul class="list-group">';
-					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contents[i]+'</li>';
+					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contentLists[i]+'</li>';
 					company_html+='</ul>';
 					company_html+='</div>'; //collapse panel2
 					company_html+='<div class="panel-body">';

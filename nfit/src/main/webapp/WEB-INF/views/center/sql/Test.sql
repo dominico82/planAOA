@@ -111,4 +111,40 @@ FROM COMPANY_LIST CO
 INNER JOIN CONTENT_LIST CT ON (CO.CO_IDX=CT.CO_IDX)
 WHERE CO.CO_NAME LIKE '%?%'
 ORDER BY CO.CO_IDX;
-  
+
+--------------------------------------------------------------
+
+INSERT INTO COMPANY_LIST VALUES(co_idx.nextval, 'TEST정보', '서울 강남구 테헤란로14길 6 남도빌딩', '뷰티', '1544-9970', '기본케어 - 케어+칼라|젤네일 - 케어+젤칼라|속눈썹 - 아이존, full|※원컬러 손기준', '남성 기본케어 이용시 5,000원 추가 지불|다른 시술 이용시 추가비용 발생', '51_1544-9970', 12, 0, 0, '주차|샤워실|타올|일일락커|목욕용품'); 
+
+INSERT INTO USETIME_TABLE VALUES(usetime_idx.NEXTVAL, 51, '평일', '11:00 ~ 21:00');
+INSERT INTO USETIME_TABLE VALUES(usetime_idx.NEXTVAL, 51, '토요일', '11:00 ~ 20:00');
+INSERT INTO USETIME_TABLE VALUES(usetime_idx.NEXTVAL, 51, '일요일', '');
+INSERT INTO USETIME_TABLE VALUES(usetime_idx.NEXTVAL, 51, '휴무일', '일요일 및 명절 당일');
+
+INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 51, 13, '4', '눈썹', '', '', '', '' );
+INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 51, 13, '4.5', '내츄럴 속눈썹', '', '', '', '' );
+INSERT INTO CONTENT_LIST VALUES(content_idx.nextval, 51, 13, '14', '브라질리언왁싱', '', '', '', '' );
+
+
+DELETE FROM COMPANY_LIST WHERE CO_IDX=61;
+DELETE FROM CONTENT_LIST WHERE CONTENT_IDX=2;
+DELETE FROM USETIME_TABLE WHERE USETIME_IDX=2;
+
+select * from company_list order by co_idx asc;
+select * from content_list order by content_idx asc;
+select * from usetime_table ORDER BY USETIME_IDX ASC;
+
+
+DROP SEQUENCE CO_IDX;
+DROP SEQUENCE content_idx;
+DROP SEQUENCE usetime_idx;
+DROP SEQUENCE feedback_idx;
+
+CREATE SEQUENCE co_idx minvalue 0 start with 1;
+CREATE SEQUENCE content_idx minvalue 0 start with 1;
+CREATE SEQUENCE usetime_idx minvalue 0 start with 1;
+CREATE SEQUENCE feedback_idx minvalue 0 start with 1;
+
+COMMIT;
+
+select * from content_list where co_idx = 13;
