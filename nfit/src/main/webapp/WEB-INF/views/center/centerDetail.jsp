@@ -560,7 +560,7 @@ function setBooking(){
 	var bCo_idx=$('#co_idx').val();
 	var bCo_name=$('#co_name').val();
 	var use_date=$('#datepicker').val();
-	var useData={"member_id":bUserid, "co_idx":bCo_idx, "co_name":bCo_name, "coin_price":3, "use_date":use_date};
+	var useData={"member_id":bUserid, "co_idx":bCo_idx, "co_name":bCo_name, "coin_price":4, "use_date":use_date};
 	$.ajax({
 		type:'POST',
 		url:'centerBooking.do',
