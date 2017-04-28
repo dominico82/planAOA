@@ -156,83 +156,77 @@ function removeChar(event) {
 </script>
 <script>
 /*센터 컨텐츠 선택시 배경색 변경, 예약시 코인값 설정*/
-
+var coin_price;
 
 $(function(){
-	$("#coinCon1").click(
+	
+	$("#con0").click(
 			function(){
-						$("#coinCon1").addClass("on");
-						$("#coinCon2").removeClass("on");
-						$("#coinCon3").removeClass("on");
-						$("#coinCon4").removeClass("on");
-						$("#coinCon5").removeClass("on");
-						$("#coinCon6").removeClass("on");
-						price="99000";
-						buy_coin="100";
-						pay_class="정기/100코인";
-		
+				$("#con0").attr("style", "background-color: lightgray;");
+				$("#con1").removeAttr("style");
+				$("#con2").removeAttr("style");
+				$("#con3").removeAttr("style");
+				$("#con4").removeAttr("style");
+				$("#con5").removeAttr("style");	
+				coin_price=$("#coin_num_0").contents().text();
+				console.log(coin_price);
 	});
-	$("#coinCon2").click(
+	$("#con1").click(
 			function(){
-						$("#coinCon1").removeClass("on");
-						$("#coinCon2").addClass("on");
-						$("#coinCon3").removeClass("on");
-						$("#coinCon4").removeClass("on");
-						$("#coinCon5").removeClass("on");
-						$("#coinCon6").removeClass("on");
-						price="199000";
-						buy_coin="200";
-						pay_class="정기/200코인";
-						
+				$("#con0").removeAttr("style");
+				$("#con1").attr("style", "background-color: lightgray;");
+				$("#con2").removeAttr("style");
+				$("#con3").removeAttr("style");
+				$("#con4").removeAttr("style");
+				$("#con5").removeAttr("style");	
+				coin_price=$("#coin_num_1").contents().text();
+				console.log(coin_price);
 	});
-	$("#coinCon3").click(
+	$("#con2").click(
 			function(){
-						$("#coinCon1").removeClass("on");
-						$("#coinCon2").removeClass("on");
-						$("#coinCon3").addClass("on");
-						$("#coinCon4").removeClass("on");
-						$("#coinCon5").removeClass("on");
-						$("#coinCon6").removeClass("on");
-						price="299000";
-						buy_coin="300";
-						pay_class="정기/300코인";
+				$("#con0").removeAttr("style");
+				$("#con1").removeAttr("style");
+				$("#con2").attr("style", "background-color: lightgray;");
+				$("#con3").removeAttr("style");
+				$("#con4").removeAttr("style");
+				$("#con5").removeAttr("style");	
+				coin_price=$("#coin_num_2").contents().text();
+				console.log(coin_price);
 	});
-	$("#coinCon4").click(
+	$("#con3").click(
 			function(){
-						$("#coinCon1").removeClass("on");
-						$("#coinCon2").removeClass("on");
-						$("#coinCon3").removeClass("on");
-						$("#coinCon4").addClass("on");
-						$("#coinCon5").removeClass("on");
-						$("#coinCon6").removeClass("on");
-						price="30000";
-						buy_coin="30";
-						pay_class="일반/30코인";
+				$("#con0").removeAttr("style");
+				$("#con1").removeAttr("style");
+				$("#con2").removeAttr("style");
+				$("#con3").attr("style", "background-color: lightgray;");
+				$("#con4").removeAttr("style");
+				$("#con5").removeAttr("style");	
+				coin_price=$("#coin_num_3").contents().text();
+				console.log(coin_price);
 	});
-	$("#coinCon5").click(
+	$("#con4").click(
 			function(){
-						$("#coinCon1").removeClass("on");
-						$("#coinCon2").removeClass("on");
-						$("#coinCon3").removeClass("on");
-						$("#coinCon4").removeClass("on");
-						$("#coinCon5").addClass("on");
-						$("#coinCon6").removeClass("on");
-						price="99000";
-						buy_coin="100";
-						pay_class="일반/100코인";
+				$("#con0").removeAttr("style");
+				$("#con1").removeAttr("style");
+				$("#con2").removeAttr("style");
+				$("#con3").removeAttr("style");
+				$("#con4").attr("style", "background-color: lightgray;");
+				$("#con5").removeAttr("style");	
+				coin_price=$("#coin_num_4").contents().text();
+				console.log(coin_price);
 	});
-	$("#coinCon6").click(
+	$("#con5").click(
 			function(){
-						$("#coinCon1").removeClass("on");
-						$("#coinCon2").removeClass("on");
-						$("#coinCon3").removeClass("on");
-						$("#coinCon4").removeClass("on");
-						$("#coinCon5").removeClass("on");
-						$("#coinCon6").addClass("on");
-						price="299000";
-						buy_coin="300";
-						pay_class="일반/300코인";
+				$("#con0").removeAttr("style");
+				$("#con1").removeAttr("style");
+				$("#con2").removeAttr("style");
+				$("#con3").removeAttr("style");
+				$("#con4").removeAttr("style");
+				$("#con5").attr("style", "background-color: lightgray;");	
+				coin_price=$("#coin_num_5").contents().text();
+				console.log(coin_price);
 	});
+});
 </script>
 </head>
 <style>
@@ -360,7 +354,7 @@ color: #fff;
 				<% int cnt = 0; %>
 				<ul class="list-group">
 				<c:forEach var="con" items="${contentlist_set}">
-				<li class="list-group-item">
+				<li class="list-group-item" id="con<%=cnt%>">
 				<ul class="list-inline" id="content_list">
 				<li><div class="coin_num" id="coin_num_<%=cnt%>">${con.content_coin}</div></li>
 				<c:if test="${!empty con.content1}">
@@ -550,26 +544,28 @@ color: #fff;
 <script>
 function setBooking(){
 	
-	console.log("userid: "+$('#userid').val());
-	console.log("co_idx: "+$('#co_idx').val());
-	console.log("co_name: "+$('#co_name').val());
-	console.log("date: "+$('#datepicker').val());
-	
-	var useCoin=3;
 	var bUserid=$('#userid').val();
 	var bCo_idx=$('#co_idx').val();
 	var bCo_name=$('#co_name').val();
 	var use_date=$('#datepicker').val();
-	var useData={"member_id":bUserid, "co_idx":bCo_idx, "co_name":bCo_name, "coin_price":4, "use_date":use_date};
-	$.ajax({
-		type:'POST',
-		url:'centerBooking.do',
-		data: useData,
-		success : function(result){
-			var msg=result==1?"예약성공!":"예약실패!";
-			console.log(msg);
-		}
-	});	
+	var useData={"member_id":bUserid, "co_idx":bCo_idx, "co_name":bCo_name, "coin_price":coin_price, "use_date":use_date};
+
+	if(coin_price==null||coin_price==''){
+		alert('이용할 컨텐츠를 선택하세요!');
+	}else if(use_date==null||use_date==''){
+		alert('이용할 날짜를 선택하세요!');
+	}else{
+				
+		$.ajax({
+			type:'POST',
+			url:'centerBooking.do',
+			data: useData,
+			success : function(result){
+				var msg=result==1?"예약성공!":"예약실패!";
+				console.log(msg);
+			}
+		});	
+	}
 }
 </script>
 				</div>
