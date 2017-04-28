@@ -28,4 +28,22 @@
 			#{pay_class}
 		)
 	</insert>
+	<insert id="setCenterBooking" parameterType="hashmap">
+		insert into
+			pay_user
+		values(
+			pay_user_idx.nextval,
+			#{member_id},
+			#{co_idx},
+			#{co_name},
+			#{usemember_coin},
+			#{use_date}
+		)
+	</insert>
+	<update id="setUseMemberCoin" parameterType="hashmap">
+		update member_table set 
+			member_coin = #{member_coin}	
+		where 
+			member_id = #{member_id}
+	</update>
 </mapper>

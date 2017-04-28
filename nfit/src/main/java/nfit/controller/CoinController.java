@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import nfit.coin.model.CoinDAO;
 import nfit.coin.model.CoinDTO;
+import nfit.member.model.MemberDAO;
 import nfit.member.model.MemberDTO;
 
 @Controller
@@ -19,6 +20,8 @@ public class CoinController {
 	
 	@Autowired 
 	private CoinDAO coinDAO;
+	@Autowired
+	private MemberDAO memberDao;
 	
 	@RequestMapping(value="coin.do")
 	public ModelAndView coin(HttpSession session){
@@ -72,6 +75,35 @@ public class CoinController {
 		MemberDTO dto=coinDAO.getCoinInfo(userid);
 		return dto;
 	}
-	
+	@RequestMapping(value="centerBooking.do")
+	@ResponseBody
+	public int centerBooking(String member_id, int co_idx, String co_name, int coin_price, String use_date){
+		System.out.println("member_id:"+member_id);
+		System.out.println("co_idx:"+co_idx);
+		System.out.println("co_name:"+co_name);
+		System.out.println("coin_price:"+coin_price);
+		System.out.println("use_date:"+use_date);
+		MemberDTO dto=memberDao.getMemberInfo(member_id);
+		int member_coin=dto.getMember_coin();
+		int result=coinDAO.setCenterBooking(member_id, member_coin, co_idx, co_name, coin_price, use_date);
+		return result;
+	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

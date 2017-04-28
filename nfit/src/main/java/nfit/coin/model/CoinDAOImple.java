@@ -39,4 +39,40 @@ public class CoinDAOImple implements CoinDAO {
 		return result;
 	}
 
+	@Override
+	public int setCenterBooking(String member_id, int member_coin, int co_idx, String co_name, int coin_price, String use_date) {
+		HashMap<String, Object> bookingMap=new HashMap<String, Object>();
+		bookingMap.put("member_id", member_id);
+		bookingMap.put("co_idx", co_idx);
+		bookingMap.put("co_name", co_name);
+		bookingMap.put("usemember_coin", coin_price);
+		bookingMap.put("use_date", use_date);
+
+		HashMap<String, Object> useCoinMap=new HashMap<String, Object>();
+		int totalCoin=member_coin-coin_price;
+		useCoinMap.put("member_coin", totalCoin);
+		useCoinMap.put("member_id", member_id);
+		
+		int bookingResult=sqlMap.insert("setCenterBooking", bookingMap);
+		int useCoinResult=sqlMap.update("setUseMemberCoin", useCoinMap);
+		int result=bookingResult==useCoinResult?1:0;
+		return result;
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -16,6 +16,8 @@
 	  <link rel="shortcut icon" href="resources/images/n-1x-170x128.jpg" type="image/x-icon">
 	  <script type="text/javascript" src="https://apis.daum.net/maps/maps3.js?apikey=edd938c4fc341b07f90ed69064de3f92&libraries=services"></script>
 <script src="http://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css"/>
 <script type="text/javascript" src="resources/js/jquery.raty.js"></script>
 <title>Insert title here</title>
 <script>
@@ -114,6 +116,123 @@ function mark(star){
 			}
 		});
 	}
+</script>
+<script>
+/*예약 날짜 관련 스크립트*/
+function onlyNumber(event){
+	event = event || window.event;
+	var keyID = (event.which) ? event.which : event.keyCode;
+	if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+		return;
+	else
+		return false;
+}
+function removeChar(event) {
+	event = event || window.event;
+	var keyID = (event.which) ? event.which : event.keyCode;
+	if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+		return;
+	else
+		event.target.value = event.target.value.replace(/[^0-9]/g, "");
+}
+</script>
+<script>
+	$(function() {
+		$("#datepicker").datepicker(
+				{
+					dateFormat : 'yy-mm-dd',
+					monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월',
+							'7월', '8월', '9월', '10월', '11월', '12월' ],
+					dayNmaeMin : [ '일', '월', '화', '수', '목', '금', '토', ],
+					changeMonth : true,
+					changeYear : true,
+					showMonthAfterYear : true,
+					yearRange : 'c-99:c+0'
+				});
+	});
+	$(document).ready(function(){
+		$('#id').css("ime-mode", "active");
+	});
+</script>
+<script>
+/*센터 컨텐츠 선택시 배경색 변경, 예약시 코인값 설정*/
+
+
+$(function(){
+	$("#coinCon1").click(
+			function(){
+						$("#coinCon1").addClass("on");
+						$("#coinCon2").removeClass("on");
+						$("#coinCon3").removeClass("on");
+						$("#coinCon4").removeClass("on");
+						$("#coinCon5").removeClass("on");
+						$("#coinCon6").removeClass("on");
+						price="99000";
+						buy_coin="100";
+						pay_class="정기/100코인";
+		
+	});
+	$("#coinCon2").click(
+			function(){
+						$("#coinCon1").removeClass("on");
+						$("#coinCon2").addClass("on");
+						$("#coinCon3").removeClass("on");
+						$("#coinCon4").removeClass("on");
+						$("#coinCon5").removeClass("on");
+						$("#coinCon6").removeClass("on");
+						price="199000";
+						buy_coin="200";
+						pay_class="정기/200코인";
+						
+	});
+	$("#coinCon3").click(
+			function(){
+						$("#coinCon1").removeClass("on");
+						$("#coinCon2").removeClass("on");
+						$("#coinCon3").addClass("on");
+						$("#coinCon4").removeClass("on");
+						$("#coinCon5").removeClass("on");
+						$("#coinCon6").removeClass("on");
+						price="299000";
+						buy_coin="300";
+						pay_class="정기/300코인";
+	});
+	$("#coinCon4").click(
+			function(){
+						$("#coinCon1").removeClass("on");
+						$("#coinCon2").removeClass("on");
+						$("#coinCon3").removeClass("on");
+						$("#coinCon4").addClass("on");
+						$("#coinCon5").removeClass("on");
+						$("#coinCon6").removeClass("on");
+						price="30000";
+						buy_coin="30";
+						pay_class="일반/30코인";
+	});
+	$("#coinCon5").click(
+			function(){
+						$("#coinCon1").removeClass("on");
+						$("#coinCon2").removeClass("on");
+						$("#coinCon3").removeClass("on");
+						$("#coinCon4").removeClass("on");
+						$("#coinCon5").addClass("on");
+						$("#coinCon6").removeClass("on");
+						price="99000";
+						buy_coin="100";
+						pay_class="일반/100코인";
+	});
+	$("#coinCon6").click(
+			function(){
+						$("#coinCon1").removeClass("on");
+						$("#coinCon2").removeClass("on");
+						$("#coinCon3").removeClass("on");
+						$("#coinCon4").removeClass("on");
+						$("#coinCon5").removeClass("on");
+						$("#coinCon6").addClass("on");
+						price="299000";
+						buy_coin="300";
+						pay_class="일반/300코인";
+	});
 </script>
 </head>
 <style>
@@ -226,7 +345,7 @@ color: #fff;
 				<h2>center detail</h2>
 				<form name="mark" action="markJoin.do">
 					<input type="hidden" value="${dtos.co_idx}" name="co_idx">
-					<input type="hidden" value="${dtos.co_name}" name="co_name">
+					<input type="hidden" value="${dtos.co_name}" name="co_name" id="co_name">
 					<input type="hidden" value="${userid}" name="member_id">
 					<input type="submit" value="즐겨찾기">
 				</form>
@@ -417,6 +536,42 @@ color: #fff;
 				</div>
 				<div id="mapping">
 							<div id="map" style=" width: 100%; height: 600px;"></div>
+				</div>
+				<!-- 예약 날짜 선택 공간 -->
+				<div class="form-group">
+					<div><label>예약 날짜 선택</label></div>
+					<div class="form-inline booking" style="display: inline-block;">
+						<input type="text" class="form-control" name="booking" id="datepicker" placeholder="클릭하세요" value=""
+						onkeydown='return onlyNumber(event)' onkeyup='removeChar(event)'/>
+					</div>
+					<div style="display: inline-block;">
+						<a role="button" href="#" class="btn btn-sm btn-success" onclick="setBooking()">예약하기</a>
+					</div>
+<script>
+function setBooking(){
+	
+	console.log("userid: "+$('#userid').val());
+	console.log("co_idx: "+$('#co_idx').val());
+	console.log("co_name: "+$('#co_name').val());
+	console.log("date: "+$('#datepicker').val());
+	
+	var useCoin=3;
+	var bUserid=$('#userid').val();
+	var bCo_idx=$('#co_idx').val();
+	var bCo_name=$('#co_name').val();
+	var use_date=$('#datepicker').val();
+	var useData={"member_id":bUserid, "co_idx":bCo_idx, "co_name":bCo_name, "coin_price":3, "use_date":use_date};
+	$.ajax({
+		type:'POST',
+		url:'centerBooking.do',
+		data: useData,
+		success : function(result){
+			var msg=result==1?"예약성공!":"예약실패!";
+			console.log(msg);
+		}
+	});	
+}
+</script>
 				</div>
 				 <!-- 후기 댓글 공간 -->
 				 <div>
