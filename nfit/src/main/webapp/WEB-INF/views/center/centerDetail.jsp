@@ -323,6 +323,87 @@ background: -o-linear-gradient(top, #3e779d, #65a9d7);
 background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
 color: #fff;
 }
+/*jsd css작업****************************************************************************************/
+#mapping{
+height:100%;
+}
+#map{
+width:100%;
+height:340px;
+}
+#infowindows_close{
+position:absolute;
+right:10px;
+top:10px;
+cursor:pointer;
+}
+#infowindows {
+	position: relative;
+	bottom: 100px;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+	border-bottom: 2px solid #ddd;
+	float: left;
+	font-size:12px;
+}
+
+#mapping span{
+cursor:pointer;
+margin: 5px 5px 5px 5px;
+}
+#mapping span:hover{
+color:#999a9b;
+}
+#center_main_con{
+padding-top:90px;
+}
+/* #center_main_img{
+width:100%;
+height:100%;
+margin: 0 0 0 0;
+z-index:-1;
+-webkit--filter:brightness(50%) blur(5px);
+filter:brightness(50%) blur(5px);
+} */
+#center_main_col{
+height:500px;
+background-color:#888;
+background-attachment:fixed;
+background-repeat: no-repeat;
+background-position: center center;
+background-size: cover;
+-webkit--filter:brightness(50%);
+filter:brightness(50%);
+z-index:-1;
+margin:0 0 0 0;
+}
+#center_main_info{
+position:absolute;
+top:30%;
+left:10%;
+color:white;
+z-index:1;
+}
+/* #center_main_row{
+z-index:1;
+padding: -1 -1 -1 -1;
+} 
+*/
+#center_content{
+margin-top:20px;
+}
+.collapse_span{
+position:absolute;
+right:30px;
+top:12px;
+}
+#map_zoom{
+z-index:1;
+position:absolute;
+top:20px;
+right:15px;
+}
+/*//ends jsd css작업************************************************************************/
 </style>
 <body>
 <!-- 업체idx 값 -->
@@ -335,136 +416,158 @@ color: #fff;
 <input type="hidden" value="${userid}" id="userid">
 <input type="hidden" value="${adminid}" id="adminid">
 <%@include file="../header.jsp" %>
-	<div class="container-fluid">
-	<div class="row" id="menu_bar">
-	<h2>menu bar</h2>
-	</div>
+<!-- jsd center mainㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+	<div class="container-fluid" id="center_main_con">
 		<c:set var="dtos" value="${dto}" />
-		<div class="row">
-			<h2>center title</h2>
-			<table class="table table-bordered">
-			<tr><td>${dtos.co_name}</td></tr>
-			<tr><td>${dtos.co_address}</td></tr>
-			<tr><td>${dtos.co_phone}</td></tr>
-			<tr><td>지금까지 이용: ${dtos.co_usecount}회</td></tr>
-			</table>
-		</div>
-		<div class="row">
-			<div class="col-sm-6">
-				<h2>center detail</h2>
-				<form name="mark" action="markJoin.do">
+		<div class="row" id="center_main_row">
+			<div class="col-sm-12" id="center_main_col">
+			</div>
+			<div id="center_main_info">
+			<h1>${dtos.co_name}</h1><br>
+			<p>${dtos.co_address}<br>${dtos.co_phone}</p>
+			<p class="text-muted"><span class="glyphicon glyphicon-stats"></span>&nbsp;지금까지 이용: <span class="bg-info">${dtos.co_usecount}회</span></p>
+			<form name="mark" action="markJoin.do">
 					<input type="hidden" value="${dtos.co_idx}" name="co_idx">
-					<input type="hidden" value="${dtos.co_name}" name="co_name" id="co_name">
+					<input type="hidden" value="${dtos.co_name}" name="co_name">
 					<input type="hidden" value="${userid}" name="member_id">
-					<input type="submit" value="즐겨찾기">
+					<input class="btn btn-info" type="submit" value="즐겨찾기">
 				</form>
-				<div id="content">
+			<input type="hidden" value="${dtos.co_view}" id="co_view">
+			</div>
+		</div>
+<!-- //ends jsd center mainㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
+		<div class="row" id="center_content">
+			<div class="col-sm-6">
+<!-- jsd content_service작업 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+				<div id="content_div">
 				<c:set var="contentlist_set" value="${contentlist}"></c:set>
+				<c:set var="coins" value="${coinlist}"></c:set>
 				<div class="panel panel-default">
-				<div class="panel-heading">이용시간</div>
+				<div class="panel-heading"><span class="glyphicon glyphicon-heart"></span>서비스
+				</div>
 				<div class="panel-body">
 				<c:if test="${empty contentlist_set }">
 				<tr><td>이용상품 없음</td></tr>
 				</c:if>
 				<% int cnt = 0; %>
 				<ul class="list-group">
-				<c:forEach var="con" items="${contentlist_set}">
-				<li class="list-group-item" id="con<%=cnt%>">
+				<c:forEach var="con" items="${contentlist_set}" begin="0" step="1" varStatus="status">
+				<c:choose>
+					<c:when test="${con.content_coin<5 }">
+				<li class="list-group-item list-group-item-success">
 				<ul class="list-inline" id="content_list">
-				<li><div class="coin_num" id="coin_num_<%=cnt%>">${con.content_coin}</div></li>
+					<c:forEach var="coin" items="${coins}" begin="0" step="1" varStatus="status1">
+						<c:if test="${status1.index==status.index}">
+						<li><div class="coin_num" id="coin_num_<%=cnt%>"><span class="label label-success glyphicon glyphicon-usd">${coin}</span></div></li>
+						</c:if>
+					</c:forEach>
 				<c:if test="${!empty con.content1}">
-				<li><div class="coin_cont_back contbg_<%=cnt%> conigb_1"><span id="coin_cont_icon" class="glyphicon glyphicon-record"></span><span id="coin_cont">${con.content1}</span></div></li>
+				<li><span id="coin_cont" class="label label-success">${con.content1}</span></li>
 				</c:if>
 				<c:if test="${!empty con.content2}">
-				<li><div class="coin_cont_back contbg_<%=cnt%> conigb_1"><span id="coin_cont_icon" class="glyphicon glyphicon-record"></span><span id="coin_cont">${con.content2}</span></div></li>
+				<li><span id="coin_cont" class="label label-success">${con.content2}</span></li>
 				</c:if>
 				<c:if test="${!empty con.content3}">
-				<li><div class="coin_cont_back contbg_<%=cnt%> conigb_1"><span id="coin_cont_icon" class="glyphicon glyphicon-record"></span><span id="coin_cont">${con.content3}</span></div></li>
+				<li><span id="coin_cont" class="label label-success">${con.content3}</span></li>
 				</c:if>
 				<c:if test="${!empty con.content4}">
-				<li><div class="coin_cont_back contbg_<%=cnt%> conigb_1"><span id="coin_cont_icon" class="glyphicon glyphicon-record"></span><span id="coin_cont">${con.content4}</span></div></li>
+				<li><span id="coin_cont" class="label label-success">${con.content4}</span></li>
 				</c:if>
 				<c:if test="${!empty con.content5}">
-				<li><div class="coin_cont_back contbg_<%=cnt%> conigb_1"><span id="coin_cont_icon" class="glyphicon glyphicon-record"></span><span id="coin_cont">${con.content5}</span></div></li>
+				<li><span id="coin_cont" class="label label-success">${con.content5}</span></li>
 				</c:if>
 				<c:if test="${!empty con.content6}">
-				<li><div class="coin_cont_back contbg_<%=cnt%> conigb_1"><span id="coin_cont_icon" class="glyphicon glyphicon-record"></span><span id="coin_cont">${con.content6}</span></div></li>
+				<li><span id="coin_cont" class="label label-success">${con.content6}</span></li>
 				</c:if>
 				</ul>
 				</li>
+					</c:when>
+					<c:when test="${con.content_coin>=5&&con.content_coin<10 }">
+									<li class="list-group-item list-group-item-info">
+				<ul class="list-inline" id="content_list">
+					<c:forEach var="coin" items="${coins}" begin="0" step="1" varStatus="status1">
+						<c:if test="${status1.index==status.index}">
+						<li><div class="coin_num" id="coin_num_<%=cnt%>"><span class="label label-primary glyphicon glyphicon-usd">${coin}</span></div></li>
+						</c:if>
+					</c:forEach>
+				<c:if test="${!empty con.content1}">
+				<li><span id="coin_cont" class="label label-primary">${con.content1}</span></li>
+				</c:if>
+				<c:if test="${!empty con.content2}">
+				<li><span id="coin_cont" class="label label-primary">${con.content2}</span></li>
+				</c:if>
+				<c:if test="${!empty con.content3}">
+				<li><span id="coin_cont" class="label label-primary">${con.content3}</span></li>
+				</c:if>
+				<c:if test="${!empty con.content4}">
+				<li><span id="coin_cont" class="label label-primary">${con.content4}</span></li>
+				</c:if>
+				<c:if test="${!empty con.content5}">
+				<li><span id="coin_cont" class="label label-primary">${con.content5}</span></li>
+				</c:if>
+				<c:if test="${!empty con.content6}">
+				<li><span id="coin_cont" class="label label-primary">${con.content6}</span></li>
+				</c:if>
+				</ul>
+				</li>
+					</c:when>
+					<c:when test="${con.content_coin>=10 }">
+									<li class="list-group-item list-group-item-danger">
+				<ul class="list-inline" id="content_list">
+					<c:forEach var="coin" items="${coins}" begin="0" step="1" varStatus="status1">
+						<c:if test="${status1.index==status.index}">
+						<li><div class="coin_num" id="coin_num_<%=cnt%>"><span class="label label-danger glyphicon glyphicon-usd">${coin}</span></div></li>
+						</c:if>
+					</c:forEach>
+				<c:if test="${!empty con.content1}">
+				<li><span id="coin_cont" class="label label-danger">${con.content1}</span></li>
+				</c:if>
+				<c:if test="${!empty con.content2}">
+				<li><span id="coin_cont" class="label label-danger">${con.content2}</span></li>
+				</c:if>
+				<c:if test="${!empty con.content3}">
+				<li><span id="coin_cont" class="label label-danger">${con.content3}</span></li>
+				</c:if>
+				<c:if test="${!empty con.content4}">
+				<li><span id="coin_cont" class="label label-danger">${con.content4}</span></li>
+				</c:if>
+				<c:if test="${!empty con.content5}">
+				<li><span id="coin_cont" class="label label-danger">${con.content5}</span></li>
+				</c:if>
+				<c:if test="${!empty con.content6}">
+				<li><span id="coin_cont" class="label label-danger">${con.content6}</span></li>
+				</c:if>
+				</ul>
+				</li>
+					</c:when>
+				</c:choose>
 				<%cnt++; %>
 				</c:forEach>
 				</ul>
 				</div>
 				</div>
 				<hr>
-				<script type="text/javascript">
-				/*이용상품 coin에 따른 coin 색 변경*/
-				var count = $("#content_list > li > .coin_num").length;
-				console.log();
-				var coin=[];
-				for(var i=0; i<count; i++){
-					coin[i] = document.getElementById("coin_num_"+i).innerHTML;
-					console.log("coin[]",coin[i]);
-					var num = 0;
-					if(coin[i]>=0 && coin[i]<=10){
-						num=0;
-					}else if(coin[i]>10 && coin[i]<=20){
-						num=1;
-					}else if(coin[i]>20){
-						num=2;
-					}
-					switch(num){
-					case 0 : $("#coin_num_"+i).css("background-image","URL(resources/images/1pass.png)"); $(".contbg_"+i); break;
-					case 1 : $("#coin_num_"+i).css("background-image","URL(resources/images/10pass.png)"); $(".contbg_"+i);break;
-					case 2 : $("#coin_num_"+i).css("background-image","URL(resources/images/20pass.png)"); $(".contbg_"+i);break;
-					}
-				}
-				</script>
 				</div>
-				<div id="co_avail">
+<!-- //ends jsd content_service 작업 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+<!-- jsd center info  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+				<div id="co_avail_div">
 				<div class="panel panel-default">
-					<div class="panel-heading">이용가능<span id="coAv" style="display:none">${dtos.co_avail}</span></div>
+					<div class="panel-heading"><span id="coAv" style="display:none">${dtos.co_avail}</span>
+					<span class="glyphicon glyphicon-user"></span>이용가능
+					</div>
 					<div class="panel-body" >
 					<ul class="list-inline" id="result">
 					</ul>
 					</div>
-				</div>
+					</div>
 				<hr>
-				<script type="text/javascript">
-				/*이용가능 텍슽트에 따른 이미지 연동*/
-	var str = document.getElementById('coAv').innerHTML;
-	var split=str.split("|");
-	var HTML='';
-	var cnt = split.length;
-	for(var i=0; i<cnt; i++){
-		HTML += "<li><span id='image"+i+"'><img id='photo' src=''></span><span id='useAvail"+i+"'>"+split[i]+"</span></li>";
-	}
-	document.getElementById('result').innerHTML = HTML;
-	$(function(){
-		var $s = $("#result > li > span:last-child");
-		var $img = $("#result > li > img");
-		var array=[];
-		for(var i=0; i < cnt; i++){
-		array[i]=$s[i].innerHTML;
-		switch(array[i]){
-		case '주차' : $img[i]="<img id='photo' src='resources/images/Car_Parking.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i]; break;
-		case '타올' : $img[i]="<img id='photo' src='resources/images/Towels.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i]; break;
-		case '운동복' : $img[i]="<img id='photo' src='resources/images/T_Shirts.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i]; break;
-		case '일일락커' : $img[i]="<img id='photo' src='resources/images/Locker.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i]; break;
-		case '샤워실' : $img[i]="<img id='photo' src='resources/images/shower.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i]; break;
-		case '샤워' : $img[i]="<img id='photo' src='resources/images/shower.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i]; break;
-		case '탈의실' : $img[i]="<img id='photo' src='resources/images/change_room.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i]; break;
-		default: $img[i]="<img id='photo' src='resources/images/causion.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i];
-		}
-		}
-	});
-	</script>
 				</div>
-				<div id="usetime_and_extra">
+				<div id="usetime_div">
 				<c:set var="list" value="${timelist}"/>
-				<table class="table">
-				<caption>이용시간</caption>
+				<div class="panel panel-default">
+				<div class="panel-heading"><span class="glyphicon glyphicon-time">이용시간</div>
+				<div class="panel-body">
+				<table class="table table-condensed">
 				<c:if test="${empty list }">
 				<tr><td>없음</td></tr>
 				</c:if>
@@ -478,74 +581,101 @@ color: #fff;
 				</tr>
 				</c:forEach>
 				</table>
+				</div>
+				</div>
+				<hr>
+				</div>
+				<div id="co_extra_div">
 				<div class="panel panel-default">
-				<div class="panel-heading">
+				<div class="panel-heading"><span class="glyphicon glyphicon-info-sign"></span>
 				부가서비스 <span id="co_extra" style="display:none">${dtos.co_extra}</span>
 				</div>
 				<div class="panel-body" id="co_extra_content">
-				
 				</div>
 				</div>
+				<hr>
+				</div>
+				<div id="co_regul_div">
 				<div class="panel panel-default">
-				<div class="panel-heading">
+				<div class="panel-heading"><span class="glyphicon glyphicon-pushpin"></span>
 				이용규정<span id="co_regul" style="display:none">${dtos.co_regul}</span>
 				</div>
 				<div class="panel-body" id="co_regul_content">
 				</div>
 				</div>
 				<hr>
-				<script type="text/javascript">
-				/**/
-				/*이용규정 StringTokenizer*/
-				var coExtra = $("#co_extra").text();
-				var splitEx= coExtra.split("|");
-				var coExtraSize=splitEx.length;
-				var coeStr = [];
-				var HTMLex ='';
-				for(var i=0; i<coExtraSize; i++){
-					coeStr[i]=splitEx[i];
-					if(coeStr[i]==''){
-					HTMLex += "<p><span class=''>&nbsp;</span>"+coeStr[i]+"</p>";
-					}else{
-					HTMLex += "<p><span class='glyphicon glyphicon-ok-circle'>&nbsp;</span>"+coeStr[i]+"</p>";
-					}
-				}
-				document.getElementById("co_extra_content").innerHTML = HTMLex;
-				
-				/*부가서비스 StringTokenizer*/
-				var coReg = $("#co_regul").text();
-				var splitReg = coReg.split("|");
-				var coRegSize = splitReg.length;
-				var corStr = [];
-				var HTMLre = '';
-				for(var i=0; i<coRegSize; i++){
-					corStr[i]=splitReg[i];
-					console.log("constr",corStr[i]);
-					if(corStr[i]==''){
-					HTMLre += "<p><span class=''>&nbsp;</span>"+corStr[i]+"</p>";
-					}else{
-					HTMLre += "<p><span class='glyphicon glyphicon-ok-circle'>&nbsp;</span>"+corStr[i]+"</p>";
-					}
-				}
-				document.getElementById("co_regul_content").innerHTML = HTMLre;
-				</script>
 				</div>
 				<div id="phone_and_address">
-				<table class="table">
-				<caption>주소, 전화번호</caption>
-				<tr><td>${dtos.co_address }</td></tr>
-				<tr><td>${dtos.co_phone }</td></tr>
+				<div class="panel panel-default">
+				<div class="panel-heading"><span class="glyphicon glyphicon-phone-alt"></span>주소 및 전화번호</div>
+				<div class="panel-body">
+				<table class="table table-condensed">
+				<tr><th>주소: </th><td>${dtos.co_address }</td></tr>
+				<tr><th>전화번호: </th><td>${dtos.co_phone }</td></tr>
 				</table>
 				</div>
-			</div>
+				</div>
+				</div>
+</div>
+<!--/ends jsd center info  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ-->
+<!-- jsd map작업ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->			
 			<div class="col-sm-6">
-				<h2>center photo</h2>
-				<div id="photos">
-				<span>photos</span>
+			<div class="col-sm-12 well well-lg">
+			<c:set var="center" value="${centerlist}"/>
+			<c:set var="imglist" value="${filelist}"/>
+			<c:set var="first" value="${firstimg}"/>
+				<input type="hidden" value="${center.co_address}" id="co_address">
+				<input type="hidden" value="${center.co_name}" id="co_name">
+				<c:if test="${!empty imglist}">
+<div id="carousel">
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+    	
+		      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    	<c:forEach var="imgSpot" items="${imglist}" begin="1" step="1" varStatus="status">
+		      <li data-target="#myCarousel" data-slide-to="${status.index}" class=""></li>
+    	</c:forEach>
+    
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      
+      		<div class="item active">
+        		<img src="${first}" style="width:100%;">
+      		</div>
+      <c:forEach var="img" items="${imglist}" begin="1" step="1" varStatus="status">
+      		<div class="item">
+        		<img src="${img}" style="width:100%;" alt="img">
+      		</div>
+      </c:forEach>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+</c:if>
 				</div>
+		<div class="col-sm-12 well well-lg">
 				<div id="mapping">
-							<div id="map" style=" width: 100%; height: 600px;"></div>
+							<div id="map"></div>
+							<div id="map_zoom" style="">
+							<span style="cursor:pointer" onclick="javascript:zoomIn()" class="glyphicon glyphicon-plus"></span>
+							<span style="cursor:pointer" onclick="javascript:zoomOut()" class="glyphicon glyphicon-minus"></span>
+							</div>
 				</div>
+				</div>
+<!-- //ends jsd map작업ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ작업 -->			
+				<div class="col-sm-12">
 				<!-- 예약 날짜 선택 공간 -->
 				<div class="form-group">
 					<div><label>예약 날짜 선택</label></div>
@@ -590,6 +720,8 @@ function setBooking(){
 }
 </script>
 				</div>
+				</div>
+		<div class="col-sm-12">
 				 <!-- 후기 댓글 공간 -->
 				 <div>
 					 <table id="feedback_table">
@@ -648,7 +780,145 @@ function setBooking(){
 			<div id="modifyFeedback"></div>
 			</div>
 		</div>
-	</div>
+		</div>
+		</div>
+	<script>
+	/*****************************************************************************************************************************************승동작업*/
+	/*map 생성*/
+var co_lat = ${center.co_lat};
+var co_lng = ${center.co_lng};
+var position = new daum.maps.LatLng(co_lat, co_lng);
+
+var mapContainer = document.getElementById('map');
+var mapOption = {
+	center: position,
+	level:4
+	};
+var map = new daum.maps.Map(mapContainer, mapOption);
+
+/*줌 컨트롤러 추가*/
+var zoomControl = new daum.maps.ZoomControl();
+map.addControl(zoomControl, daum.maps.ControlPosition.BOTTOMLEFT);
+
+//지도에 마커를 표시합니다 
+var imgSrc='resources/images/marker.png';
+var imgSize=new daum.maps.Size(54,59);
+var markerImage = new daum.maps.MarkerImage(imgSrc, imgSize);
+var marker = new daum.maps.Marker({
+map: map, 
+position: position,
+image:markerImage
+});
+
+var co_name =$("#co_name").val();
+var co_address =$("#co_address").val();
+//인포 윈도우 표시
+infoContent='<div id="infowindows" class="panel panel-default">'+
+    '<div class="panel-heading">'+co_name+'<span id="infowindows_close" onclick="javascript:closeOverlay()" class="glyphicon glyphicon-remove-circle"></span></div>'+
+        '<div class="panel-body">'+co_address+'</div>'+
+     	'</div>';
+
+var infowindow = new daum.maps.CustomOverlay({
+content : infoContent,
+map: map,
+position: marker.getPosition()
+});
+infowindow.setMap(map);
+
+//인포윈도그 끄기
+function closeOverlay(){
+infowindow.setMap(null);
+}
+//인포윈도그 열기
+daum.maps.event.addListener(marker, 'click', function() {
+  infowindow.setMap(map);  
+});
+
+//줌인
+function zoomIn(){
+map.setLevel(map.getLevel()-1);
+}
+//줌아웃
+function zoomOut(){
+map.setLevel(map.getLevel()+1);
+}
+
+/*백그라운드 채인지*/
+$(document).ready(function(){
+ var co_view =$("#co_view").val();
+ var $backUrl = "url(resources/centerImage/";
+ $backUrl+=co_view;
+ $backUrl+="/";
+ $backUrl+=co_view;
+ $backUrl+="_0.jpg)";
+ console.log("co_view="+co_view)
+ console.log("$backUrl="+$backUrl)
+ $("#center_main_col").css({"background-image":$backUrl});
+});
+
+/*이용가능 텍슽트에 따른 이미지 연동*/
+var str = document.getElementById('coAv').innerHTML;
+var split=str.split("|");
+var HTML='';
+var cnt = split.length;
+for(var i=0; i<cnt; i++){
+HTML += "<li><span id='image"+i+"'><img id='photo' src=''></span><span id='useAvail"+i+"'>"+split[i]+"</span></li>";
+}
+document.getElementById('result').innerHTML = HTML;
+$(function(){
+var $s = $("#result > li > span:last-child");
+var $img = $("#result > li > img");
+var array=[];
+for(var i=0; i < cnt; i++){
+array[i]=$s[i].innerHTML;
+switch(array[i]){
+case '주차' : $img[i]="<img id='photo' src='resources/images/Car_Parking.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i]; break;
+case '타올' : $img[i]="<img id='photo' src='resources/images/Towels.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i]; break;
+case '운동복' : $img[i]="<img id='photo' src='resources/images/T_Shirts.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i]; break;
+case '일일락커' : $img[i]="<img id='photo' src='resources/images/Locker.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i]; break;
+case '샤워실' : $img[i]="<img id='photo' src='resources/images/shower.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i]; break;
+case '샤워' : $img[i]="<img id='photo' src='resources/images/shower.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i]; break;
+case '탈의실' : $img[i]="<img id='photo' src='resources/images/change_room.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i]; break;
+default: $img[i]="<img id='photo' src='resources/images/causion.png' height='64', width='64'>"; document.getElementById('image'+i).innerHTML = $img[i];
+}
+}
+});
+
+/*이용규정 StringTokenizer*/
+var coExtra = $("#co_extra").text();
+var splitEx= coExtra.split("|");
+var coExtraSize=splitEx.length;
+var coeStr = [];
+var HTMLex ='';
+for(var i=0; i<coExtraSize; i++){
+coeStr[i]=splitEx[i];
+if(coeStr[i]==''){
+HTMLex += "<p><span class=''>&nbsp;</span>"+coeStr[i]+"</p>";
+}else{
+HTMLex += "<p><span class='glyphicon glyphicon-ok-circle'>&nbsp;</span>"+coeStr[i]+"</p>";
+}
+}
+document.getElementById("co_extra_content").innerHTML = HTMLex;
+
+/*부가서비스 StringTokenizer*/
+var coReg = $("#co_regul").text();
+var splitReg = coReg.split("|");
+var coRegSize = splitReg.length;
+var corStr = [];
+var HTMLre = '';
+for(var i=0; i<coRegSize; i++){
+corStr[i]=splitReg[i];
+console.log("constr",corStr[i]);
+if(corStr[i]==''){
+HTMLre += "<p><span class=''>&nbsp;</span>"+corStr[i]+"</p>";
+}else{
+HTMLre += "<p><span class='glyphicon glyphicon-ok-circle'>&nbsp;</span>"+corStr[i]+"</p>";
+}
+}
+document.getElementById("co_regul_content").innerHTML = HTMLre;
+/*****************************************************************************************************************************************승동작업*/
+
+	</script>
 	<%@include file="../footer.jsp" %>
 </body>
 </html>
