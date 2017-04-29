@@ -46,4 +46,11 @@
 		where 
 			member_id = #{member_id}
 	</update>
+	<select id="getCenterBooking" parameterType="hashmap" resultType="String">
+		select use_date 
+		from 
+			pay_user
+		where 
+			co_name=#{co_name} and use_date=#{use_date}
+	</select>
 </mapper>

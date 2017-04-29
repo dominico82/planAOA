@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -709,16 +711,61 @@ function picLoad(){
 							                    	</tr>
 						                    	</thead>
 						                    	<tbody>
-							                    	<c:forEach var="dta" items="${list}">
-							                    		<tr class="info">
-							                    			<td>${dta.pay_date}</td>
-							                    			<td>${dta.pay_method}</td>
-							                    			<td>${dta.pay_price}원</td>
-							                    			<td>${dta.pay_coin}coin</td>
-							                    		</tr>
-							                    	</c:forEach>
+						                    		<c:if test="${empty list}">
+						                    			<tr>
+						                    				<td colspan="4">결제 내역이 없습니다!</td>
+						                    			<tr>
+						                    		</c:if>
+						                    		<c:if test="${!empty list}">
+							                    		<c:forEach var="dta" items="${list}">
+								                    		<tr class="info">
+								                    			<td><fmt:formatDate value="${dta.PAY_DATE}" pattern="yyyy-MM-dd"/></td>
+								                    			<td>
+								                    				<c:if test="${dta.PAY_METHOD=='card'}">
+								                    				카드
+								                    				</c:if>
+								                    				<c:if test="${dta.PAY_METHOD=='vbank'}">
+								                    				가상계좌
+								                    				</c:if>
+								                    			</td>
+								                    			<td>${dta.PAY_PRICE}원</td>
+								                    			<td>${dta.PAY_COIN}coin</td>
+								                    		</tr>
+								                    	</c:forEach>					          
+						                    		</c:if>
+						                    		          	
 						                    	</tbody>
 						                    </table>
+						                    <br><div>${pageStr}</div><br>
+						                    <table class="tavle tavle-striped tavle-hover">
+						                    	<thead>
+							                    	<tr>
+							                    		<th>예약일</th>
+							                    		<th>예약장소</th>
+							                    		<th>결제한 코인</th>
+							                    		<th>취소</th>
+							                    	</tr>
+						                    	</thead>
+						                    	<tbody>
+						                    		<c:if test="${empty list2}">
+						                    			<tr>
+						                    				<td colspan="4">예약 내역이 없습니다!</td>
+						                    			<tr>
+						                    		</c:if>
+						                    		<c:if test="${!empty list2}">
+							                    		<c:forEach var="dta2" items="${list2}">
+								                    		<tr class="info">
+								                    			<td>${dta2.USE_DATE}</td>
+								                    			<td>${dta2.CO_NAME}</td>
+								                    			<td>${dta2.USEMEMBER_COIN}</td>
+								                    			<td>예약취소</td>
+								                    		</tr>
+								                    	</c:forEach>					          
+						                    		</c:if>
+						                    		          	
+						                    	</tbody>
+						                    </table>
+						                    <br><div>${pageStr2}</div>
 										</div>
 									</div>
 								</c:when>

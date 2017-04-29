@@ -27,6 +27,8 @@ public interface MemberDAO {
 	public int memberDelete(String member_id);
 	public int setMark(MarkDTO dto);
 	public List<MarkDTO> getMark(String member_id);
-	public List<CoinDTO> payList(int cp, int ls);
-	public int getpayTotalCnt();
+	public List<CoinDTO> payList(int cp, int ls, int member_idx);
+	public List<Object> usePayList(int cp, int ls, String member_id);
+	public int getpayTotalCnt(int member_idx);
+	public int getUsePayTotalCnt(String member_id);
 }

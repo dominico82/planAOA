@@ -227,9 +227,24 @@ $(function(){
 				console.log(coin_price);
 	});
 });
+//
+//$(document).ready(function(){
+//	$(".list-group-item").hover(
+//			function(){
+//				$(this).attr("id", "content_list_on");	
+//			},
+//			function(){
+//				$(this).attr("id", "content_list");	
+//			}
+//	);
+//});
+
 </script>
 </head>
 <style>
+#content_list_on{
+	background-color: lightgray;
+}
 .coin_num{
 width:30px; 
 height:30px; 
@@ -563,6 +578,12 @@ function setBooking(){
 			success : function(result){
 				var msg=result==1?"예약성공!":"예약실패!";
 				console.log(msg);
+				if(result==0){
+					alert('이미같은 날짜로 예약하셨습니다!');
+				}else{
+					alert('예약되었습니다!');
+				}
+				
 			}
 		});	
 	}

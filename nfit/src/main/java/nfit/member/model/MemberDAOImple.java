@@ -160,19 +160,19 @@ public class MemberDAOImple implements MemberDAO {
 		return dto;
 	}
 	
-	public List<CoinDTO> payList(int cp, int ls){
+	public List<CoinDTO> payList(int cp, int ls, int member_idx){
 		int startnum=(cp-1)*ls+1;
 		int endnum=cp*ls;
-		Map param=new HashMap();
+		HashMap<String, Object> param=new HashMap<String, Object>();
+		param.put("member_idx", member_idx);
 		param.put("startnum", startnum);
 		param.put("endnum", endnum);
 		List<CoinDTO> list = sqlMap.selectList("payList", param);
-		
 		return list;
 	}
 	
-	public int getpayTotalCnt() {
-		int count=sqlMap.selectOne("paytotalCnt");
+	public int getpayTotalCnt(int member_idx) {
+		int count=sqlMap.selectOne("paytotalCnt", member_idx);
 		return count;
 	}
 	
@@ -195,7 +195,22 @@ public class MemberDAOImple implements MemberDAO {
 		List<MarkDTO> dto = sqlMap.selectList("markInfo", member_id);
 		return dto;
 	}
-	
+
+	public int getUsePayTotalCnt(String member_id) {
+		int count=sqlMap.selectOne("usePayTotalCnt", member_id);
+		return count;
+	}
+
+	public List<Object> usePayList(int cp, int ls, String member_id) {
+		int startnum=(cp-1)*ls+1;
+		int endnum=cp*ls;
+		HashMap<String, Object> param=new HashMap<String, Object>();
+		param.put("member_id", member_id);
+		param.put("startnum", startnum);
+		param.put("endnum", endnum);
+		List<Object> list = sqlMap.selectList("usePayList", param);
+		return list;
+	}
 }
 
 

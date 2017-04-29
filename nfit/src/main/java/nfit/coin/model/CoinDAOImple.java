@@ -1,6 +1,7 @@
 package nfit.coin.model;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -57,6 +58,16 @@ public class CoinDAOImple implements CoinDAO {
 		int useCoinResult=sqlMap.update("setUseMemberCoin", useCoinMap);
 		int result=bookingResult==useCoinResult?1:0;
 		return result;
+	}
+	
+	@Override
+	public String getCenterBooking(String co_name, String use_date) {
+		HashMap<String, String> map=new HashMap<String, String>();
+		map.put("co_name", co_name);
+		map.put("use_date", use_date);
+		String date=sqlMap.selectOne("getCenterBooking", map);
+				
+		return date;
 	}
 	
 }

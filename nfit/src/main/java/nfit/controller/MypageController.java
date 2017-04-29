@@ -41,7 +41,8 @@ public class MypageController {
 	
 	//마이페이지 정보
 	@RequestMapping("myPage.do")
-	public ModelAndView myPage(HttpSession session, @RequestParam(value="cp", defaultValue="1") int cp){
+	public ModelAndView myPage(HttpSession session, @RequestParam(value="cp", defaultValue="1") int cp,
+													@RequestParam(value="cp2", defaultValue="1") int cp2){
 		
 		String userid = (String)session.getAttribute("saveid");
 		MemberDTO dto = memberDao.getMemberInfo(userid);
@@ -49,13 +50,16 @@ public class MypageController {
 		int useridx = dto.getMember_idx();
 		List<CoinDTO> dta = memberDao.getPayInfo(useridx);
 		
-		int totalCnt = memberDao.getpayTotalCnt();
+		int totalCnt = memberDao.getpayTotalCnt(useridx);
 		totalCnt=totalCnt==0?1:totalCnt;
+		int totalCnt2= memberDao.getUsePayTotalCnt(userid);
+		totalCnt2=totalCnt2==0?1:totalCnt2;
 		int listSize=4;
 		int pageSize=5;
-		List<CoinDTO> list = memberDao.payList(cp, listSize);
-		String pageStr = nfit.page.PageModule.makePage("myPage.do", totalCnt, listSize, pageSize, cp);
-		
+		List<CoinDTO> list = memberDao.payList(cp, listSize, useridx);
+		List<Object> list2 = memberDao.usePayList(cp2, listSize, userid);
+		String pageStr = nfit.page.PageModule3.makePage("myPage.do", totalCnt, listSize, pageSize, cp, cp2);
+		String pageStr2 = nfit.page.PageModule2.makePage("myPage.do", totalCnt2, listSize, pageSize, cp, cp2);
 		List<MarkDTO> mdt = memberDao.getMark(userid);
 		List<CenterDTO> cdt = new ArrayList<CenterDTO>();
 		for(int i=0; i<mdt.size(); i++){
@@ -74,7 +78,9 @@ public class MypageController {
 		mav.addObject("dta",dta);
 		mav.addObject("mdt", mdt);
 		mav.addObject("list", list);
+		mav.addObject("list2", list2);
 		mav.addObject("pageStr", pageStr);
+		mav.addObject("pageStr2", pageStr2);
 		mav.addObject("bmi",bmi);
 		mav.addObject("pic", pic);
 		mav.addObject("cdt", cdt);

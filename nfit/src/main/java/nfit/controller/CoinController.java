@@ -1,5 +1,9 @@
 package nfit.controller;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,7 @@ import nfit.coin.model.CoinDAO;
 import nfit.coin.model.CoinDTO;
 import nfit.member.model.MemberDAO;
 import nfit.member.model.MemberDTO;
+import oracle.sql.DATE;
 
 @Controller
 public class CoinController {
@@ -78,14 +83,22 @@ public class CoinController {
 	@RequestMapping(value="centerBooking.do")
 	@ResponseBody
 	public int centerBooking(String member_id, int co_idx, String co_name, int coin_price, String use_date){
-		System.out.println("member_id:"+member_id);
-		System.out.println("co_idx:"+co_idx);
-		System.out.println("co_name:"+co_name);
-		System.out.println("coin_price:"+coin_price);
-		System.out.println("use_date:"+use_date);
 		MemberDTO dto=memberDao.getMemberInfo(member_id);
-		int member_coin=dto.getMember_coin();
-		int result=coinDAO.setCenterBooking(member_id, member_coin, co_idx, co_name, coin_price, use_date);
+		Calendar cal=Calendar.getInstance();
+		String now=cal.get(cal.YEAR)+"-"+(cal.get(cal.MONTH)+1)+"-"+cal.get(cal.DATE);
+		System.out.println("오늘날짜:"+now);
+		
+		int result=0;
+		
+		
+		String date=coinDAO.getCenterBooking(co_name, use_date);
+		if(date==null||date.equals("")){
+			int member_coin=dto.getMember_coin();
+			result=coinDAO.setCenterBooking(member_id, member_coin, co_idx, co_name, coin_price, use_date);
+		}else{
+			result=0;
+		}
+		
 		return result;
 	}
 
