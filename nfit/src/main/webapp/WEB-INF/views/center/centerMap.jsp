@@ -607,7 +607,7 @@ function searchMark(){
 			selectoHtml+='<div class="panel-group" id="list-table">';
 			selectoHtml+='<div class="panel panel-default">';
 			selectoHtml+='<div class="panel-heading">';
-			selectoHtml+='<h6 class="panel-title" id="centerInfo_list_coName">'+co_idx[i]+"/"+coName[i]+'<span id="center_list_coName_class">('+coClass[i]+')</span></h6>';
+			selectoHtml+='<h6 class="panel-title" id="centerInfo_list_coName">'+coName[i]+'<span id="center_list_coName_class">('+coClass[i]+')</span></h6>';
 			selectoHtml+='</div>'; //panel-heading
 			selectoHtml+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
 			selectoHtml+='<ul class="list-group">';
@@ -646,7 +646,7 @@ function searchMark(){
 			selectoHtml+='<div class="panel-group" id="list-table">';
 			selectoHtml+='<div class="panel panel-default">';
 			selectoHtml+='<div class="panel-heading">';
-			selectoHtml+='<h6 class="panel-title" id="centerInfo_list_coName">'+co_idx[i]+"/"+coName[i]+'<span id="center_list_coName_class">('+coClass[i]+')</span></h6>';
+			selectoHtml+='<h6 class="panel-title" id="centerInfo_list_coName">'+coName[i]+'<span id="center_list_coName_class">('+coClass[i]+')</span></h6>';
 			selectoHtml+='</div>';
 			selectoHtml+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
 			selectoHtml+='<ul class="list-group">';
@@ -1279,7 +1279,7 @@ function keywordSearch(){
 			infoWindows[companySet.co_idx]=infowindow;
 			cLatArr[companySet.co_idx]=companySet.co_lat;
 			cLngArr[companySet.co_idx]=companySet.co_lng;
-			var curl='contentDetail.do?co_idx='+companySet.co_idx;
+			var curl='centerDetail.do?co_idx='+companySet.co_idx;
 			clickEventSearch(map, marker, infowindow, companySet.co_idx, curl);
 			}//for 맵 바운드 ends
 			function clickEventSearch(map, marker, infowindow, co_idx, curl){
@@ -1317,7 +1317,7 @@ function keywordSearch(){
 					company_html+='<div class="panel-group" id="list-table">';
 					company_html+='<div class="panel panel-default">';
 					company_html+='<div class="panel-heading">';
-					company_html+='<h6 class="panel-title" id="centerInfo_list_coName">'+companySet.co_idx+"/"+companySet.co_name+'<span id="center_list_coName_class">('+companySet.co_class+')</span></h6>';
+					company_html+='<h6 class="panel-title" id="centerInfo_list_coName">'+companySet.co_name+'<span id="center_list_coName_class">('+companySet.co_class+')</span></h6>';
 					company_html+='</div>'; //panel-heading
 					company_html+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
 					company_html+='<ul class="list-group">';
@@ -1325,7 +1325,7 @@ function keywordSearch(){
 					company_html+='</ul>';
 					company_html+='</div>'; //colapse panel1
 					company_html+='<div class="panel-body">';
-					company_html+='<a class="btn-xs" id="center-addr-btn" data-toggle="collapse" href="#centerInfo_list_coAddr_'+i+'">주소보기'+companySet.co_idx+'</a>';
+					company_html+='<a class="btn-xs" id="center-addr-btn" data-toggle="collapse" href="#centerInfo_list_coAddr_'+i+'">주소보기</a>';
 					company_html+='</div>'; //colapse panel open1
 					company_html+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
 					company_html+='<ul class="list-group">';
@@ -1333,7 +1333,7 @@ function keywordSearch(){
 					company_html+='</ul>';
 					company_html+='</div>'; //collapse panel2
 					company_html+='<div class="panel-body">';
-					company_html+='<a class="btn-xs" id="centerInfo_list_coClass" data-toggle="collapse" href="#centerInfo_list_content_'+i+'">제공서비스보기'+companySet.co_idx+'</a>';
+					company_html+='<a class="btn-xs" id="centerInfo_list_coClass" data-toggle="collapse" href="#centerInfo_list_content_'+i+'">제공서비스보기</a>';
 					company_html+='</div>'; //collapse panel open 2
 					company_html+='</div>';//panel default
 					company_html+='</div>'; //panel group
@@ -1355,7 +1355,7 @@ function keywordSearch(){
 					company_html+='<div class="panel-group" id="list-table">';
 					company_html+='<div class="panel panel-default">';
 					company_html+='<div class="panel-heading">';
-					company_html+='<h6 class="panel-title" id="centerInfo_list_coName">'+companySet.co_idx+"/"+companySet.co_name+'<span id="center_list_coName_class">('+companySet.co_class+')</span></h6>';
+					company_html+='<h6 class="panel-title" id="centerInfo_list_coName">'+companySet.co_name+'<span id="center_list_coName_class">('+companySet.co_class+')</span></h6>';
 					company_html+='</div>'; //panel-heading
 					company_html+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
 					company_html+='<ul class="list-group">';
@@ -1363,7 +1363,7 @@ function keywordSearch(){
 					company_html+='</ul>';
 					company_html+='</div>'; //colapse panel1
 					company_html+='<div class="panel-body">';
-					company_html+='<a class="btn-xs" id="center-addr-btn" data-toggle="collapse" href="#centerInfo_list_coAddr_'+i+'">주소보기'+companySet.co_idx+'</a>';
+					company_html+='<a class="btn-xs" id="center-addr-btn" data-toggle="collapse" href="#centerInfo_list_coAddr_'+i+'">주소보기</a>';
 					company_html+='</div>'; //colapse panel open1
 					company_html+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
 					company_html+='<ul class="list-group">';
@@ -1371,7 +1371,7 @@ function keywordSearch(){
 					company_html+='</ul>';
 					company_html+='</div>'; //collapse panel2
 					company_html+='<div class="panel-body">';
-					company_html+='<a class="btn-xs" id="centerInfo_list_coClass" data-toggle="collapse" href="#centerInfo_list_content_'+i+'">제공서비스보기'+companySet.co_idx+'</a>';
+					company_html+='<a class="btn-xs" id="centerInfo_list_coClass" data-toggle="collapse" href="#centerInfo_list_content_'+i+'">제공서비스보기</a>';
 					company_html+='</div>'; //collapse panel open 2
 					company_html+='</div>';//panel default
 					company_html+='</div>'; //panel group
