@@ -1,6 +1,8 @@
 package nfit.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -55,10 +57,46 @@ public class CenterController {
 		CenterDTO dto=centerDao.centerOneDB(co_idx);
 		List<UsetimeDTO> list = usetimeDao.usetimeDB(co_idx);
 		List<ContentDTO> contentList=contentDao.contentListDB(co_idx);
-		model.addAttribute("co_idx",co_idx);
+		
+		/*coin 소수점 처리*/
+		List coinList = new ArrayList();
+		for(int i=0; i<contentList.size(); i++){
+			DecimalFormat df=new DecimalFormat();
+			double coin = contentList.get(i).getContent_coin();
+			if(coin < 10){
+				df.applyLocalizedPattern("0.#"); 
+			}else if(coin >=10){
+				df.applyLocalizedPattern("00.#"); 
+			}//if(coin < 10){
+			String coinStr = df.format(coin);
+			coinList.add(coinStr);
+		}//for(int i=0; i<contentList.size(); i++){
+		/*ends coin 소수점 처리*/
+		
+		/*image file 찾기*/
+		String imgPath = "C:/Users/DESK12/git/planAOA/nfit/src/main/webapp/resources/centerImage";
+		String viewPath = dto.getCo_view();
+		String fullPath = imgPath+"/"+viewPath;
+		File f = new File(fullPath);
+		File files[] = f.listFiles();
+		List fileList = new ArrayList();
+		String srcPath="resources/centerImage/"+viewPath;
+		for(int i=0; i<files.length; i++){
+			String fileName=srcPath+"/"+files[i].getName();
+			fileList.add(fileName);
+		}
+		String firstImg = fileList.get(0).toString();
+		System.out.println(firstImg);
+		/*ends image file 찾기*/
+		
+		CenterDTO centerList=centerDao.centerOneDB(co_idx);
 		model.addAttribute("dto", dto);
 		model.addAttribute("timelist", list);
 		model.addAttribute("contentlist", contentList);
+		model.addAttribute("centerlist", centerList);
+		model.addAttribute("coinlist", coinList);
+		model.addAttribute("filelist", fileList);
+		model.addAttribute("firstimg", firstImg);
 		return "/center/centerDetail";
 	}
 	

@@ -5,7 +5,7 @@ import java.sql.Date;
 public class ContentDTO {
 	private int content_idx;
 	private int co_idx;
-	private int content_coin;
+	private double content_coin;
 	private String content1;
 	private String content2;
 	private String content3;
@@ -16,8 +16,8 @@ public class ContentDTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ContentDTO(int content_idx, int co_idx, int content_coin, String content1, String content2, String content3,
-			String content4, String content5, String content6) {
+	public ContentDTO(int content_idx, int co_idx, double content_coin, String content1, String content2,
+			String content3, String content4, String content5, String content6) {
 		super();
 		this.content_idx = content_idx;
 		this.co_idx = co_idx;
@@ -41,10 +41,10 @@ public class ContentDTO {
 	public void setCo_idx(int co_idx) {
 		this.co_idx = co_idx;
 	}
-	public int getContent_coin() {
+	public double getContent_coin() {
 		return content_coin;
 	}
-	public void setContent_coin(int content_coin) {
+	public void setContent_coin(double content_coin) {
 		this.content_coin = content_coin;
 	}
 	public String getContent1() {
@@ -84,6 +84,4 @@ public class ContentDTO {
 		this.content6 = content6;
 	}
 	
-	
-
 }
