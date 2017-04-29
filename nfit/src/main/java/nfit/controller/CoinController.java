@@ -2,6 +2,7 @@ package nfit.controller;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -99,6 +100,13 @@ public class CoinController {
 			result=0;
 		}
 		
+		return result;
+	}
+	
+	@RequestMapping(value="bookingDel.do")
+	@ResponseBody
+	public int bookingDel(String member_id, int co_idx, String use_date, int usemember_coin){		
+		int result=coinDAO.bookingDel(member_id, co_idx, use_date, usemember_coin);				
 		return result;
 	}
 

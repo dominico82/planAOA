@@ -11,4 +11,5 @@ public interface CoinDAO {
 	public int setPayInfo(int member_idx, String pmethod, int coin, int price, String pclass);
 	public int setCenterBooking(String member_id, int member_coin, int co_idx, String co_name, int coin_price, String use_date);
 	public String getCenterBooking(String co_name, String use_date);
+	public int bookingDel(String member_id, int co_idx, String use_date, int usemember_coin);
 }

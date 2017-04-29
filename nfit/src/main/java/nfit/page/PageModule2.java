@@ -15,20 +15,20 @@ public class PageModule2 {
 		if(userGroup!=0	){
 			sb.append("<a href='");
 			sb.append(pagename);
-			sb.append("?cp2=");
+			sb.append("?cp=");
+			sb.append(cp);
+			sb.append("&cp2=");
 			int temp=(userGroup-1)*pageSize+pageSize;
 			sb.append(temp);
-			sb.append("&cp=");
-			sb.append(cp);
 			sb.append("'>&lt;&lt;</a>");		
 		}
 		for(int i=userGroup*pageSize+1;i<=userGroup*pageSize+pageSize;i++){
 			sb.append("&nbsp;&nbsp;<a href='");
 			sb.append(pagename);
-			sb.append("?cp2=");
-			sb.append(i);
-			sb.append("&cp=");
+			sb.append("?cp=");
 			sb.append(cp);
+			sb.append("&cp2=");
+			sb.append(i);
 			sb.append("'>");
 			sb.append(i);
 			sb.append("</a>&nbsp;&nbsp;");
@@ -38,11 +38,11 @@ public class PageModule2 {
 		if(userGroup!=((totalPage/pageSize)-(totalPage%pageSize==0?1:0))){
 			sb.append("<a href='");
 			sb.append(pagename);
-			sb.append("?cp2=");
+			sb.append("?cp=");
+			sb.append(cp);
+			sb.append("&cp2=");
 			int temp=((userGroup+1)*pageSize+1);
 			sb.append(temp);
-			sb.append("&cp=");
-			sb.append(cp);
 			sb.append("'>&gt;&gt;</a>");
 		
 		}

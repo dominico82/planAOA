@@ -15,6 +15,14 @@
 <script type="text/javascript" src="resources/js/bootstrap-filestyle.min.js"></script>
 <jsp:include page="../header.jsp"/>
 <link rel="stylesheet" type="text/css" href="resources/css/mypage1.css"/>
+<style>
+table th{
+	text-align: center;
+}
+table td{
+	text-align: center;
+}
+</style>
 <script>
 
 $(document).ready(function(){ //DOM이 준비되고
@@ -713,7 +721,7 @@ function picLoad(){
 						                    	<tbody>
 						                    		<c:if test="${empty list}">
 						                    			<tr>
-						                    				<td colspan="4">결제 내역이 없습니다!</td>
+						                    				<td colspan="4">결제 내역이 없습니다.</td>
 						                    			<tr>
 						                    		</c:if>
 						                    		<c:if test="${!empty list}">
@@ -757,9 +765,35 @@ function picLoad(){
 								                    		<tr class="info">
 								                    			<td>${dta2.USE_DATE}</td>
 								                    			<td>${dta2.CO_NAME}</td>
-								                    			<td>${dta2.USEMEMBER_COIN}</td>
-								                    			<td>예약취소</td>
+								                    			<td>${dta2.USEMEMBER_COIN}코인</td>
+								                    			<td><button type="button" class="btn btn-sm btn-info" onclick="javascript:bookingDel('${dta2.MEMBER_ID}', ${dta2.CO_IDX}, '${dta2.USE_DATE}', ${dta2.USEMEMBER_COIN}, ${dto.member_coin});"><i class="fa fa-edit"></i>예약취소</button></td>
 								                    		</tr>
+<script>
+function bookingDel(member_id, co_idx, use_date, usemember_coin, member_coin){
+	var refundCoin=member_coin+usemember_coin;
+	console.log(member_id);
+	console.log(co_idx);
+	console.log(use_date);
+	console.log(usemember_coin);
+	console.log(member_coin);
+$.ajax({
+	type:"POST",
+	url: "bookingDel.do",
+	data: "member_id="+member_id+"&co_idx="+co_idx+"&use_date="+use_date+"&usemember_coin="+refundCoin,
+	success: function(data){
+		if(data==1){
+			alert('예약이 취소되었습니다!');
+			console.log("예약삭제성공!");
+			location.reload();
+		}
+	},
+	error: function(data){
+		alert("실패!!");
+	}
+});
+	
+};
+</script>
 								                    	</c:forEach>					          
 						                    		</c:if>
 						                    		          	

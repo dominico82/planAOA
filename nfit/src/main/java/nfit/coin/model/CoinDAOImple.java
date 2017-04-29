@@ -60,7 +60,6 @@ public class CoinDAOImple implements CoinDAO {
 		return result;
 	}
 	
-	@Override
 	public String getCenterBooking(String co_name, String use_date) {
 		HashMap<String, String> map=new HashMap<String, String>();
 		map.put("co_name", co_name);
@@ -68,6 +67,20 @@ public class CoinDAOImple implements CoinDAO {
 		String date=sqlMap.selectOne("getCenterBooking", map);
 				
 		return date;
+	}
+		
+	public int bookingDel(String member_id, int co_idx, String use_date, int usemember_coin) {
+		HashMap<String, Object> map=new HashMap<String, Object>();
+		map.put("member_id", member_id);
+		map.put("co_idx", co_idx);
+		map.put("use_date", use_date);
+		HashMap<String, Object> map2=new HashMap<String, Object>();
+		map2.put("member_id", member_id);
+		map2.put("member_coin", usemember_coin);
+		int delResult=sqlMap.delete("bookingDel", map);
+		int refundResult=sqlMap.update("refundCoin", map2);		
+		int result=delResult==1&&refundResult==1?1:0;
+		return result;
 	}
 	
 }

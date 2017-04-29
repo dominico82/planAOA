@@ -52,5 +52,15 @@
 			pay_user
 		where 
 			co_name=#{co_name} and use_date=#{use_date}
-	</select>
+	</select>	
+	<delete id="bookingDel" parameterType="hashmap">
+		delete pay_user
+		where member_id=#{member_id} and co_idx=#{co_idx} and use_date=#{use_date}
+	</delete>
+	<update id="refundCoin" parameterType="hashmap">
+		update member_table set 
+			member_coin = #{member_coin}	
+		where 
+			member_id = #{member_id}
+	</update>
 </mapper>

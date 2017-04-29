@@ -8,7 +8,7 @@ public class PageModule3 {
 		if(totalCnt%listSize==0)totalPage--;
 
 		int userGroup=cp/pageSize;
-		if(cp2%pageSize==0)userGroup--; 
+		if(cp%pageSize==0)userGroup--; 
 		
 		StringBuffer sb=new StringBuffer();//문자열을 사용하면 자원낭비가 심하므로 스트링버퍼를 사용해서 문자열을 담아준다.
 		
