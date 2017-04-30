@@ -141,6 +141,7 @@ margin-top:10px;
 #centerInfo #centerInfo_panel #centerInfo_body_sub{
 overflow-y:auto; 
 height:280px;
+font-size:12px;
 }
 #avail_photo{
 height:34px;
@@ -888,12 +889,17 @@ function show(co_idx, centerListUrl, setMapGo){
 				$("#centerInfo_img").replaceWith(coView_html);
 				
 				/*co_avail*/
-				var coAvail=dataObj.co_avail; 
+				$("#centerInfo_avail").empty();
+				var coAvail=dataObj.co_avail;
+				console.log(coAvail);
 				var coAvail_split=coAvail.split("|");
+				console.log(coAvail_split);
 				var coAvail_array=[];
 				var coAvail_html='<ul class="list-inline">';
 				for(var i=0; i<coAvail_split.length; i++){
-					coAvail_array[i]=coAvail_split[i];
+				coAvail_array[i]=coAvail_split[i];
+				console.log(coAvail_split[i]);
+				console.log(coAvail_array[i]);
 					switch(coAvail_array[i]){
 					case '주차' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/Car_Parking.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
 					case '타올' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/Towels.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
@@ -906,9 +912,9 @@ function show(co_idx, centerListUrl, setMapGo){
 					}
 				}
 				coAvail_html+='</ul>';
+				$("#centerInfo_avail").html(coAvail_html);
 				
 				/*co_regul*/
-				$("#centerInfo_avail").replaceWith(coAvail_html);
 				var coRegul=dataObj.co_regul;
 				var coRegul_split = coRegul.split("|");
 				var coRegul_array=[];
@@ -1026,9 +1032,6 @@ function show(co_idx, centerListUrl, setMapGo){
 				var strData = data;
 				var objData = eval('('+strData+')');
 				var content = objData.content;
-				console.log("strData="+strData);
-				console.log("objData="+objData);
-				console.log("content="+content);
 				if(!data){
 					alert("ajax fail");
 					return false;
