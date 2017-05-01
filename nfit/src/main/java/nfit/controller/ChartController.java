@@ -41,7 +41,7 @@ import nfit.center2.model.CompanyDAO;
 import util.MediaUtils;
 import nfit.center.model.*;
 //nfit
-
+//20170501최종수정
 @Controller
 public class ChartController {
 	//파일경로 리소스설정
@@ -111,7 +111,6 @@ public class ChartController {
 			}
 			String root_path = request.getSession().getServletContext().getRealPath("/");
 			System.out.println("컨트롤러에서본 root_path::"+root_path);
-			String attach_path = "resources/centerImage";
 			//서비스등록 
 			companyDao.company_add2(vo, menu);
 			//방금 등록한 업체 idx값 가져오기 
@@ -188,7 +187,6 @@ public class ChartController {
 		if(totalpage<endpage){
 			endpage=totalpage;
 		}
-		//List<CompanyListDTO> list = companyDao.companyListborad(start, end);
 		//업체검색 메소드호출
 		List<CenterDTO> list=companyDao.companySearch(keyword, keyfield, start, end);
 		map.put("startpage", startpage);
@@ -362,6 +360,7 @@ public class ChartController {
 					String content4=arr6[i];
 					String content5=arr7[i];
 					String content6=arr8[i];
+					//서비스 실행
 					companyDao.content_list_update(content_idx, content_coin, content1, content2, content3, content4, content5, content6);
 				}
 			entity =new ResponseEntity<String>("success",HttpStatus.OK);

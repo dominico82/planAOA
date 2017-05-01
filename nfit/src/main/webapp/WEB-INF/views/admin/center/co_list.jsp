@@ -41,6 +41,7 @@
 			async : false
 		}).responseText;
 		var data = new google.visualization.DataTable(jsonData);
+		/* json형식으로 받은 데이터를 bar타입의 차트로 표현해준다. */
 		var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
 		chart.draw(data, {
 			title : '업체 누적 이용수',		
@@ -236,7 +237,7 @@ color:black;
 </header>
 <div>
 	<!-- 경로에 이미지업로드 나오는지확인해봄 -->
-	<img alt="" src="resources/centerImage/65_07000707-/65_07000707-_1.jpg" style="display: none;" ><!-- style="display: none;" -->
+	<img alt="" src="#" style="display: none;" ><!-- style="display: none;" -->
 </div>
   <div class="app-body">
         <div class="sidebar">
@@ -268,9 +269,9 @@ color:black;
 			<img src="resources/img/favicon.png" style="height: 65px;"> 
 			<a href="memberAdmin.do" style="font-family:'Nanum Pen Script' serif;">회원관리 페이지</a>
 		</div>
-            <div><!-- class="container-fluid" -->
+            <div>
 				<!-- 내용들어갈곳 -->
-				<div><!-- id="ui-view" -->
+				<div>
 					<!--페이징부분  -->
 					<div style="display: block;">
 						<c:if test="${startpage>1}">

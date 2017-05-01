@@ -26,6 +26,9 @@ public class FeedBackController {
 	@RequestMapping("feedbackinsert.do")
 	@ResponseBody
 	public void feedbackinsert(@ModelAttribute FeedbackDTO vo){
+		//사용자 개인정보보호 아이디 일부 마킹 처리 
+		String markId=vo.getMember_id().substring(0,5)+"*****";
+		vo.setMember_id(markId);
 		feedbackDao.feedbackinsert(vo);
 	}
 	//댓글 목록
