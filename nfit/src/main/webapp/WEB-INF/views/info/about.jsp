@@ -18,12 +18,14 @@ var userEmail="${dto.member_email}";
 var userTel="${dto.member_tel}";
 var userAddr="${dto.member_addr}";
 </script>
-	</head>
+
+</head>
 	
 <body>
-	<header>
+<header>
 		<jsp:include page="../header.jsp"/>
-	</header>/
+</header>
+
 <br><br><br>
 	
 	<section>
@@ -38,34 +40,36 @@ var userAddr="${dto.member_addr}";
 									<span> </span>
 								</div>
 								<div class="panel-right">
-									<h3>해당화면을 보여주기만하면  바로입장 가능 </h3>
-									<p>코인으로 원하시는 제휴센터의 프로그램 시간을 예약한 후 예약된 시간전에 방문 하시면 센터데스크에서 해당화면을 확인한 후 , 
+									<h3 style="color: #7b74ab;
+    text-shadow: 0px 3px 3px #5bc0de;">해당화면을 보여주기만하면  바로입장 가능 </h3>
+									<p>코인으로 원하시는 제휴센터의 프로그램 시간을 예약한 후 예약된 시간전에 방문 하시면 센터데스크에서 해당화면을 확인한 후 ,<br> 
 									  센터 담당자가 친절하게 구매 프로그램 진행을 도와드립니다. ^^ 부담없이 예약해 주세요. </p>
 								</div>
 								<div class="clear"> </div>
 							</div>
 						</div>
 						</div>
+		</div><!-- class="content" -->
+		</div>
 		
-	
-			<div class="content">
+		<div class="content">
 				<div class="wrap">
 				<!---start-mid-grids--->
 					<div class="mid-grids">
 						<div class="wrap">
 						<div class="mid-grids-left">
-							<img src="resources/images/app-divices.jpg" title="divices" />
-							<span> </span>
+							<img src="resources/images/app.jpg" title="divices" />
+							
 						</div>
 						<div class="mid-grids-right">
 							<h3> <span>Nfit</span> 모바일앱 을 설치하세요!! </h3>
-							<p>지금<big>앱스토어</big> 에서 <big>설치하세요.</big></p>
-							<ul class="fea">
-								<li><a href="#" style="decoration:none;">제휴시설 이용을 더욱 편리하게!</a></li>
-								<li><a href="#" style="decoration:none;">한번에 가입부터 결제까지 </a></li>
-								<li><a href="#" style="decoration:none;">나와 가까운 제휴시설 확인하기</a></li>
-								<li><a href="#" style="decoration:none;">제휴시설 상세검색하기</a></li>
-								<li><a href="#" style="decoration:none;">제휴시설 입장하기</a></li>
+							<p>지금 앱스토어  에서  설치하세요.</p>
+							<ul class="fea" >
+								<li style="text-shadow: 2px -2px 2px #9df1e0;color: #0c153a;">제휴시설 이용을 더욱 편리하게!</li>
+								<li style="text-shadow: 2px -2px 2px #9df1e0;color: #0c153a;">한번에 가입부터 결제까지 </li>
+								<li style="text-shadow: 2px -2px 2px #9df1e0;color: #0c153a;">나와 가까운 제휴시설 확인하기</li>
+								<li style="text-shadow: 2px -2px 2px #9df1e0;color: #0c153a;">제휴시설 상세검색하기</li>
+								<li style="text-shadow: 2px -2px 2px #9df1e0;color: #0c153a;">제휴시설 입장하기</li>
 							</ul>
 							<div class="big-btns">
 								<ul>
@@ -77,12 +81,12 @@ var userAddr="${dto.member_addr}";
 						<div class="clear"> </div>
 					</div>
 				</div>		
-				
+			
 					<!--- start-top-grids---->
 					<div class="top-grids">
 						<div class="top-grid">
 							<div class="product-pic frist-product-pic">
-								<img src="resources/images/img_step_1.png" width="280" height="280" title="watch" />
+								<img src="resources/images/img_step_1.png" width="280" height="280" title="step1" />
 							</div>
 							<span><label>1</label></span>
 							<div class="border"> </div>
@@ -90,7 +94,7 @@ var userAddr="${dto.member_addr}";
 						</div>
 						<div class="top-grid">
 							<div class="product-pic">
-								<img src="resources/images/img_step_2.png" width="280" height="280" title="shoe" />
+								<img src="resources/images/img_step_2.png" width="280" height="280" title="step2" />
 							</div>
 							<span><label>2</label></span>
 							<div class="border hide"> </div>
@@ -98,7 +102,7 @@ var userAddr="${dto.member_addr}";
 						</div>
 						<div class="top-grid hide">
 							<div class="product-pic">
-								<img src="resources/images/img_step_3.png" width="280" height="280" title="laptop" />
+								<img src="resources/images/img_step_3.png" width="280" height="280" title="step3" />
 							</div>
 							<span><label>3</label></span>
 							<a href="#">센터 데스크 방문 인증 후 운동시작</a>
@@ -106,18 +110,16 @@ var userAddr="${dto.member_addr}";
 						<div class="clear"> </div>
 					</div>
 					</div>
-					<!--- start-top-grids---->
-				
 					</div>
+				
 			
-		
-		
-	<!---start-testimonials---->
+					<!---start-testimonials---->
 						<div class="testimonials">
 							<div class="wrap">
-							<div class="testimonial-head">
-								<h1><span>Nfit</span> 을 칭찬합시다.</h1>
-								<p>Kind words from our valuable customers</p>
+								<div class="testimonial-head">
+								<h1 style="color: #7b74ab;
+    text-shadow: 0px 3px 3px #5bc0de;">사람들이말하는  <span>Nfit</span></h1>
+								<p>많은 분들이 추천 해 주고 있습니다.</p>
 							</div>
 							<div class="testimonial-grids">
 								<div class="testimonial-grid">
@@ -134,25 +136,21 @@ var userAddr="${dto.member_addr}";
 									<a href="#"><img src="resources/images/test-people3.png" alt=""></a>
 									<p>요가는 나랑 맞지 않아’ 라고 얘기하는 분들도 다른 센터로 옮기시면 잘 맞을 수도 있어요. ... Nfit 덕분에 여기 저기 다녀보고 저와 잘 맞는 요가 센터를 찾아서 지금은 굉장히 만족하고 ...</p>
 									<a href="#">Steven, Microlancer</a>
-								</div>
+							  		</div>
 								<div class="clear"> </div>
 							</div>
-				  		</div>
-				  		<!---//End-testimonials---->
-				  		<!----start-clients-slider--->
+							<!----start-clients-slider--->
 				  		<div class="clients-slider">
-						<div"><div class="nbs-flexisel-inner"><ul class="flexiselDemo3 nbs-flexisel-ul" style="left: -175.2px; display: block;">
+						<div><div class="nbs-flexisel-inner"><ul class="flexiselDemo3 nbs-flexisel-ul" style="left: -175.2px; display: block;">
 						<li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c3.png"></li><li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c4.png"></li><li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c1.png"></li><li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c2.png"></li><li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c3.png"></li><li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c4.png"></li><li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c1.png"></li><li class="nbs-flexisel-item" style="width: 175.2px;"><img src="resources/images/c2.png"></li></ul><div class="nbs-flexisel-nav-left" style="top: 13px;"></div><div class="nbs-flexisel-nav-right" style="top: 13px;"></div></div></div> 
-						<div class="clear"> </div>      
-							
-
+						<div class="clear"></div>      
 						</div>
-						<!----start-clients-slider--->
-					</div>
-				</div>
-				</div>
-		
-		
+				<!----end-clients-slider--->
+				  		</div>
+				  		</div>
+				
+				<!---//End-testimonials---->
+				
 		<div class="content">
 				<div class="content-feature-grids">
 					<div class="wrap"> 
@@ -222,12 +220,11 @@ var userAddr="${dto.member_addr}";
 				</div>
 			</div>
 			
-			
 		</article>
 	</section>
-		<footer>
-			<jsp:include page="../footer.jsp"/>
-		</footer>
-	</body>
+
+<footer>
+		<jsp:include page="../footer.jsp"/>
+</footer>
 </body>
 </html>
