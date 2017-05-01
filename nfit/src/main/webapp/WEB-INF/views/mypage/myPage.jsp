@@ -698,7 +698,6 @@ function picLoad(){
 					        </div>
 							<c:choose>
 								<c:when test="${dto.member_coin == '0'}">
-				                    <h3><i class="fa fa-clone"></i>"내 멤버십"</h3>
 									<div class="notYetMembership">
 										<h4>필요한 만큼 결제하세요!</h4>
 										<p>
@@ -818,12 +817,19 @@ $.ajax({
 		                    	</thead>
 		                    	<tbody>
 			                    	<c:forEach var="cdt" items="${cdt}">
+			                    		<tr>
+			                    			<td></td>
+			                    			<td>업체명</td>
+			                    			<td>종목</td>
+			                    			<td>이용회수</td>
+			                    			<td>연락처</td>
+			                    		</tr>
 			                    		<tr class="info">
 			                    			<td><img src="resources/centerImage/${cdt.co_view}/${cdt.co_view}_0.jpg" class="markimgsize"></td>
-			                    			<td>업체명:${cdt.co_name}</td>
-			                    			<td>종목:${cdt.co_class}</td>
-			                    			<td>이용회수:${cdt.co_usecount}</td>
-			                    			<td>연락처:${cdt.co_phone}</td>
+			                    			<td>${cdt.co_name}</td>
+			                    			<td>${cdt.co_class}</td>
+			                    			<td>${cdt.co_usecount}</td>
+			                    			<td>${cdt.co_phone}</td>
 			                    		</tr>
 			                    	</c:forEach>
 		                    	</tbody>
