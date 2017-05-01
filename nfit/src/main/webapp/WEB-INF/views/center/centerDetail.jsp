@@ -159,92 +159,135 @@ function removeChar(event) {
 /*센터 컨텐츠 선택시 배경색 변경, 예약시 코인값 설정*/
 var coin_price;
 
-$(function(){
+$(document).ready(function(){
 	
-	$("#con0").click(
+	$("#con0").click(			
 			function(){
-				$("#con0").attr("style", "background-color: lightgray;");
-				$("#con1").removeAttr("style");
-				$("#con2").removeAttr("style");
-				$("#con3").removeAttr("style");
-				$("#con4").removeAttr("style");
-				$("#con5").removeAttr("style");	
-				coin_price=$("#coin_num_0").contents().text();
+				if(!(coin_price==null||coin_price=='')){	
+					for(var j=0;j<6;j++){
+						$("#con"+j+"").removeAttr("style");
+					}	
+					coin_price='';
+				}else{
+					$("#con0").attr("style", "background-color: #c7ddef;");
+					$("#con1").removeAttr("style");
+					$("#con2").removeAttr("style");
+					$("#con3").removeAttr("style");
+					$("#con4").removeAttr("style");
+					$("#con5").removeAttr("style");	
+					coin_price=$("#coin_num_0").contents().text();
+				}
 				console.log(coin_price);
 	});
 	$("#con1").click(
 			function(){
-				$("#con0").removeAttr("style");
-				$("#con1").attr("style", "background-color: lightgray;");
-				$("#con2").removeAttr("style");
-				$("#con3").removeAttr("style");
-				$("#con4").removeAttr("style");
-				$("#con5").removeAttr("style");	
-				coin_price=$("#coin_num_1").contents().text();
+				if(!(coin_price==null||coin_price=='')){	
+					for(var j=0;j<6;j++){
+						$("#con"+j+"").removeAttr("style");
+					}	
+					coin_price='';
+				}else{
+					$("#con0").removeAttr("style");
+					$("#con1").attr("style", "background-color: #c7ddef;");
+					$("#con2").removeAttr("style");
+					$("#con3").removeAttr("style");
+					$("#con4").removeAttr("style");
+					$("#con5").removeAttr("style");	
+					coin_price=$("#coin_num_1").contents().text();
+				}
 				console.log(coin_price);
 	});
 	$("#con2").click(
 			function(){
-				$("#con0").removeAttr("style");
-				$("#con1").removeAttr("style");
-				$("#con2").attr("style", "background-color: lightgray;");
-				$("#con3").removeAttr("style");
-				$("#con4").removeAttr("style");
-				$("#con5").removeAttr("style");	
-				coin_price=$("#coin_num_2").contents().text();
+				if(!(coin_price==null||coin_price=='')){		
+					for(var j=0;j<6;j++){
+						$("#con"+j+"").removeAttr("style");
+					}	
+					coin_price='';
+				}else{
+					$("#con0").removeAttr("style");
+					$("#con1").removeAttr("style");
+					$("#con2").attr("style", "background-color: #c7ddef;");
+					$("#con3").removeAttr("style");
+					$("#con4").removeAttr("style");
+					$("#con5").removeAttr("style");	
+					coin_price=$("#coin_num_2").contents().text();
+				}
 				console.log(coin_price);
 	});
 	$("#con3").click(
 			function(){
-				$("#con0").removeAttr("style");
-				$("#con1").removeAttr("style");
-				$("#con2").removeAttr("style");
-				$("#con3").attr("style", "background-color: lightgray;");
-				$("#con4").removeAttr("style");
-				$("#con5").removeAttr("style");	
-				coin_price=$("#coin_num_3").contents().text();
+				if(!(coin_price==null||coin_price=='')){	
+					for(var j=0;j<6;j++){
+						$("#con"+j+"").removeAttr("style");
+					}	
+					coin_price='';
+				}else{
+					$("#con0").removeAttr("style");
+					$("#con1").removeAttr("style");
+					$("#con2").removeAttr("style");
+					$("#con3").attr("style", "background-color: #c7ddef;");
+					$("#con4").removeAttr("style");
+					$("#con5").removeAttr("style");	
+					coin_price=$("#coin_num_3").contents().text();
+				}
 				console.log(coin_price);
 	});
 	$("#con4").click(
 			function(){
-				$("#con0").removeAttr("style");
-				$("#con1").removeAttr("style");
-				$("#con2").removeAttr("style");
-				$("#con3").removeAttr("style");
-				$("#con4").attr("style", "background-color: lightgray;");
-				$("#con5").removeAttr("style");	
-				coin_price=$("#coin_num_4").contents().text();
+				if(!(coin_price==null||coin_price=='')){	
+					for(var j=0;j<6;j++){
+						$("#con"+j+"").removeAttr("style");
+					}	
+					coin_price='';
+				}else{
+					$("#con0").removeAttr("style");
+					$("#con1").removeAttr("style");
+					$("#con2").removeAttr("style");
+					$("#con3").removeAttr("style");
+					$("#con4").attr("style", "background-color: #c7ddef;");
+					$("#con5").removeAttr("style");	
+					coin_price=$("#coin_num_4").contents().text();
+				}
 				console.log(coin_price);
 	});
 	$("#con5").click(
 			function(){
-				$("#con0").removeAttr("style");
-				$("#con1").removeAttr("style");
-				$("#con2").removeAttr("style");
-				$("#con3").removeAttr("style");
-				$("#con4").removeAttr("style");
-				$("#con5").attr("style", "background-color: lightgray;");	
-				coin_price=$("#coin_num_5").contents().text();
+				if(!(coin_price==null||coin_price=='')){	
+					for(var j=0;j<6;j++){
+						$("#con"+j+"").removeAttr("style");
+					}	
+					coin_price='';
+				}else{
+					$("#con0").removeAttr("style");
+					$("#con1").removeAttr("style");
+					$("#con2").removeAttr("style");
+					$("#con3").removeAttr("style");
+					$("#con4").removeAttr("style");
+					$("#con5").attr("style", "background-color: #c7ddef;");					
+					coin_price=$("#coin_num_5").contents().text();
+				}
 				console.log(coin_price);
 	});
 });
-//
-//$(document).ready(function(){
-//	$(".list-group-item").hover(
-//			function(){
-//				$(this).attr("id", "content_list_on");	
-//			},
-//			function(){
-//				$(this).attr("id", "content_list");	
-//			}
-//	);
-//});
+
+$(document).ready(function(){
+	$(".list-group-item").hover(
+			function(){
+				$(this).addClass("on");	
+			},
+			function(){
+				$(this).removeClass("on");	
+			}
+	);
+	
+});
 
 </script>
 </head>
 <style>
-#content_list_on{
-	background-color: lightgray;
+.list-group-item.on{
+background-color: #c7ddef;
 }
 .coin_num{
 width:30px; 
