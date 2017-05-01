@@ -174,14 +174,25 @@ public class MypageController {
 	}
 	
 	@RequestMapping(value="markJoin.do")
-	public ModelAndView markJoin(MarkDTO dto){
-		int result = memberDao.setMark(dto);
-		String msg = result>0?"즐겨찾기가 추가되었습니다.":"즐겨찾기 실패!";
-		int coIdx = dto.getCo_idx();
+	public ModelAndView markJoin(MarkDTO dto, @RequestParam(value="member_id",required=false) String member_id){
+		String msg ="";
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("msg", msg);
-		mav.addObject("idx", coIdx);
-		mav.setViewName("mypage/markMsg");
+		System.out.println("id="+member_id);
+		int coIdx = dto.getCo_idx();
+		if(member_id==null  || member_id.equals("")){
+			System.out.println("id1="+member_id);
+			msg ="로그인이 필요합니다.";
+			mav.addObject("msg", msg);
+			mav.addObject("idx", coIdx);
+			mav.setViewName("mypage/markMsg");
+		}else{
+			System.out.println("id2="+member_id);
+			int result = memberDao.setMark(dto);
+			msg = result>0?"즐겨찾기가 추가되었습니다.":"즐겨찾기 실패!";
+			mav.addObject("msg", msg);
+			mav.addObject("idx", coIdx);
+			mav.setViewName("mypage/markMsg");
+		}
 		return mav;
 	}
 }
