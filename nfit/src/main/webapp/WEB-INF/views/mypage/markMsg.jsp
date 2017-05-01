@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <script>
 window.alert('${msg}');
-location.href='centerDetail.do';
+location.href='centerDetail.do?co_idx='+${idx};
 </script>

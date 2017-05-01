@@ -175,12 +175,12 @@ public class MypageController {
 	
 	@RequestMapping(value="markJoin.do")
 	public ModelAndView markJoin(MarkDTO dto){
-		System.out.println(dto+"dto");
 		int result = memberDao.setMark(dto);
 		String msg = result>0?"즐겨찾기가 추가되었습니다.":"즐겨찾기 실패!";
-		
+		int coIdx = dto.getCo_idx();
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", msg);
+		mav.addObject("idx", coIdx);
 		mav.setViewName("mypage/markMsg");
 		return mav;
 	}
