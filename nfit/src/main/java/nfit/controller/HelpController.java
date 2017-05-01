@@ -48,7 +48,7 @@ public class HelpController {
 									@RequestParam(value="cp", defaultValue="1") int cp){
 		int totalCnt=helpDao.getTotalSearchCnt(category, keyword, tag);
 		totalCnt=totalCnt==0?1:totalCnt;
-		int listSize=5;
+		int listSize=10;
 		int pageSize=5;	
 		List<HelpDTO> dtos=helpDao.getHelpSerch(category, keyword, tag, cp, listSize);
 		String pageStr=nfit.page.PageModuleFAQ.makePageFAQ("helpSearch.do", totalCnt, listSize, pageSize, category, keyword, tag, cp);	

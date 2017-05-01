@@ -62,11 +62,7 @@
 				</a>
           	</c:forEach>
               
-          </div><!-- /.list-group -->
-
-			<div>
-		       	<a href="noticeWrite.do" class="btn btn-default">글쓰기</a><br>
-		    </div>		
+          </div><!-- /.list-group -->	
           <nav>
             <ul class="pagination">
             	<li>${pageStr}</li>

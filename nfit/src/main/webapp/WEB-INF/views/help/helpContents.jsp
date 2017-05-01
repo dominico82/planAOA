@@ -54,22 +54,11 @@
                	</c:if>
                 <span>${contents.faq_subject} </span></h4>
                 <div class="answer">
-                  <p>${contents.faq_content}
+                  <p>${contents.faq_content}</p>
                 </div>
               </article>
               
-              <div>
-              	<c:url var="helpUpdate" value="helpUpdate.do">
-					<c:param name="idx">${contents.faq_idx}</c:param>
-				</c:url>
-              	<a href="${helpUpdate}" class="btn btn-default">수정</a><br>
-              </div>
-              <div>
-              	<c:url var="helpDel" value="helpDel.do">
-					<c:param name="idx">${contents.faq_idx}</c:param>
-				</c:url>
-              	<a href="${helpDel}" class="btn btn-default">삭제</a><br>
-              </div>
+              
 
 
               <div class="orCantFindHelp">

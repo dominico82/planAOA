@@ -32,8 +32,8 @@ public class NoticeController {
 	public ModelAndView notice(@RequestParam(value="cp", defaultValue="1") int cp){
 		int totalCnt=noticeDao.getTotalCnt();
 		totalCnt=totalCnt==0?1:totalCnt;
-		int listSize=10;
-		int pageSize=5;
+		int listSize=7;
+		int pageSize=3;
 		List<NoticeDTO> list=noticeDao.noticeList(cp, listSize);
 		String pageStr=nfit.page.PageModule.makePage("notice.do", totalCnt, listSize, pageSize, cp);
 		
