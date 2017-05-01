@@ -98,6 +98,7 @@ public class CenterController {
 		/*ends image file 찾기*/
 		
 		CenterDTO centerList=centerDao.centerOneDB(co_idx);
+		model.addAttribute("co_idx",co_idx);//요거 지우지마세요-재혁
 		model.addAttribute("dto", dto);
 		model.addAttribute("timelist", list);
 		model.addAttribute("contentlist", contentList);

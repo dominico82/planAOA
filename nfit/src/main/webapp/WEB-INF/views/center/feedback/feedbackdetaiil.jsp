@@ -79,17 +79,12 @@ $(document).ready(function(){
       });
 });
 </script>
-<style>
-#detail_feedback_index{
-	border: 3px solid blue;
-}
-</style>
 </head>
 <body>
 <c:set var="vo" value="${vo}"/>
 <div id="detail_feedback_index">댓글번호${vo.feedback_index}<br> <!-- 댓글번호 -->
 	<div id="star1" ></div> <!-- 별점나타나는공간 -->
-      <div style="padding-top:20px;">						<!-- 별이찍히면 score가찍힘 -->
+      <div style="padding-top:20px; display:none;">						<!-- 별이찍히면 score가찍힘 -->
           <label for="starRating1">Value1 : </label><input type="hidden" id="starRating1" value="3"/>
       </div>
       <div style="padding-top:20px; display: none;">

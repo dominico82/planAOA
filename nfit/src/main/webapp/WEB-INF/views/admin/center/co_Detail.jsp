@@ -10,14 +10,13 @@
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <style>
 .thumbnail{
-	background-color:gray;
-	margin:10px;
-	 width: 150px;
-	 height: 150px;
-	 background-size: cover;
-	background-repeat:no-repeat;
-	background-position: center center;
-	border: 5px solid black;
+margin:10px;
+width: 150px;
+height: 150px;
+background-size: cover;
+/* background-repeat:no-repeat; */
+background-position: center center;
+border: 5px solid black;
 }
 .thumbnail.circle{
 border-radius: 100%;
@@ -210,6 +209,9 @@ height: 150px;
 clear: both;
 padding-right: 800px;
 }
+input#co_idx{
+border:1px solid white;
+}
 </style>
 </head>
 <body>
@@ -227,6 +229,8 @@ padding-right: 800px;
 
 <div class="modal-body">
 <div id="content_list"></div>
+	<hr>
+	<hr>
 		<table class="type1">
 			<tr>
 				<th>업체번호</th>
@@ -277,10 +281,10 @@ padding-right: 800px;
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3">
-					<button type="button" class="btn btn" id="btnUpdate">UpDate</button>
-					<button type="button" class="btn btn" id="btnDelete">Delete</button>
-				 	<button type="button" class="btn btn" data-dismiss="modal">Close</button>
+				<td colspan="3" class="w3-bar">
+					<button type="button"  class="w3-bar-item w3-button w3-black" id="btnUpdate">UpDate</button>
+					<button type="button" class="w3-bar-item w3-button w3-teal"   id="btnDelete">Delete</button>
+				 	<button type="button" class="w3-bar-item w3-button w3-red" data-dismiss="modal">Close</button>
 				</td>
 			</tr>
 		</table>
@@ -291,8 +295,8 @@ padding-right: 800px;
 		<div style="float: left;"class="uploadedList"></div>
 		<!-- 업체별이용시간 목록 표출 -->
 			<div id="usetime_table"> </div>
-		<!-- <!-- 업체별 컨텐츠 목록 표출   -->
-			<div id="content_list"></div>
+	  <!-- 업체별 컨텐츠 목록 표출   -->
+		<!-- 	<div id="content_list"></div>  -->
 </div>
 <!-- Footer -->
 <div class="modal-footer"></div>

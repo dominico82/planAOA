@@ -12,11 +12,13 @@
 <body>
 <c:set var="flist" value="${flist}"/>
 <c:set var="saveid" value="${sessionScope.saveid}"/>
-<span>${co_idx}번째게시물:댓글${count}건</span><br>
+<div class="w3-container">
+댓글<span  class="w3-badge w3-green">${count}</span>건
+</div><br>
 <table style="width:700px;">
 	<c:if test="${empty flist}">
 		<tr>
-			<td>후기가없습니다. ~.</td>
+			<td></td>
 		</tr>
 	</c:if>
 	<c:forEach var="row" items="${flist}">

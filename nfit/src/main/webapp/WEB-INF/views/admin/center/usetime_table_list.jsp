@@ -76,7 +76,36 @@ width: 300px;
 		</tr>
 			<c:if test="${empty list}">
 				<tr>
-					<th>이용시간 이 없습니다.</th>
+					<td>
+						<input placeholder="입력해주세요">
+					</td>
+					<td>
+						<input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input>
+					</td>
+					<td>
+						<input>
+					</td>
+				</tr>	
+				<tr>
+					<td>
+						<input>
+					</td>
+					<td>
+						<input>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input>
+					</td>
+					<td>
+						<input>
+					</td>
 				</tr>
 			</c:if>
 		<c:forEach var="vo" items="${list}" varStatus="status">
@@ -91,9 +120,9 @@ width: 300px;
 			</tr>
 		</c:forEach>
 		<tr>
-			<td colspan="2">
-				<button type="button" id="usetimeBtn">수정버튼</button>
-				<button type="button" id="usetimeBtndelete">삭제버튼</button>
+			<td colspan="2" class="w3-bar">
+				<button type="button" id="usetimeBtn"  class="w3-bar-item w3-button w3-black" >Update</button>
+				<button type="button" id="usetimeBtndelete" class="w3-bar-item w3-button w3-red" >Delete</button>
 			</td>
 		</tr>
 	</table>

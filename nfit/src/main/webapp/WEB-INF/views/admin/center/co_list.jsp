@@ -20,6 +20,8 @@
 <link href="resources/css/adminstyle.css" rel="stylesheet">
 <link href="resources/css/style.css" rel='stylesheet' type='text/css' />
 <link rel="shortcut icon" type="image/x-icon"href="resources/images/fav-icon.png" />
+<!-- w3 css -->
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!---start-login-script--->
 <script src="resources/js/login.js"></script>
 <!---//End-login-script--->
@@ -50,6 +52,9 @@
 </script>
 <script>
 $(document).ready(function(){
+		$('#modal-testNew').draggable({
+			handle:'.modal-header'
+		});
 		$('.filedropDown').on('dragenter dragover' , function(event){
 			event.preventDefault();//기본 효과를 막음
 		});
@@ -206,6 +211,19 @@ $(document).ready(function(){
  	});
 });
 </script>
+<style>
+.modal{
+ overflow: hidden;
+}
+.modal-dialog{
+ margin-right: 0;
+ margin-left: 0;
+}
+/* 자동완성검색어 색상 */
+a#ui-id-16.ui-corner-all{
+color:black;
+}
+</style>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
 <!-- 업체목록 List에담긴것  -->
@@ -266,7 +284,7 @@ $(document).ready(function(){
 					<!-- 업체등록 모달 -->
 					<div class="container" style="width: 10%;display: -webkit-inline-box">
 					  <!-- Trigger the modal with a button -->
-					  <button type="button" class="btn btn-info btn-xs-5" data-toggle="modal" data-target="#myModal" style="margin-right: 10px;">업체등록</button>
+					  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-right: 10px;">업체등록</button>
 					  <!-- Modal -->
 					  	<div class="modal fade" id="myModal" role="dialog">
 					   	 	<div class="modal-dialog" style="width:1500px;height: 700px;">
@@ -335,7 +353,7 @@ $(document).ready(function(){
 					<!-- 차트를 넣을 모달 적용 -->
 					<div class="container" style="width: 10%; display:inline-table;">
 					  <!-- Trigger the modal with a button -->
-					  <button type="button" class="btn btn-info btn-xs-5" data-toggle="modal" data-target="#myModal2">이용누적차트</button>
+					  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">이용누적차트</button>
 					  <!-- Modal -->
 						<div class="modal fade" id="myModal2" role="dialog">
 							<div class="modal-dialog">
@@ -361,7 +379,7 @@ $(document).ready(function(){
 					<!-- 이용시간및 컨탠츠 등록  -->
 					<div class="container" style="width: 10%; display:inline ;">
 					  <!-- Trigger the modal with a button -->
-					  <button type="button" class="btn btn-info btn-xs-5" data-toggle="modal" data-target="#myModal3">이용시간및 컨탠츠 등록</button>
+					  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3">이용시간및 컨탠츠 등록</button>
 					  <!-- Modal -->
 						<div class="modal fade" id="myModal3" role="dialog">
 							<div class="modal-dialog" style="width:1000px;height: 900px;">
@@ -436,7 +454,7 @@ $(document).ready(function(){
 								    		</tr>
 								    		
 								    		<tr>
-								    			<td colspan="7" align="right">
+								    			<td colspan="7" align="right" class="w3-bar">
 								    				<button type="button" id="btnContent_insert" class="button">Insert!</button>
 							    				</td>
 								    		</tr>
@@ -512,15 +530,14 @@ $(document).ready(function(){
 					    	 <div id="div1"></div>
 				</form>
 					<!-- 업체리스트 나열 테이블  -->	 
-					<span style="margin-left: 600px;">등록된 업체 나열 </span>
-						<table class="table table-striped table-bordered table-hover"> <!-- class="table table-bordered"  -->
+						<table class="w3-table-all"> <!-- class="table table-bordered"  -->
 								<thead>
-										<tr>
-											<td>업체 번호(수정)</td>
-											<td>업체 이름</td>
-											<td>업체 주소</td>
-											<td>업체 종목</td>
-											<td>업체 연락쳐</td>
+										<tr class="w3-blue">
+											<th>업체 번호(수정)</th>
+											<th>업체 이름</th>
+											<th>업체 주소</th>
+											<th>업체 종목</th>
+											<th>업체 연락쳐</th>
 										</tr>
 								</thead>
 								<tbody id="container">
@@ -531,7 +548,7 @@ $(document).ready(function(){
 									</c:if>
 									<c:forEach var="vo" items="${list}">
 											<tr>
-												<td><a data-toggle="modal"href="co_update.do?co_idx=${vo.co_idx}" data-target="#modal-testNew" role="button" data-backdrop="static"><span class="btn btn-info">${vo.co_idx}</span></a></td>
+												<td><a data-toggle="modal"href="co_update.do?co_idx=${vo.co_idx}" data-target="#modal-testNew" role="button" data-backdrop="static"><span class="btn btn-primary">${vo.co_idx}</span></a></td>
 												<td>${vo.co_name}</td>
 												<td>${vo.co_address}</td>
 												<td>${vo.co_class}</td>
@@ -543,7 +560,7 @@ $(document).ready(function(){
 						<!-- 모달 생성되는곳 -->
 						<div id="modal-testNew" class="modal fade" tabindex="1" role="dialog" aria-labelledby="테스트" aria-describedby="테스트모달">
 							<div class="modal-dialog" style="width:1200px;height: 700px;">
-								<div class="modal-content" style="width:1300px;">
+								<div class="modal-content" style="width:1323px;" id="modal-content">
 									<!-- remote ajax call -->
 								</div>
 							</div>

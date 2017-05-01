@@ -18,11 +18,16 @@
 <script src="http://code.jquery.com/jquery-3.1.0.js"></script>
 <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css"/>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript" src="resources/js/jquery.raty.js"></script>
 <title>Insert title here</title>
 <script>
 $(document).ready(function(){
 	feedbacklist();
+	/* modify버튼 드래그가능 */
+	$('#modifyFeedback').draggable({
+		handle:'#detail_feedback_index'
+	});
 		$('#btninsert').click(function(){
 			//업체 idx
 			var co_idx=$('#co_idx').val();
@@ -64,44 +69,6 @@ function feedbacklist(){
 			$('#ListFeedback').html(result);
 		}		
 	});
-}
-</script>
-<script>
-var locked=0;
-function show(star){
-	if(locked)
-		return;
-	var i;
-	var image;
-	var el;
-	var e = document.getElementById('startext');
-	var stateMsg;
-	for( i=1;i<=star;i++){
-		image = 'images'+i;
-		el = document.getElementById(image);
-		el.src='resources/images/img/star1.png';
-	}
-}
-function noshow(star){
-	if(locked)
-		return;
-	var i;
-	var image;
-	var el;
-	for(i=1;i<=star;i++){
-		image='images'+i;
-		el= document.getElementById(image);
-		el.src='resources/images/img/star0.png';
-	}
-}
-function lock(star){
-	show(star);
-	locked=1;
-}
-function mark(star){
-	lock(star);
-	$('#feedback_score').val(star);	
-	return;
 }
 </script>
 <script>
@@ -270,7 +237,7 @@ padding-right: 20px;
 width: 400px;
 height: 100px;
 position: absolute;  /*  절대좌표지정없으면 바닥에 깔리게됨  */
-top:70%; /* 위아래 50 */
+top:-5%; /* 위아래 50 */
 left:75%;
 margin-left: -220px;
 z-index: 10; /* 레이어   */
@@ -723,13 +690,13 @@ function setBooking(){
 				</div>
 		<div class="col-sm-12">
 				 <!-- 후기 댓글 공간 -->
-				 <div>
+				 <div class="w3-container w3-card-4 w3-light-grey">
 					 <table id="feedback_table">
 					 	<c:choose>
 					 		<c:when test="${empty userid}">
 					 			<tr>
 					 				<td rowspan="3" colspan="3">
-					 					<textarea rows="4" cols="35" readonly="readonly">업체를 이용하시고 댓글을 남겨보세요~</textarea>
+					 					<textarea rows="4" cols="50" readonly="readonly">업체를 이용하시고 댓글을 남겨보세요~</textarea>
 					 				</td>
 					 			</tr>
 					 		</c:when>
@@ -737,12 +704,9 @@ function setBooking(){
 								<tr>
 									<td>
 										<div id="star" ></div> <!-- 별점나타나는공간 -->
-											
-									        <div style="padding-top:20px;">						<!-- 별이찍히면 score가찍힘 -->
+										<br>
+									        <div style="padding-top:20px; display: none;">						<!-- 별이찍히면 score가찍힘 -->
 									            <label for="starRating">Value : </label><input type="text" id="starRating" value="3"/>
-									        </div>
-									        <div style="padding-top:20px; display: none;">
-									            <label for="displayStarRating">Value : </label><span id="displayStarRating" style="padding-left:20px;">3</span>
 									        </div>
 									        <script type="text/javascript">
 									        $(function() {
@@ -752,7 +716,6 @@ function setBooking(){
 									                ,width : 200
 									                ,click: function(score, evt) {
 									                    $("#starRating").val(score);
-									                    $("#displayStarRating").html(score);
 									                }
 									            });
 									        });
@@ -761,7 +724,7 @@ function setBooking(){
 								</tr>
 								<tr>
 									<td>
-										<textarea rows="5" cols="70" id="feedback_content"></textarea>
+										<textarea rows="5" cols="70" id="feedback_content" ></textarea>
 									</td>
 								</tr>
 								<tr>

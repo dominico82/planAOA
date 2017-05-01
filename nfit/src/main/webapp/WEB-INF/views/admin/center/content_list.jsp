@@ -107,7 +107,27 @@ $(document).ready(function(){
 	</tr>
 	<c:if test="${empty list}">
 		<tr>
-			<td colspan="7">등록된 컨텐츠가 없습니다.</td>
+			<td>
+				<input placeholder="입력해주세요">
+			</td>
+			<td>
+				<input>
+			</td>
+			<td>
+				<input>
+			</td>
+			<td>
+				<input>
+			</td>
+			<td>
+				<input>
+			</td>
+			<td>
+				<input>
+			</td>
+			<td>
+				<input>
+			</td>
 		</tr>
 	</c:if>
 	<c:forEach var="vo" items="${list}" varStatus="status">
@@ -138,9 +158,9 @@ $(document).ready(function(){
 	</tr>
 	</c:forEach>
 	<tr>
-		<td colspan="7">
-			<button type="button" id="btncontentupdate">컨텐츠정보수정</button>
-			<button type="button" id="btncontentdelete">컨텐츠정보삭제</button>
+		<td colspan="7" class="w3-bar">
+			<button type="button" id="btncontentupdate" class="w3-bar-item w3-button w3-black" >Update</button>
+			<button type="button" id="btncontentdelete" class="w3-bar-item w3-button w3-teal">Delete</button>
 		</td>
 	</tr>
 </table>
