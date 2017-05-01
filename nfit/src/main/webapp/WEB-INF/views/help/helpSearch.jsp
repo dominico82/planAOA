@@ -97,11 +97,6 @@
     </div><!-- /.row -->
   </div><!-- /container -->
 
-<script>
-  if ($('.fastLink a').size() == 0) {
-      $('.fastLink').remove();
-  }
-</script>
 
 
 </div>

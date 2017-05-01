@@ -18,16 +18,11 @@
 <script src="http://code.jquery.com/jquery-3.1.0.js"></script>
 <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css"/>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script type="text/javascript" src="resources/js/jquery.raty.js"></script>
 <title>Insert title here</title>
 <script>
 $(document).ready(function(){
 	feedbacklist();
-	/* modify버튼 드래그가능 */
-	$('#modifyFeedback').draggable({
-		handle:'#detail_feedback_index'
-	});
 		$('#btninsert').click(function(){
 			//업체 idx
 			var co_idx=$('#co_idx').val();
@@ -62,7 +57,6 @@ $(document).ready(function(){
 //댓글목록
 function feedbacklist(){
 	var co_idx=$('#co_idx').val();
-	console.log("co_idx:"+co_idx);
 	$.ajax({
 		type:'get',
 		url:'feedbacklist.do?co_idx='+co_idx,
@@ -70,6 +64,44 @@ function feedbacklist(){
 			$('#ListFeedback').html(result);
 		}		
 	});
+}
+</script>
+<script>
+var locked=0;
+function show(star){
+	if(locked)
+		return;
+	var i;
+	var image;
+	var el;
+	var e = document.getElementById('startext');
+	var stateMsg;
+	for( i=1;i<=star;i++){
+		image = 'images'+i;
+		el = document.getElementById(image);
+		el.src='resources/images/img/star1.png';
+	}
+}
+function noshow(star){
+	if(locked)
+		return;
+	var i;
+	var image;
+	var el;
+	for(i=1;i<=star;i++){
+		image='images'+i;
+		el= document.getElementById(image);
+		el.src='resources/images/img/star0.png';
+	}
+}
+function lock(star){
+	show(star);
+	locked=1;
+}
+function mark(star){
+	lock(star);
+	$('#feedback_score').val(star);	
+	return;
 }
 </script>
 <script>
@@ -126,135 +158,92 @@ function removeChar(event) {
 /*센터 컨텐츠 선택시 배경색 변경, 예약시 코인값 설정*/
 var coin_price;
 
-$(document).ready(function(){
+$(function(){
 	
-	$("#con0").click(			
+	$("#con0").click(
 			function(){
-				if(!(coin_price==null||coin_price=='')){	
-					for(var j=0;j<6;j++){
-						$("#con"+j+"").removeAttr("style");
-					}	
-					coin_price='';
-				}else{
-					$("#con0").attr("style", "background-color: #c7ddef;");
-					$("#con1").removeAttr("style");
-					$("#con2").removeAttr("style");
-					$("#con3").removeAttr("style");
-					$("#con4").removeAttr("style");
-					$("#con5").removeAttr("style");	
-					coin_price=$("#coin_num_0").contents().text();
-				}
+				$("#con0").attr("style", "background-color: lightgray;");
+				$("#con1").removeAttr("style");
+				$("#con2").removeAttr("style");
+				$("#con3").removeAttr("style");
+				$("#con4").removeAttr("style");
+				$("#con5").removeAttr("style");	
+				coin_price=$("#coin_num_0").contents().text();
 				console.log(coin_price);
 	});
 	$("#con1").click(
 			function(){
-				if(!(coin_price==null||coin_price=='')){	
-					for(var j=0;j<6;j++){
-						$("#con"+j+"").removeAttr("style");
-					}	
-					coin_price='';
-				}else{
-					$("#con0").removeAttr("style");
-					$("#con1").attr("style", "background-color: #c7ddef;");
-					$("#con2").removeAttr("style");
-					$("#con3").removeAttr("style");
-					$("#con4").removeAttr("style");
-					$("#con5").removeAttr("style");	
-					coin_price=$("#coin_num_1").contents().text();
-				}
+				$("#con0").removeAttr("style");
+				$("#con1").attr("style", "background-color: lightgray;");
+				$("#con2").removeAttr("style");
+				$("#con3").removeAttr("style");
+				$("#con4").removeAttr("style");
+				$("#con5").removeAttr("style");	
+				coin_price=$("#coin_num_1").contents().text();
 				console.log(coin_price);
 	});
 	$("#con2").click(
 			function(){
-				if(!(coin_price==null||coin_price=='')){		
-					for(var j=0;j<6;j++){
-						$("#con"+j+"").removeAttr("style");
-					}	
-					coin_price='';
-				}else{
-					$("#con0").removeAttr("style");
-					$("#con1").removeAttr("style");
-					$("#con2").attr("style", "background-color: #c7ddef;");
-					$("#con3").removeAttr("style");
-					$("#con4").removeAttr("style");
-					$("#con5").removeAttr("style");	
-					coin_price=$("#coin_num_2").contents().text();
-				}
+				$("#con0").removeAttr("style");
+				$("#con1").removeAttr("style");
+				$("#con2").attr("style", "background-color: lightgray;");
+				$("#con3").removeAttr("style");
+				$("#con4").removeAttr("style");
+				$("#con5").removeAttr("style");	
+				coin_price=$("#coin_num_2").contents().text();
 				console.log(coin_price);
 	});
 	$("#con3").click(
 			function(){
-				if(!(coin_price==null||coin_price=='')){	
-					for(var j=0;j<6;j++){
-						$("#con"+j+"").removeAttr("style");
-					}	
-					coin_price='';
-				}else{
-					$("#con0").removeAttr("style");
-					$("#con1").removeAttr("style");
-					$("#con2").removeAttr("style");
-					$("#con3").attr("style", "background-color: #c7ddef;");
-					$("#con4").removeAttr("style");
-					$("#con5").removeAttr("style");	
-					coin_price=$("#coin_num_3").contents().text();
-				}
+				$("#con0").removeAttr("style");
+				$("#con1").removeAttr("style");
+				$("#con2").removeAttr("style");
+				$("#con3").attr("style", "background-color: lightgray;");
+				$("#con4").removeAttr("style");
+				$("#con5").removeAttr("style");	
+				coin_price=$("#coin_num_3").contents().text();
 				console.log(coin_price);
 	});
 	$("#con4").click(
 			function(){
-				if(!(coin_price==null||coin_price=='')){	
-					for(var j=0;j<6;j++){
-						$("#con"+j+"").removeAttr("style");
-					}	
-					coin_price='';
-				}else{
-					$("#con0").removeAttr("style");
-					$("#con1").removeAttr("style");
-					$("#con2").removeAttr("style");
-					$("#con3").removeAttr("style");
-					$("#con4").attr("style", "background-color: #c7ddef;");
-					$("#con5").removeAttr("style");	
-					coin_price=$("#coin_num_4").contents().text();
-				}
+				$("#con0").removeAttr("style");
+				$("#con1").removeAttr("style");
+				$("#con2").removeAttr("style");
+				$("#con3").removeAttr("style");
+				$("#con4").attr("style", "background-color: lightgray;");
+				$("#con5").removeAttr("style");	
+				coin_price=$("#coin_num_4").contents().text();
 				console.log(coin_price);
 	});
 	$("#con5").click(
 			function(){
-				if(!(coin_price==null||coin_price=='')){	
-					for(var j=0;j<6;j++){
-						$("#con"+j+"").removeAttr("style");
-					}	
-					coin_price='';
-				}else{
-					$("#con0").removeAttr("style");
-					$("#con1").removeAttr("style");
-					$("#con2").removeAttr("style");
-					$("#con3").removeAttr("style");
-					$("#con4").removeAttr("style");
-					$("#con5").attr("style", "background-color: #c7ddef;");					
-					coin_price=$("#coin_num_5").contents().text();
-				}
+				$("#con0").removeAttr("style");
+				$("#con1").removeAttr("style");
+				$("#con2").removeAttr("style");
+				$("#con3").removeAttr("style");
+				$("#con4").removeAttr("style");
+				$("#con5").attr("style", "background-color: lightgray;");	
+				coin_price=$("#coin_num_5").contents().text();
 				console.log(coin_price);
 	});
 });
-
-$(document).ready(function(){
-	$(".list-group-item").hover(
-			function(){
-				$(this).addClass("on");	
-			},
-			function(){
-				$(this).removeClass("on");	
-			}
-	);
-	
-});
+//
+//$(document).ready(function(){
+//	$(".list-group-item").hover(
+//			function(){
+//				$(this).attr("id", "content_list_on");	
+//			},
+//			function(){
+//				$(this).attr("id", "content_list");	
+//			}
+//	);
+//});
 
 </script>
 </head>
 <style>
-.list-group-item.on{
-background-color: #c7ddef;
+#content_list_on{
+	background-color: lightgray;
 }
 .coin_num{
 width:30px; 
@@ -281,7 +270,7 @@ padding-right: 20px;
 width: 400px;
 height: 100px;
 position: absolute;  /*  절대좌표지정없으면 바닥에 깔리게됨  */
-top:-5%; /* 위아래 50 */
+top:70%; /* 위아래 50 */
 left:75%;
 margin-left: -220px;
 z-index: 10; /* 레이어   */
@@ -419,14 +408,14 @@ right:15px;
 <body>
 <!-- 업체idx 값 -->
 <c:set var="co_idx" value="${co_idx}"/>
-<input type="hidden" value="${co_idx}">
+<input type="hidden" value="${co_idx}" id="co_idx">
 <!-- 세션에저장된 id -->
 <c:set var="userid" value="${sessionScope.saveid}"/>
 <c:set var="adminid" value="${sessionScope.adminid}"/>
 <!-- 세션에 저장되 유저아이디값 히든에 담기 -->
 <input type="hidden" value="${userid}" id="userid">
 <input type="hidden" value="${adminid}" id="adminid">
-<%@include file="../header.jsp" %>
+<%@include file="../../header.jsp" %>
 <!-- jsd center mainㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ -->
 	<div class="container-fluid" id="center_main_con">
 		<c:set var="dtos" value="${dto}" />
@@ -438,7 +427,7 @@ right:15px;
 			<p>${dtos.co_address}<br>${dtos.co_phone}</p>
 			<p class="text-muted"><span class="glyphicon glyphicon-stats"></span>&nbsp;지금까지 이용: <span class="bg-info">${dtos.co_usecount}회</span></p>
 			<form name="mark" action="markJoin.do">
-					<input type="hidden" value="${dtos.co_idx}" name="co_idx" id="co_idx">
+					<input type="hidden" value="${dtos.co_idx}" name="co_idx">
 					<input type="hidden" value="${dtos.co_name}" name="co_name">
 					<input type="hidden" value="${userid}" name="member_id">
 					<input class="btn btn-info" type="submit" value="즐겨찾기">
@@ -465,11 +454,11 @@ right:15px;
 				<c:forEach var="con" items="${contentlist_set}" begin="0" step="1" varStatus="status">
 				<c:choose>
 					<c:when test="${con.content_coin<5 }">
-				<li class="list-group-item list-group-item-success" id="con<%=cnt%>">
+				<li class="list-group-item list-group-item-success">
 				<ul class="list-inline" id="content_list">
 					<c:forEach var="coin" items="${coins}" begin="0" step="1" varStatus="status1">
 						<c:if test="${status1.index==status.index}">
-						<li><div class="coin_num"><span id="coin_num_<%=cnt%>" class="label label-success glyphicon glyphicon-usd">${coin}</span></div></li>
+						<li><div class="coin_num" id="coin_num_<%=cnt%>"><span class="label label-success glyphicon glyphicon-usd">${coin}</span></div></li>
 						</c:if>
 					</c:forEach>
 				<c:if test="${!empty con.content1}">
@@ -494,7 +483,7 @@ right:15px;
 				</li>
 					</c:when>
 					<c:when test="${con.content_coin>=5&&con.content_coin<10 }">
-									<li class="list-group-item list-group-item-info" id="con<%=cnt%>">
+									<li class="list-group-item list-group-item-info">
 				<ul class="list-inline" id="content_list">
 					<c:forEach var="coin" items="${coins}" begin="0" step="1" varStatus="status1">
 						<c:if test="${status1.index==status.index}">
@@ -523,7 +512,7 @@ right:15px;
 				</li>
 					</c:when>
 					<c:when test="${con.content_coin>=10 }">
-									<li class="list-group-item list-group-item-danger" id="con<%=cnt%>">
+									<li class="list-group-item list-group-item-danger">
 				<ul class="list-inline" id="content_list">
 					<c:forEach var="coin" items="${coins}" begin="0" step="1" varStatus="status1">
 						<c:if test="${status1.index==status.index}">
@@ -705,10 +694,7 @@ function setBooking(){
 	var bCo_name=$('#co_name').val();
 	var use_date=$('#datepicker').val();
 	var useData={"member_id":bUserid, "co_idx":bCo_idx, "co_name":bCo_name, "coin_price":coin_price, "use_date":use_date};
-	console.log("예약 userid:"+bUserid);
-	console.log("예약 co_idx:"+bCo_idx);
-	console.log("예약 date:"+use_date);
-	console.log("예약 coin_price:"+coin_price);
+
 	if(coin_price==null||coin_price==''){
 		alert('이용할 컨텐츠를 선택하세요!');
 	}else if(use_date==null||use_date==''){
@@ -737,13 +723,13 @@ function setBooking(){
 				</div>
 		<div class="col-sm-12">
 				 <!-- 후기 댓글 공간 -->
-				 <div class="w3-container w3-card-4 w3-light-grey">
+				 <div>
 					 <table id="feedback_table">
 					 	<c:choose>
 					 		<c:when test="${empty userid}">
 					 			<tr>
 					 				<td rowspan="3" colspan="3">
-					 					<textarea rows="4" cols="50" readonly="readonly">업체를 이용하시고 댓글을 남겨보세요~</textarea>
+					 					<textarea rows="4" cols="35" readonly="readonly">업체를 이용하시고 댓글을 남겨보세요~</textarea>
 					 				</td>
 					 			</tr>
 					 		</c:when>
@@ -751,9 +737,12 @@ function setBooking(){
 								<tr>
 									<td>
 										<div id="star" ></div> <!-- 별점나타나는공간 -->
-										<br>
-									        <div style="padding-top:20px; display: none;">						<!-- 별이찍히면 score가찍힘 -->
+											
+									        <div style="padding-top:20px;">						<!-- 별이찍히면 score가찍힘 -->
 									            <label for="starRating">Value : </label><input type="text" id="starRating" value="3"/>
+									        </div>
+									        <div style="padding-top:20px; display: none;">
+									            <label for="displayStarRating">Value : </label><span id="displayStarRating" style="padding-left:20px;">3</span>
 									        </div>
 									        <script type="text/javascript">
 									        $(function() {
@@ -763,6 +752,7 @@ function setBooking(){
 									                ,width : 200
 									                ,click: function(score, evt) {
 									                    $("#starRating").val(score);
+									                    $("#displayStarRating").html(score);
 									                }
 									            });
 									        });
@@ -771,7 +761,7 @@ function setBooking(){
 								</tr>
 								<tr>
 									<td>
-										<textarea rows="5" cols="70" id="feedback_content" ></textarea>
+										<textarea rows="5" cols="70" id="feedback_content"></textarea>
 									</td>
 								</tr>
 								<tr>
@@ -929,6 +919,6 @@ document.getElementById("co_regul_content").innerHTML = HTMLre;
 /*****************************************************************************************************************************************승동작업*/
 
 	</script>
-	<%@include file="../footer.jsp" %>
+	<%@include file="../../footer.jsp" %>
 </body>
 </html>

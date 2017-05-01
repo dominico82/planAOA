@@ -72,6 +72,8 @@ public class HelpController {
 	public ModelAndView helpContents(@RequestParam(value="idx")int idx){
 		HelpDTO dto=helpDao.getHelpContents(idx);
 		int readnum=dto.getFaq_readnum()+1;
+		System.out.println("원래 조회수: "+dto.getFaq_readnum());
+		System.out.println("증가된 조회수: "+readnum);
 		int result=helpDao.increaseReadnum(idx, readnum);
 		ModelAndView mav=new ModelAndView();
 		mav.addObject("helpContents", dto);

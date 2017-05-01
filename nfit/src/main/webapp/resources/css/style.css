@@ -432,9 +432,9 @@ body{
 	font-family: 'open_sanssemibold';
 }
 .panel-left span{
-	background: url(../images/ios_preview_6_v2.png) no-repeat 0px 0px;
-	width: 239px;
-	height: 328px;
+	background: url(../images/myp1.png) no-repeat 0px 0px;
+	width: 1024px;
+	height: 768px;
 	display: block;
 	margin: 0 auto;
 }
