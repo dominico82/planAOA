@@ -184,7 +184,6 @@ public class MypageController {
 		mav.setViewName("mypage/markMsg");
 		return mav;
 	}
-	
 }
 
 
