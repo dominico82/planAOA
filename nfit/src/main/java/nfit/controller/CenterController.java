@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeSet;
 
@@ -53,7 +54,7 @@ public class CenterController {
 	}
 	
 	@RequestMapping("/centerDetail.do")
-	public String centerDetail(ModelMap model, @RequestParam(value="co_idx",required=false, defaultValue="0") int co_idx){
+	public String centerDetail(ModelMap model, HttpServletRequest req, @RequestParam(value="co_idx",required=false, defaultValue="0") int co_idx){
 		CenterDTO dto=centerDao.centerOneDB(co_idx);
 		List<UsetimeDTO> list = usetimeDao.usetimeDB(co_idx);
 		List<ContentDTO> contentList=contentDao.contentListDB(co_idx);
@@ -74,9 +75,11 @@ public class CenterController {
 		/*ends coin 소수점 처리*/
 		
 		/*image file 찾기*/
-		String imgPath = "C:/Users/DESK12/git/planAOA/nfit/src/main/webapp/resources/centerImage";
+		String  testPath2 = req.getSession().getServletContext().getRealPath("/");
+		String path = testPath2.replace("\\", "/");
+		String imgPath2 = path + "resources/centerImage";
 		String viewPath = dto.getCo_view();
-		String fullPath = imgPath+"/"+viewPath;
+		String fullPath = imgPath2+"/"+viewPath;
 		File f = new File(fullPath);
 		File files[] = f.listFiles();
 		List fileList = new ArrayList();
