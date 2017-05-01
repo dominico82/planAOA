@@ -10,6 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://apis.daum.net/maps/maps3.js?apikey=95b97b04d035d60f73995902d8ae2cd0&libraries=services"></script>
+  <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <link rel="shortcut icon" href="resources/images/n-1x-170x128.jpg" type="image/x-icon">
 <title>Insert title here</title>
 <style>
@@ -50,11 +51,11 @@ height:100%;
 #container_row{
 height:100%;
 }
-/* 
+
 div{
 border:1px solid black;
 } 
- */
+
  #search-div{
 padding: 0 0 0 0;
 height:28px;
@@ -172,7 +173,18 @@ max-width:250px;font-size:12px;
 #infowindows_close{position: absolute;top: 5px;right: 10px;color: #f9022b;width: 17px;height: 17px;
 cursor: pointer; font-size:12px;}
 #map_zoom{
-position:absolute;top:100px;right:10px;z-index:1
+position:absolute;bottom:10px;right:10px;z-index:1;
+width:89%;
+text-align:right;
+}
+#sample4_postcode{
+height:50px;
+}
+#sample4_postcode_btn{
+height:50px;
+}
+#sample4_postcode_input{
+height:50px;
 }
 </style>
 </head>
@@ -215,12 +227,49 @@ position:absolute;top:100px;right:10px;z-index:1
 			<div class="col-sm-6" id="map_part">
 				<div id="map"></div>
 				<div id="map_zoom">
-					<button onclick="javascript:zoomIn()" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-plus"></span></button>				
-					<button onclick="javascript:zoomOut()" type="button" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-minus"></span></button>				
+				<div>
+					<button data-toggle="modal" data-target="#myModal1" onclick="" type="button" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-map-marker"></span></button>				
+					<button data-toggle="modal" data-target="#myModal2" onclick="" type="button" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-screenshot"></span></button>				
+					<button onclick="javascript:zoomIn()" type="button" class="btn btn-basic btn-sm"><span class="glyphicon glyphicon-plus"></span></button>				
+					<button onclick="javascript:zoomOut()" type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-minus"></span></button>				
 				</div>
-			</div>
-			</div>
+				</div>
+				<!-- Modal1 -->
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">주소를 입력하세요</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+          	<div class="form-group">
+          	<div class="input-group" id="sample4_postcode_input">
+     			 <input type="text" class="form-control" id="sample4_postcode" placeholder="우편번호">
+     			 <span class="input-group-btn">
+					<input type="button" class="btn btn-secondary"  onclick="sample4_execDaumPostcode()" id="sample4_postcode_btn" value="우편번호 찾기">
+			      </span>
+          	</div>
+          	<div class="input-group">
+				<input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명주소">
+				<input type="text" class="form-control"  id="sample4_jibunAddress" placeholder="지번주소">
+          	</div>
+				<span id="guide" style="color:#999"></span>
+          	<div class="form-group" style="text-align:right;">
+          	<button onclick="javascript:getAddr()" type="button" class="btn btn-warning" data-dismiss="modal">Submit</button><button type="reset" class="btn btn-basic">Reset</button>
+          	</div>
+  			 </div>
+          </form>
+          	</div>
+        </div>
+      </div>
     </div>
+  </div>
+			</div>
+			</div>
 	
 	
 	<!--  업체 백업 부분 -->
@@ -307,6 +356,12 @@ position:absolute;top:100px;right:10px;z-index:1
 		</tbody>
 		</table>
 		</div>
+	
+<!-- 사용자 정보 백업부분-->	
+	<div class="col-sm-12" id="user_info">
+	<input type="text" value="${sessionScope.saveid}" id="userid">
+	</div>
+	
 <p style="display:none;" id="mapapi">
 33.450701, 126.570667<br>
 edd938c4fc341b07f90ed69064de3f92<br>
@@ -390,8 +445,105 @@ edd938c4fc341b07f90ed69064de3f92<br>
 </div>
 </div>
 <script type="text/javascript">
-/*ajax loading*/
+/*우편번호 찾기*/
+//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+    function sample4_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
+                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+
+                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                    extraRoadAddr += data.bname;
+                }
+                // 건물명이 있고, 공동주택일 경우 추가한다.
+                if(data.buildingName !== '' && data.apartment === 'Y'){
+                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                }
+                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                if(extraRoadAddr !== ''){
+                    extraRoadAddr = ' (' + extraRoadAddr + ')';
+                }
+                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+                if(fullRoadAddr !== ''){
+                    fullRoadAddr += extraRoadAddr;
+                }
+
+                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sample4_roadAddress').value = fullRoadAddr;
+                document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
+
+                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                if(data.autoRoadAddress) {
+                    //예상되는 도로명 주소에 조합형 주소를 추가한다.
+                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                    document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+
+                } else if(data.autoJibunAddress) {
+                    var expJibunAddr = data.autoJibunAddress;
+                    document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+
+                } else {
+                    document.getElementById('guide').innerHTML = '';
+                }
+            }
+        }).open();
+    }
+
+/*맵 추적 기능*/
+var newMarker=[];
+var newInfowindow=[];
+function getAddr(){
+	var addr = $("#sample4_roadAddress").val();
+	console.log(addr);
+	var geocoder = new daum.maps.services.Geocoder();
+	geocoder.addr2coord(addr, function (status, result){
+		if(status==daum.maps.services.Status.OK){
+			var imageSrc = 'resources/images/map-marker-icon.png'; // 마커이미지의 주소입니다    
+		    var imageSize = new daum.maps.Size(64, 69); // 마커이미지의 크기입니다
+		    var imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+		      
+		// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+		var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);
+			var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+			var marker = new daum.maps.Marker({
+				map:map,
+				position:coords,
+				image:markerImage,
+		        draggable: true, // 마커를 그리고 나서 드래그 가능하게 합니다 
+		        clickable:true,
+		        title: '오른쪽 클릭시 제거'
+			});
+			newMarker.push(marker);
+			
+			var infowindow = new daum.maps.InfoWindow({
+				content: '<div style="width:150px;text-align:center;padding:6px 0;font-size:10px;"><span class="bg-warning">주소<span>: '+addr+'</div>',
+				removable:true
+			});
+			newInfowindow.push(infowindow);
+			infowindow.open(map, marker);
+			map.setCenter(coords);
+		}//if(status==daum.maps.services.Status.OK){
+		daum.maps.event.addListener(marker, 'rightclick', function(mouseEvent){
+			marker.setMap(null);
+		});//daum.maps.event.addListener(newMarker, 'rightclick', function(mouseEvent){
+	});//geocoder.addr2coord(addr, function (status, result){
+}//function getAddr(){
+
+
+/*즐겨찾기 기능*/
+var user_id = $("#userid").val();
+console.log("user_id="+user_id);
+
+
+/*ajax loading*/
 $(document).ready(function(){
 	var $listHeight;
 	$listHeight = $("#map_part").height();
@@ -415,6 +567,7 @@ $(document).ready(function(){
 
 /*content 내용 불러오기*/
 //var content_list 세팅
+
  var contents=[];
  var content1;
  var content2;
@@ -608,7 +761,7 @@ function searchMark(){
 			selectoHtml+='<div class="panel-group" id="list-table">';
 			selectoHtml+='<div class="panel panel-default">';
 			selectoHtml+='<div class="panel-heading">';
-			selectoHtml+='<h6 class="panel-title" id="centerInfo_list_coName">'+coName[i]+'<span id="center_list_coName_class">('+coClass[i]+')</span></h6>';
+			selectoHtml+='<h6 class="panel-title" id="centerInfo_list_coName">'+coName[i]+'<span class="bg-info" id="center_list_coName_class">('+coClass[i]+')</span></h6>';
 			selectoHtml+='</div>'; //panel-heading
 			selectoHtml+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
 			selectoHtml+='<ul class="list-group">';
@@ -647,7 +800,7 @@ function searchMark(){
 			selectoHtml+='<div class="panel-group" id="list-table">';
 			selectoHtml+='<div class="panel panel-default">';
 			selectoHtml+='<div class="panel-heading">';
-			selectoHtml+='<h6 class="panel-title" id="centerInfo_list_coName">'+coName[i]+'<span id="center_list_coName_class">('+coClass[i]+')</span></h6>';
+			selectoHtml+='<h6 class="panel-title" id="centerInfo_list_coName">'+coName[i]+'<span class="bg-info" id="center_list_coName_class">('+coClass[i]+')</span></h6>';
 			selectoHtml+='</div>';
 			selectoHtml+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
 			selectoHtml+='<ul class="list-group">';
@@ -891,15 +1044,11 @@ function show(co_idx, centerListUrl, setMapGo){
 				/*co_avail*/
 				$("#centerInfo_avail").empty();
 				var coAvail=dataObj.co_avail;
-				console.log(coAvail);
 				var coAvail_split=coAvail.split("|");
-				console.log(coAvail_split);
 				var coAvail_array=[];
 				var coAvail_html='<ul class="list-inline">';
 				for(var i=0; i<coAvail_split.length; i++){
 				coAvail_array[i]=coAvail_split[i];
-				console.log(coAvail_split[i]);
-				console.log(coAvail_array[i]);
 					switch(coAvail_array[i]){
 					case '주차' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/Car_Parking.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
 					case '타올' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/Towels.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
@@ -1320,7 +1469,7 @@ function keywordSearch(){
 					company_html+='<div class="panel-group" id="list-table">';
 					company_html+='<div class="panel panel-default">';
 					company_html+='<div class="panel-heading">';
-					company_html+='<h6 class="panel-title" id="centerInfo_list_coName">'+companySet.co_name+'<span id="center_list_coName_class">('+companySet.co_class+')</span></h6>';
+					company_html+='<h6 class="panel-title" id="centerInfo_list_coName">'+companySet.co_name+'<span class="bg-info" id="center_list_coName_class">('+companySet.co_class+')</span></h6>';
 					company_html+='</div>'; //panel-heading
 					company_html+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
 					company_html+='<ul class="list-group">';
@@ -1358,7 +1507,7 @@ function keywordSearch(){
 					company_html+='<div class="panel-group" id="list-table">';
 					company_html+='<div class="panel panel-default">';
 					company_html+='<div class="panel-heading">';
-					company_html+='<h6 class="panel-title" id="centerInfo_list_coName">'+companySet.co_name+'<span id="center_list_coName_class">('+companySet.co_class+')</span></h6>';
+					company_html+='<h6 class="panel-title" id="centerInfo_list_coName">'+companySet.co_name+'<span class="bg-info" id="center_list_coName_class">('+companySet.co_class+')</span></h6>';
 					company_html+='</div>'; //panel-heading
 					company_html+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
 					company_html+='<ul class="list-group">';
