@@ -31,8 +31,6 @@ $(document).ready(function(){
 		$('#btninsert').click(function(){
 			//업체 idx
 			var co_idx=$('#co_idx').val();
-			console.log('실행co_idx::'+co_idx);
-			
 			//세션에 저장된 id값
 			var userid=$('#userid').val();
 			//내용
@@ -45,7 +43,6 @@ $(document).ready(function(){
 				return;
 			}
 			var param='feedback_content='+feedback_content+'&feedback_score='+feedback_score+'&co_idx='+co_idx+'&member_id='+userid;
-			console.log('param:::'+param);
 			$.ajax({
 				type:'post',
 				url:'feedbackinsert.do',
