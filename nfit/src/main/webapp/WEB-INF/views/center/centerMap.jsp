@@ -949,7 +949,7 @@ daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infow
 	        '<tbody><tr><td>'+cAddr+'</td></tr></tbody>'+
 	        '</table>';
 	        infowindow = new daum.maps.InfoWindow({
-	        content: '<div id="infowindow">'+cIdx+"/"+cName+'</div>'
+	        content: infoContent
 	        }); ///infowindow 생성
 	        infoWindows[i]=(infowindow);
 			latlngData = cIdx+"/"+ cLat+"/"+cLng;
