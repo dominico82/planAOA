@@ -4936,8 +4936,6 @@ body.login .subWrap {
   font-weight: 600;
   letter-spacing: -0.6px;
   color: #00bff0;
-
-  z-index: 5 /* 크롬 비밀번호 자동 입력시 autofill 영역에 가려지는것을 방지 */
 }
 
 .memberForm .form-control {
