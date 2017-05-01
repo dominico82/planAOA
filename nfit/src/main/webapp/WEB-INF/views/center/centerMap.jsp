@@ -52,10 +52,11 @@ height:100%;
 height:100%;
 }
 
-div{
+/*
+ div{
 border:1px solid black;
 } 
-
+ */
  #search-div{
 padding: 0 0 0 0;
 height:28px;
@@ -185,6 +186,9 @@ height:50px;
 }
 #sample4_postcode_input{
 height:50px;
+}
+#user_info{
+display:none;
 }
 </style>
 </head>
@@ -359,7 +363,7 @@ height:50px;
 	
 <!-- 사용자 정보 백업부분-->	
 	<div class="col-sm-12" id="user_info">
-	<input type="text" value="${sessionScope.saveid}" id="userid">
+	<input type="hidden" value="${sessionScope.saveid}" id="userid">
 	</div>
 	
 <p style="display:none;" id="mapapi">
@@ -498,9 +502,9 @@ edd938c4fc341b07f90ed69064de3f92<br>
     }
 
 /*맵 추적 기능*/
+function getAddr(){
 var newMarker=[];
 var newInfowindow=[];
-function getAddr(){
 	var addr = $("#sample4_roadAddress").val();
 	console.log(addr);
 	var geocoder = new daum.maps.services.Geocoder();
@@ -519,12 +523,12 @@ function getAddr(){
 				image:markerImage,
 		        draggable: true, // 마커를 그리고 나서 드래그 가능하게 합니다 
 		        clickable:true,
-		        title: '오른쪽 클릭시 제거'
+		        title: '오른쪽 클릭시 제거, 왼쪽 클릭시 주소창 생성'
 			});
 			newMarker.push(marker);
 			
 			var infowindow = new daum.maps.InfoWindow({
-				content: '<div style="width:150px;text-align:center;padding:6px 0;font-size:10px;"><span class="bg-warning">주소<span>: '+addr+'</div>',
+				content: '<div style="width:150px;text-align:center;padding:6px 0;font-size:10px;"><span class="bg-info">주소</span>: '+addr+'</div>',
 				removable:true
 			});
 			newInfowindow.push(infowindow);
@@ -533,7 +537,34 @@ function getAddr(){
 		}//if(status==daum.maps.services.Status.OK){
 		daum.maps.event.addListener(marker, 'rightclick', function(mouseEvent){
 			marker.setMap(null);
+			for(var i=0; i<newInfowindow.length; i++){
+				newInfowindow[i].close();
+			}
 		});//daum.maps.event.addListener(newMarker, 'rightclick', function(mouseEvent){
+		daum.maps.event.addListener(marker, 'dragend', function(){       
+			for(var i=0; i<newInfowindow.length; i++){
+				if(i==(newInfowindow.length-1)){
+				newInfowindow[i].close();
+				}//if(i==(newInfowindow.length-1)){
+			}//for(var i=0; i<newInfowindow.length; i++){
+			var latlng = marker.getPosition();
+			console.log("latlng="+latlng);
+			var geocoder2 = new daum.maps.services.Geocoder();
+			geocoder2.coord2detailaddr(latlng, function(status2, result2){
+				if(status2==daum.maps.services.Status.OK){
+					var addr2 = result2[0].roadAddress.name;
+					var addrJibun = result2[0].jibunAddress.name;
+					console.log("addr2="+addr2);
+					console.log("addr2="+addrJibun);
+					var infowindow2 = new daum.maps.InfoWindow({
+						content: '<div style="width:150px;text-align:center;padding:6px 0;font-size:10px;"><span class="bg-info">주소</span>: '+addr2+"<br>"+addrJibun+'</div>',
+						removable:true
+					});//infowindow = new daum.maps.InfoWindow({
+						infowindow2.open(map, marker);
+						newInfowindow.push(infowindow2);
+				}//if(status==daum.maps.services.Status.OK){
+			});//goecoder.coord2detailaddr(latlng, function(status, result){
+		});//daum.maps.event.addListener(marker, 'dragend', function(){
 	});//geocoder.addr2coord(addr, function (status, result){
 }//function getAddr(){
 
