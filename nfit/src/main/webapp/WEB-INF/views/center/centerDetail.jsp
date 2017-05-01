@@ -798,7 +798,7 @@ var map = new daum.maps.Map(mapContainer, mapOption);
 
 /*줌 컨트롤러 추가*/
 var zoomControl = new daum.maps.ZoomControl();
-map.addControl(zoomControl, daum.maps.ControlPosition.BOTTOMLEFT);
+map.addControl(zoomControl, daum.maps.ControlPosition.BOTTOMRIGHT);
 
 //지도에 마커를 표시합니다 
 var imgSrc='resources/images/marker.png';
