@@ -57,6 +57,7 @@ $(document).ready(function(){
 //댓글목록
 function feedbacklist(){
 	var co_idx=$('#co_idx').val();
+	console.log("co_idx:"+co_idx);
 	$.ajax({
 		type:'get',
 		url:'feedbacklist.do?co_idx='+co_idx,
@@ -408,7 +409,7 @@ right:15px;
 <body>
 <!-- 업체idx 값 -->
 <c:set var="co_idx" value="${co_idx}"/>
-<input type="hidden" value="${co_idx}" id="co_idx">
+<input type="hidden" value="${co_idx}">
 <!-- 세션에저장된 id -->
 <c:set var="userid" value="${sessionScope.saveid}"/>
 <c:set var="adminid" value="${sessionScope.adminid}"/>
@@ -427,7 +428,7 @@ right:15px;
 			<p>${dtos.co_address}<br>${dtos.co_phone}</p>
 			<p class="text-muted"><span class="glyphicon glyphicon-stats"></span>&nbsp;지금까지 이용: <span class="bg-info">${dtos.co_usecount}회</span></p>
 			<form name="mark" action="markJoin.do">
-					<input type="hidden" value="${dtos.co_idx}" name="co_idx">
+					<input type="hidden" value="${dtos.co_idx}" name="co_idx" id="co_idx">
 					<input type="hidden" value="${dtos.co_name}" name="co_name">
 					<input type="hidden" value="${userid}" name="member_id">
 					<input class="btn btn-info" type="submit" value="즐겨찾기">
@@ -454,11 +455,11 @@ right:15px;
 				<c:forEach var="con" items="${contentlist_set}" begin="0" step="1" varStatus="status">
 				<c:choose>
 					<c:when test="${con.content_coin<5 }">
-				<li class="list-group-item list-group-item-success">
+				<li class="list-group-item list-group-item-success" id="con<%=cnt%>">
 				<ul class="list-inline" id="content_list">
 					<c:forEach var="coin" items="${coins}" begin="0" step="1" varStatus="status1">
 						<c:if test="${status1.index==status.index}">
-						<li><div class="coin_num" id="coin_num_<%=cnt%>"><span class="label label-success glyphicon glyphicon-usd">${coin}</span></div></li>
+						<li><div class="coin_num"><span id="coin_num_<%=cnt%>" class="label label-success glyphicon glyphicon-usd">${coin}</span></div></li>
 						</c:if>
 					</c:forEach>
 				<c:if test="${!empty con.content1}">
@@ -483,7 +484,7 @@ right:15px;
 				</li>
 					</c:when>
 					<c:when test="${con.content_coin>=5&&con.content_coin<10 }">
-									<li class="list-group-item list-group-item-info">
+									<li class="list-group-item list-group-item-info" id="con<%=cnt%>">
 				<ul class="list-inline" id="content_list">
 					<c:forEach var="coin" items="${coins}" begin="0" step="1" varStatus="status1">
 						<c:if test="${status1.index==status.index}">
@@ -512,7 +513,7 @@ right:15px;
 				</li>
 					</c:when>
 					<c:when test="${con.content_coin>=10 }">
-									<li class="list-group-item list-group-item-danger">
+									<li class="list-group-item list-group-item-danger" id="con<%=cnt%>">
 				<ul class="list-inline" id="content_list">
 					<c:forEach var="coin" items="${coins}" begin="0" step="1" varStatus="status1">
 						<c:if test="${status1.index==status.index}">
@@ -694,7 +695,10 @@ function setBooking(){
 	var bCo_name=$('#co_name').val();
 	var use_date=$('#datepicker').val();
 	var useData={"member_id":bUserid, "co_idx":bCo_idx, "co_name":bCo_name, "coin_price":coin_price, "use_date":use_date};
-
+	console.log("예약 userid:"+bUserid);
+	console.log("예약 co_idx:"+bCo_idx);
+	console.log("예약 date:"+use_date);
+	console.log("예약 coin_price:"+coin_price);
 	if(coin_price==null||coin_price==''){
 		alert('이용할 컨텐츠를 선택하세요!');
 	}else if(use_date==null||use_date==''){

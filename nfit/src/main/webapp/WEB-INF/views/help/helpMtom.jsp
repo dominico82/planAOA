@@ -198,6 +198,7 @@ $(function(){
 });
 var listNum=4;
 var listSize;
+var indexNum;
 function mtomReload(){
 	$(document).ready(function(){
 		console.log("mtomReload()함수 동작!!");
@@ -209,11 +210,10 @@ function mtomReload(){
 				$(".accordionList").empty();
 				listSize=data.length;
 				var moreList;
-				
 				console.log("목록 갯수: "+listSize);
+				console.log("목록보여줄 갯수: "+listNum);
 				$.each(data, function(index, list){
-					
-					console.log("index:"+index);
+					indexNum=index;
 					var qa_date=list.qa_date;
 					var qa_adate=list.qa_adate;
 					if(list.qa_checked=='n'){
@@ -273,7 +273,7 @@ function mtomReload(){
 										+"<div class='panel panel-default'>"
 										+"<div class='panel-heading' role='tab' id='qaHeading1'>"
 										+"<h4 class='panel-title'><strong class='faqType faqType_18'></strong>"
-										+"<i class='fa fa-question-circle'></i>"+list.qa_idx+""
+										+"<i class='fa fa-question-circle'></i>"+list.qa_subject+""
 							            +"<span class='date'>&nbsp;"+qa_date+"</span></h4>"
 							            +"<div style='text-align: right;'><a role='button' data-toggle='collapse' data-parent='#accordion' href='#"+list.qa_idx+"' aria-expanded='false' aria-controls='qa2' class='btn btn-sm btn-success btnAnswer collapsed'>"
 							            +"답변보기</a></div></div>"
@@ -290,7 +290,10 @@ function mtomReload(){
 								$("div.accordionList").append($div);
 							});
 						}
+						
+		
 						if(index!='0'){	
+							
 							if(index>listNum){
 								moreList="style='display: none;'";
 							}else{
@@ -317,11 +320,27 @@ function mtomReload(){
 							      		);
 								$("div.accordionList").find(".panel-group:last").append($div);
 							});
+						}else{
+							
 						}
 					}
 										
 				});
-				if(listSize>listNum){
+	
+				if(indexNum==null){
+
+					$(document).ready(function(){
+						var $div=$("<div class='panel-group' id='accordion' role='tablist' aria-multiselectable='true'>"
+								+"<div class='panel panel-default'>"
+								+"<div class='panel-heading' role='tab' id='qaHeading1'>"
+								+"<h4 class='panel-title'><strong class='faqType faqType_18'></strong>"
+								+"<i class='fa fa-question-circle'></i>문의하신 내용이 없습니다.</h4></div><!-- /.answer -->)");
+						$("div.accordionList").append($div);
+					});
+				}
+
+				console.log("닫기버튼 안보여줄 갯수: "+indexNum);
+				if(listSize>listNum+1){
 					$(document).ready(function(){
 						var $div=$('<div id="moreMtom" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="text-align: center;">'
 							   	
@@ -331,24 +350,39 @@ function mtomReload(){
 						$("div.accordionList").append($div);
 					});
 		
-				}else{
+				}else if(listSize<listNum+1||listSize==listNum+1){
 					$(document).ready(function(){
-						var $div=$('<div id="moreMtom" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="text-align: center;">'
-							   	
-				                +'<a id="moreList" role="button" data-toggle="collapse" data-parent="#accordion" href="#" onclick="resetMtomList()" aria-expanded="false" aria-controls="qa1" class="btn btn-sm btn-info btnAnswer">닫기</a>'
-				                +'</div><!-- /.panel-group -->'
-				                );
-						$("div.accordionList").append($div);
+						
+							var $div=$('<div id="moreMtom" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="text-align: center;">'
+								   	
+					                +'<a id="moreList" style="" role="button" data-toggle="collapse" data-parent="#accordion" href="#" onclick="resetMtomList()" aria-expanded="false" aria-controls="qa1" class="btn btn-sm btn-info btnAnswer">닫기</a>'
+					                +'</div><!-- /.panel-group -->'
+					                );
+							$("div.accordionList").append($div);
+					
+						
 					});
+				}
+				if(indexNum<=4||indexNum==null){
+					
+					$(document).ready(function(){			
+						$("#moreList").attr("style","display: none");
+					});	
 				}
 				
 			},
 			error:function(xhr, status, error){
 				alert("에러발생!");
 			}
+			
 		});
+		
 	});
+	
+	
 };
+
+
 
 function moreMtomList(){
 	if(listNum>=listSize){
