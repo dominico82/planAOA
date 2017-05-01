@@ -130,13 +130,18 @@ $(document).ready(function(){
 	
 	$("#con0").click(			
 			function(){
-				if(!(coin_price==null||coin_price=='')){	
+				if($("li.choose0").length>0){	
 					for(var j=0;j<6;j++){
 						$("#con"+j+"").removeAttr("style");
+						$("#con"+j+"").removeClass("choose0");
 					}	
 					coin_price='';
 				}else{
+					for(var j=0;j<6;j++){
+						$("#con"+j+"").removeClass("choose"+j);
+					}	
 					$("#con0").attr("style", "background-color: #c7ddef;");
+					$("#con0").addClass("choose0");
 					$("#con1").removeAttr("style");
 					$("#con2").removeAttr("style");
 					$("#con3").removeAttr("style");
@@ -148,14 +153,19 @@ $(document).ready(function(){
 	});
 	$("#con1").click(
 			function(){
-				if(!(coin_price==null||coin_price=='')){	
+				if($("li.choose1").length>0){	
 					for(var j=0;j<6;j++){
 						$("#con"+j+"").removeAttr("style");
+						$("#con"+j+"").removeClass("choose1");
 					}	
 					coin_price='';
 				}else{
+					for(var j=0;j<6;j++){
+						$("#con"+j+"").removeClass("choose"+j);
+					}	
 					$("#con0").removeAttr("style");
 					$("#con1").attr("style", "background-color: #c7ddef;");
+					$("#con1").addClass("choose1");
 					$("#con2").removeAttr("style");
 					$("#con3").removeAttr("style");
 					$("#con4").removeAttr("style");
@@ -166,15 +176,20 @@ $(document).ready(function(){
 	});
 	$("#con2").click(
 			function(){
-				if(!(coin_price==null||coin_price=='')){		
+				if($("li.choose2").length>0){	
 					for(var j=0;j<6;j++){
 						$("#con"+j+"").removeAttr("style");
+						$("#con"+j+"").removeClass("choose2");
 					}	
 					coin_price='';
 				}else{
+					for(var j=0;j<6;j++){
+						$("#con"+j+"").removeClass("choose"+j);
+					}	
 					$("#con0").removeAttr("style");
 					$("#con1").removeAttr("style");
 					$("#con2").attr("style", "background-color: #c7ddef;");
+					$("#con2").addClass("choose2");
 					$("#con3").removeAttr("style");
 					$("#con4").removeAttr("style");
 					$("#con5").removeAttr("style");	
@@ -184,16 +199,21 @@ $(document).ready(function(){
 	});
 	$("#con3").click(
 			function(){
-				if(!(coin_price==null||coin_price=='')){	
+				if($("li.choose3").length>0){	
 					for(var j=0;j<6;j++){
 						$("#con"+j+"").removeAttr("style");
+						$("#con"+j+"").removeClass("choose3");
 					}	
 					coin_price='';
 				}else{
+					for(var j=0;j<6;j++){
+						$("#con"+j+"").removeClass("choose"+j);
+					}	
 					$("#con0").removeAttr("style");
 					$("#con1").removeAttr("style");
 					$("#con2").removeAttr("style");
 					$("#con3").attr("style", "background-color: #c7ddef;");
+					$("#con3").addClass("choose3");
 					$("#con4").removeAttr("style");
 					$("#con5").removeAttr("style");	
 					coin_price=$("#coin_num_3").contents().text();
@@ -202,17 +222,22 @@ $(document).ready(function(){
 	});
 	$("#con4").click(
 			function(){
-				if(!(coin_price==null||coin_price=='')){	
+				if($("li.choose4").length>0){	
 					for(var j=0;j<6;j++){
 						$("#con"+j+"").removeAttr("style");
+						$("#con"+j+"").removeClass("choose4");
 					}	
 					coin_price='';
 				}else{
+					for(var j=0;j<6;j++){
+						$("#con"+j+"").removeClass("choose"+j);
+					}	
 					$("#con0").removeAttr("style");
 					$("#con1").removeAttr("style");
 					$("#con2").removeAttr("style");
 					$("#con3").removeAttr("style");
 					$("#con4").attr("style", "background-color: #c7ddef;");
+					$("#con4").addClass("choose4");
 					$("#con5").removeAttr("style");	
 					coin_price=$("#coin_num_4").contents().text();
 				}
@@ -220,18 +245,23 @@ $(document).ready(function(){
 	});
 	$("#con5").click(
 			function(){
-				if(!(coin_price==null||coin_price=='')){	
+				if($("li.choose5").length>0){	
 					for(var j=0;j<6;j++){
 						$("#con"+j+"").removeAttr("style");
+						$("#con"+j+"").removeClass("choose5");
 					}	
 					coin_price='';
 				}else{
+					for(var j=0;j<6;j++){
+						$("#con"+j+"").removeClass("choose"+j);
+					}	
 					$("#con0").removeAttr("style");
 					$("#con1").removeAttr("style");
 					$("#con2").removeAttr("style");
 					$("#con3").removeAttr("style");
 					$("#con4").removeAttr("style");
-					$("#con5").attr("style", "background-color: #c7ddef;");					
+					$("#con5").attr("style", "background-color: #c7ddef;");	
+					$("#con5").addClass("choose5");				
 					coin_price=$("#coin_num_5").contents().text();
 				}
 				console.log(coin_price);
