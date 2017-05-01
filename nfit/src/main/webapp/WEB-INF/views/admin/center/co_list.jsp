@@ -212,6 +212,9 @@ $(document).ready(function(){
 });
 </script>
 <style>
+.checkbox input[type=checkbox]{
+position: inherit;
+}
 .modal{
  overflow: hidden;
 }
@@ -296,54 +299,39 @@ color:black;
 					        		</div>
 					        		<!-- 모달 body  -->
 					        		<div class="modal-body" style="margin:10px;">
-					          			<form action="chart.do" name="company_add" method="post" enctype="multipart/form-data"id="form1" target="iframe1" class="form-horizontal" role="form" >
+					          			<form action="chart.do" name="company_add" method="post" enctype="multipart/form-data"id="form1" target="iframe1"  role="form" >
 										  	<label for="inputText3" class="col-sm-2 control-label">업체명</label>
-										  		<div class="col-sm-5">
 													<input type="text" class="form-control" name="co_name" id="co_name">  			
-										  		</div>
 										  	<label for="inputText3" class="col-sm-2 control-label">주소</label>
-										  		<div class="col-sm-5">
 													<input type="text" class="form-control" name="co_address" id="co_address">  			
-										  		</div>
-													 <div class="col-sm-offset-2 col-sm-5"> 
-												   		<div class="checkbox"> 
-													   		<label> <input type="checkbox" name="co_class2" value="1"> 헬스 </label> 
-													   		<label> <input type="checkbox" name="co_class2" value="2"> 뷰티</label> 
-													   		<label> <input type="checkbox" name="co_class2" value="3"> 필라테스</label> 
-													   		<label> <input type="checkbox" name="co_class2" value="4"> 탁구</label> 
-													   		<label> <input type="checkbox" name="co_class2" value="5"> 복싱</label> 
-													   		<br>
-													   		<label> <input type="checkbox" name="co_class2" value="6"> 검도</label> 
-													   		<label> <input type="checkbox" name="co_class2" value="7"> 격투기</label> 
-													   		<label> <input type="checkbox" name="co_class2" value="8"> 크로스핏</label> 
-													   		<label> <input type="checkbox" name="co_class2" value="9"> 골프</label> 
-													   		<label> <input type="checkbox" name="co_class2" value="10"> 기타</label> 
-												   		</div> 
-											   		</div> 
+														<label>업체 종목</label>
+														<br><br>
+												   		 	<input type="checkbox" name="co_class2" value="1" class="w3-check"><label>헬스</label>
+													   		 <input type="checkbox" name="co_class2" value="2" class="w3-check"><label>뷰티</label> 
+													   		 <input type="checkbox" name="co_class2" value="3" class="w3-check"><label>필라테스</label>
+													   		 <input type="checkbox" name="co_class2" value="4" class="w3-check"><label>탁구</label>
+													   		 <input type="checkbox" name="co_class2" value="5" class="w3-check"><label>복싱</label>
+													   		 <input type="checkbox" name="co_class2" value="6" class="w3-check"><label>검도</label>
+													   		 <input type="checkbox" name="co_class2" value="7" class="w3-check"><label>격투기</label>
+													   		 <input type="checkbox" name="co_class2" value="8" class="w3-check"><label>크로스핏</label>
+													   		 <input type="checkbox" name="co_class2" value="9" class="w3-check"><label>골프</label>
+													   		 <input type="checkbox" name="co_class2" value="10" class="w3-check"><label>기타</label>
+												   		<br>
+												   		<br>
 											  	<label for="inputText3" class="col-sm-2 control-label">업체전화번호</label>
-											  		<div class="col-sm-5">
 														<input type="text" class="form-control" name="co_phone" id="co_phone">  			
-											  		</div>
 										  		<label for="inputText3" class="col-sm-2 control-label">이용규정및  &nbsp;&nbsp;&nbsp;준비물</label>
-										  			<div class="col-sm-5">
 														<textarea rows="5" cols="20"class="form-control" name="co_regul" placeholder="문단구분 '|'를 넣어주세요" id="co_regul"></textarea>
-										  			</div>
 										  		<label for="inputText3" class="col-sm-2 control-label">부가서비스</label>
-										  			<div class="col-sm-5">
 														<textarea rows="5" cols="20"class="form-control" name="co_extra" placeholder="문단구분 '|'를 넣어주세요" id="co_extra"></textarea>
-										  			</div>
 										  	
 										  		<label for="inputText3" class="col-sm-2 control-label">이용가능</label>
-										  			<div class="col-sm-5">
 														<textarea rows="5" cols="20"class="form-control" name="co_avail" placeholder="문단구분 '|'를 넣어주세요" id="co_avail"></textarea>
-										  			</div>
 										  	 	<div class="col-sm-5">
 										  	 	<b>사진은 마지막에 넣어주세요 ~</b>
 										  		</div>
 										  		<label for="inputText3" class="col-sm-5 control-label">업체사진업로드</label>
-										  			<div class="col-sm-5">
 														<div class="filedropDown" style="width: 300px;height: 300px; border: 2px solid black;"></div>
-										  			</div>
 										</form>
 					        		</div>
 					      		</div>
@@ -524,7 +512,7 @@ color:black;
 							 	<option value="co_phone">연락처</option>
 							 	<option value="co_address">주소</option>
 						 </select>
-							 <input type="text" name="keyfield" id="keyField">
+							 <input type="text" name="keyfield" id="keyField" >
 					    	 <input type="submit" value="조회">
 					    	 <!-- 키워드목록표출 -->
 					    	 <div id="div1"></div>

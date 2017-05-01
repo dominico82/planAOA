@@ -49,11 +49,6 @@ public class ChartController {
 	String uploadPath;
 	@Autowired
 	private CompanyDAO companyDao;
-	
-	@RequestMapping(value="chart.do",method=RequestMethod.GET)
-	public String view(){
-		return "center/admin/admin";
-	}
 	//json 표기법 , 구글 차트 이용 한것
 	//{"변수명":[{0},{1}],"변수명":"값"}
 	@RequestMapping("company_list.do")

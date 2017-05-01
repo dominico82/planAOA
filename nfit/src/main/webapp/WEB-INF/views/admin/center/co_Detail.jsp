@@ -14,9 +14,9 @@ margin:10px;
 width: 150px;
 height: 150px;
 background-size: cover;
-/* background-repeat:no-repeat; */
+background-repeat:no-repeat;
 background-position: center center;
-border: 5px solid black;
+border: 2px solid black;
 }
 .thumbnail.circle{
 border-radius: 100%;
