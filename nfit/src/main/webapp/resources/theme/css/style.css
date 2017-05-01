@@ -597,7 +597,9 @@ h1, h2, h3, h4, h5, h6,
 .display-1, .display-2, .display-3, .display-4 {
   font-family: 'Montserrat', sans-serif;
   word-break: break-word;
-  word-wrap: break-word; }
+  word-wrap: break-word;
+  
+   }
 
 input, textarea {
   font-family: "Raleway"; }
