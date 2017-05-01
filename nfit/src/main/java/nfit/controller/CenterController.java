@@ -56,6 +56,9 @@ public class CenterController {
 	@RequestMapping("/centerDetail.do")
 	public String centerDetail(ModelMap model, HttpServletRequest req, @RequestParam(value="co_idx",required=false, defaultValue="0") int co_idx){
 		if(co_idx==0){
+			String msg = "잘못된 접근입니다.";
+			model.addAttribute("msg", msg);
+			return "center/centerMsg";
 		}
 		CenterDTO dto=centerDao.centerOneDB(co_idx);
 		List<UsetimeDTO> list = usetimeDao.usetimeDB(co_idx);
