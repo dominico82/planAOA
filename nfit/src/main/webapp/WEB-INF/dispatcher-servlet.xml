@@ -121,9 +121,11 @@
     	<!-- 파일 업로드의 디렉토리 만들기 -->    
     <bean id="uploadPath" class="java.lang.String">
     	<!-- 집경로 -->
-    	 <constructor-arg value="C:/Users/kimja_000/Desktop/JSP/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/nfit/resources/centerImage/"/>
+    	 <!-- <constructor-arg value="C:/Users/kimja_000/Desktop/JSP/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/nfit/resources/centerImage/"/> -->
     	<!-- 학원경로 -->
     	<!-- <constructor-arg value="E:/projectFolder/jspstudy/.metadata/.plugins/org.eclipse.wst.server.core/tmp2/wtpwebapps/nfit/resources/centerImage/"/> -->
+    	<!-- 수석형 노트북경로 -->
+    	<constructor-arg value="C:/Users/Administrator/Documents/AOA_Enfit/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/nfit/resources/centerImage/"/>
     </bean>
     
     <!-- 파일 업로드 -->

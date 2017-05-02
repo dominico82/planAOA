@@ -69,7 +69,6 @@
                     <li class="nav-item"><a class="nav-link link" href="centerLoad.do">주변센터찾기</a></li>
                     <li class="nav-item"><a class="nav-link link" href="help.do">고객센터</a></li>
                     <li class="nav-item"><a class="nav-link link" href="notice.do">공지사항</a></li>
-                    <li class="nav-item"><a class="nav-link link" href="coin.do" aria-expanded="false">코인결제</a></li>
                     
                     <c:choose>
 					<%-- <c:when test="${empty sessionScope.saveid }">
@@ -81,6 +80,8 @@
                     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="logout.do">로그아웃</a></li>
                     </c:when>
                     <c:when test="${!empty sessionScope.saveid }">
+                    
+                    <li class="nav-item"><a class="nav-link link" href="coin.do" aria-expanded="false">코인결제</a></li>
                     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="myPage.do">마이페이지</a></li>
                     <li class="nav-item nav-btn"><a class="nav-link btn btn-white btn-white-outline" href="logout.do">로그아웃</a></li>
                     </c:when>

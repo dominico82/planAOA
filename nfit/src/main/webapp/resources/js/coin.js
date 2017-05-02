@@ -125,7 +125,7 @@ $(function(){
 						$("#pay_num4").removeClass("on");
 						$("#pay_num5").addClass("on");
 						$("#pay_num6").removeClass("on");
-						price="9900";
+						price="1000";
 						buy_coin="100";
 						pay_class="일반/100코인";
 	});
