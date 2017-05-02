@@ -107,13 +107,8 @@ function checkValue() {
 	if(pw1.length <= 5){
 		alert("비밀번호는 6글자 이상 입력해주세요.");
 		return false;
-	}else{
-		form.submit();
-	}
-	
-	if(pw1 != pw2){
-		alert("비밀번호를 동일하게 입력해주세요.");
-		return false;
+	}else if(pw1 != pw2){
+		alert("비밀번호를 동일하게 입력해주세요.")
 	}else{
 		form.submit();
 	}
