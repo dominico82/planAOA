@@ -816,7 +816,6 @@ $.ajax({
 			                    	</tr>
 		                    	</thead>
 		                    	<tbody>
-			                    	<c:forEach var="cdt" items="${cdt}">
 			                    		<tr>
 			                    			<td></td>
 			                    			<td>업체명</td>
@@ -824,6 +823,7 @@ $.ajax({
 			                    			<td>이용회수</td>
 			                    			<td>연락처</td>
 			                    		</tr>
+			                    	<c:forEach var="cdt" items="${cdt}">
 			                    		<tr class="info">
 			                    			<td><img src="resources/centerImage/${cdt.co_view}/${cdt.co_view}_0.jpg" class="markimgsize"></td>
 			                    			<td>${cdt.co_name}</td>
