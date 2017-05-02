@@ -40,7 +40,7 @@ $(document).ready(function(){
 			success : function(result){
 				if(result=='deleted'){
 					//클릭한 span 태그 속한 div 제거
-					alert('삭제됨 새로운파일을올리세요~');
+					alert('새로운파일을올리세요~');
 					that.parent('div').remove();
 				}
 			}
@@ -290,7 +290,7 @@ border:1px solid white;
 		</table>
 		<!-- 파일 업로드할 영역  -->
 		<span>파일 수정 칸</span><br>
-		<div class="fileDrop" style="border : 1px solid black;">파일을 드래그 해서 넣어주세요~</div>
+		<div class="fileDrop" style="border : 1px solid black;"><i 	class="fa fa-file-image-o"></i>파일을 드래그 해서 넣어주세요~</div>
 		<!-- 파일 업로드한 리스트출력란 -->
 		<div style="float: left;"class="uploadedList"></div>
 		<!-- 업체별이용시간 목록 표출 -->

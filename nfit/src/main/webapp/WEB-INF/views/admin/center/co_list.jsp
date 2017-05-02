@@ -7,6 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 아이콘링크 -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="resources/css/co_list.css">
 <!-- 제이쿼리 -->
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
@@ -219,6 +222,7 @@ position: inherit;
 .modal{
  overflow: hidden;
 }
+
 .modal-dialog{
  margin-right: 0;
  margin-left: 0;
@@ -226,6 +230,10 @@ position: inherit;
 /* 자동완성검색어 색상 */
 a#ui-id-16.ui-corner-all{
 color:black;
+}
+button[type=submit]{
+border:2px double;
+border-radius: 50%;
 }
 </style>
 </head>
@@ -265,7 +273,8 @@ color:black;
             </nav>
         </div>
         <!-- Main content -->
-       <main class="main"><div class="title" style="margin-top: 15px; margin-left: 35px;">
+       <main class="main">
+       <div class="title"> <!-- style="margin-top: 15px; margin-left: 35px;" -->
 			<img src="resources/img/favicon.png" style="height: 65px;"> 
 			<a href="memberAdmin.do" style="font-family:'Nanum Pen Script' serif;">회원관리 페이지</a>
 		</div>
@@ -288,7 +297,7 @@ color:black;
 					<!-- 업체등록 모달 -->
 					<div class="container" style="width: 10%;display: -webkit-inline-box">
 					  <!-- Trigger the modal with a button -->
-					  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-right: 10px;">업체등록</button>
+					  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-right: 10px;"><i class="fa fa-plus-square" style="font-size:30px" ></i></button>
 					  <!-- Modal -->
 					  	<div class="modal fade" id="myModal" role="dialog">
 					   	 	<div class="modal-dialog" style="width:1500px;height: 700px;">
@@ -342,7 +351,7 @@ color:black;
 					<!-- 차트를 넣을 모달 적용 -->
 					<div class="container" style="width: 10%; display:inline-table;">
 					  <!-- Trigger the modal with a button -->
-					  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">이용누적차트</button>
+					  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i class="fa fa-bar-chart" style="font-size:30px"></i></button>
 					  <!-- Modal -->
 						<div class="modal fade" id="myModal2" role="dialog">
 							<div class="modal-dialog">
@@ -368,7 +377,7 @@ color:black;
 					<!-- 이용시간및 컨탠츠 등록  -->
 					<div class="container" style="width: 10%; display:inline ;">
 					  <!-- Trigger the modal with a button -->
-					  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3">이용시간및 컨탠츠 등록</button>
+					  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3"><i class="fa fa-plus-square-o" style="font-size: 30px;"></i></button>
 					  <!-- Modal -->
 						<div class="modal fade" id="myModal3" role="dialog">
 							<div class="modal-dialog" style="width:1000px;height: 900px;">
@@ -514,7 +523,10 @@ color:black;
 							 	<option value="co_address">주소</option>
 						 </select>
 							 <input type="text" name="keyfield" id="keyField" >
-					    	 <input type="submit" value="조회">
+					    	<button type="submit">
+					    	<i class="material-icons" style="font-size:25px;">search</i>
+					    	</button> 
+					    	<!--  <input type="submit" value="조회"> -->
 					    	 <!-- 키워드목록표출 -->
 					    	 <div id="div1"></div>
 				</form>

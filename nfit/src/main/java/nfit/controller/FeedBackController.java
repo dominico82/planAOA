@@ -27,8 +27,8 @@ public class FeedBackController {
 	@ResponseBody
 	public void feedbackinsert(@ModelAttribute FeedbackDTO vo){
 		//사용자 개인정보보호 아이디 일부 마킹 처리 
-		String markId=vo.getMember_id().substring(0,5)+"*****";
-		vo.setMember_id(markId);
+		//String markId=vo.getMember_id().substring(0,5)+"*****";
+		//vo.setMember_id(markId);
 		feedbackDao.feedbackinsert(vo);
 	}
 	//댓글 목록
@@ -37,13 +37,7 @@ public class FeedBackController {
 		
 		List<FeedbackDTO> flist=feedbackDao.feedbackList(co_idx);
 		int count = feedbackDao.feedbackcount(co_idx);
-		String userid="";
-		String userid2="";
-		for(int i=0;i<flist.size();i++){
-			 userid=flist.get(i).getMember_id();
-			 userid2 = userid.substring(0, 3);
-			 System.out.println("userid2:::"+userid2);
-		}
+		
 		map.put("flist", flist);
 		map.put("count",count );
 		map.put("co_idx", co_idx);
@@ -86,7 +80,4 @@ public class FeedBackController {
 		map.put("vo", vo);
 		return "center/feedback/feedbackdetaiil";
 	}
-	
-	
-	
 }

@@ -97,13 +97,13 @@ $(document).ready(function(){
 <c:set var="list" value="${list}"/>
 <table border="1">
 	<tr>
-		<th>이용코인</th>
-		<th>컨텐츠1</th>
-		<th>컨텐츠2</th>
-		<th>컨텐츠3</th>
-		<th>컨텐츠4</th>
-		<th>컨텐츠5</th>
-		<th>컨텐츠6</th>
+		<th>Coin</th>
+		<th>Content1</th>
+		<th>Content2</th>
+		<th>Content3</th>
+		<th>Content4</th>
+		<th>Content5</th>
+		<th>Content6</th>
 	</tr>
 	<c:if test="${empty list}">
 		<tr>

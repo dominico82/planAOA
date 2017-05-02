@@ -11,7 +11,10 @@
 </head>
 <body>
 <c:set var="flist" value="${flist}"/>
+<!-- 세션에저장된아이디 -->
 <c:set var="saveid" value="${sessionScope.saveid}"/>
+<!-- 세션에저장된 이름 -->
+<c:set var="member_name" value="${sessionScope.member_name}"/>
 <div class="w3-container">
 댓글<span  class="w3-badge w3-green">${count}</span>건
 </div><br>
@@ -48,9 +51,9 @@
 		<br>
 		${row.feedback_content}
 			<!-- 댓글 수정버튼 --> <!-- 세션아이디와 디비아이디비교후 버튼 활성화제한 예정-->
-			<c:if test="${saveid eq row.member_id}">
+			<c:if test="${saveid eq row.member_id}"> 
 				<input type="button" value="Modify" onclick="showModify(${row.feedback_index})" class="button">
-			</c:if>
+			</c:if> 
 		<hr>
 		</td>
 	</tr>

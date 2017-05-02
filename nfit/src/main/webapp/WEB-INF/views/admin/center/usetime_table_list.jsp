@@ -71,8 +71,8 @@ width: 300px;
 <c:set var="list" value="${list}"/>
 	<table border="1">
 		<tr>
-			<th>요일</th>
-			<th>시간</th>
+			<th>Day</th>
+			<th>Time</th>
 		</tr>
 			<c:if test="${empty list}">
 				<tr>
