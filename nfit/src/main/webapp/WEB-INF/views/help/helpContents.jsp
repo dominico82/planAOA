@@ -6,13 +6,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@include file="../header.jsp" %>
 <link href="resources/css/bbs.css" rel="stylesheet" type="text/css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="resources/css/help.css" rel="stylesheet" type="text/css">
 <link href="resources/css/notice.css" rel="stylesheet" type="text/css">
+<link href="resources/css/tlx.bootstrap.min.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<style>
+textarea{
+width: 100%; 
+border:0;overflow-y:hidden;background:clear;
+}
+</style>
+<script>
+$(document).ready(function(){
+	$("#help_con").focus();
+});
+
+function resize(obj) {
+  obj.style.height = "1px";
+  obj.style.height = (20+obj.scrollHeight)+"px";
+
+  $("#help_con").blur();
+}
+
+</script>
 </head>
 <body>
+	<header>
+		<jsp:include page="../header.jsp"/>
+	</header>
 <div class="wrap">
 
     <div class="container">
@@ -54,7 +77,7 @@
                	</c:if>
                 <span>${contents.faq_subject} </span></h4>
                 <div class="answer">
-                  <p>${contents.faq_content}</p>
+                  <textarea onfocus="resize(this)" id="help_con" cols="80">${contents.faq_content}</textarea> 
                 </div>
               </article>
               

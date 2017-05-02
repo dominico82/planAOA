@@ -10,8 +10,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="http://tlx.co.kr/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="resources/css/notice.css" rel="stylesheet" type="text/css">
+<link href="resources/css/tlx.bootstrap.min.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="resources/js/httpRequest.js"></script>
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 

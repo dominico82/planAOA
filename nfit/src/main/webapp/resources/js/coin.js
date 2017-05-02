@@ -125,7 +125,7 @@ $(function(){
 						$("#pay_num4").removeClass("on");
 						$("#pay_num5").addClass("on");
 						$("#pay_num6").removeClass("on");
-						price="99000";
+						price="9900";
 						buy_coin="100";
 						pay_class="일반/100코인";
 	});
@@ -158,6 +158,7 @@ $(function(){
 				document.getElementById("pay_method").value=pay;
 				document.getElementById("pay_coin").value=buy_coin;
 				document.getElementById("pay_price").value=price;
+				console.log("결제할 가격:"+price);
 				document.getElementById("pay_class").value=pay_class;
 				if(price!="0"){
 					IMP.request_pay({
@@ -206,6 +207,7 @@ $(function(){
 							    		data: formData,
 							    		success: function(data){
 							    			console.log(data.member_id);
+							    			console.log(price);
 							    			$(".mP_coin").empty();
 							    			$(".mP_coin").append(data.member_coin);
 							    		},

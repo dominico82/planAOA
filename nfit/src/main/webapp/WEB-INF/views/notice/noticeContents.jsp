@@ -6,13 +6,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@include file="../header.jsp" %>
-<link href="http://tlx.co.kr/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="resources/css/tlx.bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="resources/css/notice.css" rel="stylesheet" type="text/css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<style>
+textarea{
+width: 100%; 
+border:0;overflow-y:hidden;background:clear;
+}
+</style>
+<script>
+$(document).ready(function(){
+	$("#notice_con").focus();
+});
+
+function resize(obj) {
+  obj.style.height = "1px";
+  obj.style.height = (20+obj.scrollHeight)+"px";
+
+  $("#notice_con").blur();
+}
+
+</script>
 </head>
 <body>
+	<header>
+		<jsp:include page="../header.jsp"/>
+	</header>
 <br><br><br>
+
 <div class="wrap">
 
     <div class="container">
@@ -27,7 +50,7 @@
           </h2>
         </div>
 
-        <div class="noticeWrap">
+        <div class="noticeWrap" id="noticeWrap">
           <article class="notice">
 			<div>
 				<c:if test="${!empty pics}">
@@ -36,12 +59,12 @@
 					</c:forEach>
 				</c:if>
 			</div>
-			<div>			
-				<p>${dto.notice_content}</p>
-			</div>
+				<c:if test="${!(dto.notice_content==null||dto.notice_content==' ')}">								
+					<div><textarea id="notice_con" readonly="readonly" onfocus="resize(this)">${dto.notice_content}</textarea></div>
+				</c:if>	
           </article>
 
-          
+           
 
 
           <div class="articleTail">

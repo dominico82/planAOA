@@ -144,7 +144,7 @@
                     
               
            	<div class="innerBox col-xs-6 col-sm-12">
-                <h3>1:1 문의</h3>
+              <h3>1:1 문의</h3>
                 <p class="help-block">
                   <span>게시판에 문의사항을 남겨주시면 정확하게 답변해 드립니다.</span>
                 </p>
@@ -152,7 +152,7 @@
                   1:1 문의 남기기
                 </a>
               </div>
-              <div class="faqList">
+              <div class="faqList innerBox col-xs-6 col-sm-12">
                 <h3>FAQ <small><span class="label label-info">TOP 5</span></small></h3>
                 <ul>
                 	<c:if test="${empty top5}"><div>게시글이 없습니다.</div></c:if>

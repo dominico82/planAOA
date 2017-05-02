@@ -7,19 +7,24 @@
 <meta charset="UTF-8">
 <title>만족스러운 피트니스 Nfit</title>
 
-<%@include file="../header.jsp" %>
-<link href="http://tlx.co.kr/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="resources/css/bbs.css" rel="stylesheet" type="text/css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="resources/css/help.css" rel="stylesheet" type="text/css">
+<link href="resources/css/notice.css" rel="stylesheet" type="text/css">
+<link href="resources/css/tlx.bootstrap.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+
+	<header>
+		<jsp:include page="../header.jsp"/>
+	</header>
 <div class="wrap">
 
     <div class="container">
     <div class="row">
       <div class="content col-md-12">
         <div class="page-header">
-        <br><br>
+        <br><br><br>
           <h2>고객센터 <small>도움이 필요하신가요?</small></h2>
         </div>
 
@@ -31,7 +36,7 @@
             <div class="col-md-12">
 
               <ol class="breadcrumb">
-                <li><a href="/help">고객센터</a></li>
+                <li><a href="help.do">고객센터</a></li>
                 <li class="active">검색결과</li>
               </ol>
 
