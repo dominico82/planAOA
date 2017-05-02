@@ -11,13 +11,20 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="resources/css/help.css" rel="stylesheet" type="text/css">
 <link href="resources/css/notice.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link href="resources/css/tlx.bootstrap.min.css" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <jsp:include page="../header.jsp"/>
 <style>
 a{
 	text-align: right;
+}
+div.margin_botton{
+	margin-bottom: 300px;
+}
+div.applyBoxWrap{
+	margin-bottom: 50px;
 }
 </style>
 <script>
@@ -57,7 +64,7 @@ $(document).ready(function(){
             </div><!-- /.applyBoxWrap -->
           </div>
           
-          <h3>문의 내역</h3>
+          <h3>문의 내역</h3><br>
           <div class="accordionList">              
 			
           </div><!-- /.accordionFaq -->   
@@ -67,10 +74,9 @@ $(document).ready(function(){
           
 
       </div> <!-- /.content -->
-      	<div id="PAGE_NAVI"></div>
     </div><!-- /.row -->
   </div><!-- /container -->
-
+	<div class="margin_botton"></div>
 <!-- Modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="qa11" style="display: none;">
   <div class="modal-dialog">

@@ -129,13 +129,13 @@
 								<td class="center">${list.notice_idx }</td>
 								<td class="center">${list.notice_subject }</td>
 								<td>${list.notice_content }</td>
-								<td class="center">${list.notice_top }</td>
-								<td class="center">${list.notice_event }</td>
+								<td class="center"><c:if test="${list.notice_top==1}">Yes</c:if><c:if test="${list.notice_top==0}">No</c:if></td>
+								<td class="center"><c:if test="${list.notice_event==1}">Yes</c:if><c:if test="${list.notice_event==0}">No</c:if></td>
 								
 								<td class="center">
 								<fmt:formatDate value="${list.notice_date }" pattern="yyy-MM-dd HH:mm"/></td>
-								<td class="center"><input type="button" value="수정" onclick="location.href='noticeUpdate.do?idx=${list.notice_idx}'"></td>
-								<td class="center"><input type="button" value="삭제"
+								<td class="center"><input class="btn btn-sm btn-primary" type="button" value="수정" onclick="location.href='noticeUpdate.do?idx=${list.notice_idx}'"></td>
+								<td class="center"><input class="btn btn-sm btn-primary" type="button" value="삭제"
 									onclick="location.href='noticeDel.do?idx=${list.notice_idx}'">
 								</td>
 							</tr>
@@ -146,7 +146,7 @@
 			</div>
 			<div style="margin-top: 10px;">
 				<ul>
-					<li class="wirte"><input type="button" value="공지작성"
+					<li class="wirte"><input class="btn btn-sm btn-primary" type="button" value="공지작성"
 						onclick="location.href='noticeWrite.do'"></li>
 				</ul>
 			</div>

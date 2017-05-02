@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@include file="../header.jsp" %>
-<link href="http://tlx.co.kr/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="resources/css/tlx.bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="resources/css/notice.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
@@ -47,6 +46,9 @@ $(":file").filestyle({input: false});
 
 </head>
 <body>
+	<header>
+		<jsp:include page="../header.jsp"/>
+	</header>
 <br><br><br>
 <div class="wrap">
 
