@@ -55,11 +55,6 @@ public class CenterController {
 	
 	@RequestMapping("/centerDetail.do")
 	public String centerDetail(ModelMap model, HttpServletRequest req, @RequestParam(value="co_idx",required=false, defaultValue="0") int co_idx){
-		if(co_idx==0){
-			String msg = "잘못된 접근입니다.";
-			model.addAttribute("msg", msg);
-			return "center/centerMsg";
-		}
 		CenterDTO dto=centerDao.centerOneDB(co_idx);
 		List<UsetimeDTO> list = usetimeDao.usetimeDB(co_idx);
 		List<ContentDTO> contentList=contentDao.contentListDB(co_idx);
@@ -85,6 +80,7 @@ public class CenterController {
 		String imgPath2 = path + "resources/centerImage";
 		String viewPath = dto.getCo_view();
 		String fullPath = imgPath2+"/"+viewPath;
+		System.out.println("fullPath="+fullPath);
 		File f = new File(fullPath);
 		File files[] = f.listFiles();
 		List fileList = new ArrayList();
@@ -94,11 +90,9 @@ public class CenterController {
 			fileList.add(fileName);
 		}
 		String firstImg = fileList.get(0).toString();
-		System.out.println(firstImg);
 		/*ends image file 찾기*/
 		
 		CenterDTO centerList=centerDao.centerOneDB(co_idx);
-		model.addAttribute("co_idx",co_idx);//요거 지우지마세요-재혁
 		model.addAttribute("dto", dto);
 		model.addAttribute("timelist", list);
 		model.addAttribute("contentlist", contentList);
@@ -197,6 +191,7 @@ public class CenterController {
 					}
 			}
 			contentJson+="]}";
+			System.out.println("contentJson=");
 			System.out.println(contentJson);
 		}else{
 			contentJson="null";

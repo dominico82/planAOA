@@ -24,16 +24,12 @@
   <select id="centerSearchSQL" parameterType="String" resultType="nfit.center.model.CenterDTO">
 SELECT DISTINCT CO.CO_IDX, CO.CO_NAME, CO.CO_ADDRESS, CO.CO_CLASS, CO.CO_PHONE, CO.CO_REGUL, CO.CO_EXTRA, CO.CO_VIEW, CO.CO_USECOUNT, CO.CO_LAT, CO.CO_LNG, CO.CO_AVAIL 
 FROM COMPANY_LIST CO 
-INNER JOIN CONTENT_LIST CT ON (CO.CO_IDX=CT.CO_IDX)
-WHERE CO.CO_NAME LIKE '%'||#{keyword}||'%'
-OR CO.CO_CLASS LIKE '%'||#{keyword}||'%'
-OR CO.CO_ADDRESS LIKE '%'||#{keyword}||'%'
-OR CT.CONTENT1 LIKE '%'||#{keyword}||'%'
-OR CT.CONTENT2 LIKE '%'||#{keyword}||'%'
-OR CT.CONTENT3 LIKE '%'||#{keyword}||'%'
-OR CT.CONTENT4 LIKE '%'||#{keyword}||'%'
-OR CT.CONTENT5 LIKE '%'||#{keyword}||'%'
-OR CT.CONTENT6 LIKE '%'||#{keyword}||'%'
+WHERE CO.CO_NAME LIKE '%'||upper(#{keyword})||'%'
+OR CO.CO_CLASS LIKE '%'||upper(#{keyword})||'%'
+OR CO.CO_ADDRESS LIKE '%'||upper(#{keyword})||'%'
+OR CO.CO_NAME LIKE '%'||lower(#{keyword})||'%'
+OR CO.CO_CLASS LIKE '%'||lower(#{keyword})||'%'
+OR CO.CO_ADDRESS LIKE '%'||lower(#{keyword})||'%'
 ORDER BY CO.CO_IDX
   </select>
   </mapper>

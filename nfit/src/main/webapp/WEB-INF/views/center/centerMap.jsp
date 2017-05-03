@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="https://apis.daum.net/maps/maps3.js?apikey=95b97b04d035d60f73995902d8ae2cd0&libraries=services"></script>
+  <script type="text/javascript" src="https://apis.daum.net/maps/maps3.js?apikey=edd938c4fc341b07f90ed69064de3f92&libraries=services"></script>
   <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <link rel="shortcut icon" href="resources/images/n-1x-170x128.jpg" type="image/x-icon">
 <title>Insert title here</title>
@@ -86,13 +86,13 @@ font-size:12px;
 z-index:500;
 }
 /*업체 백업 테이블*/
-#center_list{
+/* #center_list{
 display:none; 
-}
+} */
 /*업체 서비스 백업 테이블*/
-#content_list{
+/* #content_list{
  display:none;
-}
+} */
 #centerInfo_list .hiddenCnt{
 display:none;
 }
@@ -285,10 +285,14 @@ display:none;
 			<tr>
 			<th>co_idx</th>
 			<th>co_name</th>
-			<th>co_class</th>
 			<th>co_phone</th>
+			<th>co_address</th>
+			<th>co_class</th>
+			<th>co_view</th>
 			<th>co_lat</th>
 			<th>co_lng</th>
+			<th>co_usecount</th>
+			<th>co_url</th>
 			</tr>
 			</thead>
 			<tbody id="center_list_tbody">
@@ -297,27 +301,25 @@ display:none;
 			<td colspan="4" align="center">no data</td>
 			</tr>
 			</c:if>
-			<% int cnt=1; %>
 			<c:forEach var="dto" items="${centerList}" begin="0"  step="1" varStatus="status">
 			<c:url var="centerListUrl" value="centerDetail.do">
 			<c:param name="co_idx">${dto.co_idx}</c:param>
 			</c:url>
 			<tr>
-			<td><span id="co_idx_idx_${status.index}">${dto.co_idx }</span><span id="centerUrl_${status.index}" style="display:none;">${centerListUrl}</span></td>
-			<td>
-			<a href="javascript:show(${dto.co_idx}, '${centerListUrl}')" id="co_name_${status.index}" class="coName">${dto.co_name}</a>
-			<input type="hidden" id="co_address_${status.index}" value="${dto.co_address}">
-			</td>
-			<td><span id="coClass_${status.index}">${dto.co_class}</span></td>
-			<td><span id="centerImg_${status.index}">${dto.co_view}</span></td>
-			<td><span id="centerLat_${status.index}">${dto.co_lat}</span></td>
-			<td><span id="centerLng_${status.index}">${dto.co_lng}</span></td>
+			<td>	<span class="centeridx" id="coIdx_${status.count}">${dto.co_idx }</span></td>
+			<td>	<span id="coName_${status.count}">${dto.co_name}</span></td>
+			<td>	<span id="coPhone_${status.count}">${dto.co_phone}</span></td>
+			<td>	<span id="coAddr_${status.count}">${dto.co_address}</span></td>
+			<td><span id="coClass_${status.count}">${dto.co_class}</span></td>
+			<td><span id="coView_${status.count}">${dto.co_view}</span></td>
+			<td><span id="coLat_${status.count}">${dto.co_lat}</span></td>
+			<td><span id="coLng_${status.count}">${dto.co_lng}</span></td>
+			<td><span id="coUsecount_${status.count}">${dto.co_usecount}</span></td>
+			<td><span id="coUrl_${status.count}">${centerListUrl}</span></td>
 			</tr>
-				<%cnt++;%>
 			</c:forEach>
 			</tbody>
 			</table>
-			<input type="hidden" value="<%=cnt%>" id="count">
 			</div>
 		
 <!-- 서비스 백업 부분 -->
@@ -510,18 +512,17 @@ var newInfowindow=[];
 	var geocoder = new daum.maps.services.Geocoder();
 	geocoder.addr2coord(addr, function (status, result){
 		if(status==daum.maps.services.Status.OK){
-			var imageSrc = 'resources/images/map-marker-icon.png'; // 마커이미지의 주소입니다    
-		    var imageSize = new daum.maps.Size(64, 69); // 마커이미지의 크기입니다
-		    var imageOption = {offset: new daum.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+			var imageSrc1 = 'resources/images/map-marker-icon.png';   
+		    var imageSize1 = new daum.maps.Size(64, 69); 
+		    var imageOption1 = {offset: new daum.maps.Point(27, 69)}; 
 		      
-		// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-		var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);
+		var markerImage1 = new daum.maps.MarkerImage(imageSrc1, imageSize1);
 			var coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
 			var marker = new daum.maps.Marker({
 				map:map,
 				position:coords,
-				image:markerImage,
-		        draggable: true, // 마커를 그리고 나서 드래그 가능하게 합니다 
+				image:markerImage1,
+		        draggable: true, 
 		        clickable:true,
 		        title: '오른쪽 클릭시 제거, 왼쪽 클릭시 주소창 생성'
 			});
@@ -529,7 +530,8 @@ var newInfowindow=[];
 			
 			var infowindow = new daum.maps.InfoWindow({
 				content: '<div style="width:150px;text-align:center;padding:6px 0;font-size:10px;"><span class="bg-info">주소</span>: '+addr+'</div>',
-				removable:true
+				removable:true,
+				zIndex:4
 			});
 			newInfowindow.push(infowindow);
 			infowindow.open(map, marker);
@@ -539,7 +541,7 @@ var newInfowindow=[];
 			marker.setMap(null);
 			for(var i=0; i<newInfowindow.length; i++){
 				newInfowindow[i].close();
-			}
+			}//for(var i=0; i<newInfowindow.length; i++){
 		});//daum.maps.event.addListener(newMarker, 'rightclick', function(mouseEvent){
 		daum.maps.event.addListener(marker, 'dragend', function(){       
 			for(var i=0; i<newInfowindow.length; i++){
@@ -548,17 +550,15 @@ var newInfowindow=[];
 				}//if(i==(newInfowindow.length-1)){
 			}//for(var i=0; i<newInfowindow.length; i++){
 			var latlng = marker.getPosition();
-			console.log("latlng="+latlng);
 			var geocoder2 = new daum.maps.services.Geocoder();
 			geocoder2.coord2detailaddr(latlng, function(status2, result2){
 				if(status2==daum.maps.services.Status.OK){
 					var addr2 = result2[0].roadAddress.name;
 					var addrJibun = result2[0].jibunAddress.name;
-					console.log("addr2="+addr2);
-					console.log("addr2="+addrJibun);
 					var infowindow2 = new daum.maps.InfoWindow({
 						content: '<div style="width:150px;text-align:center;padding:6px 0;font-size:10px;"><span class="bg-info">주소</span>: '+addr2+"<br>"+addrJibun+'</div>',
-						removable:true
+						removable:true,
+						zIndex:4
 					});//infowindow = new daum.maps.InfoWindow({
 						infowindow2.open(map, marker);
 						newInfowindow.push(infowindow2);
@@ -566,6 +566,7 @@ var newInfowindow=[];
 			});//goecoder.coord2detailaddr(latlng, function(status, result){
 		});//daum.maps.event.addListener(marker, 'dragend', function(){
 	});//geocoder.addr2coord(addr, function (status, result){
+	setTimeout(searchMark, 100);
 }//function getAddr(){
 
 
@@ -596,50 +597,54 @@ $(document).ready(function(){
 	});
 });
 
-/*content 내용 불러오기*/
-//var content_list 세팅
 
- var contents=[];
+//var content_list 세팅
  var content1;
  var content2;
  var content3;
  var content4;
  var content5;
  var content6;
- var contentCnt = $("#content_list_tbody > tr").length;
- var contentLists=[];
- var contentIdx=[];
- 
-//var------------------------
-var markers=[];
-var count = $("#center_list_tbody > tr").length;
-var coName =[];
-var addr=[];
-var co_idx=[];
-var centerListUrl=[];
-var coClass=[];
-var coImgs=[];
-var cLatArr=[];
-var cLngArr=[];
-var cName;
-var cIdx;
-var cAddr;
-var cUrl;
-var cClass;
-var cImg;
-var cLat;
-var cLng;
+ var contents=[];
+ var contentCnt = $("#content_list_tbody > tr").length;//content 리스트 수
+ var finalindex=0;
+ var coidx=0;
+var contentLists=[];
+ //var company list세팅------------------------
+var finalcenteridx =$(".centeridx:last").text();
+var centerCnt = 0;
+var coIdxs=[];
+var coNames=[];
+var coPhones=[];
+var coAddrs=[];
+var coClasses=[];
+var coViews=[];
+var coLats=[];
+var coLngs=[];
+var coUsecounts=[];
+var coUrls=[];
+var coIdx;
+var coName;
+var coPhone;
+var coAddr;
+var coClass;
+var coView;
+var coLat;
+var coLng;
+var coUsecount;
+var coUrl;
+//var 마커 및 인포윈도우 세팅--------------------------------------------------
+var markers=[]; //마커
 var infoWindows=[]; //인포윈도우
-var moreN; //더보기 눌렀을 때 보여질 리스트 수
-var startCheck=false;
+var infoContent; //윈포윈도우 컨텐츠
+var startCheck=false; //첫 접속false일 경우, 다음 움직임 부터 true -> 리스트 와 마커 제거
 var mapOn=false; //리스트 생성 여부 : 맵 움직을때만 
-var searchOn = false;
-var infoContent;
-//-------------------------------------
+var searchOn = false; //검색일 경우, 마커와 인포가 고정으로 생성됨 맵을 움직여도 마커 및 인포 변하지 않음 
+
 //--------------마카 이미지 생성
-	var imgSrc='resources/images/marker.png';
-	var imgSize=new daum.maps.Size(54,59);
-	var markerImage = new daum.maps.MarkerImage(imgSrc, imgSize);
+var imgSrc='resources/images/marker.png';
+var imgSize=new daum.maps.Size(54,59);
+var markerImage = new daum.maps.MarkerImage(imgSrc, imgSize);
 //----------ends 마카 이미지 생성
 
 
@@ -667,210 +672,14 @@ function goCenter(locPosition){
 map.setCenter(locPosition);
 }
 
+/*시작*/
 window.onload=mapStart();
-
-/*이름과 주소 가져오기*/
-function mapStart(){
-	searchOn = false;
-	closeAllMarkInfo();
-	removeMarker();
-	removeMore();
-	contents=[];
-	contentLists=[];
-	$("#search_initialization").empty();
-	/*content_list 세팅*/
-	var finalCnt = $(".content_idx_cnt:last").text();
-	for(var i=1; i<=contentCnt; i++){//content_list 정보
-		var idxCnt=$("#content_list_co_idx_"+i+":last").text();
-		content1 = $("#content_list_content1_"+i).text();
-		content2 = $("#content_list_content2_"+i).text();
-		content3 = $("#content_list_content3_"+i).text();
-		content4 = $("#content_list_content4_"+i).text();
-		content5 = $("#content_list_content5_"+i).text();
-		content6 = $("#content_list_content6_"+i).text();
-		if(content2!=" " && content2 !=""){
-			content1+=", ";
-		}
-		if(content3!=" " && content3 !=""){
-			content2+=", ";
-		}
-		if(content4!=" " && content4 !=""){
-			content3+=", ";
-		}
-		if(content5!=" " && content5 !=""){
-			content4+=", ";
-		}
-		if(content6!=" " && content6 !=""){
-			content5+=", ";
-		}
-		if(content1!=" "&& content1 !=""){
-			content6+=", ";
-		}
-		for(var j=1; j<=finalCnt; j++){
-			if(j==idxCnt){
-				if(contents[j]==null){
-				contents[j]="";
-				}
-				contents[j]+=(content1
-						+content2
-						+content3
-						+content4
-						+content5
-						+content6);
-			}//if null handling ends
-
-		}// for contents[j] ends
-	}//for content list ends
-for(var i=0; i<count;i++){ //center_list 정보
-	cName=document.getElementById('co_name_'+i).innerHTML;
-	cAddr=document.getElementById('co_address_'+i).value;
-	cIdx=document.getElementById('co_idx_idx_'+i).innerHTML;
-	cUrl=document.getElementById('centerUrl_'+i).innerHTML;
-	cClass=document.getElementById('coClass_'+i).innerHTML;
-	cImg=document.getElementById('centerImg_'+i).innerHTML;
-	cLat=document.getElementById('centerLat_'+i).innerHTML;
-	cLng=document.getElementById('centerLng_'+i).innerHTML;
-	getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i);
-}//for center list ends
-searchMark();
-}//mapStart() ends
 
 /*지도 확대 축소 컨트롤러*/
 var zoomControl = new daum.maps.ZoomControl();
 map.addControl(zoomControl, daum.maps.ControlPosition.BOTTOMLEFT);
-setTimeout(searchMark, 500);
+//setTimeout(searchMark, 500);
 
-/*지도 움직일 때 마크 및 백업 리스트 생성*/
-if(searchOn==true){
-}else if(searchOn==false){
-daum.maps.event.addListener(map, 'zoom_changed', searchMark);
-daum.maps.event.addListener(map, 'dragend', searchMark);
-}
-function searchMark(){
-	if(searchOn==true){
-		return false;
-	}//if searchOn true ends
-	if(markers!=null||markers!=''){
-	if(startCheck==false){//첫 접속일 경우 마크 생성 후 리스트만 제거
-	startCheck=true;
-	listRemove();
-	}else if(startCheck==true){//지도 움직일 경우 리스트와 마크 제거
-	if(mapOn==false){//맵 마우스로 움직일 때만 전체 삭제
-		listRemove();
- 		removeMarker();
-	}//if mapOn ends
-	}
-	var bounds=map.getBounds();
-	var n=1; // 현재 맵에 뿌려진 리스트 수
-	var hiddenN=0; //감춰진 list
-	//↓보여질 리스트 행 수
-	var appendN = (Math.round(markers.length/2)); 
-	//↓ 더보기로 보여질 행 수
-	moreN = (Math.ceil(appendN/2));
-	var numDiv=0;
-	if(mapOn==false){ //맵 마우스로 움직일 경우만 마크 생성
-	var selectoHtml;
-	removeMore();
-	/*마커에 따른리스트 생성*/
-	for(var i=0; i<markers.length; i++){
-		if(bounds.contain(markers[i].getPosition())){
-			markers[i].setMap(map);
-			/*table append 부분*/
-			selectoHtml='';
-			if(n>4){
-			selectoHtml+='<div class="col-sm-6 panel panel-default hiddenCnt" id="centerInfo_list_div">';
-			selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_img">';
-			selectoHtml+='<a href="javascript:show('+co_idx[i]+',';
-			selectoHtml+="'";
-			selectoHtml+=centerListUrl[i];
-			selectoHtml+="'";
-			selectoHtml+=')">';
-			selectoHtml+='<img src="resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
-			selectoHtml+='</a>';
-			selectoHtml+='</div>';
-			selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
-			selectoHtml+='<div class="panel-group" id="list-table">';
-			selectoHtml+='<div class="panel panel-default">';
-			selectoHtml+='<div class="panel-heading">';
-			selectoHtml+='<h6 class="panel-title" id="centerInfo_list_coName">'+coName[i]+'<span class="bg-info" id="center_list_coName_class">('+coClass[i]+')</span></h6>';
-			selectoHtml+='</div>'; //panel-heading
-			selectoHtml+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
-			selectoHtml+='<ul class="list-group">';
-			selectoHtml+='<li class="list-group-item">'+addr[i]+'</li>';
-			selectoHtml+='</ul>';
-			selectoHtml+='</div>'; //colapse panel1
-			selectoHtml+='<div class="panel-body">';
-			selectoHtml+='<a class="btn-xs" id="center-addr-btn" data-toggle="collapse" href="#centerInfo_list_coAddr_'+i+'">주소보기</a>';
-			selectoHtml+='</div>'; //colapse panel open1
-			selectoHtml+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
-			selectoHtml+='<ul class="list-group">';
-			selectoHtml+='<li class="list-group-item"><b>'+coClass[i]+'</b>-'+contentLists[i]+'</li>';
-			selectoHtml+='</ul>';
-			selectoHtml+='</div>'; //collapse panel2
-			selectoHtml+='<div class="panel-body">';
-			selectoHtml+='<a class="btn-xs" id="centerInfo_list_coClass" data-toggle="collapse" href="#centerInfo_list_content_'+i+'">제공서비스보기</a>';
-			selectoHtml+='</div>'; //collapse panel open 2
-			selectoHtml+='</div>';//panel default
-			selectoHtml+='</div>'; //panel group
-			selectoHtml+='</div>'; //panel final
-			selectoHtml+='</div>'; //panel final
-			$("#centerInfo_list").append(selectoHtml);
-			moreButton();
-			}else{
-			selectoHtml+='<div class="col-sm-6 panel panel-default" id="centerInfo_list_div">';
-			selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_img">';
-			selectoHtml+='<a href="javascript:show('+co_idx[i]+',';
-			selectoHtml+="'";
-			selectoHtml+=centerListUrl[i];
-			selectoHtml+="'";
-			selectoHtml+=')">';
-			selectoHtml+='<img src="resources/centerImage/'+coImgs[i]+'/'+coImgs[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
-			selectoHtml+='</a>';
-			selectoHtml+='</div>';
-			selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
-			selectoHtml+='<div class="panel-group" id="list-table">';
-			selectoHtml+='<div class="panel panel-default">';
-			selectoHtml+='<div class="panel-heading">';
-			selectoHtml+='<h6 class="panel-title" id="centerInfo_list_coName">'+coName[i]+'<span class="bg-info" id="center_list_coName_class">('+coClass[i]+')</span></h6>';
-			selectoHtml+='</div>';
-			selectoHtml+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
-			selectoHtml+='<ul class="list-group">';
-			selectoHtml+='<li class="list-group-item">'+addr[i]+'</li>';
-			selectoHtml+='</ul>';
-			selectoHtml+='</div>';
-			selectoHtml+='<div class="panel-body">';
-			selectoHtml+='<a class="btn-xs" id="center-addr-btn" data-toggle="collapse" href="#centerInfo_list_coAddr_'+i+'">주소보기</a>';
-			selectoHtml+='</div>';
-			selectoHtml+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
-			selectoHtml+='<ul class="list-group">';
-			selectoHtml+='<li class="list-group-item"><b>'+coClass[i]+'</b>-'+contentLists[i]+'</li>';
-			selectoHtml+='</ul>';
-			selectoHtml+='</div>';
-			selectoHtml+='<div class="panel-body">';
-			selectoHtml+='<a class="btn-xs" id="centerInfo_list_coClass" data-toggle="collapse" href="#centerInfo_list_content_'+i+'">제공서비스보기</a>';
-			selectoHtml+='</div>';
-			selectoHtml+='</div>';
-			selectoHtml+='</div>';
-			selectoHtml+='</div>';
-			selectoHtml+='</div>';
-			$("#centerInfo_list").append(selectoHtml);
-			removeMore();
-			}
-			n++;
-			if(numDiv%1==0 && numDiv%2!=0){
-				selectoHtml='<div class="col-sm-12"></div>';
-				$("#centerInfo_list").append(selectoHtml);
-			}
-		numDiv++;
-		}else{
-			markers[i].setMap(null);
-		}//if bound contain method ends
-		
-	}// for method ends
-	}else{}//if mapOn check method ends list 생성문 마우스로 움직일때만 리스트 형성
-	}else{}//if markers 있는지 없는지 check method ends
-	mapOn=false;
-}//searchMark문 end
 
 /*리스트 전부 끄기*/
 function listRemove(){
@@ -912,128 +721,374 @@ function zoomOut() {
     map.setLevel(map.getLevel() + 1);
 }
 
-/*마커 생성 및 클릭 이벤트*/
-function getMarker(cAddr, cName, cIdx, cUrl, cClass, cImg, cLat, cLng, i){
-	var marker;
-	var infowindow;
-	var coords;
-	var latlngData;
-	if(cLat!=0 && cLng!=0){ // 위도 경도가 DB에 등록된 경우
-		coords = new daum.maps.LatLng(cLat, cLng);
-		
-		/*마커생성*/
-		marker = new daum.maps.Marker({
-        	map:map,
-        	position: coords,
-        	image: markerImage,
-            clickable: true
-        }); //마커 생성
-        coName[i]=cName;
-        addr[i]=cAddr;
-        co_idx[i]=cIdx;
-        centerListUrl[i]=cUrl;
-        coClass[i]=cClass;
-        coImgs[i]=cImg;
-        markers[i]=marker;
-        contentLists[i]=contents[cIdx];
-        cLatArr[i]=cLat;
-        cLngArr[i]=cLng;
-        infoContent='<table id="infowindows" class="table table-condensed">'+
-        '<thead><tr><th>'+cName+'<div id="infowindows_close" onclick="javascript:closeAllMarkInfo()"><span class="glyphicon glyphicon-remove-circle"></span></div></th></tr></thead>'+
-        '<tbody><tr><td>'+cAddr+'</td></tr></tbody>'+
-        '</table>';
-        infowindow = new daum.maps.InfoWindow({
-        content: infoContent
-        }); //infowindow 생성
-        infoWindows[i]=(infowindow);
+/*상세 aside 닫기*/
+$(function(){
+		$close=$("#close");
+		$close.on("click", function(e){
+			e.preventDefault();
+			$(this).parents("#centerInfo_panel").animate({
+				opacity:'0',
+				height:'0px'
+			}, 500);
+		})
+	})
+
+/*센터 상세보기 열기*/
+function centerDetail(centerListUrl){
+		window.location.href=centerListUrl;
+	}
 
 
-//makingMarkers ends
-daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infowindow, cIdx, cUrl));
-	}else{ //위도 경도가 DB에 등록되지 않는 경우
-		var geocoder = new daum.maps.services.Geocoder();
-	geocoder.addr2coord(cAddr, function(status, result) {
-	     if (status === daum.maps.services.Status.OK) {
-		    coords = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
-		    
-		    /*마커생성*/
-		    marker = new daum.maps.Marker({
-	        	map:map,
-	        	position: coords,
-	        	image: markerImage,
-	            clickable: true
-	        }); //마커생성
-	        coName[i]=cName;
-	        addr[i]=cAddr;
-	        co_idx[i]=cIdx;
-	        centerListUrl[i]=cUrl;
-	        coClass[i]=cClass;
-	        coImgs[i]=cImg;
-	        markers[i]=marker;
-	        contentLists[i]=contents[cIdx];
-	        cLat = result.addr[0].lat;
-	        cLng = result.addr[0].lng;
-	        cLatArr[i]=cLat;
-	        cLngArr[i]=cLng;
-	        infoContent='<table id="infowindows" class="table table-condensed">'+
-	        '<thead><tr><th>'+cName+'<div id="infowindows_close" onclick="javascript:closeAllMarkInfo()"><span class="glyphicon glyphicon-remove-circle"></span></div></th></tr></thead>'+
-	        '<tbody><tr><td>'+cAddr+'</td></tr></tbody>'+
-	        '</table>';
-	        infowindow = new daum.maps.InfoWindow({
-	        content: infoContent
-	        }); ///infowindow 생성
-	        infoWindows[i]=(infowindow);
-			latlngData = cIdx+"/"+ cLat+"/"+cLng;
-			$.ajax({
-				url:"centerLatLng.do",
-				type:"GET",
-				data:{"latlngData":latlngData},
-				success:function(data){
-					$("#ajax").remove();
-					if(!data){
-						alert("ajax fail");
+/*마크 전부 끄기*/
+function removeMarker(){
+			if(markers==null){
+			return;
+			}else{
+				for(var i=0; i<markers.length; i++){
+				if(markers[i]==null || markers[i]=="undefined"){
+				}else{
+				markers[i].setMap(null);
+				}//if(markers[i]==null || markers[i]=="undefined"){
+			}//for(var i=0; i<markers.length; i++){
+	}//if(markers==null){
+}
+
+/*검색 초기화 */
+function searchReset(searchNum){
+	$("#search_initialization").empty();
+	$("#search_initialization").html('<a href="javascript:mapStart()" class="btn btn-primary btn-block">검색초기화<span class="badge">'+searchNum+'</span></a>');
+}
+
+/*인포 전부 끄기*/
+function closeAllMarkInfo(){
+	for(var j=1; j<=infoWindows.length; j++){
+		if(infoWindows[j]==null||infoWindows[j]=="undefined"){
+		}else{	
+			infoWindows[j].close();
+		}//if(infoWindows[j]==null||infoWindows[j]=="undefined"){
+	}//for(var j=1; j<=infoWindows.length; j++){
+}
+
+/*이름과 주소 가져오기*/
+function mapStart(){
+	searchOn = false;
+	closeAllMarkInfo();
+	removeMarker();
+	removeMore();
+	contents=[];
+	$("#search_initialization").empty();
+	/*contents 생성*/
+	finalindex=$(".content_idx_cnt:last").text(); //전체 idx중 마지막
+	contentCnt = $("#content_list_tbody > tr").length;//content 리스트 수 
+	for(var i=0; i<=finalcenteridx; i++){ 
+		contents[i]="";
+	}//for(var i=0; i<finalindex; i++){
+	for(var i=1; i<=contentCnt; i++){//content_list 정보
+		content1 = $("#content_list_content1_"+i).text();
+		content2 = $("#content_list_content2_"+i).text();
+		content3 = $("#content_list_content3_"+i).text();
+		content4 = $("#content_list_content4_"+i).text();
+		content5 = $("#content_list_content5_"+i).text();
+		content6 = $("#content_list_content6_"+i).text();
+		coidx = $("#content_list_co_idx_"+i).text();//현재 idx
+		if(content2!=" " && content2 !=""){
+			content1+=", ";
+		}
+		if(content3!=" " && content3 !=""){
+			content2+=", ";
+		}
+		if(content4!=" " && content4 !=""){
+			content3+=", ";
+		}
+		if(content5!=" " && content5 !=""){
+			content4+=", ";
+		}
+		if(content6!=" " && content6 !=""){
+			content5+=", ";
+		}
+		if(content1!=" "&& content1 !=""){
+			content6+=", ";
+		}
+		contents[coidx]+=(content1+content2+content3+content4+content5+content6);
+	}//for content list ends
+	
+	/*company 생성*/
+	finalcenteridx = $(".centeridx:last").text(); //center 마지막 idx 추출
+	centerCnt = $("#center_list_tbody > tr").length; //center list개수 추출 
+	console.log("finalcenteridx="+finalcenteridx);
+	console.log("centerCnt="+centerCnt);
+	for(var i=1; i<=centerCnt; i++){
+		coIdx = $("#coIdx_"+i).text();
+		coIdxs[coIdx]=coIdx;
+		coName = $("#coName_"+i).text();
+		coNames[coIdx]=coName;
+		coPhone = $("#coPhone_"+i).text();
+		coPhones[coIdx]=coPhone;
+		coAddr = $("#coAddr_"+i).text();
+		coAddrs[coIdx]=coAddr;
+		coClass = $("#coClass_"+i).text();
+		coClasses[coIdx]=coClass;
+		coView = $("#coView_"+i).text();
+		coViews[coIdx]=coView;
+		coLat = $("#coLat_"+i).text();
+		coLats[coIdx]=coLat;
+		coLng = $("#coLng_"+i).text();
+		coLngs[coIdx]=coLng;
+		coUsecount = $("#coUsecount_"+i).text();
+		coUsecounts[coIdx]=coUsecount;
+		coUrl = $("#coUrl_"+i).text();
+		coUrls[coIdx]=coUrl;
+		getMarker(coIdx, coName, coPhone, coAddr, coClass, coView, coLat, coLng, coUsecount, coUrl);
+	}//for(var i=1; i<=centerCnt; i++){
+		console.log("markers.length="+markers.length);
+setTimeout(searchMark, 100);
+}//mapStart() ends
+
+console.log("=======================================")
+for(var i=1; i<=finalcenteridx; i++){
+	if(coIdxs[i]==null){}else{
+console.log("---------------------------------------")
+	console.log("i="+i+", coIdxs[i]="+coIdxs[i]);
+	console.log("i="+i+", coNames[i]="+coNames[i]);
+	console.log("i="+i+", coPhones[i]="+coPhones[i]);
+	console.log("i="+i+", coAddrs[i]="+coAddrs[i]);
+	console.log("i="+i+", coClasses[i]="+coClasses[i]);
+	console.log("i="+i+", coViews[i]="+coViews[i]);
+	console.log("i="+i+", coLats[i]="+coLats[i]);
+	console.log("i="+i+", coLngs[i]="+coLngs[i]);
+	console.log("i="+i+", coUsecounts[i]="+coUsecounts[i]);
+	console.log("i="+i+", coUrls[i]="+coUrls[i]);
+console.log("---------------------------------------")
+	console.log("i="+i+", contents[i]="+contents[i]);
+	}
+}
+console.log("=======================================")
+
+/*마커 및 인포윈도우 생성*/
+function getMarker(coIdx, coName, coPhone, coAddr, coClass, coView, coLat, coLng, coUsecount, coUrl){
+var coords; //위도경도
+var markerMain; //마커
+var infowindowMain //인포윈도우
+var latlngData; //위도 경도 없을 시 DB에 입력하기 위한 값
+if(coLat!=0 && coLng!=0){//DB에 위도 경도 있눈 경우
+	coords = new daum.maps.LatLng(coLat, coLng);
+	markerMain = new daum.maps.Marker({
+		position:coords,
+		image:markerImage,
+		clickable:true
+	});//markerMain = new daum.maps.Marker({
+	markers[coIdx]=markerMain;
+	infoContent='<table id="infowindows" class="table table-condensed">'+
+    '<thead><tr><th>'+coName+'<div id="infowindows_close" onclick="javascript:closeAllMarkInfo()"><span class="glyphicon glyphicon-remove-circle"></span></div></th></tr></thead>'+
+    '<tbody><tr><td>'+coAddr+'</td></tr></tbody>'+
+    '</table>';
+ 	infowindowMain=new daum.maps.InfoWindow({ 
+		content: infoContent,
+		zIndex:3
+ 	});//infowindowMain=new daum.maps.infoWindow({
+ 	infoWindows[coIdx]=infowindowMain;
+ 	daum.maps.event.addListener(markerMain, 'click', makeAddListener(map, markerMain, infowindowMain, coIdx, coUrl));
+}else{//DB에 위도 경도 값이 없는 경우
+	var geocoder = new daum.maps.services.Geocoder();
+	geocoder.addr2coord(coAddr, function(status, result){
+			if(status==daum.maps.services.Status.OK){
+				coords=new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+				markerMain = new daum.maps.Marker({
+					position:coords,
+					image:markerImage,
+					clickable:true
+				});//marker = new daum.maps.Marker({
+				markers[coIdx]=markerMain;
+				infoContent='<table id="infowindows" class="table table-condensed">'+
+			        '<thead><tr><th>'+coName+'<div id="infowindows_close" onclick="javascript:closeAllMarkInfo()"><span class="glyphicon glyphicon-remove-circle"></span></div></th></tr></thead>'+
+			        '<tbody><tr><td>'+coAddr+'</td></tr></tbody>'+
+			        '</table>';
+			     infowindowMain=new daum.maps.InfoWindow({ 
+					content: infoContent,
+					zIndex:3
+			     });//infowindowMain=new daum.maps.infoWindow({
+			   	infoWindows[coIdx]=infowindowMain;
+			   	coLat=result.addr[0].lat;
+			   	coLng=result.addr[0].lng;
+			   	latlngData =  coIdx+"/"+ coLat+"/"+coLng;
+			   	$.ajax({ 
+			   		url:"centerLatLng.do",
+					type:"GET",
+					data:{"latlngData":latlngData},
+					success:function(data){
+						$("#ajax").remove();
+						if(!data){
+							alert("ajax fail");
+							return false;
+						}else{
+						}//ajax !data
+					},//success:function(data){
+					error: function(data){
+						alert("ajax fail=");
 						return false;
-					}else{
-					}//ajax !data
-				},//ajax success function
-				error: function(data){
-					alert("ajax fail=");
-					return false;
-				}// ajax error function
-			}); //ajax lat lng ends
-	//makingMarkers ends
-    daum.maps.event.addListener(marker,'click', makeClickListener(map, marker, infowindow, cIdx, cUrl));
-	     }//if status ok ends
-	}); //geocoder addr2coord ends
-	}//cLnt cLng if check ends
-	        
-	function makeClickListener(){
-		return function(){
+					}// ajax error function
+				});//$ajax({
+		daum.maps.event.addListener(markerMain, 'click', makeAddListener(map, markerMain, infowindowMain, coIdx, coUrl));
+			}//if(status==daum.maps.services.Status.OK){
+		});//geocoder,addr2coord(coAddr, function(){	
+	}///if(coLat!=0 && coLng!=0)
+		function makeAddListener(){
+			return function(){
 				var setMapGo=false;
 				closeAllMarkInfo();
-				infowindow.open(map, marker);
-				show(cIdx, cUrl, setMapGo);
-		}
-	}//makeClickListener ends
-}//getMark ends
+				infowindowMain.open(map, markerMain);
+				show(coIdx, coUrl, setMapGo);
+			}//return function(){
+		}//function makeAddListener(){
+			console.log("markers[coIdx="+coIdx+"]="+markers[coIdx]);
+}//function getMarker(coIdx, coName, coPhone, coAddr, coClass, coView, coLat, coLng, coUsecount, coUrl){
+
+/*마커 및 인포윈도우 생성*/
+if(searchOn==true){}else if(searchOn==false){
+daum.maps.event.addListener(map, 'zoom_changed', searchMark);
+daum.maps.event.addListener(map, 'dragend', searchMark);
+}//if(searchOn==true){}else if(searchOn==false)
+function searchMark(){
+	if(searchOn==true){
+		return false;
+	}else{
+	if(markers!=null||markers!=''){
+		if(startCheck==false){//첫 접속일 경우 마커 생성 후 리스트만 제거
+			listRemove();
+			startCheck=true;
+		}else if(startCheck==true){//첫 접속 이후 맵 움직일 시에
+			if(mapOn==false){//맵 움직일 경우
+				listRemove();
+				removeMarker();
+			}//if(mapOn==false){
+		}//if(startCheck==false){
+	var bounds = map.getBounds();
+	var n=1; //리스트 카운트
+	var numDiv=0; //경계선
+	var selectoHtml;
+	if(mapOn==false){//맵 마우스로 움직일 경우만 생성
+		removeMore();
+		for(var i=0; i<markers.length; i++){
+			if(markers[i]==null||markers[i]=="undefined"){	}else{
+				if(bounds.contain(markers[i].getPosition())){
+					console.log("i reached here3~~~~~@!!@"+markers[i]+", i="+i);
+					markers[i].setMap(map);
+					selectoHtml='';
+					if(n>4){
+						selectoHtml+='<div class="col-sm-6 panel panel-default hiddenCnt" id="centerInfo_list_div">';
+						selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_img">';
+						selectoHtml+='<a href="javascript:show('+coIdxs[i]+',';
+						selectoHtml+="'";
+						selectoHtml+=coUrls[i];
+						selectoHtml+="'";
+						selectoHtml+=')">';
+						selectoHtml+='<img src="resources/centerImage/'+coViews[i]+'/'+coViews[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+						selectoHtml+='</a>';
+						selectoHtml+='</div>';
+						selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
+						selectoHtml+='<div class="panel-group" id="list-table">';
+						selectoHtml+='<div class="panel panel-default">';
+						selectoHtml+='<div class="panel-heading">';
+						selectoHtml+='<h6 class="panel-title" id="centerInfo_list_coName">'+coNames[i]+'<span class="bg-info" id="center_list_coName_class">'+coClasses[i]+'</span></h6>';
+						selectoHtml+='</div>'; //panel-heading
+						selectoHtml+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
+						selectoHtml+='<ul class="list-group">';
+						selectoHtml+='<li class="list-group-item">'+coAddrs[i]+'</li>';
+						selectoHtml+='</ul>';
+						selectoHtml+='</div>'; //colapse panel1
+						selectoHtml+='<div class="panel-body">';
+						selectoHtml+='<a class="btn-xs" id="center-addr-btn" data-toggle="collapse" href="#centerInfo_list_coAddr_'+i+'">주소보기</a>';
+						selectoHtml+='</div>'; //colapse panel open1
+						selectoHtml+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
+						selectoHtml+='<ul class="list-group">';
+						selectoHtml+='<li class="list-group-item"><b>'+coClasses[i]+'</b>-'+contents[i]+'</li>';
+						selectoHtml+='</ul>';
+						selectoHtml+='</div>'; //collapse panel2
+						selectoHtml+='<div class="panel-body">';
+						selectoHtml+='<a class="btn-xs" id="centerInfo_list_coClass" data-toggle="collapse" href="#centerInfo_list_content_'+i+'">제공서비스보기</a>';
+						selectoHtml+='</div>'; //collapse panel open 2
+						selectoHtml+='</div>';//panel default
+						selectoHtml+='</div>'; //panel group
+						selectoHtml+='</div>'; //panel final
+						selectoHtml+='</div>'; //panel final
+						$("#centerInfo_list").append(selectoHtml);
+						moreButton();
+					}else{
+						selectoHtml+='<div class="col-sm-6 panel panel-default" id="centerInfo_list_div">';
+						selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_img">';
+						selectoHtml+='<a href="javascript:show('+coIdxs[i]+',';
+						selectoHtml+="'";
+						selectoHtml+=coUrls[i];
+						selectoHtml+="'";
+						selectoHtml+=')">';
+						selectoHtml+='<img src="resources/centerImage/'+coViews[i]+'/'+coViews[i]+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+						selectoHtml+='</a>';
+						selectoHtml+='</div>';
+						selectoHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
+						selectoHtml+='<div class="panel-group" id="list-table">';
+						selectoHtml+='<div class="panel panel-default">';
+						selectoHtml+='<div class="panel-heading">';
+						selectoHtml+='<h6 class="panel-title" id="centerInfo_list_coName">'+coNames[i]+'<span class="bg-info" id="center_list_coName_class">'+coClasses[i]+'</span></h6>';
+						selectoHtml+='</div>'; //panel-heading
+						selectoHtml+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
+						selectoHtml+='<ul class="list-group">';
+						selectoHtml+='<li class="list-group-item">'+coAddrs[i]+'</li>';
+						selectoHtml+='</ul>';
+						selectoHtml+='</div>'; //colapse panel1
+						selectoHtml+='<div class="panel-body">';
+						selectoHtml+='<a class="btn-xs" id="center-addr-btn" data-toggle="collapse" href="#centerInfo_list_coAddr_'+i+'">주소보기</a>';
+						selectoHtml+='</div>'; //colapse panel open1
+						selectoHtml+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
+						selectoHtml+='<ul class="list-group">';
+						selectoHtml+='<li class="list-group-item"><b>'+coClasses[i]+'</b>-'+contents[i]+'</li>';
+						selectoHtml+='</ul>';
+						selectoHtml+='</div>'; //collapse panel2
+						selectoHtml+='<div class="panel-body">';
+						selectoHtml+='<a class="btn-xs" id="centerInfo_list_coClass" data-toggle="collapse" href="#centerInfo_list_content_'+i+'">제공서비스보기</a>';
+						selectoHtml+='</div>'; //collapse panel open 2
+						selectoHtml+='</div>';//panel default
+						selectoHtml+='</div>'; //panel group
+						selectoHtml+='</div>'; //panel final
+						selectoHtml+='</div>'; //panel final
+						$("#centerInfo_list").append(selectoHtml);
+						removeMore();
+					}//if(n>4){
+						n++;
+						if(numDiv%1==0 && numDiv%2!=0){
+							selectoHtml='<div class="col-sm-12"></div>';
+							$("#centerInfo_list").append(selectoHtml);
+						}
+					numDiv++;
+				}else{
+					markers[i].setMap(null);
+				}//if(bounds.contain(markers[i].getPosition())){
+			}//if(markers[i]==null||markers[i]=="undefined"){	}else{
+		}//for(var i=0; i<markers.length; i++){
+	}else{}//if(mapOn==false){
+}else{}//if(markers!=null||markers!=''){
+}//if(searchOn==true){
+	mapOn=false;
+}//function searchMark(){
 
 
-	/*업체 상세 aside 떠오르기*/
-function show(co_idx, centerListUrl, setMapGo){
+/*업체 정보 떠오르기 생성*/
+function show(coIdx, coUrl, setMapGo){
+	/*show 초기 세팅*/
 	mapOn=true;
 	if(infoWindows.length>0){
 		closeAllMarkInfo();
-	}
-	
-	$("#centerInfo_panel").animate({
+	}//if(infoWindows.length>0){
+		$("#centerInfo_panel").animate({
 			opacity:1,
 			height:'389px'
-		},600);
+		},600);//$("#centerInfo_panel").animate({
 		$("#centerInfo").css({display:"block"});
+		
+		/*show ajax center 불러오기*/
 		$.ajax({
-			url : "centerCompany.do",
-			type : "GET",
-			data : {"co_idx": co_idx},
+			url:"centerCompany.do",
+			type:"GET",
+			data:{"co_idx":coIdx},
 			success : function(data){
 				$("#ajax").remove();
 				var dataObj = JSON.parse(data);
@@ -1041,145 +1096,141 @@ function show(co_idx, centerListUrl, setMapGo){
 					alert("ajax fail");
 					return false;
 				}else{
-				/*co_idx and button*/
-				var btn_html = '';
-				btn_html += "<a class='col-sm-12 btn btn-info' href='"+centerListUrl+"' id='coBtn_button'>자세히보기</a>";
-				$("#centerInfo_body > #coBtn").css({display:"block"});
-				$("#coBtn_button").replaceWith(btn_html);
-
-				/*co_name*/
-				var coName_html = '';
-				coName_html = "<h4 id='centerInfo_coname'>"+dataObj.co_name+"</h4>";
-				$("#centerInfo_coname").replaceWith(coName_html)
-
-				/*co_address*/
-				var coAddr_html='';
-				coAddr_html = "<p class='glyphicon glyphicon-flag' id='centerInfo_address'>"+dataObj.co_address+"</p>";
-				$("#centerInfo_address").replaceWith(coAddr_html);
-
-				/*co_phone*/
-				var coPhone_html='';
-				coPhone_html = "<p class='glyphicon glyphicon-phone-alt' id='centerInfo_phone'>"+dataObj.co_phone+"</p>";
-				$("#centerInfo_phone").replaceWith(coPhone_html);
-
-				/*co_usecount*/
-				var coUsecount_html='';
-				coUsecount_html = '<p id="centerInfo_usecount"><span class="glyphicon glyphicon-stats"></span>총 이용 횟수 : '+dataObj.co_usecount+'</p>';
-				$("#centerInfo_usecount").replaceWith(coUsecount_html);
+					/*co_idx and button*/
+					var btn_html = '';
+					btn_html += "<a class='col-sm-12 btn btn-info' href='"+coUrl+"' id='coBtn_button'>자세히보기</a>";
+					$("#centerInfo_body > #coBtn").css({display:"block"});
+					$("#coBtn_button").replaceWith(btn_html);
 				
-				/*co_view*/
-				var coView_html='';
-				coView_html='<img alt="center" src="resources/centerImage/'+dataObj.co_view+'/'+dataObj.co_view+'_0.jpg" class="img-rounded img-responsive" id="centerInfo_img">';
-				$("#centerInfo_img").replaceWith(coView_html);
-				
-				/*co_avail*/
-				$("#centerInfo_avail").empty();
-				var coAvail=dataObj.co_avail;
-				var coAvail_split=coAvail.split("|");
-				var coAvail_array=[];
-				var coAvail_html='<ul class="list-inline">';
-				for(var i=0; i<coAvail_split.length; i++){
-				coAvail_array[i]=coAvail_split[i];
-					switch(coAvail_array[i]){
-					case '주차' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/Car_Parking.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
-					case '타올' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/Towels.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
-					case '운동복' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/T_Shirts.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
-					case '일일락커' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/Locker.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
-					case '샤워실' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/shower.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
-					case '샤워' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/shower.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
-					case '탈의실' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/change_room.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
-					default : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/causion.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>";
-					}
-				}
-				coAvail_html+='</ul>';
-				$("#centerInfo_avail").html(coAvail_html);
-				
-				/*co_regul*/
-				var coRegul=dataObj.co_regul;
-				var coRegul_split = coRegul.split("|");
-				var coRegul_array=[];
-				var coRegul_html='<div id="centerInfo_regul">';
-				for(var i=0; i<coRegul_split.length; i++){
-					coRegul_array[i]=coRegul_split[i];
-						if(coRegul_array[i]==null||coRegul_array[i]=="null"){
-							coRegul_html +='<p><span class="glyphicon glyphicon-ok-circle"></span>없음</p>';
-						}else{
-							coRegul_html +='<p><span class="glyphicon glyphicon-ok-circle"></span>'+coRegul_array[i]+'</p>';
+					/*co_name*/
+					var coName_html = '';
+					coName_html = "<h4 id='centerInfo_coname'>"+dataObj.co_name+"</h4>";
+					$("#centerInfo_coname").replaceWith(coName_html);
+					
+					/*co_address*/
+					var coAddr_html='';
+					coAddr_html = "<p class='glyphicon glyphicon-flag' id='centerInfo_address'>"+dataObj.co_address+"</p>";
+					$("#centerInfo_address").replaceWith(coAddr_html);
+					
+					/*co_phone*/
+					var coPhone_html='';
+					coPhone_html = "<p class='glyphicon glyphicon-phone-alt' id='centerInfo_phone'>"+dataObj.co_phone+"</p>";
+					$("#centerInfo_phone").replaceWith(coPhone_html);
+					
+					/*co_usecount*/
+					var coUsecount_html='';
+					coUsecount_html = '<p id="centerInfo_usecount"><span class="glyphicon glyphicon-stats"></span>총 이용 횟수 : '+dataObj.co_usecount+'</p>';
+					$("#centerInfo_usecount").replaceWith(coUsecount_html);
+					
+					/*co_view*/
+					var coView_html='';
+					coView_html='<img alt="center" src="resources/centerImage/'+dataObj.co_view+'/'+dataObj.co_view+'_0.jpg" class="img-rounded img-responsive" id="centerInfo_img">';
+					$("#centerInfo_img").replaceWith(coView_html);
+					
+					/*co_avail*/
+					$("#centerInfo_avail").empty();
+					var coAvail=dataObj.co_avail;
+					var coAvail_split=coAvail.split("|");
+					var coAvail_array=[];
+					var coAvail_html='<ul class="list-inline">';
+					for(var i=0; i<coAvail_split.length; i++){
+					coAvail_array[i]=coAvail_split[i];
+						switch(coAvail_array[i]){
+						case '주차' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/Car_Parking.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
+						case '타올' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/Towels.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
+						case '운동복' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/T_Shirts.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
+						case '일일락커' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/Locker.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
+						case '샤워실' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/shower.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
+						case '샤워' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/shower.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
+						case '탈의실' : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/change_room.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>"; break;
+						default : coAvail_html += "<li><span id='coAvail_img'><img id='avail_photo' src='resources/images/causion.png'></span><span id='coAvail_text_"+i+"'>"+coAvail_split[i]+"</span></li>";
 						}
 					}
-				coRegul_html+='</div>';
-				$("#centerInfo_regul").replaceWith(coRegul_html);
-				
-				/*co_extra*/
-				var coExtra = dataObj.co_extra;
-				var coExtra_split = coExtra.split("|");
-				var coExtra_array=[];
-				var coExtra_html='<div id="centerInfo_extra">';
-				for(var i=0; i<coExtra_split.length; i++){
-					coExtra_array[i]=coExtra_split[i];
-					if(coExtra_array[i]==null||coExtra_array[i]=='null'){
-						coExtra_html='<p><span class="glyphicon glyphicon-ok-circle"></span>없음</p>';
-					}else{
-						coExtra_html+='<p><span class="glyphicon glyphicon-ok-circle"></span>'+coExtra_array[i]+'</p>';
+					coAvail_html+='</ul>';
+					$("#centerInfo_avail").html(coAvail_html);
+					
+					/*co_regul*/
+					var coRegul=dataObj.co_regul;
+					var coRegul_split = coRegul.split("|");
+					var coRegul_array=[];
+					var coRegul_html='<div id="centerInfo_regul">';
+					for(var i=0; i<coRegul_split.length; i++){
+						coRegul_array[i]=coRegul_split[i];
+							if(coRegul_array[i]==null||coRegul_array[i]=="null"){
+								coRegul_html +='<p><span class="glyphicon glyphicon-ok-circle"></span>없음</p>';
+							}else{
+								coRegul_html +='<p><span class="glyphicon glyphicon-ok-circle"></span>'+coRegul_array[i]+'</p>';
+							}
+						}
+					coRegul_html+='</div>';
+					$("#centerInfo_regul").replaceWith(coRegul_html);
+					
+					/*co_extra*/
+					var coExtra = dataObj.co_extra;
+					var coExtra_split = coExtra.split("|");
+					var coExtra_array=[];
+					var coExtra_html='<div id="centerInfo_extra">';
+					for(var i=0; i<coExtra_split.length; i++){
+						coExtra_array[i]=coExtra_split[i];
+						if(coExtra_array[i]==null||coExtra_array[i]=='null'){
+							coExtra_html='<p><span class="glyphicon glyphicon-ok-circle"></span>없음</p>';
+						}else{
+							coExtra_html+='<p><span class="glyphicon glyphicon-ok-circle"></span>'+coExtra_array[i]+'</p>';
+						}
 					}
-				}
-				coExtra_html+='</div>';
-				$("#centerInfo_extra").replaceWith(coExtra_html);
-				
-			/*클릭 후 이동*/
-
-			if(searchOn==true){
-				if(setMapGo==false){//마커를 클릭할 경우
-					infoWindows[co_idx].open(map, markers[co_idx]);
-					}else{//리스트를 클릭할 경우
-					infoWindows[co_idx].open(map, markers[co_idx]);
-					var movePosition;
-					if(cLatArr[co_idx] != 0 && cLngArr[co_idx] != 0){//db값에 lat lng가 입력된 경우
-						movePosition = new daum.maps.LatLng(cLatArr[co_idx], cLngArr[co_idx]);
-						map.setCenter(movePosition);
-						map.setLevel(4);
-					}else{ //db값에 lat lng가 입력되지 않은 경우
-						var geocoder = new daum.maps.services.Geocoder();
-						geocoder.addr2coord(dataObj.co_address,function(status,result){
-							movePosition = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
-							infoWindows[co_idx].open(map, markers[co_idx]);
-							map.setCenter(movePosition);
-							map.setLevel(4);
-						});
-					}//lat lng 데이터 배이스 여부 확인 후 geo 호출 결정 if 문
-					}//if setMapGo ends 지도 움직이기
-			/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-			}else if(searchOn==false){
-				if(setMapGo==false){//마커를 클릭할 경우
-				co_idx-=1;
-				infoWindows[co_idx].open(map, markers[co_idx])
-				}else{//리스트를 클릭할 경우
-				co_idx-=1;
-				var movePosition
-				if(cLatArr[co_idx] != 0 && cLngArr[co_idx] != 0){//db값에 lat lng가 입력된 경우
-				movePosition = new daum.maps.LatLng(cLatArr[co_idx], cLngArr[co_idx]);
-				infoWindows[co_idx].open(map, markers[co_idx]);
-				map.setCenter(movePosition);
-				map.setLevel(4);
-				}else{ //db값에 lat lng가 입력되지 않은 경우
-				var geocoder = new daum.maps.services.Geocoder();
-				geocoder.addr2coord(dataObj.co_address,function(status,result){
-					movePosition = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
-					infoWindows[co_idx].open(map, markers[co_idx]);
-					map.setCenter(movePosition);
-					map.setLevel(4);
-				});
-				}//lat lng 데이터 배이스 여부 확인 후 geo 호출 결정 if 문
-				}//if setMapGo ends 지도 움직이기
-			}//if searchOn false ends
-				co_idx+=1;
-				}//ajax의 data !=null 경우의 if문 
-			} //ajax success function
-		});//패널 센터정보 떠오르기 ajax ends
+					coExtra_html+='</div>';
+					$("#centerInfo_extra").replaceWith(coExtra_html);
+					
+					/*클릭 후 이동*/
+					if(searchOn==true){//검색일 경우
+						if(setMapGo==false){//마커 클릭할 경우
+							infoWindows[coIdx].open(map, markers[coIdx]);
+						}else{//리스트를 클릭할 경우
+							var movePosition;
+							if(coLats[coIdx]!=0&&coLng[coIdx]!=0){
+								movePosition = new daum.maps.LatLng(coLats[coIdx], coLngs[coIdx]);
+								infoWindows[coIdx].open(map, markers[coIdx]);
+								map.setCenter(movePosition);
+								map.setLevel(4);
+							}else{
+								var geocoder=new daum.maps.services.Geocoder();
+								geocoder.addr2coord(dataObj.co_address, function(status, result){
+									movePosition = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+									infoWindows[coIdx].open(map, markers[coIdx]);
+									map.setCenter(movePosition);
+									map.setLevel(4);
+								});//geocoder.addr2coord(dataObj.co_address, function(status, result)
+							}//if(coLats[coIdx]!=0&&coLng[coIdx]!=0){
+						}//if(setMapGo==false){
+					}else if(searchOn==false){//검색이 아닐경우
+						if(setMapGo==false){//마커를 클릭할 경우
+							infoWindows[coIdx].open(map, markers[coIdx])
+						}else{
+							if(coLats[coIdx]!=0&&coLng[coIdx]!=0){
+								movePosition = new daum.maps.LatLng(coLats[coIdx], coLngs[coIdx]);
+								infoWindows[coIdx].open(map, markers[coIdx]);
+								map.setCenter(movePosition);
+								map.setLevel(4);
+							}else{
+								var geocoder = new daum.maps.services.Geocoder();
+								geocoder.addr2coord(dataObj.co_address,function(status,result){
+									movePosition = new daum.maps.LatLng(result.addr[0].lat, result.addr[0].lng);
+									infoWindows[coIdx].open(map, markers[coIdx]);
+									map.setCenter(movePosition);
+									map.setLevel(4);
+								});//geocoder.addr2coord(dataObj.co_address,function(status,result)
+							}//if(coLats[coIdx]!=0&&coLng[coIdx]!=0)
+						}//if(setMapGo==false)
+					}//if(searchOn==true)
+				}//if(!data)
+			}//successfunction(data)
+		});//ajax ends
+		
+		/*show ajax usetime 불러오기*/
 		$.ajax({
 			url: "centerUsetime.do",
 			type: "GET",
-			data: {"co_idx":co_idx},
+			data: {"co_idx":coIdx},
 			success:function(data){
 				$("#ajax").remove();
 				var strData= data;
@@ -1196,17 +1247,20 @@ function show(co_idx, centerListUrl, setMapGo){
 								useTime_html += "<tr><td>"+usetimeSet.usetime_day+"</td><td></td></tr>";
 							}else{
 								useTime_html += "<tr><td>"+usetimeSet.usetime_day+"</td><td>"+usetimeSet.usetime_time+"</td></tr>";
-							}
-					} 
+							}//if(usetimeSet.usetime_time==0||usetimeSet.usetime_time=='0' || usetimeSet.usetime_time=="null")
+					}//for(var i=0; i<usetime.length; i++)
 					useTime_html+="</tbody>";
 					$("#centerInfo_time").replaceWith(useTime_html);
-				}
-			}
-		});
+				}//if(!data)
+			}//success:function(data)
+		});//$.ajax(
+		
+				
+		/*show ajax 서비스 떠오르기*/
 		$.ajax({
 			url : "centerContent.do",
 			type:"GET",
-			data: {"co_idx":co_idx},
+			data: {"co_idx":coIdx},
 			success:function(data){
 				$("#ajax").remove();
 				var strData = data;
@@ -1296,59 +1350,16 @@ function show(co_idx, centerListUrl, setMapGo){
 								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content5+'</span>&nbsp;';
 								content_html+='&nbsp;<span class="label label-danger">'+contentSet.content6+'</span></p>';
 							}//if(contentSet.content2==null||contentSet.content2=='null'){
-						}//if(contentCoin<=5 ){
-						}//for(var i=0; i<content.length; i++){
+						}//if(contentCoin<=5 )
+						}//for(var i=0; i<content.length; i++)
 					$("#centerInfo_coin_div").html(content_html);
 						}//if(!data)
-				}//	success:function(data){
+				}//success:function(data)
 		});//ajax content list ends
-	}//show 끝
-	
-	/*상세 aside 닫기*/
-$(function(){
-		$close=$("#close");
-		$close.on("click", function(e){
-			e.preventDefault();
-			$(this).parents("#centerInfo_panel").animate({
-				opacity:'0',
-				height:'0px'
-			}, 500);
-		})
-	})
+}//function show(){
 
-/*센터 상세보기 열기*/
-function centerDetail(centerListUrl){
-		window.location.href=centerListUrl;
-	}
-
-/*인포 전부 끄기*/
-function closeAllMarkInfo(){
-			for(var i=0; i<infoWindows.length; i++){
-				infoWindows[i].close();
-			}
-		}
-/*마크 전부 끄기*/
-function removeMarker(){
-			if(markers==null){
-			return;
-			}else{
-			for(var i=0; i<markers.length; i++){
-				markers[i].setMap(null);
-			}
-	}
-}
-
-/*검색 초기화 */
-function searchReset(searchNum){
-	$("#search_initialization").empty();
-	$("#search_initialization").html('<a href="javascript:mapStart()" class="btn btn-primary btn-block">검색초기화<span class="badge">'+searchNum+'</span></a>');
-}
-
-
-
-/*검색하기*/
 function keywordSearch(){
-
+	searchOn=true;
 	var keyword = $("#search_input").val();
 	$("#search_input").val('');
 	$.ajax({
@@ -1371,209 +1382,130 @@ function keywordSearch(){
 				searchReset(0);
 				removeMore()
 				return false;
-			}
+			}//if(!data){
 			/*초기세팅 및 전부 삭제*/
 			searchOn = true;
 			closeAllMarkInfo();
 			removeMarker();
 			listRemove();
 			searchReset(company.length);
-			var numDiv1=0;
-			var n1=0;
 			var points=[];
+			var point;
 			var bounds = new daum.maps.LatLngBounds(); //맵 바운드
-			var marker;
-			var infowindow;
-	
-			/***************************************************idx 체크 후 content 대입**********************************************************************/
-			contents=[];
-			contentLists=[];
-			var contentidx=[];
-			var contentarr=[];
+			var companySet;
+			var companyIdx;
+			var searchCoIdx=[];
 			for(var i=0; i<company.length; i++){
-				var contentSet=company[i];
-				contentidx[i]=contentSet.co_idx;
-			}
-			var cnt;
-			for(var i=0; i<company.length; i++){
-				contentLists[i]='';
-				for(var j=0; j<contentCnt; j++){
-					contentarr[j]=$("#content_list_co_idx_"+(j+1)).text();
-					if(contentidx[i]==contentarr[j]){
-						content1 = $("#content_list_content1_"+(j+1)).text();
-						content2 = $("#content_list_content2_"+(j+1)).text();
-						content3 = $("#content_list_content3_"+(j+1)).text();
-						content4 = $("#content_list_content4_"+(j+1)).text();
-						content5 = $("#content_list_content5_"+(j+1)).text();
-						content6 = $("#content_list_content6_"+(j+1)).text();
-						var comma=", ";
-						if(content2!=""&&content2!=" "&&content2!="null"){
-							content1+=", ";
-						}
-						if(content3!=""&&content3!=" "&&content3!="null"){
-							content2+=", ";
-						}
-						if(content4!=""&&content4!=" "&&content4!="null"){
-							content3+=", ";
-						}
-						if(content5!=""&&content5!=" "&&content5!="null"){
-							content4+=", ";
-						}
-						if(content6!=""&&content6!=" "&&content6!="null"){
-							content5+=", ";
-						}
-						if(content1!=""&&content1!=" "&&content1!="null"){
-							content6+=", ";
-						}
-						contentLists[i]+=content1
-						+content2
-						+content3
-						+content4
-						+content5
-						+content6;	
-					
-					}//if(contentidx[i]==contentarr[j]
-				}//for(var j=0; j<contentCnt; j++){
-			}//for(var i=0; i<contentidx.length; i++){
-			/***************************************************end: idx 체크 후 content 대입**********************************************************************/
-			
-			/*검색 후 리스트의 주소값 저장 후 맵 바운드 설정*/
-			for(var i=0; i<company.length; i++){
-			var companySet = company[i];
-			point= new daum.maps.LatLng(companySet.co_lat, companySet.co_lng);
-			points[i]=point;
-			bounds.extend(points[i]);
-
-			/*주소값으로 마커 및 인포윈도우 생성*/
-			marker=new daum.maps.Marker({
-				position:points[i],
-				image:markerImage,
-			 	clickable:true
-			});//마커 생성
-			markers[companySet.co_idx]=marker;
-			marker.setMap(map);
-			infoContent='<table id="infowindows" class="table table-condensed">'+
-	        '<thead><tr><th>'+companySet.co_name+'<div id="infowindows_close" onclick="javascript:closeAllMarkInfo()"><span class="glyphicon glyphicon-remove-circle"></span></div></th></tr></thead>'+
-	        '<tbody><tr><td>'+companySet.co_address+'</td></tr></tbody>'+
-	        '</table>';
-			infowindow = new daum.maps.InfoWindow({
-				content:infoContent
-			});//인포 윈도우 생성
-			infoWindows[companySet.co_idx]=infowindow;
-			cLatArr[companySet.co_idx]=companySet.co_lat;
-			cLngArr[companySet.co_idx]=companySet.co_lng;
-			var curl='centerDetail.do?co_idx='+companySet.co_idx;
-			clickEventSearch(map, marker, infowindow, companySet.co_idx, curl);
-			}//for 맵 바운드 ends
-			function clickEventSearch(map, marker, infowindow, co_idx, curl){
-				daum.maps.event.addListener(marker, 'click', searchClick(map, marker, infowindow, co_idx, curl));
-				function searchClick(){
-					return function(){
-						var setMapGo=false;
-						infowindow.open(map, marker);
-						show(co_idx, curl, setMapGo);
-					}//return function ends
-				}//searchClick function ends
-			}//clickEventSearch ends
-
-			/*맵 이동*/
-			map.setBounds(bounds);
-			
-			/*리스트 생성*/
-			listRemove();
-			for(var i=0; i<company.length; i++){
-				var companySet = company[i];
-				var company_html='';
-				var point;
-				if(n1>3){
-					company_html+='<div class="col-sm-6 panel panel-default hiddenCnt" id="centerInfo_list_div">';
-					company_html+='<div class="panel-body col-sm-12" id="centerInfo_list_img">';
-					company_html+='<a href="javascript:show('+companySet.co_idx+',';
-					company_html+="'";
-					company_html+="centerDetail.do?co_idx="+companySet.co_idx;
-					company_html+="'";
-					company_html+=')">';
-					company_html+='<img src="resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
-					company_html+='</a>';
-					company_html+='</div>';
-					company_html+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
-					company_html+='<div class="panel-group" id="list-table">';
-					company_html+='<div class="panel panel-default">';
-					company_html+='<div class="panel-heading">';
-					company_html+='<h6 class="panel-title" id="centerInfo_list_coName">'+companySet.co_name+'<span class="bg-info" id="center_list_coName_class">('+companySet.co_class+')</span></h6>';
-					company_html+='</div>'; //panel-heading
-					company_html+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
-					company_html+='<ul class="list-group">';
-					company_html+='<li class="list-group-item">'+companySet.co_address+'</li>';
-					company_html+='</ul>';
-					company_html+='</div>'; //colapse panel1
-					company_html+='<div class="panel-body">';
-					company_html+='<a class="btn-xs" id="center-addr-btn" data-toggle="collapse" href="#centerInfo_list_coAddr_'+i+'">주소보기</a>';
-					company_html+='</div>'; //colapse panel open1
-					company_html+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
-					company_html+='<ul class="list-group">';
-					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contentLists[i]+'</li>';
-					company_html+='</ul>';
-					company_html+='</div>'; //collapse panel2
-					company_html+='<div class="panel-body">';
-					company_html+='<a class="btn-xs" id="centerInfo_list_coClass" data-toggle="collapse" href="#centerInfo_list_content_'+i+'">제공서비스보기</a>';
-					company_html+='</div>'; //collapse panel open 2
-					company_html+='</div>';//panel default
-					company_html+='</div>'; //panel group
-					company_html+='</div>'; //panel final
-					company_html+='</div>'; //panel final
-					$("#centerInfo_list").append(company_html);	
-				}else{
-					company_html+='<div class="col-sm-6 panel panel-default" id="centerInfo_list_div">';
-					company_html+='<div class="panel-body col-sm-12" id="centerInfo_list_img">';
-					company_html+='<a href="javascript:show('+companySet.co_idx+',';
-					company_html+="'";
-					company_html+="centerDetail.do?co_idx="+companySet.co_idx;
-					company_html+="'";
-					company_html+=')">';
-					company_html+='<img src="resources/centerImage/'+companySet.co_view+'/'+companySet.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
-					company_html+='</a>';
-					company_html+='</div>';
-					company_html+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
-					company_html+='<div class="panel-group" id="list-table">';
-					company_html+='<div class="panel panel-default">';
-					company_html+='<div class="panel-heading">';
-					company_html+='<h6 class="panel-title" id="centerInfo_list_coName">'+companySet.co_name+'<span class="bg-info" id="center_list_coName_class">('+companySet.co_class+')</span></h6>';
-					company_html+='</div>'; //panel-heading
-					company_html+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
-					company_html+='<ul class="list-group">';
-					company_html+='<li class="list-group-item">'+companySet.co_address+'</li>';
-					company_html+='</ul>';
-					company_html+='</div>'; //colapse panel1
-					company_html+='<div class="panel-body">';
-					company_html+='<a class="btn-xs" id="center-addr-btn" data-toggle="collapse" href="#centerInfo_list_coAddr_'+i+'">주소보기</a>';
-					company_html+='</div>'; //colapse panel open1
-					company_html+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
-					company_html+='<ul class="list-group">';
-					company_html+='<li class="list-group-item"><b>'+companySet.co_class+'</b>-'+contentLists[i]+'</li>';
-					company_html+='</ul>';
-					company_html+='</div>'; //collapse panel2
-					company_html+='<div class="panel-body">';
-					company_html+='<a class="btn-xs" id="centerInfo_list_coClass" data-toggle="collapse" href="#centerInfo_list_content_'+i+'">제공서비스보기</a>';
-					company_html+='</div>'; //collapse panel open 2
-					company_html+='</div>';//panel default
-					company_html+='</div>'; //panel group
-					company_html+='</div>'; //panel final
-					company_html+='</div>'; //panel final
-					$("#centerInfo_list").append(company_html);
-				}//i>4 if 문
-				n1++;
-				if(numDiv1%1==0&&numDiv1%2!=0){
-					company_html='<div class="col-sm-12" id="line"></div>';
-					$("#centerInfo_list").append(company_html);
-				}//div line 붙이기 if 문
-				numDiv1++;
-			}//for문 센터 리스트 end
-			mapOn=false;
-		}//ajax success function ends
-	})//ajax end
-}//keywordSearch() ends
-
+				/*검색 후 리스트의 주소값 저장 후 맵 바운드 설정*/
+				companySet=company[i];
+				companyIdx=companySet.co_idx;
+				searchCoIdx[i]=companyIdx;
+				point = new daum.maps.LatLng(companySet.co_lat, companySet.co_lng);
+				points[i]=point;
+				bounds.extend(points[i]);
+				markers[companyIdx].setMap(map);
+				map.setBounds(bounds);
+			}//for(var i=0; i<markers.length; i++)
+				
+				/*마커에 따른 list 생성*/
+				console.log("company.length="+company.length);
+				var companySet2;
+				var numDiv1=0;
+				var n1=1;
+				var searchHtml;
+				for(var i=0; i<company.length; i++){
+					searchHtml='';
+					companySet2=company[i];
+					if(n1>4){
+						searchHtml+='<div class="col-sm-6 panel panel-default hiddenCnt" id="centerInfo_list_div">';
+						searchHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_img">';
+						searchHtml+='<a href="javascript:show('+companySet2.co_idx+',';
+						searchHtml+="'";
+						searchHtml+="centerDetail.do?co_idx="+companySet2.co_idx;
+						searchHtml+="'";
+						searchHtml+=')">';
+						searchHtml+='<img src="resources/centerImage/'+companySet2.co_view+'/'+companySet2.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+						searchHtml+='</a>';
+						searchHtml+='</div>';
+						searchHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
+						searchHtml+='<div class="panel-group" id="list-table">';
+						searchHtml+='<div class="panel panel-default">';
+						searchHtml+='<div class="panel-heading">';
+						searchHtml+='<h6 class="panel-title" id="centerInfo_list_coName">'+companySet2.co_name+'<span class="bg-info" id="center_list_coName_class">('+companySet2.co_class+')</span></h6>';
+						searchHtml+='</div>'; //panel-heading
+						searchHtml+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
+						searchHtml+='<ul class="list-group">';
+						searchHtml+='<li class="list-group-item">'+companySet2.co_address+'</li>';
+						searchHtml+='</ul>';
+						searchHtml+='</div>'; //colapse panel1
+						searchHtml+='<div class="panel-body">';
+						searchHtml+='<a class="btn-xs" id="center-addr-btn" data-toggle="collapse" href="#centerInfo_list_coAddr_'+i+'">주소보기</a>';
+						searchHtml+='</div>'; //colapse panel open1
+						searchHtml+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
+						searchHtml+='<ul class="list-group">';
+						searchHtml+='<li class="list-group-item"><b>'+companySet2.co_class+'</b>-'+contents[i]+'</li>';
+						searchHtml+='</ul>';
+						searchHtml+='</div>'; //collapse panel2
+						searchHtml+='<div class="panel-body">';
+						searchHtml+='<a class="btn-xs" id="centerInfo_list_coClass" data-toggle="collapse" href="#centerInfo_list_content_'+i+'">제공서비스보기</a>';
+						searchHtml+='</div>'; //collapse panel open 2
+						searchHtml+='</div>';//panel default
+						searchHtml+='</div>'; //panel group
+						searchHtml+='</div>'; //panel final
+						searchHtml+='</div>'; //panel final
+						$("#centerInfo_list").append(searchHtml);
+						moreButton();	
+					}else{
+						searchHtml+='<div class="col-sm-6 panel panel-default" id="centerInfo_list_div">';
+						searchHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_img">';
+						searchHtml+='<a href="javascript:show('+companySet2.co_idx+',';
+						searchHtml+="'";
+						searchHtml+="centerDetail.do?co_idx="+companySet2.co_idx;
+						searchHtml+="'";
+						searchHtml+=')">';
+						searchHtml+='<img src="resources/centerImage/'+companySet2.co_view+'/'+companySet2.co_view+'_0.jpg" id="list_img" alt="center"  class="img-responsive">';
+						searchHtml+='</a>';
+						searchHtml+='</div>';
+						searchHtml+='<div class="panel-body col-sm-12" id="centerInfo_list_table">';
+						searchHtml+='<div class="panel-group" id="list-table">';
+						searchHtml+='<div class="panel panel-default">';
+						searchHtml+='<div class="panel-heading">';
+						searchHtml+='<h6 class="panel-title" id="centerInfo_list_coName">'+companySet2.co_name+'<span class="bg-info" id="center_list_coName_class">('+companySet2.co_class+')</span></h6>';
+						searchHtml+='</div>'; //panel-heading
+						searchHtml+='<div id="centerInfo_list_coAddr_'+i+'" class="panel-collapse collapse">';
+						searchHtml+='<ul class="list-group">';
+						searchHtml+='<li class="list-group-item">'+companySet2.co_address+'</li>';
+						searchHtml+='</ul>';
+						searchHtml+='</div>'; //colapse panel1
+						searchHtml+='<div class="panel-body">';
+						searchHtml+='<a class="btn-xs" id="center-addr-btn" data-toggle="collapse" href="#centerInfo_list_coAddr_'+i+'">주소보기</a>';
+						searchHtml+='</div>'; //colapse panel open1
+						searchHtml+='<div id="centerInfo_list_content_'+i+'" class="panel-collapse collapse">';
+						searchHtml+='<ul class="list-group">';
+						searchHtml+='<li class="list-group-item"><b>'+companySet2.co_class+'</b>-'+contents[i]+'</li>';
+						searchHtml+='</ul>';
+						searchHtml+='</div>'; //collapse panel2
+						searchHtml+='<div class="panel-body">';
+						searchHtml+='<a class="btn-xs" id="centerInfo_list_coClass" data-toggle="collapse" href="#centerInfo_list_content_'+i+'">제공서비스보기</a>';
+						searchHtml+='</div>'; //collapse panel open 2
+						searchHtml+='</div>';//panel default
+						searchHtml+='</div>'; //panel group
+						searchHtml+='</div>'; //panel final
+						searchHtml+='</div>'; //panel final
+						$("#centerInfo_list").append(searchHtml);
+						removeMore();
+					}
+					n1++;
+					if(numDiv1%1==0&&numDiv1%2!=0){
+						var line='<div class="col-sm-12" id="listline"></div>';
+						$("#centerInfo_list").append(line);
+					}//div line 붙이기 if 문
+					numDiv1++;
+				}//for(var i=0; i<company.length; i++)
+				mapOn=false;
+		}//success:function(data)
+});//$.ajax
+}//function keywordSearch()
 </script>
 </body>
 </html>
