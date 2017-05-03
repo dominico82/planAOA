@@ -12,12 +12,14 @@
 <link href="resources/css/help.css" rel="stylesheet" type="text/css">
 <link href="resources/css/notice.css" rel="stylesheet" type="text/css">
 <link href="resources/css/tlx.bootstrap.min.css" rel="stylesheet" type="text/css">
+<jsp:include page="../header.jsp"/>
+<style>
+a{
+	color: gray;
+}
+</style>
 </head>
 <body>
-
-	<header>
-		<jsp:include page="../header.jsp"/>
-	</header>
 <div class="wrap">
 
     <div class="container">

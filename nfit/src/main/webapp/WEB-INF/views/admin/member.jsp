@@ -135,7 +135,7 @@
 								<td class="center">${admin.member_email }</td>
 								<td class="center"">${admin.member_tel }</td>
 								<td class="center">${admin.member_coin }</td>
-								<td class="center"><input type="button" value="삭제"
+								<td class="center"><input type="button" value="삭제" class="btn btn-sm btn-primary"
 									onclick="location.href='memberDeleteAdmin.do?member_id=${admin.member_id}'">
 								</td>
 							</tr>

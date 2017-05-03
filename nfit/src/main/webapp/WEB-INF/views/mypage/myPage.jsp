@@ -68,6 +68,32 @@ function picLoad(){
 	document.upload.submit();
 }
 </script>
+<script>
+function bookingDel(member_id, co_idx, use_date, usemember_coin, member_coin){
+	var refundCoin=member_coin+usemember_coin;
+	console.log(member_id);
+	console.log(co_idx);
+	console.log(use_date);
+	console.log(usemember_coin);
+	console.log(member_coin);
+	$.ajax({
+		type:"POST",
+		url: "bookingDel.do",
+		data: "member_id="+member_id+"&co_idx="+co_idx+"&use_date="+use_date+"&usemember_coin="+refundCoin,
+		success: function(data){
+			if(data==1){
+				alert('예약이 취소되었습니다!');
+				console.log("예약삭제성공!");
+				location.reload();
+			}
+		},
+		error: function(data){
+			alert("실패!!");
+		}
+	});
+	
+}
+</script>
 </head>
 <body>
 <div class="wrap">
@@ -769,32 +795,7 @@ function picLoad(){
 								                    			<td>${dta2.USEMEMBER_COIN}코인</td>
 								                    			<td><button type="button" class="btn btn-sm btn-info" onclick="javascript:bookingDel('${dta2.MEMBER_ID}', ${dta2.CO_IDX}, '${dta2.USE_DATE}', ${dta2.USEMEMBER_COIN}, ${dto.member_coin});"><i class="fa fa-edit"></i>예약취소</button></td>
 								                    		</tr>
-<script>
-function bookingDel(member_id, co_idx, use_date, usemember_coin, member_coin){
-	var refundCoin=member_coin+usemember_coin;
-	console.log(member_id);
-	console.log(co_idx);
-	console.log(use_date);
-	console.log(usemember_coin);
-	console.log(member_coin);
-$.ajax({
-	type:"POST",
-	url: "bookingDel.do",
-	data: "member_id="+member_id+"&co_idx="+co_idx+"&use_date="+use_date+"&usemember_coin="+refundCoin,
-	success: function(data){
-		if(data==1){
-			alert('예약이 취소되었습니다!');
-			console.log("예약삭제성공!");
-			location.reload();
-		}
-	},
-	error: function(data){
-		alert("실패!!");
-	}
-});
-	
-};
-</script>
+
 								                    	</c:forEach>					          
 						                    		</c:if>
 						                    		          	

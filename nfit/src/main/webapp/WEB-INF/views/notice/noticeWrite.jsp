@@ -3,13 +3,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description"
+	content="CoreUI - Open Source Bootstrap list Template">
+<meta name="author" content="Łukasz Holeczek">
+<meta name="keyword"
+	content="Bootstrap,list,Template,Open,Source,AngularJS,Angular,Angular2,Angular 2,Angular4,Angular 4,jQuery,CSS,HTML,RWD,Dashboard,React,React.js,Vue,Vue.js">
+<link rel="shortcut icon" href="resources/img/favicon.png">
+
+<title>Nfit 공지사항 작성</title>
 <link href="resources/css/tlx.bootstrap.min.css" rel="stylesheet" type="text/css">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="resources/css/notice.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/bootstrap-filestyle.min.js"></script>
+<!-- Main styles for this application -->
+
+<link href="resources/css/adminstyle.css" rel="stylesheet">
+<link href="resources/css/style.css" rel='stylesheet' type='text/css' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" type="image/x-icon"
+	href="resources/images/fav-icon.png" />
+
+<!---start-login-script--->
+<script src="resources/js/login.js"></script>
+<!---//End-login-script--->
+<!-----768px-menu----->
+<link type="text/css" rel="stylesheet"
+	href="resources/css/jquery.mmenu.all.css" />
+<link href="resources/css/font-awesome.min.css" rel="stylesheet">
+<link href="resources/css/simple-line-icons.css" rel="stylesheet">
+<link href="resources/css/table.css" rel="stylesheet">
 <script>
 //Check for the various File API support.
 if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -45,11 +72,34 @@ $(":file").filestyle({input: false});
 
 
 </head>
-<body>
+<body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
 	<header>
 		<jsp:include page="../header.jsp"/>
 	</header>
-<br><br><br>
+<div class="app-body">
+		<div class="sidebar">
+			<nav class="sidebar-nav">
+				<ul class="nav">
+					<li class="nav-item"><a class="nav-link" href="#"><i
+							class="icon-speedometer"></i>Test<span class="badge badge-info">NEW</span></a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="memberAdmin.do"><i
+							class="icon-people"></i> 회원관리</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="co_list.do"><i class="icon-briefcase"></i>제휴업체
+							등록/삭제</a></li>
+					<li class="nav-item"><a class="nav-link" href="coinAdmin.do"><i
+							class="icon-credit-card"></i>코인 관리</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="helpMtomReply.do"><i class="icon-check"></i>문의 관리</a></li>
+					<li class="nav-item"><a class="nav-link" href="noticeAdmin.do"><i
+							class="icon-list"></i>공지사항 관리</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<!-- Main content -->
+		<main class="main">
 <div class="wrap">
 
     <div class="container">
@@ -127,6 +177,25 @@ $(":file").filestyle({input: false});
   </div><!-- /container -->
 
 </div>
-<%@include file="../footer.jsp" %>
+</main>
+
+
+	</div>
+
+	<footer class="app-footer">
+		<jsp:include page="../footer.jsp"/>
+	</footer>
+
+	<!-- Bootstrap and necessary plugins -->
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/tether/dist/js/tether.min.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/pace/pace.min.js"></script>
+
+
+
+	<!-- GenesisUI main scripts -->
+
+</body>
 </body>
 </html>
