@@ -197,5 +197,4 @@ $(":file").filestyle({input: false});
 	<!-- GenesisUI main scripts -->
 
 </body>
-</body>
 </html>

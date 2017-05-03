@@ -33,6 +33,11 @@
   <link rel="stylesheet" href="resources/animate.css/animate.min.css">
   <link rel="stylesheet" href="resources/theme/css/style.css">
   <link rel="stylesheet" href="resources/mobirise/css/mbr-additional.css" type="text/css">
+  <style>
+  a{
+	color: gray;
+  }
+  </style>
 </head>
 
 <body>
