@@ -86,13 +86,13 @@ font-size:12px;
 z-index:500;
 }
 /*업체 백업 테이블*/
-/* #center_list{
+ #center_list{
 display:none; 
-} */
+} 
 /*업체 서비스 백업 테이블*/
-/* #content_list{
+ #content_list{
  display:none;
-} */
+} 
 #centerInfo_list .hiddenCnt{
 display:none;
 }
