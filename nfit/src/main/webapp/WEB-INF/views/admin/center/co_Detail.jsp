@@ -167,6 +167,10 @@ function getImageLink(data){
 function checkImageType(data){
 	// i : ignore case ( 대소문자 무관)
 	var pattern = /jpg|gif|png|jpeg/i; //정규식표현
+	if(!data.match(pattern)){
+		alert('이미지 파일 형식을 지켜주세요');
+		return;
+	}
 	return data.match(pattern);// 규칙에 맞으면 true
 }
 //이용시간 테이블목록뽑기

@@ -37,7 +37,6 @@ public class FeedBackController {
 		
 		List<FeedbackDTO> flist=feedbackDao.feedbackList(co_idx);
 		int count = feedbackDao.feedbackcount(co_idx);
-		
 		map.put("flist", flist);
 		map.put("count",count );
 		map.put("co_idx", co_idx);

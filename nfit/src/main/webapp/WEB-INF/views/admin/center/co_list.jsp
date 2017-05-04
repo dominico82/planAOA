@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 <!-- 다음우편주소서비스 -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<!-- 다음지도api주소 -->
+<script type="text/javascript" src="//apis.daum.net/maps/maps3.js?apikey=1dc7234b3e38c0fbbc3c82f768f6a747&libraries=services"></script>
 <!-- 아이콘링크 -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -57,13 +59,13 @@
 	/* PieChatomcat 8 context path 설정rt 도가능  */
 	//주소찾기
 	  function execDaumPostcode() {
-        new daum.Postcode({
+		new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
                 // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+                var	fullRoadAddr = data.roadAddress; // 도로명 주소 변수
                 var extraRoadAddr = ''; // 도로명 조합형 주소 변수
 
                 // 법정동명이 있을 경우 추가한다. (법정리는 제외)
@@ -83,7 +85,8 @@
                 if(fullRoadAddr !== ''){
                     fullRoadAddr += extraRoadAddr;
                 }
-
+                //주소료 좌표찾기 
+				geocoderaddr(fullRoadAddr);
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
 /*                 document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
  */                document.getElementById('roadAddress').value = fullRoadAddr;
@@ -105,6 +108,20 @@
             }
         }).open();
     }
+	function geocoderaddr(fullRoadAddr){
+        /* 주소로좌표찾기 */
+        var geocoder = new daum.maps.services.Geocoder();
+        geocoder.addr2coord(fullRoadAddr,function(status,result){
+        	
+        	if(status === daum.maps.services.Status.OK){
+        		var lat = result.addr[0].lat;
+        		var lng = result.addr[0].lng;
+        	
+        		document.getElementById('co_lat').value= lat;
+        		document.getElementById('co_lng').value = lng;
+        	}
+        });
+	}
 </script>
 <script>
 $(document).ready(function(){
@@ -128,6 +145,8 @@ $(document).ready(function(){
 				 checkbox = $(this).val();
 				console.log(checkbox);
 			});
+			var co_lat = $('#co_lat').val(); //위도
+			var co_lng = $('#co_lng').val();//경도
 			var co_name =document.getElementById('co_name').value;
 			var co_address =document.getElementById('roadAddress').value;
 		 	var co_avail = document.getElementById('co_avail').value;
@@ -151,6 +170,8 @@ $(document).ready(function(){
 			console.log('두번째파일::'+files[1]);
 			console.log('콘솔에서찍은 주소 ::'+co_address);
 			
+			formData.append('co_lat' , co_lat);
+			formData.append('co_lng' , co_lng);
 			formData.append('checkbox' ,checkbox);
 			formData.append('co_name' ,co_name);
 			formData.append('co_address' ,co_address);
@@ -367,7 +388,11 @@ border-radius: 50%;
 										 			<!-- daum  우편주소이용 -->
 										  	<label for="inputText3" class="col-sm-2 control-label">주소</label>
 										 		 	<button type="button" onclick="execDaumPostcode()"><i class="material-icons" style="font-size:25px;">search</i></button>
-													<input type="text" class="form-control" name="co_address" id="roadAddress" readonly="readonly">  			
+													<input type="text" class="form-control" name="co_address" id="roadAddress" readonly="readonly">  	
+													<!-- 위도 -->
+													<input type="text" class="form-control" id="co_lat">		
+													<!-- 경도 -->
+													<input type="text" class="form-control" id="co_lng">		
 														<label>업체 종목</label>
 														<br><br>
 												   		 	<input type="checkbox" name="co_class2" value="1" class="w3-check"><label>헬스</label>

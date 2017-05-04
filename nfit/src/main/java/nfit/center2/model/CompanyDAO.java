@@ -14,8 +14,6 @@ public interface CompanyDAO {
 	public List<CenterDTO> companyListborad(int start,int end); 
 	//회서 목록 검색
 	public List<CenterDTO> companySearch(String keyword);
-	//업체등록 
-	public int company_add(CenterDTO vo,String menu,String filename);
 	//업체등록2
 	public void company_add2(CenterDTO vo,String menu);
 

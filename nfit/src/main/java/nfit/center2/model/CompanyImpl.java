@@ -116,6 +116,8 @@ public class CompanyImpl implements CompanyDAO {
 		map.put("co_regul", vo.getCo_regul());
 		map.put("co_extra", vo.getCo_extra());
 		map.put("co_avail", vo.getCo_avail());
+		map.put("co_lat", vo.getCo_lat());
+		map.put("co_lng", vo.getCo_lng());
 		
 		sqlMap.insert("insertPath", map);
 	 }

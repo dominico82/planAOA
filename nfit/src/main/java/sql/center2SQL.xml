@@ -12,7 +12,7 @@
 		values(co_idx.nextval,#{co_name},
 		#{co_address},#{co_class},
 		#{co_phone},#{co_regul},
-		#{co_extra},0,0,0,0,#{co_avail})
+		#{co_extra},0,0,#{co_lat},#{co_lng},#{co_avail})
 	</insert>
 	<!-- co_view컬럼에 폴더만 업로드 -->
 	<update id="Newupdate" parameterType="hashmap">
