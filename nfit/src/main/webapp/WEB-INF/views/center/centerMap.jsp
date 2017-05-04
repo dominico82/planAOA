@@ -197,7 +197,7 @@ display:none;
 <!-- 업체 리스트 부분 -->
 <div class="container-fluid" id="container">
 <div class="row" id="container_row">
-		<div class="col-sm-6" id="centerListResult">
+		<div class="col-sm-4" id="centerListResult">
 		<div class="col-sm-12" id="margining"></div>
 
 		<div id="wait""><img src='resources/images/pageloader.gif'/><br>Loading..</div>
@@ -228,7 +228,7 @@ display:none;
 			</div>
 			</div>	
 <!-- 맵 부분 -->
-			<div class="col-sm-6" id="map_part">
+			<div class="col-sm-8" id="map_part">
 				<div id="map"></div>
 				<div id="map_zoom">
 				<div>
