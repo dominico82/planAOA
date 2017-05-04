@@ -6,16 +6,35 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<%@include file="../header.jsp" %>
-<link href="http://tlx.co.kr/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="resources/css/tlx.bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <link href="resources/css/notice.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="resources/js/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/bootstrap-filestyle.min.js"></script>
+<style>
+textarea{
+width: 100%; 
+border:0;overflow-y:hidden;background:clear;
+}
+</style>
+<script>
+$(document).ready(function(){
+	$("#qCon").focus();
+});
 
+function resize(obj) {
+  obj.style.height = "1px";
+  obj.style.height = (20+obj.scrollHeight)+"px";
+
+  $("#qCon").blur();
+  $("#aCon").focus();
+}
+</script>
 </head>
 <body>
-<br><br><br>
+	<header>
+		<jsp:include page="../header.jsp"/>
+	</header>
 <div class="wrap">
 
     <div class="container">

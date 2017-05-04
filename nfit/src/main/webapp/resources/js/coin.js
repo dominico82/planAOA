@@ -125,7 +125,7 @@ $(function(){
 						$("#pay_num4").removeClass("on");
 						$("#pay_num5").addClass("on");
 						$("#pay_num6").removeClass("on");
-						price="1000";
+						price="9900";
 						buy_coin="100";
 						pay_class="일반/100코인";
 	});
@@ -194,28 +194,31 @@ $(function(){
 					    			
 					    			alert(msg);
 					    			
+					    			
 					    		} else {
 					    			//[3] 아직 제대로 결제가 되지 않았습니다.
 					    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
 					    		}
-					    		$(function(){
-						    		var formData=$("#getCoin").serialize();
-							    	
-							    	$.ajax({
-							    		type:"POST",
-							    		url: "getCoin.do",
-							    		data: formData,
-							    		success: function(data){
-							    			console.log(data.member_id);
-							    			console.log(price);
-							    			$(".mP_coin").empty();
-							    			$(".mP_coin").append(data.member_coin);
-							    		},
-							    		error: function(data){
-							    			alert("실패!!");
-							    		}
-							    	});	
-						    	});
+					    		
+					    	});
+
+			    			$(function(){
+					    		var formData=$("#getCoin").serialize();
+						    	
+						    	$.ajax({
+						    		type:"POST",
+						    		url: "getCoin.do",
+						    		data: formData,
+						    		success: function(data){
+						    			console.log(data.member_id);
+						    			console.log(price);
+						    			$(".mP_coin").empty();
+						    			$(".mP_coin").append(data.member_coin);
+						    		},
+						    		error: function(data){
+						    			alert("실패!!");
+						    		}
+						    	});	
 					    	});
 
 					    } else {

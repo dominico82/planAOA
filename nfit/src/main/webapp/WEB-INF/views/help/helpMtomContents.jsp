@@ -26,7 +26,34 @@
 <link href="resources/css/tlx.bootstrap.min.css" rel="stylesheet" type="text/css">
 <link href="resources/css/notice.css" rel="stylesheet" type="text/css">
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="resources/js/jquery.min.js"></script>
+<style>
+textarea{
+width: 100%; 
+border:0;overflow-y:hidden;background:clear;
+}
+</style>
+<script>
+$(document).ready(function(){
+	$("#qCon").focus();
+});
 
+function resize(obj) {
+  obj.style.height = "1px";
+  obj.style.height = (20+obj.scrollHeight)+"px";
+
+  $("#qCon").blur();
+}
+$(document).ready(function(){
+	$("#aCon").focus();
+});
+
+function resize(obj) {
+  obj.style.height = "1px";
+  obj.style.height = (20+obj.scrollHeight)+"px";
+
+}
+</script>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
     <header>
@@ -62,7 +89,7 @@
        <main class="main">
 <div class="wrap">
 
-    <div class="container">
+    <div  style="width: 650px;" class="container">
     <div class="row">
       <div class="content col-md-12">
         <div class="page-header mtomViewHeader">
@@ -81,12 +108,12 @@
           	</div>
 			<div class="form-group">
 				<label>내용</label>
-				<textarea cols="60" rows="20" name="qa_content" class="form-control" readonly="readonly" required="required">${content.qa_content}</textarea>				
+				<textarea onfocus="resize(this)" id="qCon" cols="60" rows="20" name="qa_content" class="form-control" readonly="readonly" required="required">${content.qa_content}</textarea>				
 			</div>
 
 			<div class="form-group">
 				<label>답변</label>
-				<textarea cols="60" rows="20" name="qa_answer" class="form-control" required="required"><c:if test="${content.qa_checked=='y'}">${content.qa_answer}</c:if></textarea>				
+				<textarea onkeyup="resize(this)" onfocus="resize(this)" id="aCon" cols="60" rows="20" name="qa_answer" class="form-control" required="required"><c:if test="${content.qa_checked=='y'}">${content.qa_answer}</c:if></textarea>				
 			</div>
           </article>
 
@@ -123,16 +150,9 @@
     </footer>
     
     
-    <!-- Bootstrap and necessary plugins -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="bower_components/tether/dist/js/tether.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="bower_components/pace/pace.min.js"></script>
 
 
 
     <!-- GenesisUI main scripts -->
-
-    <script src="resources/js/app.js"></script>
 </body>
 </html>

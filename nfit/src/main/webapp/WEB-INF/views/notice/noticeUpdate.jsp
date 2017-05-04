@@ -39,6 +39,22 @@
 <link href="resources/css/font-awesome.min.css" rel="stylesheet">
 <link href="resources/css/simple-line-icons.css" rel="stylesheet">
 <link href="resources/css/table.css" rel="stylesheet">
+<style>
+textarea{
+width: 100%; 
+border:0;overflow-y:hidden;background:clear;
+}
+</style>
+<script>
+$(document).ready(function(){
+	$("#notice_con").focus();
+});
+
+function resize(obj) {
+  obj.style.height = "1px";
+  obj.style.height = (20+obj.scrollHeight)+"px";
+}
+</script>
 <script>
 //Check for the various File API support.
 if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -104,7 +120,7 @@ $(":file").filestyle({input: false});
 		<main class="main">
 <div class="wrap">
 
-    <div class="container" style="margin-top:100px;">
+    <div class="container" style="margin-top:100px; width: 650px;">
     <div class="row">
       <div class="content col-md-12">
         <div class="page-header noticeViewHeader">
@@ -137,7 +153,7 @@ $(":file").filestyle({input: false});
 						</c:forEach>
 					</c:if>
 				</div>
-				<textarea cols="60" rows="20" name="notice_content" class="form-control" required="required">${content.notice_content}</textarea>				
+				<textarea onkeyup="resize(this)" onfocus="resize(this)" id="notice_con" cols="60" rows="20" name="notice_content" class="form-control" required="required">${content.notice_content}</textarea>				
 			</div>
 
 			<div class="form-group">
@@ -195,13 +211,6 @@ $(":file").filestyle({input: false});
 	<footer class="app-footer">
 		<jsp:include page="../footer.jsp"/>
 	</footer>
-
-	<!-- Bootstrap and necessary plugins -->
-	<script src="bower_components/jquery/dist/jquery.min.js"></script>
-	<script src="bower_components/tether/dist/js/tether.min.js"></script>
-	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="bower_components/pace/pace.min.js"></script>
-
 
 
 	<!-- GenesisUI main scripts -->

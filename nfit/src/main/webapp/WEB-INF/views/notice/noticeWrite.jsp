@@ -37,6 +37,22 @@
 <link href="resources/css/font-awesome.min.css" rel="stylesheet">
 <link href="resources/css/simple-line-icons.css" rel="stylesheet">
 <link href="resources/css/table.css" rel="stylesheet">
+<style>
+textarea{
+width: 100%; 
+border:0;overflow-y:hidden;background:clear;
+}
+</style>
+<script>
+$(document).ready(function(){
+	$("#notice_con").focus();
+});
+
+function resize(obj) {
+  obj.style.height = "1px";
+  obj.style.height = (20+obj.scrollHeight)+"px";
+}
+</script>
 <script>
 //Check for the various File API support.
 if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -112,7 +128,7 @@ $(":file").filestyle({input: false});
         </div>
 
         <form name="noticeContentWrite" action="noticeWrite.do" method="post" enctype="multipart/form-data">
-        <div class="noticeWrap">
+        <div style="width: 650px;" class="noticeWrap">
           <article class="notice">
           	<div class="checks etrans">
           		
@@ -124,11 +140,11 @@ $(":file").filestyle({input: false});
           	</div>
           	<div class="form-group">          	
           		<label>제목</label>
-          		<input type="text" name="notice_subject" size="60" class="form-control" required="required">
+          		<input type="text" name="notice_subject" class="form-control" required="required">
           	</div>
 			<div class="form-group">
 				<label>내용</label>
-				<textarea cols="60" rows="20" name="notice_content" class="form-control" required="required"></textarea>				
+				<textarea onkeyup="resize(this)" onfocus="resize(this)" id="notice_con" name="notice_content" class="form-control" required="required"></textarea>				
 			</div>
 
 			<div class="form-group">

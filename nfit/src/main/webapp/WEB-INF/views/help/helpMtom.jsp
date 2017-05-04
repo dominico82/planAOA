@@ -333,7 +333,7 @@ function mtomReload(){
 										
 				});
 	
-				if(indexNum==null){
+				if(listSize==0){
 
 					$(document).ready(function(){
 						var $div=$("<div class='panel-group' id='accordion' role='tablist' aria-multiselectable='true'>"
@@ -414,6 +414,7 @@ function mtomDel(idx){
 		data: "idx="+idx,
 		success: function(data){
 			mtomReload();
+			console.log("삭제후 index:"+indexNum);
 		},
 		error: function(data){
 			alert("실패!!");
