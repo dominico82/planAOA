@@ -5,6 +5,8 @@ import java.util.StringTokenizer;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import nfit.bookmark.model.MarkDTO;
+
 public class CenterDAOImple implements CenterDAO {
 	
 	private SqlSessionTemplate sqlMap;
@@ -28,6 +30,10 @@ public class CenterDAOImple implements CenterDAO {
 	}
 	public List<CenterDTO> centerSearchDB(String keyword) {
 		List<CenterDTO> list=sqlMap.selectList("centerSearchSQL", keyword);
+		return list;
+	}
+	public List<MarkDTO> markDB(String user_id){
+		List<MarkDTO> list =sqlMap.selectList("markSQL", user_id);
 		return list;
 	}
 }

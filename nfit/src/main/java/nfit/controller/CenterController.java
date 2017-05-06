@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import nfit.bookmark.model.MarkDTO;
 import nfit.center.model.CenterDAO;
 import nfit.center.model.CenterDTO;
 import nfit.center.model.ContentDAO;
@@ -359,6 +360,45 @@ public class CenterController {
 	       			e.printStackTrace();
 	       		}
 		}
+	
+	@RequestMapping(value="/centerTrack.do", method=RequestMethod.GET)
+	public void trackAjax(@RequestParam("user_id") String user_id, HttpServletResponse res){
+		res.setContentType("text/html;charset=UTF-8");
+		String trackContent="{bookmark:[";
+		List<MarkDTO> mark=centerDao.markDB(user_id);
+		List<CenterDTO> centers=new ArrayList<CenterDTO>();
+		for(int i=0; i<mark.size(); i++){
+			CenterDTO center = centerDao.centerOneDB(mark.get(i).getCo_idx());
+			centers.add(center);
+		}
+		
+		for(int i=0; i<centers.size(); i++){
+			  trackContent += "{\"co_idx\":\""+centers.get(i).getCo_idx()
+		               	+"\",\"co_name\":\""+centers.get(i).getCo_name()
+		       			+"\",\"co_address\":\""+centers.get(i).getCo_address()
+		       			+"\",\"co_class\":\""+centers.get(i).getCo_class()
+		       			+"\",\"co_phone\":\""+centers.get(i).getCo_phone()
+		       			+"\",\"co_regul\":\""+centers.get(i).getCo_regul()
+		       			+"\",\"co_extra\":\""+centers.get(i).getCo_extra()
+		       			+"\",\"co_view\":\""+centers.get(i).getCo_view()
+		       			+"\",\"co_usecount\":\""+centers.get(i).getCo_usecount()
+		       			+"\",\"co_lat\":\""+centers.get(i).getCo_lat()
+		       			+"\",\"co_lng\":\""+centers.get(i).getCo_lng();
+		                  if(i<centers.size()-1){
+		               	   trackContent+="\",\"co_avail\":\""+centers.get(i).getCo_avail()+"\"},";
+		                  }else if(i==centers.size()-1){
+		               	   trackContent+="\",\"co_avail\":\""+centers.get(i).getCo_avail()+"\"}";
+		                  }
+		}
+		trackContent+="]}";
+		System.out.println(trackContent);
+		try{
+			res.getWriter().print(trackContent);
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
 	}
 
 

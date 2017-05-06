@@ -174,9 +174,19 @@ max-width:250px;font-size:12px;
 #infowindows_close{position: absolute;top: 5px;right: 10px;color: #f9022b;width: 17px;height: 17px;
 cursor: pointer; font-size:12px;}
 #map_zoom{
-position:absolute;bottom:10px;right:10px;z-index:1;
+position:absolute;
+bottom:10px;
+right:10px;
+z-index:1;
 width:89%;
 text-align:right;
+}
+#navi-title{
+position:absolute;
+top:65px;
+left:40%;
+z-index:1;
+text-align:left;
 }
 #sample4_postcode{
 height:50px;
@@ -188,7 +198,55 @@ height:50px;
 height:50px;
 }
 #user_info{
-display:none;
+display:block;
+}
+
+/*tracking*/
+.node {
+    position: absolute;
+    background-image: url(resources/images/circlemark1.png);
+    cursor: pointer;
+    width: 64px;
+    height: 64px;
+}
+
+.tooltip {
+    background-color: #fff;
+    position: absolute;
+    border: 2px solid #333;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 3px 5px 0;
+    left: 65px;
+    top: 14px;
+    border-radius: 5px;
+    white-space: nowrap;
+    display: block;
+}
+
+.tracker {
+    position: absolute;
+    margin: -35px 0 0 -30px;
+    display: none;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.icon {
+    position: absolute;
+    left: 6px;
+    top: 9px;
+    width: 80px;
+    height: 80px;
+}
+
+.balloon {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    -ms-transform-origin: 50% 34px;
+    -webkit-transform-origin: 50% 34px;
+    transform-origin: 50% 34px;
 }
 </style>
 </head>
@@ -233,11 +291,12 @@ display:none;
 				<div id="map_zoom">
 				<div>
 					<button data-toggle="modal" data-target="#myModal1" onclick="" type="button" class="btn btn-danger btn-sm" ><span class="glyphicon glyphicon-map-marker"></span></button>				
-					<button data-toggle="modal" data-target="#myModal2" onclick="" type="button" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-screenshot"></span></button>				
-					<button onclick="javascript:zoomIn()" type="button" class="btn btn-basic btn-sm"><span class="glyphicon glyphicon-plus"></span></button>				
-					<button onclick="javascript:zoomOut()" type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-minus"></span></button>				
+					<button onclick="javascript:tracker()" type="button" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-screenshot"></span></button>				
+					<button onclick="javascript:zoomSetIn()" type="button" class="btn btn-basic btn-sm"><span class="glyphicon glyphicon-plus"></span></button>				
+					<button onclick="javascript:zoomSetOut()" type="button" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-minus"></span></button>				
 				</div>
 				</div>
+				<div id="navi-title"></div>
 				<!-- Modal1 -->
   <div class="modal fade" id="myModal1" role="dialog">
     <div class="modal-dialog">
@@ -365,7 +424,7 @@ display:none;
 	
 <!-- 사용자 정보 백업부분-->	
 	<div class="col-sm-12" id="user_info">
-	<input type="hidden" value="${sessionScope.saveid}" id="userid">
+	<input class="form-control" type="text" value="${sessionScope.saveid}" id="userid">
 	</div>
 	
 <p style="display:none;" id="mapapi">
@@ -503,7 +562,7 @@ edd938c4fc341b07f90ed69064de3f92<br>
         }).open();
     }
 
-/*맵 추적 기능*/
+/*마커 표시 기능*/
 function getAddr(){
 var newMarker=[];
 var newInfowindow=[];
@@ -570,9 +629,269 @@ var newInfowindow=[];
 }//function getAddr(){
 
 
-/*즐겨찾기 기능*/
-var user_id = $("#userid").val();
-console.log("user_id="+user_id);
+/*맵 추척 기능*/
+var trackCheck=true;
+function tracker(){
+		var user_id = $("#userid").val();
+		console.log("user_id="+user_id)
+		if(user_id==null || user_id==""){
+			window.alert("로그인이 필요합니다.")
+			return false;
+		}//if(user_id==null || user_id=="")
+			$.ajax({
+				url:"centerTrack.do",
+				type:"GET",
+				data:{"user_id":user_id},
+				success:function(data){
+					$("#ajax").remove();
+					var strData= data;
+					var objData = eval('('+strData+')');
+					var bookmark = objData.bookmark;
+					if(!data){
+						alert("ajax fail");
+						return false;
+					}else{
+						searchMark();
+						if(trackCheck==true){
+						//2. tooltip 말풍선 생성*******************
+						function TooltipMarker(position, tooltipText){
+							console.log("this="+this);
+							this.position=position
+							console.log("this.position="+this.position);
+							var node = this.node = document.createElement('div');
+						    node.className = 'node';
+
+						    var tooltip = document.createElement('div');
+						    tooltip.className = 'tooltip',
+
+						    tooltip.appendChild(document.createTextNode(tooltipText));
+						    node.appendChild(tooltip);
+						    
+						    // 툴팁 엘리먼트에 마우스 인터렉션에 따라 보임/숨김 기능을 하도록 이벤트를 등록합니다.
+						    node.onmouseover = function() {
+						    	tooltip.style.display = 'block';
+						        $(this).append().html("<div class='col-sm-2'><span class='label label-danger' style='font-size:14px;position:absolute;top:60px;'>"+tooltipText+"</span></div>");
+						    };//node.onmouseover = function()
+						    node.onmouseout = function() {
+						        tooltip.style.display = 'none';
+						        $(this).append().html("");
+						    };//node.onmouseout = function()
+						}//function TooltipMarker(position, tooltipText){
+						
+						// 10. 2번에서 만든 말풍선 abstractoverlay로 사용자 재정의 오버레이 생성 구현 1******************* 
+						TooltipMarker.prototype = new daum.maps.AbstractOverlay;
+
+						TooltipMarker.prototype.onAdd = function() {
+						    var panel = this.getPanels().overlayLayer;
+						    panel.appendChild(this.node);
+						};//TooltipMarker.prototype.onAdd = function() {
+
+						TooltipMarker.prototype.onRemove = function() {
+						    this.node.parentNode.removeChild(this.node);
+						};//TooltipMarker.prototype.onRemove = function() {
+
+						TooltipMarker.prototype.draw = function() {
+						    // 화면 좌표와 지도의 좌표를 매핑시켜주는 projection객체
+						    var projection = this.getProjection();
+						    
+						    // overlayLayer는 지도와 함께 움직이는 layer이므로
+						    // 지도 내부의 위치를 반영해주는 pointFromCoords를 사용합니다.
+						    var point = projection.pointFromCoords(this.position);
+
+						    // 내부 엘리먼트의 크기를 얻어서
+						    var width = this.node.offsetWidth;
+						    var height = this.node.offsetHeight;
+
+						    // 해당 위치의 정중앙에 위치하도록 top, left를 지정합니다.
+						    this.node.style.left = (point.x - width/2) + "px";
+						    this.node.style.top = (point.y - height/2) + "px";
+						};//TooltipMarker.prototype.draw = function() {
+
+						TooltipMarker.prototype.getPosition = function() {
+						    return this.position;
+						};//TooltipMarker.prototype.getPosition = function() {
+						
+						// 3. 마커 추적 객채 생성 ('tracker')*******************
+						function MarkerTracker(map, target, name){
+							var OUTCODE={
+									INSIDE:0,
+									TOP: 8,
+									RIGHT: 2,
+									BOTTOM:4,
+									LEFT: 1
+							};
+							var BOUNDS_BUFFER = 30;
+							var CLIP_BUFFER = 40;
+							var tracker = document.createElement('div');
+							tracker.className = 'tracker';
+							var icon = document.createElement('div');
+							icon.className = 'icon';
+							var balloon = document.createElement('div');
+							balloon.className = 'balloon';
+							
+							icon.onmouseover=function(){
+								console.log("name="+name);
+								$("#navi-title").html("<div class='col-sm-2' id='navi-tag'><span class='label label-danger' style='font-size:14px;position:absolute;top:60px;'>즐겨찾기이동: "+name+"</span></div>");
+							}
+							
+							icon.onmouseout=function(){
+								console.log("nameout="+name);
+								$("div").remove("#navi-tag");
+							}
+							
+							tracker.appendChild(balloon);
+							tracker.appendChild(icon);
+							
+							map.getNode().appendChild(tracker);
+							
+							tracker.onclick = function(){
+								map.setCenter(target.getPosition());
+								setVisible(false);
+								searchMark();
+							};//tracker.onclick = function(){
+							// 4. 마커를 추적하는 함수
+							function tracking(){
+								var proj = map.getProjection();
+								var bounds = map.getBounds();
+								// 5. 지도영역 기준 확장 영역 구하기 
+								var extBounds = extendBounds(bounds, proj);
+								// 6. 지도 영역에 있는지 없는지 확인하기
+								if(extBounds.contain(target.getPosition())){
+									setVisible(false);
+								}else{
+									//7. 지도 밖일 경우 아이콘이 변하게 되는 지도 bounds선 만들기 (개별 마커 중심으로)
+									var pos = proj.containerPointFromCoords(target.getPosition());
+									var center = proj.containerPointFromCoords(map.getCenter());
+									var sw = proj.containerPointFromCoords(bounds.getSouthWest());
+									var ne = proj.containerPointFromCoords(bounds.getNorthEast());
+									var top = ne.y + (CLIP_BUFFER*3);
+									var right = ne.x - CLIP_BUFFER;
+									var bottom = sw.y-CLIP_BUFFER;
+									var left = sw.x + CLIP_BUFFER;
+									//8. Cohen–Sutherland clipping algorithm 을 이용하여 맵 밖의 포지션 추적하기
+									var clipPosition = getClipPosition(top, right, bottom, left, center, pos);
+									tracker.style.top = clipPosition.y + 'px';
+									tracker.style.left = clipPosition.x + 'px';
+									//9. 추적 말풍선 돌리게 하는 기능 및 각도 계산
+									var angle = getAngle(center, pos);
+									balloon.style.cssText +=
+										'-ms-transform: rotate('+angle+'deg);'+
+										'-webkit-transform: rotate('+angle+'deg);'+
+										'transform: rotate('+angle+'deg)';
+									setVisible(true);
+								}//if(extBounds.contain(target.getPosition())){
+							}//function tracking(){
+							// 5. 지도영역 기준 확장 영역 구하기 
+							function extendBounds(bounds, proj){
+								var sw = proj.pointFromCoords(bounds.getSouthWest());
+								var ne = proj.pointFromCoords(bounds.getNorthEast());
+								sw.x -= BOUNDS_BUFFER;
+								sw.y += BOUNDS_BUFFER;
+								ne.x += BOUNDS_BUFFER;
+								ne.y -= BOUNDS_BUFFER;
+								
+								return new daum.maps.LatLngBounds(proj.coordsFromPoint(sw), proj.coordsFromPoint(ne));
+							}
+							//8. Cohen–Sutherland clipping algorithm
+							function getClipPosition(top, right, bottom, left, inner, outer){
+								function calcOutcode(x,y){
+									var outcode = OUTCODE.INSIDE;
+									
+									if(x<left){
+										outcode |= OUTCODE.LEFT;
+									}else if (x > right){
+										outcode |= OUTCODE.RIGHT;
+									}//if(x<left)
+									if(y<top){
+										outcode |= OUTCODE.TOP;
+									}else if(y>bottom){
+										outcode |= OUTCODE.BOTTOM;
+									}//if(y<top)
+									return outcode;
+								}//function calcOutcode(x,y)
+								var ix = inner.x;
+								var iy = inner.y;
+								var ox = outer.x;
+								var oy = outer.y;
+								
+								var code = calcOutcode(ox, oy);
+								
+								while(true){
+									if(!code){
+										break;
+									}//if(!code){
+									if(code&OUTCODE.TOP){
+										ox = ox + (ix-ox) / (iy-oy) * (top - oy);
+										oy = top;
+									} else if (code & OUTCODE.RIGHT){
+										oy = oy + (iy - oy) / (ix - ox) * (right - ox);
+										ox = right;
+									}else if (code & OUTCODE.BOTTOM){
+										ox = ox + (ix - ox) / (iy - oy) * (bottom-oy);
+										oy = bottom;
+									}else if(code & OUTCODE.LEFT){
+										oy = oy + (iy - oy) / (ix - ox) * (left - ox);
+										ox = left;
+									}//if(code&OUTCODE.TOP)
+									code = calcOutcode(ox, oy);
+								}//while(true)
+								return {x: ox, y: oy};
+							}//function getClipPosition(top, right, bottom, left, inner, outer)
+							//9. 추적 말풍선 돌리게 하는 기능 및 각도 계산
+							function getAngle(center, target){
+								var dx = target.x - center.x;
+								var dy = center.y - target.y;
+								var deg = Math.atan2(dy,dx)*180/Math.PI;
+								return ((-deg + 360)%360|0)+90;
+							}//function getAngle(center, target)
+							function setVisible(visible){
+								tracker.style.display = visible ? 'block' : 'none';
+							}//function setVisible(visible)
+							function hideTracker(){
+								setVisible(false);
+							}//function hideTracker()
+							this.run = function(){
+								daum.maps.event.addListener(map, 'zoom_start', hideTracker);
+								daum.maps.event.addListener(map, 'zoom_changed', tracking);
+								daum.maps.event.addListener(map, 'center_changed', tracking);
+								tracking();
+							}///this.run = function(){
+							this.stop = function(){
+								daum.maps.event.removeListener(map, 'zoom_start', hideTracker);
+								daum.maps.event.removeListener(map, 'zoom_changed', tracking);
+								daum.maps.event.removeListener(map, 'center_changed', tracking);
+								setVisible(false);
+							};//this.stop = function(){
+						}//function MarkerTracker(map, target){
+							
+						// 1. 변수생성*******************
+						var dkpos=[];
+						var markerTrack=[];
+						var Tracking=[];
+						for(var i=0; i<bookmark.length; i++){
+							var bookmarkOne = bookmark[i];
+							dkpos[i] = new daum.maps.LatLng(bookmarkOne.co_lat, bookmarkOne.co_lng);
+							markerTrack[i] = new TooltipMarker(dkpos[i], bookmarkOne.co_name);
+							markerTrack[i].setMap(map);
+							Tracking[i]=new MarkerTracker(map, markerTrack[i], bookmarkOne.co_name);
+							Tracking[i].run();
+						}//for(var i=0; i<bookmark.length; i++){
+						$(".balloon").html("<img src='resources/images/navigation1.png' class='img-responsive'>");
+						
+						trackCheck=false;
+					}else if(trackCheck==false){
+						$(".node").hide();
+						$(".icon").hide();
+						$(".balloon").hide();
+						$(".tracker").hide();
+						trackCheck=true;
+					}//if(trackCheck==false)
+					}//if(!data){
+				}//success:function(data){
+			});//$.ajax({
+	
+
+}//function tracker()
 
 
 /*ajax loading*/
@@ -712,12 +1031,12 @@ function more(){
 }
 
 /*지도 축소*/
-function zoomIn() {
+function zoomSetIn() {
     map.setLevel(map.getLevel() - 1);
 }
 
 /*지도 확대*/
-function zoomOut() {
+function zoomSetOut() {
     map.setLevel(map.getLevel() + 1);
 }
 

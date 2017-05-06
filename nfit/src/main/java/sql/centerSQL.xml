@@ -32,4 +32,7 @@ OR CO.CO_CLASS LIKE '%'||lower(#{keyword})||'%'
 OR CO.CO_ADDRESS LIKE '%'||lower(#{keyword})||'%'
 ORDER BY CO.CO_IDX
   </select>
+  <select id="markSQL" parameterType="String" resultType="nfit.bookmark.model.MarkDTO">
+  SELECT * FROM BOOKMARK WHERE MEMBER_ID = #{user_id}
+  </select>
   </mapper>
