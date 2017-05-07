@@ -177,7 +177,7 @@ cursor: pointer; font-size:12px;}
 position:absolute;
 bottom:10px;
 right:10px;
-z-index:1;
+z-index:500;
 width:89%;
 text-align:right;
 }
@@ -229,7 +229,7 @@ display:block;
     margin: -35px 0 0 -30px;
     display: none;
     cursor: pointer;
-    z-index: 3;
+    z-index: 600;    
 }
 
 .icon {
@@ -238,6 +238,7 @@ display:block;
     top: 9px;
     width: 80px;
     height: 80px;
+    z-index:600;
 }
 
 .balloon {
@@ -247,6 +248,7 @@ display:block;
     -ms-transform-origin: 50% 34px;
     -webkit-transform-origin: 50% 34px;
     transform-origin: 50% 34px;
+    z-index:600;
 }
 </style>
 </head>
@@ -424,7 +426,7 @@ display:block;
 	
 <!-- 사용자 정보 백업부분-->	
 	<div class="col-sm-12" id="user_info">
-	<input class="form-control" type="text" value="${sessionScope.saveid}" id="userid">
+	<input class="form-control" type="hidden" value="${sessionScope.saveid}" id="userid">
 	</div>
 	
 <p style="display:none;" id="mapapi">
