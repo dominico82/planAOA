@@ -349,7 +349,7 @@ border-radius: 50%;
        <main class="main">
        <div class="title"> <!-- style="margin-top: 15px; margin-left: 35px;" -->
 			<img src="resources/img/favicon.png" style="height: 65px;"> 
-			<a href="memberAdmin.do" style="font-family:'Nanum Pen Script' serif;">회원관리 페이지</a>
+			<a href="co_list.do" style="font-family:'Nanum Pen Script' serif;">제휴업체 등록/삭제 페이지</a>
 		</div>
             <div>
 				<!-- 내용들어갈곳 -->

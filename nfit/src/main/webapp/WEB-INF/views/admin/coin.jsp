@@ -99,7 +99,7 @@
        <main class="main">
        <div class="title" style="margin-top: 15px; margin-left: 35px;">
 			<img src="resources/img/favicon.png" style="height: 65px;"> 
-			<a href="memberAdmin.do" style="font-family:'Nanum Pen Script' serif;">코인 사용현황</a>
+			<a href="coinAdmin.do" style="font-family:'Nanum Pen Script' serif;">코인 사용현황</a>
 		</div>
             <div class="container-fluid">
 			<div id="ui-view">

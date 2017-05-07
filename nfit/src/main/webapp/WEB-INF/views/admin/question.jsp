@@ -102,7 +102,7 @@
 		<main class="main">
 		<div class="title" style="margin-top: 15px; margin-left: 35px;">
 			<img src="resources/img/favicon.png" style="height: 65px;"> 
-			<a href="memberAdmin.do" style="font-family:'Nanum Pen Script' serif;">1:1문의 답변</a>
+			<a href="helpMtomReply.do" style="font-family:'Nanum Pen Script' serif;">1:1문의 답변</a>
 		</div>
 		<div class="container-fluid">
 			<div id="ui-view">
