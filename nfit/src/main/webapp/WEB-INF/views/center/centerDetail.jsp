@@ -59,7 +59,6 @@ $(document).ready(function(){
 //댓글목록
 function feedbacklist(){
 	var co_idx=$('#co_idx').val();
-	console.log("co_idx:"+co_idx);
 	$.ajax({
 		type:'get',
 		url:'feedbacklist.do?co_idx='+co_idx,
