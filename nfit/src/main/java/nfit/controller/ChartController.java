@@ -109,9 +109,9 @@ public class ChartController {
 			case 9: menu="골프"; break;
 			case 10: menu="기타"; break;
 			}
-			String root_path = request.getSession().getServletContext().getRealPath("/");
+/*			String root_path = request.getSession().getServletContext().getRealPath("/");
 			System.out.println("컨트롤러에서본 root_path::"+root_path);
-			//서비스등록 
+*/			//서비스등록 
 			companyDao.company_add2(vo, menu);
 			//방금 등록한 업체 idx값 가져오기 
 			int co_idx = companyDao.sonnco_idx(vo.getCo_phone());
@@ -142,7 +142,7 @@ public class ChartController {
 				//확장자 강제설정
 				
 				fileName=co_idx+"_"+vo.getCo_phone()+"_"+i+".jpg";
-				System.out.println("파일이름찍어보세요:"+fileName);
+			/*	System.out.println("파일이름찍어보세요:"+fileName);*/
 				//파일 이름 j
 				File target = new File(maxPath,fileName);
 				FileCopyUtils.copy(mfile.get(i).getBytes(),target);
