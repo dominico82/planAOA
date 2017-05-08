@@ -49,11 +49,17 @@
 		}).responseText;
 		var data = new google.visualization.DataTable(jsonData);
 		/* json형식으로 받은 데이터를 bar타입의 차트로 표현해준다. */
-		var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+		var chart = new google.visualization.LineChart(document.getElementById('chart_div')); //BarChart
 		chart.draw(data, {
 			title : '업체 누적 이용수',		
 			width : 900,
-			height : 1450
+			height : 700,
+			bar:{
+				groupWidth:'20%'
+			},
+			legend : {
+				position : 'none'
+			}
 		});
 	}
 	/* PieChatomcat 8 context path 설정rt 도가능  */
@@ -156,20 +162,12 @@ $(document).ready(function(){
 			//ajax로 전달할  폼 객체 
 			var formData=new FormData();
 			//폼 객체에 파일 추가 , append ('변수명',값)
-			console.log(files[0]);
 			
 			var arr=[];
 			for(var i =0;i<files.length;i++){
 				var file=files[i];
-				console.log('파일 for문 돌림 : :  :: : '+file)
-				
 			formData.append('files' ,file);//파일 배열 담는곳
 			}
-			
-			console.log('첫번째파일::'+files[0]);
-			console.log('두번째파일::'+files[1]);
-			console.log('콘솔에서찍은 주소 ::'+co_address);
-			
 			formData.append('co_lat' , co_lat);
 			formData.append('co_lng' , co_lng);
 			formData.append('checkbox' ,checkbox);
@@ -373,9 +371,9 @@ border-radius: 50%;
 					  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-right: 10px;"><i class="fa fa-plus-square" style="font-size:30px" ></i></button>
 					  <!-- Modal -->
 					  	<div class="modal fade" id="myModal" role="dialog">
-					   	 	<div class="modal-dialog" style="width:1500px;height: 700px;">
+					   	 	<div class="modal-dialog" style="width:1200px;height: 700px;">
 					      	<!-- Modal content-->
-					      		<div class="modal-content" style="width: 900px;">
+					      		<div class="modal-content" style="width: 800px;">
 					        		<div class="modal-header">
 					          			<button type="button" class="close" data-dismiss="modal">&times;</button>
 					          			<h4 class="modal-title">업체등록</h4>
@@ -435,7 +433,7 @@ border-radius: 50%;
 						<div class="modal fade" id="myModal2" role="dialog">
 							<div class="modal-dialog">
 							<!-- Modal content-->
-								<div class="modal-content" style="width:1000px;height: 1600px;">
+								<div class="modal-content" style="width:1000px;height: 900px;">
 								  <div class="modal-header">
 								    <button type="button" class="close" data-dismiss="modal">&times;</button>
 								    <h4 class="modal-title">누적차트표</h4>
@@ -443,10 +441,10 @@ border-radius: 50%;
 								  <div class="modal-body">
 								    <div id="chart_div">
 										<!-- 차트새로고침버튼 -->
-										<button type="button" onclick="drawChart()" id="btn" class="btn btn-default">refresh</button>
 									</div>
 								 </div>
 								      <div class="modal-footer">
+										<button type="button" onclick="drawChart()" id="btn" class="btn btn-default">refresh</button>
 								        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 								 	 </div>
 								</div>
