@@ -441,6 +441,10 @@ position:absolute;
 top:20px;
 right:15px;
 }
+div.navbar-brand{
+	width: 128px;
+	height: 90px;
+}
 /*//ends jsd css작업************************************************************************/
 </style>
 <body>

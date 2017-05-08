@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>만족스러운 피트니스 Nfit 회원정보 보기</title>
+
 <link rel="stylesheet" type="text/css" href="resources/css/progressBar.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script type="text/javascript" src="resources/js/bootstrap.min.js"></script>
@@ -15,12 +16,17 @@
 <script type="text/javascript" src="resources/js/bootstrap-filestyle.min.js"></script>
 <jsp:include page="../header.jsp"/>
 <link rel="stylesheet" type="text/css" href="resources/css/mypage1.css"/>
+
 <style>
 table th{
 	text-align: center;
 }
 table td{
 	text-align: center;
+}
+div.navbar-brand{
+	width: 128px;
+	height: 90px;
 }
 </style>
 <script>

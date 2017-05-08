@@ -250,6 +250,10 @@ display:block;
     transform-origin: 50% 34px;
     z-index:600;
 }
+div.navbar-brand{
+	width: 128px;
+	height: 90px;
+}
 </style>
 </head>
 <body>

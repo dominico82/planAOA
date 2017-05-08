@@ -196,7 +196,7 @@
 					·
 					<a href="about.do">이용안내</a>
 					·
-					<a href="#">주변센터칮기</a>
+					<a href="#">주변센터찾기</a>
 					·
 					<a href="help.do">고객센터</a>
 					·
