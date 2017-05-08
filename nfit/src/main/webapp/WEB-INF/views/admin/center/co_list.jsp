@@ -366,7 +366,7 @@ border-radius: 50%;
 					</div>
 					<!-- -------- -->
 					<!-- 업체등록 모달 -->
-					<div class="container" style="width: 10%;display: -webkit-inline-box">
+					<div class="container" style="width: 10%;display:inline-table;">
 					  <!-- Trigger the modal with a button -->
 					  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="margin-right: 10px;"><i class="fa fa-plus-square" style="font-size:30px" ></i></button>
 					  <!-- Modal -->
